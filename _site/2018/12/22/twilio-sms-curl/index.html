@@ -194,7 +194,7 @@
 
 <p>We will use a command line utility called <code class="highlighter-rouge">curl</code> that is included with macOS and Linux. Curl will establish an <code class="highlighter-rouge">HTTP</code> connection to Twilio’s REST API using the <code class="highlighter-rouge">-X</code> flag and use the <code class="highlighter-rouge">POST</code> method to send data the same way an application using a Twilio <code class="highlighter-rouge">helper library</code> would send TwiML. The benefit of using <code class="highlighter-rouge">curl</code> is it’s quick and we do not need to write an application.</p>
 
-<p>The <code class="highlighter-rouge">-d</code> option represents the data we will POST to Twilio. Include your own SID and Auth Token in the <code class="highlighter-rouge">-u</code> option for Twilio verification. They must be seperated by <code class="highlighter-rouge">:</code> or credentials will fail. Numbers must be formatted as <a href="https://www.twilio.com/docs/glossary/what-e164"><code class="highlighter-rouge">E.164</code></a>.</p>
+<p>The <code class="highlighter-rouge">-d</code> option represents the data we will POST to Twilio. Include your own SID and Auth Token in the <code class="highlighter-rouge">-u</code> option for Twilio verification. They must be seperated by <code class="highlighter-rouge">:</code> or credentials will fail. Phone numbers must be formatted as <a href="https://www.twilio.com/docs/glossary/what-e164"><code class="highlighter-rouge">E.164</code></a>.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 curl <span class="nt">-X</span> POST <span class="se">\</span>
@@ -206,7 +206,7 @@ curl <span class="nt">-X</span> POST <span class="se">\</span>
 
 </code></pre></div></div>
 
-<p>If all went will you should receive a text on your device. Your terminal window will display <code class="highlighter-rouge">JSON</code> sent by Twilio either confirming your <code class="highlighter-rouge">HTTP</code> request was successful or it will display an error.</p>
+<p>If all went will you should receive a text on your device. Your terminal window will display an <code class="highlighter-rouge">XML</code> response sent by Twilio either confirming your <code class="highlighter-rouge">HTTP</code> request was successful or there was an error.</p>
 
 <h2 id="phone-number-and-message-body-redaction">Phone number and message body redaction</h2>
 

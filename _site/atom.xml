@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-23T05:53:54-05:00</updated>
+ <updated>2018-12-23T06:00:57-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -25,7 +25,7 @@
 
 &lt;p&gt;We will use a command line utility called &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; that is included with macOS and Linux. Curl will establish an &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; connection to Twilio’s REST API using the &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; flag and use the &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; method to send data the same way an application using a Twilio &lt;code class=&quot;highlighter-rouge&quot;&gt;helper library&lt;/code&gt; would send TwiML. The benefit of using &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; is it’s quick and we do not need to write an application.&lt;/p&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; option represents the data we will POST to Twilio. Include your own SID and Auth Token in the &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; option for Twilio verification. They must be seperated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or credentials will fail. Numbers must be formatted as &lt;a href=&quot;https://www.twilio.com/docs/glossary/what-e164&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E.164&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; option represents the data we will POST to Twilio. Include your own SID and Auth Token in the &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; option for Twilio verification. They must be seperated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or credentials will fail. Phone numbers must be formatted as &lt;a href=&quot;https://www.twilio.com/docs/glossary/what-e164&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E.164&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
@@ -37,7 +37,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;If all went will you should receive a text on your device. Your terminal window will display &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; sent by Twilio either confirming your &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; request was successful or it will display an error.&lt;/p&gt;
+&lt;p&gt;If all went will you should receive a text on your device. Your terminal window will display an &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; response sent by Twilio either confirming your &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; request was successful or there was an error.&lt;/p&gt;
 
 &lt;h2 id=&quot;phone-number-and-message-body-redaction&quot;&gt;Phone number and message body redaction&lt;/h2&gt;
 

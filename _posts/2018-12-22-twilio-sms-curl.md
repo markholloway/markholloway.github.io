@@ -13,7 +13,7 @@ Here is a quick way to send outbound SMS messages with your `Twilio` number usin
 
 We will use a command line utility called `curl` that is included with macOS and Linux. Curl will establish an `HTTP` connection to Twilio's REST API using the `-X` flag and use the `POST` method to send data the same way an application using a Twilio `helper library` would send TwiML. The benefit of using `curl` is it's quick and we do not need to write an application.
 
-The `-d` option represents the data we will POST to Twilio. Include your own SID and Auth Token in the `-u` option for Twilio verification. They must be seperated by `:` or credentials will fail. Numbers must be formatted as [`E.164`](https://www.twilio.com/docs/glossary/what-e164).
+The `-d` option represents the data we will POST to Twilio. Include your own SID and Auth Token in the `-u` option for Twilio verification. They must be seperated by `:` or credentials will fail. Phone numbers must be formatted as [`E.164`](https://www.twilio.com/docs/glossary/what-e164).
  
 ```bash
 
@@ -26,7 +26,7 @@ curl -X POST \
 
 ```
 
-If all went will you should receive a text on your device. Your terminal window will display `JSON` sent by Twilio either confirming your `HTTP` request was successful or it will display an error.
+If all went will you should receive a text on your device. Your terminal window will display an `XML` response sent by Twilio either confirming your `HTTP` request was successful or there was an error.
 
 ## Phone number and message body redaction
 
