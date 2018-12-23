@@ -1,22 +1,20 @@
 ---
 layout: post
-title: Use macOS or Linux to send texts from your Twilio number
+title: Send texts from your Twilio number using macOS and Linux
 tags: [twilio]
 ---
 
-Quick tip on testing outbound SMS messages with your `Twilio` number or short code using macOS or Linux and `curl`
+Here is a quick way to send outbound SMS messages with your `Twilio` number using macOS or Linux and `#!/bin/bash`
 
 <!--more-->
 
 
 ## Working with `curl`
 
-We will use a command line utility called `curl` that is included with macOS and Linux. Curl can establish an `HTTP` connection to Twilio's REST API using the `-X` flag and pass along data with the `POST` action.
+We will use a command line utility called `curl` that is included with macOS and Linux. Curl will establish an `HTTP` connection to Twilio's REST API using the `-X` flag and use the `POST` method to send data the same way an application using a Twilio `helper library` would send TwiML. The benefit of using `curl` is it's quick and we do not need to write an application.
 
-The `-d` flag represents the data we will POST. For verification the `-u` flag passes the SID and Auth Token. Note the `:` betwen the SID and Auth Token. Without this verification will fail.
-
-I recommend creating the script in a text editor first then pasting the script to macOS terminal or a Linux command prompt.
-
+The `-d` option represents the data we will POST to Twilio. Include your own SID and Auth Token in the `-u` option for Twilio verification. They must be seperated by `:` or credentials will fail. Numbers must be formatted as [`E.164`](https://www.twilio.com/docs/glossary/what-e164).
+ 
 ```bash
 
 curl -X POST \
@@ -28,13 +26,13 @@ curl -X POST \
 
 ```
 
-After sending the text you will receive a response from Twilio. If the text did not go through there will be errors presented. As long as no errors are indicated the text should have been delivered successfully.
+If all went will you should receive a text on your device. Your terminal window will display `JSON` sent by Twilio either confirming your `HTTP` request was successful or it will display an error.
 
 ## Phone number and message body redaction
 
-If you use `redaction` for privacy reasons this can also be tested with curl. Redaction must be enabled in your Twilio console for the flags to work.
+If you use `redaction` for privacy reasons this can also be tested with curl. Redaction must be enabled in your account for the flags to work.
 
-Only the NPA-NXX are stored in the log files. The remaining digits are redacted.
+This redacts digits from the phone number. Only the NPA-NXX are in the logs.
 
 ```bash
 
@@ -77,21 +75,22 @@ curl -X POST \
 
 ```
 
-Using [`Postman`](https://www.getpostman.com/) provides a readable view of SMS transaction history. 
+[`Postman`](https://www.getpostman.com/) is a free and handy tool for more lengthy testing. It's also a great way to view `JSON` files containing SMS transaction details.
 
-Here is the URL we need to paste in the `GET` field of Postman. Replace `{AccountSid}` with your actual SID.
+Below is the Twilio URL to `GET` SMS records from your Twilio account. Replace `{AccountSid}` with your SID.
 
 ```bash
 
 https://api.twilio.com/2010-04-01/Accounts/{AccountSid}/Messages.json
 
 ```
-Configure `Postman` with your SID and Auth Token credentials. 
+Add your SID and Auth Token to `Postman` for Twilio verification. 
 
 ![]({{ site.baseurl }}/blog/assets/postman/postman_settings.png)
 
-Press `Send` in Postman and the appropriate `JSON` should be returned. This is for a simple SMS.
+In Postman press `Send` to query the Twilio URL we added. Postman will display the returned JSON data in a readable format.
 
 ![]({{ site.baseurl }}/blog/assets/postman/postman_sms_log.jpg)
+
 
 Happy texting!

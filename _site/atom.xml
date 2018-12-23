@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-22T23:18:58-05:00</updated>
+ <updated>2018-12-23T05:53:54-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,21 +13,19 @@
 
  
  <entry>
-   <title>Use macOS or Linux to send texts from your Twilio number</title>
+   <title>Send texts from your Twilio number using macOS and Linux</title>
    <link href="http://localhost:4000/2018/12/22/twilio-sms-curl/"/>
    <updated>2018-12-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/22/twilio-sms-curl</id>
-   <content type="html">&lt;p&gt;Quick tip on testing outbound SMS messages with your &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; number or short code using macOS or Linux and &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;Here is a quick way to send outbound SMS messages with your &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; number using macOS or Linux and &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;working-with-curl&quot;&gt;Working with &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;We will use a command line utility called &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; that is included with macOS and Linux. Curl can establish an &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; connection to Twilio’s REST API using the &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; flag and pass along data with the &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; action.&lt;/p&gt;
+&lt;p&gt;We will use a command line utility called &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; that is included with macOS and Linux. Curl will establish an &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; connection to Twilio’s REST API using the &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; flag and use the &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; method to send data the same way an application using a Twilio &lt;code class=&quot;highlighter-rouge&quot;&gt;helper library&lt;/code&gt; would send TwiML. The benefit of using &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; is it’s quick and we do not need to write an application.&lt;/p&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; flag represents the data we will POST. For verification the &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; flag passes the SID and Auth Token. Note the &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; betwen the SID and Auth Token. Without this verification will fail.&lt;/p&gt;
-
-&lt;p&gt;I recommend creating the script in a text editor first then pasting the script to macOS terminal or a Linux command prompt.&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; option represents the data we will POST to Twilio. Include your own SID and Auth Token in the &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; option for Twilio verification. They must be seperated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or credentials will fail. Numbers must be formatted as &lt;a href=&quot;https://www.twilio.com/docs/glossary/what-e164&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E.164&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
@@ -39,13 +37,13 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;After sending the text you will receive a response from Twilio. If the text did not go through there will be errors presented. As long as no errors are indicated the text should have been delivered successfully.&lt;/p&gt;
+&lt;p&gt;If all went will you should receive a text on your device. Your terminal window will display &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; sent by Twilio either confirming your &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; request was successful or it will display an error.&lt;/p&gt;
 
 &lt;h2 id=&quot;phone-number-and-message-body-redaction&quot;&gt;Phone number and message body redaction&lt;/h2&gt;
 
-&lt;p&gt;If you use &lt;code class=&quot;highlighter-rouge&quot;&gt;redaction&lt;/code&gt; for privacy reasons this can also be tested with curl. Redaction must be enabled in your Twilio console for the flags to work.&lt;/p&gt;
+&lt;p&gt;If you use &lt;code class=&quot;highlighter-rouge&quot;&gt;redaction&lt;/code&gt; for privacy reasons this can also be tested with curl. Redaction must be enabled in your account for the flags to work.&lt;/p&gt;
 
-&lt;p&gt;Only the NPA-NXX are stored in the log files. The remaining digits are redacted.&lt;/p&gt;
+&lt;p&gt;This redacts digits from the phone number. Only the NPA-NXX are in the logs.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
@@ -85,19 +83,19 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Using &lt;a href=&quot;https://www.getpostman.com/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Postman&lt;/code&gt;&lt;/a&gt; provides a readable view of SMS transaction history.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.getpostman.com/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Postman&lt;/code&gt;&lt;/a&gt; is a free and handy tool for more lengthy testing. It’s also a great way to view &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; files containing SMS transaction details.&lt;/p&gt;
 
-&lt;p&gt;Here is the URL we need to paste in the &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; field of Postman. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;{AccountSid}&lt;/code&gt; with your actual SID.&lt;/p&gt;
+&lt;p&gt;Below is the Twilio URL to &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; SMS records from your Twilio account. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;{AccountSid}&lt;/code&gt; with your SID.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 https://api.twilio.com/2010-04-01/Accounts/&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;AccountSid&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;/Messages.json
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Configure &lt;code class=&quot;highlighter-rouge&quot;&gt;Postman&lt;/code&gt; with your SID and Auth Token credentials.&lt;/p&gt;
+&lt;p&gt;Add your SID and Auth Token to &lt;code class=&quot;highlighter-rouge&quot;&gt;Postman&lt;/code&gt; for Twilio verification.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/postman/postman_settings.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Press &lt;code class=&quot;highlighter-rouge&quot;&gt;Send&lt;/code&gt; in Postman and the appropriate &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; should be returned. This is for a simple SMS.&lt;/p&gt;
+&lt;p&gt;In Postman press &lt;code class=&quot;highlighter-rouge&quot;&gt;Send&lt;/code&gt; to query the Twilio URL we added. Postman will display the returned JSON data in a readable format.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/postman/postman_sms_log.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
