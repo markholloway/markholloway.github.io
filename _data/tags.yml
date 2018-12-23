@@ -1,0 +1,52 @@
+api:
+  name: API
+bash:
+  name: Bash
+node:
+  name: Node.js
+react:
+  name: React
+python:
+  name: Python
+pyqt:
+  name: PyQt
+pyside:
+  name: PySide
+qtpy:
+  name: Qt.py
+docker:
+  name: Docker
+github:
+  name: Github
+github-pages:
+  name: Github Pages
+jekyll:
+  name: Jekyll
+twilio:
+  name: Twilio
+sms:
+  name: SMS
+voice:
+  name: Voice
+flex:
+  name: Flex
+linux:
+  name: Linux
+macos:
+  name: macOS
+flame:
+  name: Flame
+maya:
+  name: Maya
+arnold:
+  name: Arnold
+mel:
+  name: MEL
+nuke:
+  name: Nuke
+houdini:
+  name: Houdini
+vray:
+  name: V-Ray
+workflow:
+  name: Workflow

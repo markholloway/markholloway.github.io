@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      title &middot; Mark Holloway
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole_custom.css">
+  <link rel="stylesheet" href="/public/css/syntax_dracula.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde_custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+
+
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Force https -->
+  
+  <script>
+    var host = 'markholloway.github.io';
+    if (window.location.host == host && window.location.protocol != 'https:') {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+  
+
+  <!-- Jekyll SEO tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>title | Mark Holloway</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="title" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Recursively replace all gizmos in Nuke script with a group. The only exception is the Cryptomatte nodes, which will be maintained as gizmos." />
+<meta property="og:description" content="Recursively replace all gizmos in Nuke script with a group. The only exception is the Cryptomatte nodes, which will be maintained as gizmos." />
+<link rel="canonical" href="http://localhost:4000/2018/06/25/template-file/" />
+<meta property="og:url" content="http://localhost:4000/2018/06/25/template-file/" />
+<meta property="og:site_name" content="Mark Holloway" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-06-25T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@twilion2" />
+<script type="application/ld+json">
+{"dateModified":"2018-06-25T00:00:00-04:00","datePublished":"2018-06-25T00:00:00-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/06/25/template-file/"},"url":"http://localhost:4000/2018/06/25/template-file/","description":"Recursively replace all gizmos in Nuke script with a group. The only exception is the Cryptomatte nodes, which will be maintained as gizmos.","headline":"title","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  
+
+
+  <body>
+    
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mark Holloway
+        </a>
+      </h1>
+      <p class="lead">Technical notes to help build and learn.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive/">Archive</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <p>
+        <a class="sidebar-nav-icons" href="/atom.xml" target="blank"><img src="/public/rss_icon_32x32.png" alt="RSS feed" width="16" height="16"></a>
+        <a class="sidebar-nav-icons" href="https://feedly.com/i/subscription/feed/http://localhost:4000/atom.xml" target="blank"><img id="feedlyFollow" src="/public/feedly_icon_37x32.png" alt="Follow me in feedly" width="19" height="16"></a>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="/public/GitHub-Mark-Light-32px.png" alt="Github" width="16" height="16"></a>
+      </p>
+
+    </nav>
+
+    <p><small>&copy; 2012-2018 All rights reserved.</small></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      
+
+
+
+<div class="post">
+  <h1 class="post-title">title</h1>
+  <span class="post-date">25 Jun 2018 <i class="fa fa-tag"></i> <a href="/blog/tag/python/">#Python</a> </span>
+
+  <p>Recursively replace all gizmos in Nuke script with a group. The only exception is the <code class="highlighter-rouge">Cryptomatte</code> nodes, which will be maintained as gizmos.</p>
+
+<!--more-->
+
+<p>Copy-paste the below code into the Nuke script editor and run.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">nuke</span>
+
+
+<span class="k">def</span> <span class="nf">is_gizmo</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="s">"""Return True if given node is a gizmo (and not allowed gizmo type)"""</span>
+
+    <span class="n">allowed_gizmo_classes</span> <span class="o">=</span> <span class="p">(</span><span class="s">'Cryptomatte'</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">knob</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">knobs</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s">'gizmo'</span> <span class="ow">in</span> <span class="n">knob</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">Class</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_gizmo_classes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+
+<span class="k">def</span> <span class="nf">get_gizmo_names</span><span class="p">():</span>
+    <span class="s">"""Return the fullName attribute for all gizmos in script"""</span>
+    
+    <span class="n">gizmos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_nodes</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">allNodes</span><span class="p">(</span><span class="n">recurseGroups</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">all_nodes</span><span class="p">:</span>
+        <span class="n">gizmos</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">fullName</span><span class="p">()</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">all_nodes</span> <span class="k">if</span> <span class="n">is_gizmo</span><span class="p">(</span><span class="n">node</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">gizmos</span>
+
+
+<span class="k">def</span> <span class="nf">deselect_all_nodes</span><span class="p">():</span>
+    <span class="s">"""De-select all nodes"""</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nuke</span><span class="o">.</span><span class="n">allNodes</span><span class="p">(</span><span class="n">recurseGroups</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s">'selected'</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">convert_gizmo_to_group</span><span class="p">(</span><span class="n">gizmo_full_name</span><span class="p">):</span>
+    <span class="s">"""Convert given gizmo (gizmo.fullName) to group"""</span>
+    
+    <span class="n">gizmo</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">toNode</span><span class="p">(</span><span class="n">gizmo_full_name</span><span class="p">)</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">gizmo</span><span class="o">.</span><span class="n">maximumInputs</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="n">gizmo</span><span class="o">.</span><span class="nb">input</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gizmo</span><span class="o">.</span><span class="nb">input</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">original_name</span> <span class="o">=</span> <span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="n">xpos</span> <span class="o">=</span> <span class="n">gizmo</span><span class="o">.</span><span class="n">xpos</span><span class="p">()</span>
+    <span class="n">ypos</span> <span class="o">=</span> <span class="n">gizmo</span><span class="o">.</span><span class="n">ypos</span><span class="p">()</span>
+    <span class="n">uid_name</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+
+    <span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">uid_name</span><span class="p">)</span>
+    <span class="n">deselect_all_nodes</span><span class="p">()</span>
+    <span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s">'selected'</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">gizmo</span><span class="p">:</span>
+        <span class="n">new_group</span> <span class="o">=</span> <span class="n">gizmo</span><span class="o">.</span><span class="n">makeGroup</span><span class="p">()</span>
+
+        <span class="n">deselect_all_nodes</span><span class="p">()</span>
+        <span class="n">nuke</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">gizmo</span><span class="p">)</span>
+
+        <span class="n">new_group</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">original_name</span><span class="p">)</span>
+        <span class="n">new_group</span><span class="p">[</span><span class="s">'xpos'</span><span class="p">]</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">xpos</span><span class="p">)</span>
+        <span class="n">new_group</span><span class="p">[</span><span class="s">'ypos'</span><span class="p">]</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">ypos</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">new_group</span><span class="o">.</span><span class="n">maximumInputs</span><span class="p">()):</span>
+            <span class="n">new_group</span><span class="o">.</span><span class="n">setInput</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">inputs</span><span class="p">[</span><span class="n">x</span><span class="p">]:</span>
+                <span class="n">new_group</span><span class="o">.</span><span class="n">connectInput</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">inputs</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="s">"""Main script"""</span>
+    <span class="c"># Store the current selection</span>
+    <span class="n">current_selection</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">selectedNodes</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="n">get_gizmo_names</span><span class="p">():</span>
+        <span class="n">gizmo_full_name</span> <span class="o">=</span> <span class="n">get_gizmo_names</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">convert_gizmo_to_group</span><span class="p">(</span><span class="n">gizmo_full_name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Converted </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">gizmo_full_name</span><span class="p">)</span>
+
+    <span class="c"># Restore original selection</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">current_selection</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">n</span><span class="p">[</span><span class="s">'selected'</span><span class="p">]</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+<span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+
+</div>
+
+<!--
+<div class="donate">
+If you liked this post, please consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7JD292KUAQCNY">donating $1</a> to support me and my blog!
+</div>
+
+-->
+
+
+
+<!-- fluidvids.js -->
+<script src="/public/js/fluidvids/dist/fluidvids.js"></script>
+<script>
+fluidvids.init({
+  selector: ['iframe'],
+  players: ['www.youtube.com', 'player.vimeo.com']
+});
+</script>
+
+
+
+
+    </div>
+
+  </body>
+</html>

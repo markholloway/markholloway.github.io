@@ -1,0 +1,52 @@
+# Dependencies
+markdown:             kramdown
+highlighter:          rouge
+
+# Permalinks
+permalink:            pretty
+
+# Setup
+title:                Mark Holloway
+tagline:              Technical notes to help build and learn. 
+description:          Technical notes to help build and learn. 
+url:                  https://markholloway.github.io
+baseurl:
+paginate:             5
+name:                 Mark Holloway
+
+gems:
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-gist
+
+# SEO
+twitter:
+  username:           twilion2
+  url:                https://twitter.com/twilion2
+social:
+  name:               Mark Holloway
+  links:
+    - https://linkedin.com/in/mholloway
+    - https://www.facebook.com/twilion2
+    - https://github.com/markholloway
+
+# Custom vars
+custom_pages:
+  feed:               /atom.xml
+github:
+    url:              https://github.com/markholloway
+    repo:             https://github.com/markholloway
+excerpt_separator:    <!--more-->
+#google_analytics:
+hyde_version:         2.1.0
+hyde_url:             http://hyde.getpoole.com
+hyde_repo:            https://github.com/poole/hyde
+show_related_posts:   false
+force_https:          true
+
+  
+# Comments
+comments:
+  use_disqus:         false
+  use_googleplus:     false
+  disqus_shortname:   
