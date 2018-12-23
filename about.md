@@ -10,7 +10,7 @@ Throughout the years I have spent my professional career within the domain of IP
 
 ## Get in touch!
     
-[linkedin.com/in/mholloway](https://linkedin.com/in/mholloway)  
+[linkedin.com/in/mholloway](http://linkedin.com/in/mholloway)  
 [github.com/markholloway](https://github.com/markholloway)
 
 

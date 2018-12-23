@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Send texts from your Twilio number using macOS and Linux
-tags: [twilio]
+tags: [bash]
 ---
 
 Here is a quick way to send outbound SMS messages with your `Twilio` number using macOS or Linux and `#!/bin/bash`
