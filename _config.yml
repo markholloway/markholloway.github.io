@@ -7,8 +7,8 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              Technical notes to help build and learn. 
-description:          Technical notes to help build and learn. 
+tagline:              Technical notes, coding, hacks, tips, and tricks. 
+description:          Technical notes, coding, hacks, tips, and tricks. 
 url:                  https://markholloway.github.io
 baseurl:
 paginate:             5

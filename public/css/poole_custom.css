@@ -439,16 +439,6 @@ a.pagination-item:hover {
 
 /* Fredrik's custom stuff */
 
-/* Donate */
-.donate {
-  display: block;
-  padding: 1em;
-  margin-top: 0;
-  margin-bottom: 4em;
-  background-color: #21252b;
-  border-radius: 3px;
-}
-
 /* Monospace font for archive */
 .archivemono {
   font-family: Menlo, Monaco, "Courier New", monospace;
