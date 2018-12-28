@@ -7,8 +7,8 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              Technical notes, coding, hacks, tips, and tricks. 
-description:          Technical notes, coding, hacks, tips, and tricks. 
+tagline:              My personal blog on web languages, libraries, and frameworks for Cloud Communications.
+description:          My personal blog on web languages, libraries, and frameworks for Cloud Communications.
 url:                  https://markholloway.github.io
 baseurl:
 paginate:             5

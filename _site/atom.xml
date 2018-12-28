@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-23T12:38:22-05:00</updated>
+ <updated>2018-12-27T16:26:47-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,19 +13,19 @@
 
  
  <entry>
-   <title>Send texts from your Twilio number using macOS and Linux</title>
+   <title>Send texts from your Twilio number using macOS Terminal with bash and curl</title>
    <link href="http://localhost:4000/2018/12/22/twilio-sms-curl/"/>
    <updated>2018-12-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/22/twilio-sms-curl</id>
-   <content type="html">&lt;p&gt;Here is a quick way to send outbound SMS messages with your &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; number using macOS or Linux and &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;Here is a fast way to send outbound SMS messages with your &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; number using &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;working-with-curl&quot;&gt;Working with &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;We will use a command line utility called &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; that is included with macOS and Linux. Curl will establish an &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; connection to Twilio’s REST API using the &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; flag and use the &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; method to send data the same way an application using a Twilio &lt;code class=&quot;highlighter-rouge&quot;&gt;helper library&lt;/code&gt; would send TwiML. The benefit of using &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; is it’s quick and we do not need to write an application.&lt;/p&gt;
+&lt;p&gt;We will use a command line utility called &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; that is included with macOS and Linux. Curl will establish an &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; connection to Twilio’s REST API using the &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; flag and use a &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; method to send data the same way an application using a Twilio &lt;code class=&quot;highlighter-rouge&quot;&gt;helper library&lt;/code&gt; would send TwiML. The benefit of using &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; is it’s quick and convenient, especially for testing.&lt;/p&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; option represents the data we will POST to Twilio. Include your own SID and Auth Token in the &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; option for Twilio verification. They must be seperated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or credentials will fail. Phone numbers must be formatted as &lt;a href=&quot;https://www.twilio.com/docs/glossary/what-e164&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E.164&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Below is an example of  our &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; script. The &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; options represent the data we will POST to Twilio. Replace your own SID and Auth Token in the &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; option for Twilio verification. They must be seperated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or credentials will fail. Enter your Twilio number in the &lt;code class=&quot;highlighter-rouge&quot;&gt;From&lt;/code&gt; field and a mobile number in the &lt;code class=&quot;highlighter-rouge&quot;&gt;To&lt;/code&gt; field. Numbers must be in &lt;a href=&quot;https://www.twilio.com/docs/glossary/what-e164&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E.164&lt;/code&gt;&lt;/a&gt; format.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
@@ -37,7 +37,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;If all went will you should receive a text on your device. Your terminal window will display an &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; response sent by Twilio either confirming your &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; request was successful or there was an error.&lt;/p&gt;
+&lt;p&gt;If all went will you should receive a text on your device. Your terminal window will display an &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; response sent by Twilio either confirming your HTTP request was successful or there was an error.&lt;/p&gt;
 
 &lt;h2 id=&quot;phone-number-and-message-body-redaction&quot;&gt;Phone number and message body redaction&lt;/h2&gt;
 
@@ -82,8 +82,9 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;using-postman&quot;&gt;Using Postman&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.getpostman.com/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Postman&lt;/code&gt;&lt;/a&gt; is a free and handy tool for more lengthy testing. It’s also a great way to view &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; files containing SMS transaction details.&lt;/p&gt;
+&lt;p&gt;This is the swiss army knife of REST API tools. &lt;a href=&quot;https://www.getpostman.com/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Postman&lt;/code&gt;&lt;/a&gt; is free and in this example we will look at the SMS details for a text sent from a Twilio number to a mobile device.&lt;/p&gt;
 
 &lt;p&gt;Below is the Twilio URL to &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; SMS records from your Twilio account. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;{AccountSid}&lt;/code&gt; with your SID.&lt;/p&gt;
 
@@ -95,7 +96,7 @@ https://api.twilio.com/2010-04-01/Accounts/&lt;span class=&quot;o&quot;&gt;{&lt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/postman/postman_settings.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;In Postman press &lt;code class=&quot;highlighter-rouge&quot;&gt;Send&lt;/code&gt; to query the Twilio URL we added. Postman will display the returned JSON data in a readable format.&lt;/p&gt;
+&lt;p&gt;In Postman press &lt;code class=&quot;highlighter-rouge&quot;&gt;Send&lt;/code&gt; to query the Twilio URL we added. Make sure the &lt;code class=&quot;highlighter-rouge&quot;&gt;Pretty&lt;/code&gt; option under &lt;code class=&quot;highlighter-rouge&quot;&gt;Body&lt;/code&gt; is selected and Postman will display the returned &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; output in a readable format.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/postman/postman_sms_log.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 

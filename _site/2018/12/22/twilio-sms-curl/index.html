@@ -11,7 +11,7 @@
 
   <title>
     
-      Send texts from your Twilio number using macOS and Linux &middot; Mark Holloway
+      Send texts from your Twilio number using macOS Terminal with bash and curl &middot; Mark Holloway
     
   </title>
 
@@ -43,12 +43,12 @@
 
   <!-- Jekyll SEO tag plugin -->
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Send texts from your Twilio number using macOS and Linux | Mark Holloway</title>
+<title>Send texts from your Twilio number using macOS Terminal with bash and curl | Mark Holloway</title>
 <meta name="generator" content="Jekyll v3.7.4" />
-<meta property="og:title" content="Send texts from your Twilio number using macOS and Linux" />
+<meta property="og:title" content="Send texts from your Twilio number using macOS Terminal with bash and curl" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Here is a quick way to send outbound SMS messages with your Twilio number using macOS or Linux and #!/bin/bash" />
-<meta property="og:description" content="Here is a quick way to send outbound SMS messages with your Twilio number using macOS or Linux and #!/bin/bash" />
+<meta name="description" content="Here is a fast way to send outbound SMS messages with your Twilio number using #!/bin/bash" />
+<meta property="og:description" content="Here is a fast way to send outbound SMS messages with your Twilio number using #!/bin/bash" />
 <link rel="canonical" href="http://localhost:4000/2018/12/22/twilio-sms-curl/" />
 <meta property="og:url" content="http://localhost:4000/2018/12/22/twilio-sms-curl/" />
 <meta property="og:site_name" content="Mark Holloway" />
@@ -57,7 +57,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@twilion2" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/2018/12/22/twilio-sms-curl/","headline":"Send texts from your Twilio number using macOS and Linux","dateModified":"2018-12-22T00:00:00-05:00","datePublished":"2018-12-22T00:00:00-05:00","description":"Here is a quick way to send outbound SMS messages with your Twilio number using macOS or Linux and #!/bin/bash","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/12/22/twilio-sms-curl/"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"description":"Here is a fast way to send outbound SMS messages with your Twilio number using #!/bin/bash","@type":"BlogPosting","url":"http://localhost:4000/2018/12/22/twilio-sms-curl/","headline":"Send texts from your Twilio number using macOS Terminal with bash and curl","dateModified":"2018-12-22T00:00:00-05:00","datePublished":"2018-12-22T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/12/22/twilio-sms-curl/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -75,7 +75,7 @@
           Mark Holloway
         </a>
       </h1>
-      <p class="lead">Technical notes, coding, hacks, tips, and tricks.</p>
+      <p class="lead">My personal blog on web languages, libraries, and frameworks for Cloud Communications.</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -183,18 +183,18 @@
 
 
 <div class="post">
-  <h1 class="post-title">Send texts from your Twilio number using macOS and Linux</h1>
+  <h1 class="post-title">Send texts from your Twilio number using macOS Terminal with bash and curl</h1>
   <span class="post-date">22 Dec 2018 <i class="fa fa-tag"></i> <a href="/blog/tag/bash/">#Bash</a> </span>
 
-  <p>Here is a quick way to send outbound SMS messages with your <code class="highlighter-rouge">Twilio</code> number using macOS or Linux and <code class="highlighter-rouge"><span class="c">#!/bin/bash</span></code></p>
+  <p>Here is a fast way to send outbound SMS messages with your <code class="highlighter-rouge">Twilio</code> number using <code class="highlighter-rouge"><span class="c">#!/bin/bash</span></code></p>
 
 <!--more-->
 
 <h2 id="working-with-curl">Working with <code class="highlighter-rouge">curl</code></h2>
 
-<p>We will use a command line utility called <code class="highlighter-rouge">curl</code> that is included with macOS and Linux. Curl will establish an <code class="highlighter-rouge">HTTP</code> connection to Twilio’s REST API using the <code class="highlighter-rouge">-X</code> flag and use the <code class="highlighter-rouge">POST</code> method to send data the same way an application using a Twilio <code class="highlighter-rouge">helper library</code> would send TwiML. The benefit of using <code class="highlighter-rouge">curl</code> is it’s quick and we do not need to write an application.</p>
+<p>We will use a command line utility called <code class="highlighter-rouge">curl</code> that is included with macOS and Linux. Curl will establish an <code class="highlighter-rouge">HTTP</code> connection to Twilio’s REST API using the <code class="highlighter-rouge">-X</code> flag and use a <code class="highlighter-rouge">POST</code> method to send data the same way an application using a Twilio <code class="highlighter-rouge">helper library</code> would send TwiML. The benefit of using <code class="highlighter-rouge">curl</code> is it’s quick and convenient, especially for testing.</p>
 
-<p>The <code class="highlighter-rouge">-d</code> option represents the data we will POST to Twilio. Include your own SID and Auth Token in the <code class="highlighter-rouge">-u</code> option for Twilio verification. They must be seperated by <code class="highlighter-rouge">:</code> or credentials will fail. Phone numbers must be formatted as <a href="https://www.twilio.com/docs/glossary/what-e164"><code class="highlighter-rouge">E.164</code></a>.</p>
+<p>Below is an example of  our <code class="highlighter-rouge">curl</code> script. The <code class="highlighter-rouge">-d</code> options represent the data we will POST to Twilio. Replace your own SID and Auth Token in the <code class="highlighter-rouge">-u</code> option for Twilio verification. They must be seperated by <code class="highlighter-rouge">:</code> or credentials will fail. Enter your Twilio number in the <code class="highlighter-rouge">From</code> field and a mobile number in the <code class="highlighter-rouge">To</code> field. Numbers must be in <a href="https://www.twilio.com/docs/glossary/what-e164"><code class="highlighter-rouge">E.164</code></a> format.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 curl <span class="nt">-X</span> POST <span class="se">\</span>
@@ -206,7 +206,7 @@ curl <span class="nt">-X</span> POST <span class="se">\</span>
 
 </code></pre></div></div>
 
-<p>If all went will you should receive a text on your device. Your terminal window will display an <code class="highlighter-rouge">XML</code> response sent by Twilio either confirming your <code class="highlighter-rouge">HTTP</code> request was successful or there was an error.</p>
+<p>If all went will you should receive a text on your device. Your terminal window will display an <code class="highlighter-rouge">XML</code> response sent by Twilio either confirming your HTTP request was successful or there was an error.</p>
 
 <h2 id="phone-number-and-message-body-redaction">Phone number and message body redaction</h2>
 
@@ -251,8 +251,9 @@ curl <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-u</span> <span class="s2">"ABCD1234:EFGH5678"</span>
 
 </code></pre></div></div>
+<h2 id="using-postman">Using Postman</h2>
 
-<p><a href="https://www.getpostman.com/"><code class="highlighter-rouge">Postman</code></a> is a free and handy tool for more lengthy testing. It’s also a great way to view <code class="highlighter-rouge">JSON</code> files containing SMS transaction details.</p>
+<p>This is the swiss army knife of REST API tools. <a href="https://www.getpostman.com/"><code class="highlighter-rouge">Postman</code></a> is free and in this example we will look at the SMS details for a text sent from a Twilio number to a mobile device.</p>
 
 <p>Below is the Twilio URL to <code class="highlighter-rouge">GET</code> SMS records from your Twilio account. Replace <code class="highlighter-rouge">{AccountSid}</code> with your SID.</p>
 
@@ -264,7 +265,7 @@ https://api.twilio.com/2010-04-01/Accounts/<span class="o">{</span>AccountSid<sp
 
 <p><img src="/blog/assets/postman/postman_settings.png" alt="" /></p>
 
-<p>In Postman press <code class="highlighter-rouge">Send</code> to query the Twilio URL we added. Postman will display the returned JSON data in a readable format.</p>
+<p>In Postman press <code class="highlighter-rouge">Send</code> to query the Twilio URL we added. Make sure the <code class="highlighter-rouge">Pretty</code> option under <code class="highlighter-rouge">Body</code> is selected and Postman will display the returned <code class="highlighter-rouge">JSON</code> output in a readable format.</p>
 
 <p><img src="/blog/assets/postman/postman_sms_log.jpg" alt="" /></p>
 

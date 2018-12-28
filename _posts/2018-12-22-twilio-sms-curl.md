@@ -1,19 +1,19 @@
 ---
 layout: post
-title: Send texts from your Twilio number using macOS and Linux
+title: Send texts from your Twilio number using macOS Terminal with bash and curl
 tags: [bash]
 ---
 
-Here is a quick way to send outbound SMS messages with your `Twilio` number using macOS or Linux and `#!/bin/bash`
+Here is a fast way to send outbound SMS messages with your `Twilio` number using `#!/bin/bash`
 
 <!--more-->
 
 
 ## Working with `curl`
 
-We will use a command line utility called `curl` that is included with macOS and Linux. Curl will establish an `HTTP` connection to Twilio's REST API using the `-X` flag and use the `POST` method to send data the same way an application using a Twilio `helper library` would send TwiML. The benefit of using `curl` is it's quick and we do not need to write an application.
+We will use a command line utility called `curl` that is included with macOS and Linux. Curl will establish an `HTTP` connection to Twilio's REST API using the `-X` flag and use a `POST` method to send data the same way an application using a Twilio `helper library` would send TwiML. The benefit of using `curl` is it's quick and convenient, especially for testing.
 
-The `-d` option represents the data we will POST to Twilio. Include your own SID and Auth Token in the `-u` option for Twilio verification. They must be seperated by `:` or credentials will fail. Phone numbers must be formatted as [`E.164`](https://www.twilio.com/docs/glossary/what-e164).
+Below is an example of  our `curl` script. The `-d` options represent the data we will POST to Twilio. Replace your own SID and Auth Token in the `-u` option for Twilio verification. They must be seperated by `:` or credentials will fail. Enter your Twilio number in the `From` field and a mobile number in the `To` field. Numbers must be in [`E.164`](https://www.twilio.com/docs/glossary/what-e164) format.
  
 ```bash
 
@@ -26,7 +26,7 @@ curl -X POST \
 
 ```
 
-If all went will you should receive a text on your device. Your terminal window will display an `XML` response sent by Twilio either confirming your `HTTP` request was successful or there was an error.
+If all went will you should receive a text on your device. Your terminal window will display an `XML` response sent by Twilio either confirming your HTTP request was successful or there was an error.
 
 ## Phone number and message body redaction
 
@@ -74,8 +74,9 @@ curl -X POST \
     -u "ABCD1234:EFGH5678"
 
 ```
+## Using Postman 
 
-[`Postman`](https://www.getpostman.com/) is a free and handy tool for more lengthy testing. It's also a great way to view `JSON` files containing SMS transaction details.
+This is the swiss army knife of REST API tools. [`Postman`](https://www.getpostman.com/) is free and in this example we will look at the SMS details for a text sent from a Twilio number to a mobile device.
 
 Below is the Twilio URL to `GET` SMS records from your Twilio account. Replace `{AccountSid}` with your SID.
 
@@ -88,7 +89,7 @@ Add your SID and Auth Token to `Postman` for Twilio verification.
 
 ![]({{ site.baseurl }}/blog/assets/postman/postman_settings.png)
 
-In Postman press `Send` to query the Twilio URL we added. Postman will display the returned JSON data in a readable format.
+In Postman press `Send` to query the Twilio URL we added. Make sure the `Pretty` option under `Body` is selected and Postman will display the returned `JSON` output in a readable format.
 
 ![]({{ site.baseurl }}/blog/assets/postman/postman_sms_log.jpg)
 
