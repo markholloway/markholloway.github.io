@@ -1,10 +1,15 @@
 # Don't track content of these folders
-vendor
-.bundle
 node_modules
 .DS_Store
 .env
 
+# Ignore Bundler folders
+vendor
+.bundle
+
+# Ignore Jekyll folders
+.sass-cache
+_site
 
 # Compiled source #
 ###################

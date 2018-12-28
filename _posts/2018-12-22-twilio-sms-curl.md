@@ -1,97 +1,49 @@
 ---
 layout: post
-title: Send texts from your Twilio number using macOS Terminal with bash and curl
+title: Send texts from your Twilio number using macOS or Linux with bash and curl
 tags: [bash]
 ---
 
-Here is a fast way to send outbound SMS messages with your `Twilio` number using `#!/bin/bash`
+It doesn't get any easier than this to quickly send sending outbound text with your Twilio number. Perfect for testing if something isn't working. 
 
 <!--more-->
 
 
-## Working with `curl`
+## The goal
 
-We will use a command line utility called `curl` that is included with macOS and Linux. Curl will establish an `HTTP` connection to Twilio's REST API using the `-X` flag and use a `POST` method to send data the same way an application using a Twilio `helper library` would send TwiML. The benefit of using `curl` is it's quick and convenient, especially for testing.
+`BASH` is the default Unix shell for macOS and Linux and includes a powerful utility called `curl`. With curl we are going to `POST` data Twilio's `REST API` and send outbound text message from a Twilio number. 
 
-Below is an example of  our `curl` script. The `-d` options represent the data we will POST to Twilio. Replace your own SID and Auth Token in the `-u` option for Twilio verification. They must be seperated by `:` or credentials will fail. Enter your Twilio number in the `From` field and a mobile number in the `To` field. Numbers must be in [`E.164`](https://www.twilio.com/docs/glossary/what-e164) format.
- 
-```bash
+## Working with curl
 
-curl -X POST \
-    "https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages" \
-    -d "From=+14244881616" \
-    -d "To=+18079072252" \
-    -d "Body=Price is what you pay. Value is what you get." \
-    -u "ABCD1234:EFGH5678"
+There no arguing that `curl` is a swiss army knife for common protocols such as SFTP, SCP, LDAP, and many more. One of its greatest strengths is `HTTP Scripting`. Below are the curl `flags` we will use in out scripts.  
 
-```
+`curl -X POST` tells curl to POST to a particular URL
 
-If all went will you should receive a text on your device. Your terminal window will display an `XML` response sent by Twilio either confirming your HTTP request was successful or there was an error.
+`curl --data-urlencode` the actual `data` that `Twilio` will process
 
-## Phone number and message body redaction
+`curl -u` provides authentication credentials to the server
 
-If you use `redaction` for privacy reasons this can also be tested with curl. Redaction must be enabled in your account for the flags to work.
+`NOTE` Twilio expects the account `SID` separated by a `:` and the Auto Token. Without this verifications will fail.
 
-This redacts digits from the phone number. Only the NPA-NXX are in the logs.
+Twilio requires phone numbers to be in global [`E.164`](https://www.twilio.com/docs/glossary/what-e164) format.
+
+Copy the script to a plain text editor and inthe HTTPS URL replace `ABCD1234` with your account `SID` and in the `-u` option replace `ABCD1234:EFGH5678` with your own `SID` and `AUTH TOKEN`. Replace `From=+1xxxxxxxxxx` with your Twilio number and `To=+1xxxxxxxxxx` with your mobile number. 
+
+For easier reading each curl element is on its own line. if you use this form keep the `\` at the end of each line as this tells curl to POST the information as one string wihtout line breaks.
 
 ```bash
 
 curl -X POST \
     "https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages" \
-    -d "From=+14244881616" \
-    -d "To=+18079072252" \
-    -d "Body=Price is what you pay. Value is what you get." \
-    -d "AddressRetention=obfuscate"
+    --data-urlencode "From=+1xxxxxxxxxx" \
+    --data-urlencode "Body=I'm using curl to send a text with a Twilio number!" \
+    --data-urlencode "To=+1xxxxxxxxxx" \
     -u "ABCD1234:EFGH5678"
 
 ```
 
-This redacts the message body.
+If all went will you should receive a text on your mobile device. There should also be an `XML` response from Twilio that includes 200 OK displayed in BASH along with several XML headers. 
 
-```bash
-
-curl -X POST \
-    "https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages" \
-    -d "From=+14244881616" \
-    -d "To=+18079072252" \
-    -d "Body=Price is what you pay. Value is what you get." \
-    -d "ContentRetention=obfuscate"
-    -u "ABCD1234:EFGH5678"
-
-```
-
-This redacts the digits and the message body.
-
-```bash
-
-curl -X POST \
-    "https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages" \
-    -d "From=+14244881616" \
-    -d "To=+18079072252" \
-    -d "Body=Price is what you pay. Value is what you get." \
-    -d "ContentRetention=obfuscate"
-    -d "AddressRetention=obfuscate"
-    -u "ABCD1234:EFGH5678"
-
-```
-## Using Postman 
-
-This is the swiss army knife of REST API tools. [`Postman`](https://www.getpostman.com/) is free and in this example we will look at the SMS details for a text sent from a Twilio number to a mobile device.
-
-Below is the Twilio URL to `GET` SMS records from your Twilio account. Replace `{AccountSid}` with your SID.
-
-```bash
-
-https://api.twilio.com/2010-04-01/Accounts/{AccountSid}/Messages.json
-
-```
-Add your SID and Auth Token to `Postman` for Twilio verification. 
-
-![]({{ site.baseurl }}/blog/assets/postman/postman_settings.png)
-
-In Postman press `Send` to query the Twilio URL we added. Make sure the `Pretty` option under `Body` is selected and Postman will display the returned `JSON` output in a readable format.
-
-![]({{ site.baseurl }}/blog/assets/postman/postman_sms_log.jpg)
-
+If the text did not work and you like have received a `4xx` such as `401 Unauthorized` pr `404 Not Found`. The most common issue is incorrect SID:AUTH credentials for Twilio project the phone number belongs to. The list of possible status codes may be viewed `here`(https://www.twilio.com/docs/usage/your-request-to-twilio). 
 
 Happy texting!
