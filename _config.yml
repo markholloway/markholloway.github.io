@@ -7,8 +7,8 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              My personal blog on web languages, libraries, and frameworks for Cloud Communications.
-description:          My personal blog on web languages, libraries, and frameworks for Cloud Communications.
+tagline:              My personal blog on Web Languages, Libraries, and Frameworks for Cloud Communications.
+description:          My personal blog on Web Languages, Libraries, and Frameworks for Cloud Communications.
 url:                  https://markholloway.github.io
 baseurl:
 paginate:             5
