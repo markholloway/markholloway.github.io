@@ -1,20 +1,20 @@
 ---
 layout: post
-title: How to configure Twilio SMS phone number and message body redaction
+title: Configuring Twilio SMS message body and phone number redaction for PII
 tags: [twilio,bash]
 ---
 
-Twilio supports phone number and message body `redaction` when sending SMS or MMS messages. The following examples show the `flags` required to support redaction.
+ Twilio offers `redaction` of Personally Identifiable Information when sending text messages. The following examples show the necessary settings to utilize this feature.
 
 <!--more-->
 
 ## Testing with `curl` 
 
-The script in the following [`post`](https://markholloway.github.io/2018/12/22/twilio-sms-curl/) will be the starting point for the redaction example. Below is a refresher on how to configure the script for standard SMS messaging with Twilio.
+Below is the `curl` script used from a previous [post](https://markholloway.github.io/2018/12/22/twilio-sms-curl/) demonstrating how to send SMS gmessages from a Twilio number using `curl` and `BASH` in macOS, Linux, and Windows.
 
-### Demo script
+### Demo `curl` script
 
-To make editing easier copy the example script to a plain text editor and modify the `URL` by replacing `ABCD1234` with your SID. Replace the `-u` option `ABCD1234:EFGH5678` with your SID and AUTH TOKEN credentials. They must be separated by `:` or verification will fail. 
+It is recommended to copy the script below to a plain text editor for easier editing. Modify the `URL` by replacing `ABCD1234`with a valid `SID`. Replace `-u` credentials `ABCD1234:EFGH5678` with the same account `SID` and a valid `Auth Token`. They must be separated by `:` or verification will fail. 
 
 Replace `From=+1xxxxxxxxxx` with a Twilio number and `To=+1xxxxxxxxxx` with a mobile number. 
 
@@ -28,15 +28,15 @@ curl -X POST \
     -u "ABCD1234:EFGH5678"
 
 ```
-## Twilio message redaction options
+## Twilio redaction options
 
-Message redaction requires users are granted access to the feature in their Twilio console by completing [`this`](https://ahoy.twilio.com/message-body-redaction) sign-up form. 
+`NOTE:` Users must be granted access to the redaction feature in their Twilio console by completing [`this`](https://ahoy.twilio.com/message-body-redaction) sign-up form. 
 
-There are two significant `data` settings used for redaction.
+There are two significant `data` flags used for redaction.
 
 ## Redaction examples
 
-Setting `AddressRetention=obfuscate` redacts the last 4 digits of the phone number and only the NPA-NXX are stored. The number `+15554229999` is stored as `+1555422XXXX`
+Setting `AddressRetention=obfuscate` redacts the last 4 digits of the phone number and only the NPA-NXX are stored. The number `+13074229999` is stored as `+1307422XXXX`
 
 ```bash
 
@@ -44,13 +44,13 @@ curl -X POST \
     "https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages" \
     --data-urlencode "From=+1xxxxxxxxxx" \
     --data-urlencode "Body=I'm using curl to send a text with a Twilio number!" \
-    --data-urlencode "AddressRetention=obfuscate"
+    --data-urlencode "AddressRetention=obfuscate" \
     --data-urlencode  "To=+1xxxxxxxxxx" \
     -u "ABCD1234:EFGH5678"
 
 ```
 
-Setting `ContentRetention=discard` redacts the SMS message body. If the message includes MMS media it will be discarded as well.
+Setting `ContentRetention=discard` redacts the SMS message body and media (if sent as an MMS).
 
 ```bash
 
@@ -58,13 +58,13 @@ curl -X POST \
     "https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages" \
     --data-urlencode "From=+1xxxxxxxxxx" \
     --data-urlencode "Body=I'm using curl to send a text with a Twilio number!" \
-    --data-urlencode "ContentRetention=discard"
+    --data-urlencode "ContentRetention=discard" \
     --data-urlencode  "To=+1xxxxxxxxxx" \
     -u "ABCD1234:EFGH5678"
 
 ```
 
-Including both options redacts the phone number, message body, and media (if applicable). 
+Including both options redacts the phone number, message body, and media. 
 
 ```bash
 
@@ -72,15 +72,15 @@ curl -X POST \
     "https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages" \
     --data-urlencode "From=+1xxxxxxxxxx" \
     --data-urlencode "Body=I'm using curl to send a text with a Twilio number!" \
-    --data-urlencode "AddressRetention=obfuscate"
-    --data-urlencode "ContentRetention=discard"
+    --data-urlencode "AddressRetention=obfuscate" \
+    --data-urlencode "ContentRetention=discard" \
     --data-urlencode  "To=+1xxxxxxxxxx" \
     -u "ABCD1234:EFGH5678"
 
 ```
-The above examples assume the Twilio Console settings do not redact messages by default which is why it is necessary to include the additoinal flags.
+The above examples assume the Twilio Console settings do not redact messages by default. Specifying the appropriate flag tells Twilio to redact the data content.
 
-It is possible to set the `default behavior` in the console to `always` include redaction for either of the options. In the event there are messages which should not be redacted, there are flags for `retaining` both the phone number and message body.
+It is possible to set the `default behavior` in the console to `always` include redaction for either option. Therefore there may be messages which should not be redacted. Using `retain` will keep the data content.
 
 ```bash
 
@@ -88,12 +88,10 @@ curl -X POST \
     "https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages" \
     --data-urlencode "From=+1xxxxxxxxxx" \
     --data-urlencode "Body=I'm using curl to send a text with a Twilio number!" \
-    --data-urlencode "AddressRetention=retain"
-    --data-urlencode "ContentRetention=retain"
+    --data-urlencode "AddressRetention=retain" \
+    --data-urlencode "ContentRetention=retain" \
     --data-urlencode  "To=+1xxxxxxxxxx" \
     -u "ABCD1234:EFGH5678"
 
 ```
-When `sub-accounts` are created they will inherit the current redaction setting of the parent account. The sub-account settings can be changed at any time.
-
-Happy texting!
+When `sub-accounts` are created they will inherit the current redaction setting of the parent account. Sub-account redaction settings can be changed.

@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-29T12:32:53-05:00</updated>
+ <updated>2018-12-29T17:20:23-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,21 +13,21 @@
 
  
  <entry>
-   <title>How to configure Twilio SMS phone number and message body redaction</title>
+   <title>Configuring Twilio SMS message body and phone number redaction for PII</title>
    <link href="http://localhost:4000/2018/12/28/twilio-sms-redaction/"/>
    <updated>2018-12-28T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/28/twilio-sms-redaction</id>
-   <content type="html">&lt;p&gt;Twilio supports phone number and message body &lt;code class=&quot;highlighter-rouge&quot;&gt;redaction&lt;/code&gt; when sending SMS or MMS messages. The following examples show the &lt;code class=&quot;highlighter-rouge&quot;&gt;flags&lt;/code&gt; required to support redaction.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Twilio offers &lt;code class=&quot;highlighter-rouge&quot;&gt;redaction&lt;/code&gt; of Personally Identifiable Information when sending text messages. The following examples show the necessary settings to utilize this feature.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;testing-with-curl&quot;&gt;Testing with &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;The script in the following &lt;a href=&quot;https://markholloway.github.io/2018/12/22/twilio-sms-curl/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;post&lt;/code&gt;&lt;/a&gt; will be the starting point for the redaction example. Below is a refresher on how to configure the script for standard SMS messaging with Twilio.&lt;/p&gt;
+&lt;p&gt;Below is the &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; script used from a previous &lt;a href=&quot;https://markholloway.github.io/2018/12/22/twilio-sms-curl/&quot;&gt;post&lt;/a&gt; demonstrating how to send SMS gmessages from a Twilio number using &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; in macOS, Linux, and Windows.&lt;/p&gt;
 
-&lt;h3 id=&quot;demo-script&quot;&gt;Demo script&lt;/h3&gt;
+&lt;h3 id=&quot;demo-curl-script&quot;&gt;Demo &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; script&lt;/h3&gt;
 
-&lt;p&gt;To make editing easier copy the example script to a plain text editor and modify the &lt;code class=&quot;highlighter-rouge&quot;&gt;URL&lt;/code&gt; by replacing &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234&lt;/code&gt; with your SID. Replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; option &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234:EFGH5678&lt;/code&gt; with your SID and AUTH TOKEN credentials. They must be separated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or verification will fail.&lt;/p&gt;
+&lt;p&gt;It is recommended to copy the script below to a plain text editor for easier editing. Modify the &lt;code class=&quot;highlighter-rouge&quot;&gt;URL&lt;/code&gt; by replacing &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234&lt;/code&gt;with a valid &lt;code class=&quot;highlighter-rouge&quot;&gt;SID&lt;/code&gt;. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; credentials &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234:EFGH5678&lt;/code&gt; with the same account &lt;code class=&quot;highlighter-rouge&quot;&gt;SID&lt;/code&gt; and a valid &lt;code class=&quot;highlighter-rouge&quot;&gt;Auth Token&lt;/code&gt;. They must be separated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or verification will fail.&lt;/p&gt;
 
 &lt;p&gt;Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;From=+1xxxxxxxxxx&lt;/code&gt; with a Twilio number and &lt;code class=&quot;highlighter-rouge&quot;&gt;To=+1xxxxxxxxxx&lt;/code&gt; with a mobile number.&lt;/p&gt;
 
@@ -40,71 +40,69 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;twilio-message-redaction-options&quot;&gt;Twilio message redaction options&lt;/h2&gt;
+&lt;h2 id=&quot;twilio-redaction-options&quot;&gt;Twilio redaction options&lt;/h2&gt;
 
-&lt;p&gt;Message redaction requires users are granted access to the feature in their Twilio console by completing &lt;a href=&quot;https://ahoy.twilio.com/message-body-redaction&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;&lt;/a&gt; sign-up form.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NOTE:&lt;/code&gt; Users must be granted access to the redaction feature in their Twilio console by completing &lt;a href=&quot;https://ahoy.twilio.com/message-body-redaction&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;&lt;/a&gt; sign-up form.&lt;/p&gt;
 
-&lt;p&gt;There are two significant &lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt; settings used for redaction.&lt;/p&gt;
+&lt;p&gt;There are two significant &lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt; flags used for redaction.&lt;/p&gt;
 
 &lt;h2 id=&quot;redaction-examples&quot;&gt;Redaction examples&lt;/h2&gt;
 
-&lt;p&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;AddressRetention=obfuscate&lt;/code&gt; redacts the last 4 digits of the phone number and only the NPA-NXX are stored. The number &lt;code class=&quot;highlighter-rouge&quot;&gt;+15554229999&lt;/code&gt; is stored as &lt;code class=&quot;highlighter-rouge&quot;&gt;+1555422XXXX&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;AddressRetention=obfuscate&lt;/code&gt; redacts the last 4 digits of the phone number and only the NPA-NXX are stored. The number &lt;code class=&quot;highlighter-rouge&quot;&gt;+13074229999&lt;/code&gt; is stored as &lt;code class=&quot;highlighter-rouge&quot;&gt;+1307422XXXX&lt;/code&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AddressRetention=obfuscate&quot;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AddressRetention=obfuscate&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt;  &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;ContentRetention=discard&lt;/code&gt; redacts the SMS message body. If the message includes MMS media it will be discarded as well.&lt;/p&gt;
+&lt;p&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;ContentRetention=discard&lt;/code&gt; redacts the SMS message body and media (if sent as an MMS).&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ContentRetention=discard&quot;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ContentRetention=discard&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt;  &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Including both options redacts the phone number, message body, and media (if applicable).&lt;/p&gt;
+&lt;p&gt;Including both options redacts the phone number, message body, and media.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AddressRetention=obfuscate&quot;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ContentRetention=discard&quot;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AddressRetention=obfuscate&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ContentRetention=discard&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt;  &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The above examples assume the Twilio Console settings do not redact messages by default which is why it is necessary to include the additoinal flags.&lt;/p&gt;
+&lt;p&gt;The above examples assume the Twilio Console settings do not redact messages by default. Specifying the appropriate flag tells Twilio to redact the data content.&lt;/p&gt;
 
-&lt;p&gt;It is possible to set the &lt;code class=&quot;highlighter-rouge&quot;&gt;default behavior&lt;/code&gt; in the console to &lt;code class=&quot;highlighter-rouge&quot;&gt;always&lt;/code&gt; include redaction for either of the options. In the event there are messages which should not be redacted, there are flags for &lt;code class=&quot;highlighter-rouge&quot;&gt;retaining&lt;/code&gt; both the phone number and message body.&lt;/p&gt;
+&lt;p&gt;It is possible to set the &lt;code class=&quot;highlighter-rouge&quot;&gt;default behavior&lt;/code&gt; in the console to &lt;code class=&quot;highlighter-rouge&quot;&gt;always&lt;/code&gt; include redaction for either option. Therefore there may be messages which should not be redacted. Using &lt;code class=&quot;highlighter-rouge&quot;&gt;retain&lt;/code&gt; will keep the data content.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AddressRetention=retain&quot;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ContentRetention=retain&quot;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AddressRetention=retain&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ContentRetention=retain&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt;  &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;When &lt;code class=&quot;highlighter-rouge&quot;&gt;sub-accounts&lt;/code&gt; are created they will inherit the current redaction setting of the parent account. The sub-account settings can be changed at any time.&lt;/p&gt;
-
-&lt;p&gt;Happy texting!&lt;/p&gt;
+&lt;p&gt;When &lt;code class=&quot;highlighter-rouge&quot;&gt;sub-accounts&lt;/code&gt; are created they will inherit the current redaction setting of the parent account. Sub-account redaction settings can be changed.&lt;/p&gt;
 </content>
  </entry>
  
@@ -113,7 +111,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
    <link href="http://localhost:4000/2018/12/27/postman-sms-twilio/"/>
    <updated>2018-12-27T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/27/postman-sms-twilio</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.getpostman.com&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Postman&lt;/code&gt;&lt;/a&gt; is a free application for macOS, Linux, and Windows, that simplifies API development and testing. The following example shows how to configure Postman to support Twilio and send SMS messages.&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.getpostman.com&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Postman&lt;/code&gt;&lt;/a&gt; is a &lt;a href=&quot;https://www.getpostman.com&quot;&gt;free&lt;/a&gt; application for macOS, Linux, and Windows, that simplifies &lt;code class=&quot;highlighter-rouge&quot;&gt;API&lt;/code&gt; development and testing. The following &lt;code class=&quot;highlighter-rouge&quot;&gt;screenshots&lt;/code&gt; shows how to configure Postman to work with &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; and send SMS messages.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -142,17 +140,15 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
 &lt;p&gt;Twilio responds to HTTP Requests in &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; format. If the text was sent successfully the response from Twilio provides details about the SMS transaction. Click the &lt;code class=&quot;highlighter-rouge&quot;&gt;Pretty&lt;/code&gt; option in Postman and the JSON data will be presented in a readable format.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/postman/postman-json.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Happy texting!&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>Send texts from your Twilio number using BASH and curl with macOS or Linux</title>
+   <title>Send texts from your Twilio number using BASH and curl with macOS, Linux, and Windows</title>
    <link href="http://localhost:4000/2018/12/22/twilio-sms-curl/"/>
    <updated>2018-12-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/22/twilio-sms-curl</id>
-   <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; utiliy is a powerful command line program bundled with &lt;code class=&quot;highlighter-rouge&quot;&gt;macOS&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Linux&lt;/code&gt;. The following script provides a quick method to send text messages from a &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; phone number to a mobile device. This is ideal for development and testing.&lt;/p&gt;
+   <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; utiliy is a powerful command line program bundled with &lt;code class=&quot;highlighter-rouge&quot;&gt;macOS&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Linux&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;Windows&lt;/code&gt; users should &lt;a href=&quot;https://gitforwindows.org&quot;&gt;download&lt;/a&gt; &lt;a href=&quot;https://gitforwindows.org&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GIT SCM&lt;/code&gt;&lt;/a&gt; which includes &lt;code class=&quot;highlighter-rouge&quot;&gt;GIT BASH&lt;/code&gt; and the curl program. The following script provides a quick method to send text messages from a &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; phone number to a mobile device. This is ideal for development and testing.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -173,9 +169,8 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Paste the above script in a &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; shell to send the text. Twilio should respond with &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; headers and include a &lt;code class=&quot;highlighter-rouge&quot;&gt;2xx&lt;/code&gt; response code for successful delivery. If the message did not go through check &lt;a href=&quot;https://www.twilio.com/docs/usage/your-request-to-twilio&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;here&lt;/code&gt;&lt;/a&gt; for a descriptive list of &lt;code class=&quot;highlighter-rouge&quot;&gt;4xx&lt;/code&gt; error codes.&lt;/p&gt;
+&lt;p&gt;Paste the above script in a &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; shell to send the &lt;code class=&quot;highlighter-rouge&quot;&gt;REST API&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; request. If the text wen through Twilio will respond with a &lt;code class=&quot;highlighter-rouge&quot;&gt;2xx&lt;/code&gt; response code and details records in &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; format. If the message failed to send then note the response code and check &lt;a href=&quot;https://www.twilio.com/docs/usage/your-request-to-twilio&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;here&lt;/code&gt;&lt;/a&gt; for a descriptive of error codes.&lt;/p&gt;
 
-&lt;p&gt;Happy texting!&lt;/p&gt;
 </content>
  </entry>
  

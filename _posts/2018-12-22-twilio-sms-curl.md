@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Send texts from your Twilio number using BASH and curl with macOS or Linux
+title: Send texts from your Twilio number using BASH and curl with macOS, Linux, and Windows
 tags: [twilio,bash]
 ---
 
-The `curl` utiliy is a powerful command line program bundled with `macOS` and `Linux`. The following script provides a quick method to send text messages from a `Twilio` phone number to a mobile device. This is ideal for development and testing.
+The `curl` utiliy is a powerful command line program bundled with `macOS` and `Linux`. `Windows` users should [download](https://gitforwindows.org) [`GIT SCM`](https://gitforwindows.org) which includes `GIT BASH` and the curl program. The following script provides a quick method to send text messages from a `Twilio` phone number to a mobile device. This is ideal for development and testing.
 
 <!--more-->
 
@@ -26,6 +26,5 @@ curl -X POST \
     -u "ABCD1234:EFGH5678"
 
 ```
-Paste the above script in a `BASH` shell to send the text. Twilio should respond with `XML` headers and include a `2xx` response code for successful delivery. If the message did not go through check [`here`](https://www.twilio.com/docs/usage/your-request-to-twilio) for a descriptive list of `4xx` error codes.
+Paste the above script in a `BASH` shell to send the `REST API` `POST` request. If the text wen through Twilio will respond with a `2xx` response code and details records in `JSON` format. If the message failed to send then note the response code and check [`here`](https://www.twilio.com/docs/usage/your-request-to-twilio) for a descriptive of error codes.
 
-Happy texting!

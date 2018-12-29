@@ -4,7 +4,7 @@ title: Configuring Postman to send SMS messages from your Twilio number
 tags: [twilio]
 ---
 
-[`Postman`](https://www.getpostman.com) is a free application for macOS, Linux, and Windows, that simplifies API development and testing. The following example shows how to configure Postman to support Twilio and send SMS messages.
+[`Postman`](https://www.getpostman.com) is a [free](https://www.getpostman.com) application for macOS, Linux, and Windows, that simplifies `API` development and testing. The following `screenshots` shows how to configure Postman to work with `Twilio` and send SMS messages.
 
 <!--more-->
 
@@ -33,5 +33,3 @@ Click the `SEND` button to `POST` the `HTTP` request to Twilio.
 Twilio responds to HTTP Requests in `JSON` format. If the text was sent successfully the response from Twilio provides details about the SMS transaction. Click the `Pretty` option in Postman and the JSON data will be presented in a readable format.
 
 ![]({{ site.baseurl }}/blog/assets/postman/postman-json.png)
-
-Happy texting!
