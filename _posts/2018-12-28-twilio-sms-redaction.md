@@ -1,20 +1,20 @@
 ---
 layout: post
-title: Using Twilio SMS redaction to discard a phone number and message body
-tags: [bash]
+title: How to configure Twilio SMS phone number and message body redaction
+tags: [twilio,bash]
 ---
 
-Twilio supports the option of phone number and message body `redaction` when sending SMS or MMS messages. The following examples show what `flags` are required to support redaction.
+Twilio supports phone number and message body `redaction` when sending SMS or MMS messages. The following examples show the `flags` required to support redaction.
 
 <!--more-->
 
-## Using `curl` 
+## Testing with `curl` 
 
-In a previous [`post`](https://markholloway.github.io/2018/12/22/twilio-sms-curl/) I showed how to send outbound text messages from your Twilio number using `BASH` and `curl` with macOS Terminal or Linux. 
+The script in the following [`post`](https://markholloway.github.io/2018/12/22/twilio-sms-curl/) will be the starting point for the redaction example. Below is a refresher on how to configure the script for standard SMS messaging with Twilio.
 
-### Refresher
+### Demo script
 
-For easy editing copy the script below to a plain text editor and modify the URL by placing your SID where `ABCD1234` is shown. Replace the `-u` option `ABCD1234:EFGH5678` with your own SID and AUTH TOKEN. They must be separated by `:` or verification will fail. 
+To make editing easier copy the example script to a plain text editor and modify the `URL` by replacing `ABCD1234` with your SID. Replace the `-u` option `ABCD1234:EFGH5678` with your SID and AUTH TOKEN credentials. They must be separated by `:` or verification will fail. 
 
 Replace `From=+1xxxxxxxxxx` with a Twilio number and `To=+1xxxxxxxxxx` with a mobile number. 
 
@@ -36,7 +36,7 @@ There are two significant `data` settings used for redaction.
 
 ## Redaction examples
 
-Setting `AddressRetention=obfuscate` redacts the last 4 digits of the phone number and only the NPA-NXX are stored. The number `+15554229999` is stored as  `+1555422XXXX`
+Setting `AddressRetention=obfuscate` redacts the last 4 digits of the phone number and only the NPA-NXX are stored. The number `+15554229999` is stored as `+1555422XXXX`
 
 ```bash
 
@@ -94,6 +94,6 @@ curl -X POST \
     -u "ABCD1234:EFGH5678"
 
 ```
-If `sub-accounts` are created they will inherit the current redaction setting of the parent account. The sub-account settings can be changed at any time.
+When `sub-accounts` are created they will inherit the current redaction setting of the parent account. The sub-account settings can be changed at any time.
 
 Happy texting!
