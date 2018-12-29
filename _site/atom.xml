@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-28T20:09:47-05:00</updated>
+ <updated>2018-12-29T12:03:42-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -103,6 +103,45 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;When &lt;code class=&quot;highlighter-rouge&quot;&gt;sub-accounts&lt;/code&gt; are created they will inherit the current redaction setting of the parent account. The sub-account settings can be changed at any time.&lt;/p&gt;
+
+&lt;p&gt;Happy texting!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Configuring Postman to send SMS messages from your Twilio number</title>
+   <link href="http://localhost:4000/2018/12/27/postman-sms-twilio/"/>
+   <updated>2018-12-27T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2018/12/27/postman-sms-twilio</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.getpostman.com&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Postman&lt;/code&gt;&lt;/a&gt; is a free application for macOS, Linux, and Windows, that simplifies API development and testing. The following example shows how to configure Postman to support Twilio and send SMS messages.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;adding-the-twilio-url-and-authentication-credentials&quot;&gt;Adding the Twilio URL and Authentication Credentials&lt;/h2&gt;
+
+&lt;p&gt;Click the &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; symbol next to &lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt; in the tab section. The new tab defaults to &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt;. This must be changed to &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; by clicking the drop down arrow.&lt;/p&gt;
+
+&lt;p&gt;Click &lt;code class=&quot;highlighter-rouge&quot;&gt;Auth&lt;/code&gt; and verify the green circle is lit. Add the Twilio account &lt;code class=&quot;highlighter-rouge&quot;&gt;SID&lt;/code&gt; as the username and &lt;code class=&quot;highlighter-rouge&quot;&gt;Auth Token&lt;/code&gt; as the password. Set the &lt;code class=&quot;highlighter-rouge&quot;&gt;Type&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Basic Auth&lt;/code&gt; in the dropdown list.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/postman/postman-add-auth.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;adding-phone-numbers-and-message-data&quot;&gt;Adding phone numbers and message data&lt;/h2&gt;
+
+&lt;p&gt;Click &lt;code class=&quot;highlighter-rouge&quot;&gt;Body&lt;/code&gt; and enter the &lt;code class=&quot;highlighter-rouge&quot;&gt;Key&lt;/code&gt; values representing &lt;code class=&quot;highlighter-rouge&quot;&gt;To&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;From&lt;/code&gt; phone numbers and &lt;code class=&quot;highlighter-rouge&quot;&gt;Body&lt;/code&gt; for message content.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/postman/postman-body.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;send-a-text-message&quot;&gt;Send a text message&lt;/h2&gt;
+
+&lt;p&gt;Click the &lt;code class=&quot;highlighter-rouge&quot;&gt;SEND&lt;/code&gt; button to &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; request to Twilio.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/postman/postman-send.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;twilio-json-response&quot;&gt;Twilio JSON response&lt;/h2&gt;
+
+&lt;p&gt;Twilio responds to HTTP Requests in &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; format. If the text was sent successfully the response from Twilio provides details about the SMS transaction. Click the &lt;code class=&quot;highlighter-rouge&quot;&gt;Pretty&lt;/code&gt; option in Postman and the JSON data will be presented in a readable format.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/postman/postman-json.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Happy texting!&lt;/p&gt;
 </content>
