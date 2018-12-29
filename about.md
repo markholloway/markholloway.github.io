@@ -13,13 +13,13 @@ title: About
 
 ## Mark Holloway - Blog Info
 
-This blog uses Ruby to run [Jekyll](https://jekyllrb.com) and is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) with some additional modifications:
+The blog uses [Jekyll](https://jekyllrb.com) running on [Ruby](https://www.ruby-lang.org/en/) and is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) with additional modifications:
 
-- Tags
-- Post archive
-- Excerpts (Read more...) on index page
-- Video embeds with fluidvids.js
+- Tags for blog posts
+- Blog post archive
+- Excerpts (Read more...) on main page
 - Rouge syntax highlighter, modified version of [`dracula.css`](https://github.com/dracula/pygments)
+- Video embeds with fluidvids.js
 - Google Analytics
 - Comments (using Disqus)
 - Switch to https if accessing site through http
