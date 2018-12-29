@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-28T19:53:00-05:00</updated>
+ <updated>2018-12-28T20:08:20-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -113,7 +113,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
    <link href="http://localhost:4000/2018/12/22/twilio-sms-curl/"/>
    <updated>2018-12-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/22/twilio-sms-curl</id>
-   <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; utiliy is an extremely powerful command line program that is bundled with &lt;code class=&quot;highlighter-rouge&quot;&gt;macOS&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Linux&lt;/code&gt;. Here we will use it to write a script that allows us to send text messages from a Twilio phone number.&lt;/p&gt;
+   <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; utiliy is an extremely powerful command line program that is bundled with &lt;code class=&quot;highlighter-rouge&quot;&gt;macOS&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Linux&lt;/code&gt;. Let’s write a script that allows us to send text messages from a Twilio phone number.&lt;/p&gt;
 
 &lt;!--more--&gt;
 

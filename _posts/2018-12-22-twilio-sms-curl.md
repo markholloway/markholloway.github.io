@@ -4,7 +4,7 @@ title: Send texts from your Twilio number using BASH and curl with macOS or Linu
 tags: [twilio,bash]
 ---
 
-The `curl` utiliy is an extremely powerful command line program that is bundled with `macOS` and `Linux`. Here we will use it to write a script that allows us to send text messages from a Twilio phone number.
+The `curl` utiliy is an extremely powerful command line program that is bundled with `macOS` and `Linux`. Let's write a script that allows us to send text messages from a Twilio phone number.
 
 <!--more-->
 
