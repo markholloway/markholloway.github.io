@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Configuring Postman to send SMS messages from your Twilio number
-tags: [twilio,bash]
+tags: [twilio]
 ---
 
 [`Postman`](https://www.getpostman.com) is a free application for macOS, Linux, and Windows, that simplifies API development and testing. The following example shows how to configure Postman to support Twilio and send SMS messages.
