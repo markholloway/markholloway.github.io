@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-29T12:08:04-05:00</updated>
+ <updated>2018-12-29T12:32:53-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -152,15 +152,15 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
    <link href="http://localhost:4000/2018/12/22/twilio-sms-curl/"/>
    <updated>2018-12-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/22/twilio-sms-curl</id>
-   <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; utiliy is an extremely powerful command line program bundled with &lt;code class=&quot;highlighter-rouge&quot;&gt;macOS&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Linux&lt;/code&gt;. Let’s write a script that allows us to send text messages from a Twilio phone number.&lt;/p&gt;
+   <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; utiliy is a powerful command line program bundled with &lt;code class=&quot;highlighter-rouge&quot;&gt;macOS&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Linux&lt;/code&gt;. The following script provides a quick method to send text messages from a &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; phone number to a mobile device. This is ideal for development and testing.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;working-with-curl&quot;&gt;Working with &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;The curl utility supports many protocols. For this example we will use &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; information to the &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;REST API&lt;/code&gt; so we can send outbound SMS messages.&lt;/p&gt;
+&lt;p&gt;The curl utility supports many protocols. The example script uses &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; information to the &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;REST API&lt;/code&gt; and sends an outbound SMS message.&lt;/p&gt;
 
-&lt;p&gt;For easy editing copy the script below to a plain text editor and modify the URL by placing your SID where &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234&lt;/code&gt; is shown. Replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; option &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234:EFGH5678&lt;/code&gt; with your own SID and AUTH TOKEN. They must be separated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or verification will fail.&lt;/p&gt;
+&lt;p&gt;It is recommended to copy the script below to a plain text editor for easier editing. Modify the &lt;code class=&quot;highlighter-rouge&quot;&gt;URL&lt;/code&gt; by replacing &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234&lt;/code&gt;with a valid &lt;code class=&quot;highlighter-rouge&quot;&gt;SID&lt;/code&gt;. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; credentials &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234:EFGH5678&lt;/code&gt; with the same account &lt;code class=&quot;highlighter-rouge&quot;&gt;SID&lt;/code&gt; and a valid &lt;code class=&quot;highlighter-rouge&quot;&gt;Auth Token&lt;/code&gt;. They must be separated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or verification will fail.&lt;/p&gt;
 
 &lt;p&gt;Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;From=+1xxxxxxxxxx&lt;/code&gt; with a Twilio number and &lt;code class=&quot;highlighter-rouge&quot;&gt;To=+1xxxxxxxxxx&lt;/code&gt; with a mobile number.&lt;/p&gt;
 
@@ -173,8 +173,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;If all went will you should receive a text on your mobile device. There should also be an &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; response from Twilio that includes &lt;code class=&quot;highlighter-rouge&quot;&gt;200 OK&lt;/code&gt; displayed in BASH along with several XML headers. Otherise check &lt;a href=&quot;https://www.twilio.com/docs/usage/your-request-to-twilio&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;here&lt;/code&gt;&lt;/a&gt; to see a descriptive list a error codes.&lt;/p&gt;
+&lt;p&gt;Paste the above script in a &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; shell to send the text. Twilio should respond with &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; headers and include a &lt;code class=&quot;highlighter-rouge&quot;&gt;2xx&lt;/code&gt; response code for successful delivery. If the message did not go through check &lt;a href=&quot;https://www.twilio.com/docs/usage/your-request-to-twilio&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;here&lt;/code&gt;&lt;/a&gt; for a descriptive list of &lt;code class=&quot;highlighter-rouge&quot;&gt;4xx&lt;/code&gt; error codes.&lt;/p&gt;
 
 &lt;p&gt;Happy texting!&lt;/p&gt;
 </content>

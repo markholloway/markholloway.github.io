@@ -47,8 +47,8 @@
 <meta name="generator" content="Jekyll v3.7.4" />
 <meta property="og:title" content="Send texts from your Twilio number using BASH and curl with macOS or Linux" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="The curl utiliy is an extremely powerful command line program bundled with macOS and Linux. Let’s write a script that allows us to send text messages from a Twilio phone number." />
-<meta property="og:description" content="The curl utiliy is an extremely powerful command line program bundled with macOS and Linux. Let’s write a script that allows us to send text messages from a Twilio phone number." />
+<meta name="description" content="The curl utiliy is a powerful command line program bundled with macOS and Linux. The following script provides a quick method to send text messages from a Twilio phone number to a mobile device. This is ideal for development and testing." />
+<meta property="og:description" content="The curl utiliy is a powerful command line program bundled with macOS and Linux. The following script provides a quick method to send text messages from a Twilio phone number to a mobile device. This is ideal for development and testing." />
 <link rel="canonical" href="http://localhost:4000/2018/12/22/twilio-sms-curl/" />
 <meta property="og:url" content="http://localhost:4000/2018/12/22/twilio-sms-curl/" />
 <meta property="og:site_name" content="Mark Holloway" />
@@ -57,7 +57,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@twilion2" />
 <script type="application/ld+json">
-{"description":"The curl utiliy is an extremely powerful command line program bundled with macOS and Linux. Let’s write a script that allows us to send text messages from a Twilio phone number.","@type":"BlogPosting","url":"http://localhost:4000/2018/12/22/twilio-sms-curl/","headline":"Send texts from your Twilio number using BASH and curl with macOS or Linux","dateModified":"2018-12-22T00:00:00-05:00","datePublished":"2018-12-22T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/12/22/twilio-sms-curl/"},"@context":"http://schema.org"}</script>
+{"description":"The curl utiliy is a powerful command line program bundled with macOS and Linux. The following script provides a quick method to send text messages from a Twilio phone number to a mobile device. This is ideal for development and testing.","@type":"BlogPosting","url":"http://localhost:4000/2018/12/22/twilio-sms-curl/","headline":"Send texts from your Twilio number using BASH and curl with macOS or Linux","dateModified":"2018-12-22T00:00:00-05:00","datePublished":"2018-12-22T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/12/22/twilio-sms-curl/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -186,15 +186,15 @@
   <h1 class="post-title">Send texts from your Twilio number using BASH and curl with macOS or Linux</h1>
   <span class="post-date">22 Dec 2018 <i class="fa fa-tags"></i> <a href="/blog/tag/twilio/">#Twilio</a> <!--comma--><a href="/blog/tag/bash/">#Bash</a> </span>
 
-  <p>The <code class="highlighter-rouge">curl</code> utiliy is an extremely powerful command line program bundled with <code class="highlighter-rouge">macOS</code> and <code class="highlighter-rouge">Linux</code>. Let’s write a script that allows us to send text messages from a Twilio phone number.</p>
+  <p>The <code class="highlighter-rouge">curl</code> utiliy is a powerful command line program bundled with <code class="highlighter-rouge">macOS</code> and <code class="highlighter-rouge">Linux</code>. The following script provides a quick method to send text messages from a <code class="highlighter-rouge">Twilio</code> phone number to a mobile device. This is ideal for development and testing.</p>
 
 <!--more-->
 
 <h2 id="working-with-curl">Working with <code class="highlighter-rouge">curl</code></h2>
 
-<p>The curl utility supports many protocols. For this example we will use <code class="highlighter-rouge">HTTP</code> to <code class="highlighter-rouge">POST</code> information to the <code class="highlighter-rouge">Twilio</code> <code class="highlighter-rouge">REST API</code> so we can send outbound SMS messages.</p>
+<p>The curl utility supports many protocols. The example script uses <code class="highlighter-rouge">HTTP</code> to <code class="highlighter-rouge">POST</code> information to the <code class="highlighter-rouge">Twilio</code> <code class="highlighter-rouge">REST API</code> and sends an outbound SMS message.</p>
 
-<p>For easy editing copy the script below to a plain text editor and modify the URL by placing your SID where <code class="highlighter-rouge">ABCD1234</code> is shown. Replace the <code class="highlighter-rouge">-u</code> option <code class="highlighter-rouge">ABCD1234:EFGH5678</code> with your own SID and AUTH TOKEN. They must be separated by <code class="highlighter-rouge">:</code> or verification will fail.</p>
+<p>It is recommended to copy the script below to a plain text editor for easier editing. Modify the <code class="highlighter-rouge">URL</code> by replacing <code class="highlighter-rouge">ABCD1234</code>with a valid <code class="highlighter-rouge">SID</code>. Replace <code class="highlighter-rouge">-u</code> credentials <code class="highlighter-rouge">ABCD1234:EFGH5678</code> with the same account <code class="highlighter-rouge">SID</code> and a valid <code class="highlighter-rouge">Auth Token</code>. They must be separated by <code class="highlighter-rouge">:</code> or verification will fail.</p>
 
 <p>Replace <code class="highlighter-rouge">From=+1xxxxxxxxxx</code> with a Twilio number and <code class="highlighter-rouge">To=+1xxxxxxxxxx</code> with a mobile number.</p>
 
@@ -207,8 +207,7 @@ curl <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-u</span> <span class="s2">"ABCD1234:EFGH5678"</span>
 
 </code></pre></div></div>
-
-<p>If all went will you should receive a text on your mobile device. There should also be an <code class="highlighter-rouge">XML</code> response from Twilio that includes <code class="highlighter-rouge">200 OK</code> displayed in BASH along with several XML headers. Otherise check <a href="https://www.twilio.com/docs/usage/your-request-to-twilio"><code class="highlighter-rouge">here</code></a> to see a descriptive list a error codes.</p>
+<p>Paste the above script in a <code class="highlighter-rouge">BASH</code> shell to send the text. Twilio should respond with <code class="highlighter-rouge">XML</code> headers and include a <code class="highlighter-rouge">2xx</code> response code for successful delivery. If the message did not go through check <a href="https://www.twilio.com/docs/usage/your-request-to-twilio"><code class="highlighter-rouge">here</code></a> for a descriptive list of <code class="highlighter-rouge">4xx</code> error codes.</p>
 
 <p>Happy texting!</p>
 
