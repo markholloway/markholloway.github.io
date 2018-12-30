@@ -4,107 +4,13 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-30T17:51:26-05:00</updated>
+ <updated>2018-12-30T17:53:50-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
    <email></email>
  </author>
 
- 
- <entry>
-   <title>Configuring Twilio SMS message body and phone number redaction for PII</title>
-   <link href="http://localhost:4000/2018/12/28/twilio-sms-redaction/"/>
-   <updated>2018-12-28T00:00:00-05:00</updated>
-   <id>http://localhost:4000/2018/12/28/twilio-sms-redaction</id>
-   <content type="html">&lt;p&gt;Twilio offers &lt;code class=&quot;highlighter-rouge&quot;&gt;redaction&lt;/code&gt; of Personally Identifiable Information when sending text messages. The following examples show the necessary settings to utilize this feature.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;testing-with-curl&quot;&gt;Testing with &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;Below is the &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; script used from a previous &lt;a href=&quot;https://markholloway.github.io/2018/12/22/twilio-sms-curl/&quot;&gt;post&lt;/a&gt; demonstrating how to send SMS gmessages from a Twilio number using &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; in macOS, Linux, and Windows.&lt;/p&gt;
-
-&lt;h3 id=&quot;demo-curl-script&quot;&gt;Demo &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; script&lt;/h3&gt;
-
-&lt;p&gt;It is recommended to copy the script below to a plain text editor for easier editing. Modify the &lt;code class=&quot;highlighter-rouge&quot;&gt;URL&lt;/code&gt; by replacing &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234&lt;/code&gt;with a valid &lt;code class=&quot;highlighter-rouge&quot;&gt;SID&lt;/code&gt;. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; credentials &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234:EFGH5678&lt;/code&gt; with the same account &lt;code class=&quot;highlighter-rouge&quot;&gt;SID&lt;/code&gt; and a valid &lt;code class=&quot;highlighter-rouge&quot;&gt;Auth Token&lt;/code&gt;. They must be separated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or verification will fail.&lt;/p&gt;
-
-&lt;p&gt;Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;From=+1xxxxxxxxxx&lt;/code&gt; with a Twilio number and &lt;code class=&quot;highlighter-rouge&quot;&gt;To=+1xxxxxxxxxx&lt;/code&gt; with a mobile number.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;twilio-redaction-options&quot;&gt;Twilio redaction options&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NOTE:&lt;/code&gt; Users must be granted access to the redaction feature in their Twilio console by completing &lt;a href=&quot;https://ahoy.twilio.com/message-body-redaction&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;&lt;/a&gt; sign-up form.&lt;/p&gt;
-
-&lt;p&gt;There are two significant &lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt; flags used for redaction.&lt;/p&gt;
-
-&lt;h2 id=&quot;redaction-examples&quot;&gt;Redaction examples&lt;/h2&gt;
-
-&lt;p&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;AddressRetention=obfuscate&lt;/code&gt; redacts the last 4 digits of the phone number and only the NPA-NXX are stored. The number &lt;code class=&quot;highlighter-rouge&quot;&gt;+13074229999&lt;/code&gt; is stored as &lt;code class=&quot;highlighter-rouge&quot;&gt;+1307422XXXX&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AddressRetention=obfuscate&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt;  &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;ContentRetention=discard&lt;/code&gt; redacts the SMS message body and media (if sent as an MMS).&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ContentRetention=discard&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt;  &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Including both options redacts the phone number, message body, and media.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AddressRetention=obfuscate&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ContentRetention=discard&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt;  &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The above examples assume the Twilio Console settings do not redact messages by default. Specifying the appropriate flag tells Twilio to redact the data content.&lt;/p&gt;
-
-&lt;p&gt;It is possible to set the &lt;code class=&quot;highlighter-rouge&quot;&gt;default behavior&lt;/code&gt; in the console to &lt;code class=&quot;highlighter-rouge&quot;&gt;always&lt;/code&gt; include redaction for either option. Therefore there may be messages which should not be redacted. Using &lt;code class=&quot;highlighter-rouge&quot;&gt;retain&lt;/code&gt; will keep the data content.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AddressRetention=retain&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ContentRetention=retain&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt;  &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;When &lt;code class=&quot;highlighter-rouge&quot;&gt;sub-accounts&lt;/code&gt; are created they will inherit the current redaction setting of the parent account. Sub-account redaction settings can be changed.&lt;/p&gt;
-</content>
- </entry>
  
  <entry>
    <title>Send texts from your Twilio number using BASH and curl with macOS, Linux, and Windows</title>
