@@ -34,19 +34,3 @@ linux:
   name: Linux
 macos:
   name: macOS
-flame:
-  name: Flame
-maya:
-  name: Maya
-arnold:
-  name: Arnold
-mel:
-  name: MEL
-nuke:
-  name: Nuke
-houdini:
-  name: Houdini
-vray:
-  name: V-Ray
-workflow:
-  name: Workflow

@@ -7,8 +7,8 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              My personal blog on Web Languages, Libraries, and Frameworks for Cloud Communications.
-description:          My personal blog on Web Languages, Libraries, and Frameworks for Cloud Communications.
+tagline:              Web Languages, Libraries, and Frameworks for Cloud Communications.
+description:          Web Languages, Libraries, and Frameworks for Cloud Communications.
 url:                  https://markholloway.github.io
 baseurl:
 paginate:             5
@@ -37,7 +37,7 @@ github:
     url:              https://github.com/markholloway
     repo:             https://github.com/markholloway
 excerpt_separator:    <!--more-->
-#google_analytics:
+google_analytics:     UA-131536379-1
 hyde_version:         2.1.0
 hyde_url:             http://hyde.getpoole.com
 hyde_repo:            https://github.com/poole/hyde

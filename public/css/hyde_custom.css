@@ -76,21 +76,22 @@ html {
 }
 
 /* About section */
-/*
+
 .sidebar-about h1 {
   color: #fff;
   margin-top: 0;
   font-family: "Abril Fatface", serif;
   font-size: 3.25rem;
 }
-*/
-/* Use PT Sans instead of Abril Fatface */
+
+/* Use PT Sans as alternative to Abril Fatface 
 .sidebar-about h1 {
   color: #fff;
   margin-top: 0;
   font-family: "PT Sans", serif;
   font-size: 3.25rem;
 }
+*/
 
 /* Sidebar nav */
 .sidebar-nav {
