@@ -1,30 +1,40 @@
 ---
 layout: post
-title: Send texts from your Twilio number using BASH and curl with macOS, Linux, and Windows
+title: Using BASH to send texts with Twilio
 tags: [twilio,bash]
 ---
 
-The `curl` utiliy is a powerful command line program bundled with `macOS` and `Linux`. `Windows` users should [download](https://gitforwindows.org) [`GIT SCM`](https://gitforwindows.org) which includes `GIT BASH` and the curl program. The following script provides a quick method to send text messages from a `Twilio` phone number to a mobile device. This is ideal for development and testing.
+This is a short note on how to send SMS messages using `BASH` and `curl`in macOS and Linux. Windows users can use [GIT BASH](https://gitforwindows.org) to follow along. 
 
 <!--more-->
 
 ## Working with `curl`
 
-The curl utility supports many protocols. The example script uses `HTTP` to `POST` information to the `Twilio` `REST API` and sends an outbound SMS message.
-
-It is recommended to copy the script below to a plain text editor for easier editing. Modify the `URL` by replacing `ABCD1234`with a valid `SID`. Replace `-u` credentials `ABCD1234:EFGH5678` with the same account `SID` and a valid `Auth Token`. They must be separated by `:` or verification will fail. 
-
-Replace `From=+1xxxxxxxxxx` with a Twilio number and `To=+1xxxxxxxxxx` with a mobile number. 
+Copy the script to a text editor for modification. 
 
 ```bash
 
 curl -X POST \
-    "https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages" \
+    "https://api.twilio.com/2010-04-01/Accounts/{AccountSID}/Messages" \
     --data-urlencode "From=+1xxxxxxxxxx" \
-    --data-urlencode "Body=I'm using curl to send a text with a Twilio number!" \
+    --data-urlencode "Body=I'm using curl to send a text with a Twilio number." \
     --data-urlencode "To=+1xxxxxxxxxx" \
-    -u "ABCD1234:EFGH5678"
+    -u "{AccountSID}:{AuthToken}"
 
 ```
-Paste the above script in a `BASH` shell to send the `REST API` `POST` request. If the text wen through Twilio will respond with a `2xx` response code and details records in `JSON` format. If the message failed to send then note the response code and check [`here`](https://www.twilio.com/docs/usage/your-request-to-twilio) for a descriptive of error codes.
+Replace {AccountSID} in the `URL` portion with a valid SID. Repalce the `-u` credentials {AccountSID:AuthToken} with the matching SID and Token.  They must be separated by `:` or verification will fail. Replace `From=+1xxxxxxxxxx` to with the Twilio number and replace `To=+1xxxxxxxxxx` with the destination number. 
 
+Adding `> sms-test.json` at the end of the script will allow the response to be easily read in a `JSON` viewer. Otherwise the response is squashed together in the BASH terminal and difficult to read.
+
+Below is the final format of the script to paste and send a text message.
+
+```bash
+
+curl -X POST \
+    "https://api.twilio.com/2010-04-01/Accounts/1a2b3c4d5e6f7g8h9i0j/Messages" \
+    --data-urlencode "From=+15552392613" \
+    --data-urlencode "Body=I'm using curl to send a text with a Twilio number." \
+    --data-urlencode "To=+15554345978" \
+    -u "1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1" > "sms-test.json"
+
+```

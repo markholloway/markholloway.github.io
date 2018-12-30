@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-30T17:53:50-05:00</updated>
+ <updated>2018-12-30T18:48:02-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,33 +13,42 @@
 
  
  <entry>
-   <title>Send texts from your Twilio number using BASH and curl with macOS, Linux, and Windows</title>
+   <title>Using BASH to send texts with Twilio</title>
    <link href="http://localhost:4000/2018/12/22/twilio-sms-curl/"/>
    <updated>2018-12-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/22/twilio-sms-curl</id>
-   <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; utiliy is a powerful command line program bundled with &lt;code class=&quot;highlighter-rouge&quot;&gt;macOS&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Linux&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;Windows&lt;/code&gt; users should &lt;a href=&quot;https://gitforwindows.org&quot;&gt;download&lt;/a&gt; &lt;a href=&quot;https://gitforwindows.org&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GIT SCM&lt;/code&gt;&lt;/a&gt; which includes &lt;code class=&quot;highlighter-rouge&quot;&gt;GIT BASH&lt;/code&gt; and the curl program. The following script provides a quick method to send text messages from a &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; phone number to a mobile device. This is ideal for development and testing.&lt;/p&gt;
+   <content type="html">&lt;p&gt;This is a short note on how to send SMS messages using &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;in macOS and Linux. Windows users can use &lt;a href=&quot;https://gitforwindows.org&quot;&gt;GIT BASH&lt;/a&gt; to follow along.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;working-with-curl&quot;&gt;Working with &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;The curl utility supports many protocols. The example script uses &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; information to the &lt;code class=&quot;highlighter-rouge&quot;&gt;Twilio&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;REST API&lt;/code&gt; and sends an outbound SMS message.&lt;/p&gt;
-
-&lt;p&gt;It is recommended to copy the script below to a plain text editor for easier editing. Modify the &lt;code class=&quot;highlighter-rouge&quot;&gt;URL&lt;/code&gt; by replacing &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234&lt;/code&gt;with a valid &lt;code class=&quot;highlighter-rouge&quot;&gt;SID&lt;/code&gt;. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; credentials &lt;code class=&quot;highlighter-rouge&quot;&gt;ABCD1234:EFGH5678&lt;/code&gt; with the same account &lt;code class=&quot;highlighter-rouge&quot;&gt;SID&lt;/code&gt; and a valid &lt;code class=&quot;highlighter-rouge&quot;&gt;Auth Token&lt;/code&gt;. They must be separated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or verification will fail.&lt;/p&gt;
-
-&lt;p&gt;Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;From=+1xxxxxxxxxx&lt;/code&gt; with a Twilio number and &lt;code class=&quot;highlighter-rouge&quot;&gt;To=+1xxxxxxxxxx&lt;/code&gt; with a mobile number.&lt;/p&gt;
+&lt;p&gt;Copy the script to a text editor for modification.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/ABCD1234/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/{AccountSID}/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number!&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number.&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ABCD1234:EFGH5678&quot;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;{AccountSID}:{AuthToken}&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Paste the above script in a &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; shell to send the &lt;code class=&quot;highlighter-rouge&quot;&gt;REST API&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; request. If the text wen through Twilio will respond with a &lt;code class=&quot;highlighter-rouge&quot;&gt;2xx&lt;/code&gt; response code and details records in &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; format. If the message failed to send then note the response code and check &lt;a href=&quot;https://www.twilio.com/docs/usage/your-request-to-twilio&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;here&lt;/code&gt;&lt;/a&gt; for a descriptive of error codes.&lt;/p&gt;
+&lt;p&gt;Replace {AccountSID} in the &lt;code class=&quot;highlighter-rouge&quot;&gt;URL&lt;/code&gt; portion with a valid SID. Repalce the &lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt; credentials {AccountSID:AuthToken} with the matching SID and Token.  They must be separated by &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; or verification will fail. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;From=+1xxxxxxxxxx&lt;/code&gt; to with the Twilio number and replace &lt;code class=&quot;highlighter-rouge&quot;&gt;To=+1xxxxxxxxxx&lt;/code&gt; with the destination number.&lt;/p&gt;
 
+&lt;p&gt;Adding &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt; sms-test.json&lt;/code&gt; at the end of the script will allow the response to be easily read in a &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; viewer. Otherwise the response is squashed together in the BASH terminal and difficult to read.&lt;/p&gt;
+
+&lt;p&gt;Below is the final format of the script to paste and send a text message.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/1a2b3c4d5e6f7g8h9i0j/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+15552392613&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number.&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;To=+15554345978&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sms-test.json&quot;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </content>
  </entry>
  
