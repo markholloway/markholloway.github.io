@@ -10,7 +10,7 @@ Apple includes `php` with macOS. The `composer` package manager initializes php 
 
 ## PHP version
 
-Check the default php version used by macOS
+Check the php version macOS is using
 
 ```bash
 
@@ -22,7 +22,7 @@ Zend Engine v3.1.0, Copyright (c) 1998-2018 Zend Technologies
 ```
 ## Which PHP
 
-To see what `php` binary macOS runs by default use the `which` command. In most cases it will be `/usr/bin/php` unless a separate php install has been done. 
+Check the `php` binary macOS executes by default using the `which` command. In most cases it will be `/usr/bin/php` unless a separate php install exists. 
 
 ```bash
 
@@ -50,7 +50,7 @@ Assuming `/usr/bin/php` copy `php.ini.default` and name it `php.ini` which will 
 
 ```bash
 
-sudo cp /private/etc/php.ini.default php.ini
+macbookpro:~ mh$ sudo cp /private/etc/php.ini.default php.ini
 
 ```
 Download `composer` with `curl` and move the file to `/usr/local/bin`
@@ -59,7 +59,7 @@ Download `composer` with `curl` and move the file to `/usr/local/bin`
 
 curl -sS https://getcomposer.org/installer | php
 
-sudo mv composer.phar /usr/local/bin
+macbookpro:~ mh$ sudo mv composer.phar /usr/local/bin
 
 ```
 Add the following line to `.bash_profile` in your home directory.  This allows `composer` to run from folder.
@@ -73,7 +73,7 @@ Close terminal and re-open it.  Make a new folder called `myphp` for the new php
 
 ```bash
 
-mkdir ~/Projects/myphp
+macbookpro:~ mh$ mkdir ~/Projects/myphp
 
 ```
 Initialize the project with `composer`
@@ -132,6 +132,6 @@ Use the internal php web server for testing during development.
 
 ```bash
 
-php -S 127.0.0.1:5000
+macbookpro:~ mh$ php -S 127.0.0.1:5000
 
 ```
