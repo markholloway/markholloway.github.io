@@ -1,36 +1,35 @@
 api:
   name: API
 bash:
-  name: Bash
+  name: bash
 node:
-  name: Node.js
+  name: node.js
 react:
-  name: React
+  name: react
 python:
-  name: Python
-pyqt:
-  name: PyQt
-pyside:
-  name: PySide
-qtpy:
-  name: Qt.py
+  name: python
 docker:
-  name: Docker
+  name: docker
 github:
-  name: Github
+  name: github
 github-pages:
-  name: Github Pages
+  name: github pages
 jekyll:
-  name: Jekyll
+  name: jekyll
 twilio:
-  name: Twilio
+  name: twilio
 sms:
-  name: SMS
+  name: sms
 voice:
-  name: Voice
+  name: voice
 flex:
-  name: Flex
+  name: flex
 linux:
-  name: Linux
+  name: linux
 macos:
   name: macOS
+php:
+  name: php
+laravel:
+  name: laravel
+  
