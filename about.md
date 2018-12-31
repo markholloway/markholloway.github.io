@@ -14,7 +14,7 @@ title: About
 
 This blog is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site.hyde_version }}) for [Poole](http://getpoole.com), using [Ruby](https://www.ruby-lang.org/en/) and [Jekyll](https://jekyllrb.com), running on [Github Pages](https://pages.github.com) but with some modifications:
 
-- User Comments using Disqus
+- User comments (using Disqus)
 - Tags for blog posts
 - Blog post archive
 - Excerpts (Read more...) on main page
