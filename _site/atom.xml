@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-31T15:34:36-05:00</updated>
+ <updated>2018-12-31T15:36:50-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -17,13 +17,13 @@
    <link href="http://localhost:4000/2018/12/31/php-composer-macos/"/>
    <updated>2018-12-31T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/31/php-composer-macos</id>
-   <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; with macOS. Use the &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt; package manager to initialize php projects and install dependencies locally in the project folder. Run the php’s web server locally to test your project.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; with macOS. Use the &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt; package manager to initialize php projects and install dependencies locally in the project folder. Run php’s web server locally to test your project.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;php-version&quot;&gt;PHP version&lt;/h2&gt;
 
-&lt;p&gt;Check the php version&lt;/p&gt;
+&lt;p&gt;Check the php version in macOS&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;php &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;

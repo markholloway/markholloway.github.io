@@ -10,7 +10,7 @@ Apple includes `php` with macOS. Use the `composer` package manager to initializ
 
 ## PHP version
 
-Check the php version
+Check the php version in macOS
 
 ```bash
 
