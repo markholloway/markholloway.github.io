@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-31T17:01:50-05:00</updated>
+ <updated>2018-12-31T17:05:20-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -34,7 +34,7 @@ Zend Engine v3.1.0, Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h2 id=&quot;which-php&quot;&gt;Which PHP&lt;/h2&gt;
 
-&lt;p&gt;Check the &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; binary macOS executes by default with the &lt;code class=&quot;highlighter-rouge&quot;&gt;which&lt;/code&gt; command. In most cases it will be &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/php&lt;/code&gt; unless a separate php install exists.&lt;/p&gt;
+&lt;p&gt;Check the &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; binary macOS executes by default using the &lt;code class=&quot;highlighter-rouge&quot;&gt;which&lt;/code&gt; command. In most cases it will be &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/php&lt;/code&gt; unless a separate php install exists.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;which php

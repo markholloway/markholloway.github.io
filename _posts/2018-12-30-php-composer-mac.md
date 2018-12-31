@@ -22,7 +22,7 @@ Zend Engine v3.1.0, Copyright (c) 1998-2018 Zend Technologies
 ```
 ## Which PHP
 
-Check the `php` binary macOS executes by default with the `which` command. In most cases it will be `/usr/bin/php` unless a separate php install exists. 
+Check the `php` binary macOS executes by default using the `which` command. In most cases it will be `/usr/bin/php` unless a separate php install exists. 
 
 ```bash
 
