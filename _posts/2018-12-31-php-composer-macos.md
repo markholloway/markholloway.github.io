@@ -4,13 +4,13 @@ title: Install composer and globally initialize php projects on macOS
 tags: [php, bash]
 ---
 
-Apple includes `php` with macOS. Use the `composer` package manager to initialize php projects and install dependencies locally in the project folder. Run php's web server locally to test your project.
+Apple includes `php` with macOS. The `composer` package manager initializes php projects and installs dependencies locally in the project folder. Use php's built in web server to locally test your project.
 
 <!--more-->
 
 ## PHP version
 
-Check the php version in macOS
+Check the default php version used by macOS
 
 ```bash
 
@@ -22,7 +22,7 @@ Zend Engine v3.1.0, Copyright (c) 1998-2018 Zend Technologies
 ```
 ## Which PHP
 
-To see what version of `php` macOS is runs by default use the `which` command. In most cases it will be `/usr/bin/php` unless a separate install has been done. 
+To see what `php` binary macOS runs by default use the `which` command. In most cases it will be `/usr/bin/php` unless a separate php install has been done. 
 
 ```bash
 
@@ -38,9 +38,15 @@ macbookpro:~ mh$ which -a php
 /usr/bin/php
 /usr/locall/bin/php
 
+/usr/local/bin/php -v 
+
+PHP 7.3.4 (cli) (built: Nov 27 2018 09:10:18) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.1.0, Copyright (c) 1998-2018 Zend Technologies
+
 ```
 
-Copy `php.ini.default` and name it `php.ini`.
+Assuming `/usr/bin/php` copy `php.ini.default` and name it `php.ini` which will be used by `composer`
 
 ```bash
 
