@@ -9,7 +9,6 @@ vendor
 
 # Ignore Jekyll folders
 .sass-cache
-_site
 
 # Compiled source #
 ###################
