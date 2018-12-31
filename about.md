@@ -2,7 +2,6 @@
 layout: page
 title: About
 ---
-
 ![]({{ site.url }}/blog/assets/mark.jpg)
 
 ## Get in touch!
