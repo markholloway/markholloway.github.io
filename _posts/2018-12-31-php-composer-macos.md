@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Install composer and globally initialize php projects on macOS
+title: Install composer and globally initialize php projects in macOS
 tags: [php, bash]
 ---
 
