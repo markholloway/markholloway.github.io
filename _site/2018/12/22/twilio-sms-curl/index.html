@@ -11,7 +11,7 @@
 
   <title>
     
-      Using BASH to send texts with Twilio &middot; Mark Holloway
+      Use BASH to send texts with Twilio &middot; Mark Holloway
     
   </title>
 
@@ -43,12 +43,12 @@
 
   <!-- Jekyll SEO tag plugin -->
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Using BASH to send texts with Twilio | Mark Holloway</title>
+<title>Use BASH to send texts with Twilio | Mark Holloway</title>
 <meta name="generator" content="Jekyll v3.7.4" />
-<meta property="og:title" content="Using BASH to send texts with Twilio" />
+<meta property="og:title" content="Use BASH to send texts with Twilio" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="This is a short note on how to send SMS messages using BASH and curlin macOS and Linux. Windows users can use GIT BASH to follow along." />
-<meta property="og:description" content="This is a short note on how to send SMS messages using BASH and curlin macOS and Linux. Windows users can use GIT BASH to follow along." />
+<meta name="description" content="This is a short note on how to send SMS messages using BASH and curl in macOS and Linux. Windows users can use GIT BASH." />
+<meta property="og:description" content="This is a short note on how to send SMS messages using BASH and curl in macOS and Linux. Windows users can use GIT BASH." />
 <link rel="canonical" href="http://localhost:4000/2018/12/22/twilio-sms-curl/" />
 <meta property="og:url" content="http://localhost:4000/2018/12/22/twilio-sms-curl/" />
 <meta property="og:site_name" content="Mark Holloway" />
@@ -57,7 +57,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@twilion2" />
 <script type="application/ld+json">
-{"description":"This is a short note on how to send SMS messages using BASH and curlin macOS and Linux. Windows users can use GIT BASH to follow along.","@type":"BlogPosting","url":"http://localhost:4000/2018/12/22/twilio-sms-curl/","headline":"Using BASH to send texts with Twilio","dateModified":"2018-12-22T00:00:00-05:00","datePublished":"2018-12-22T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/12/22/twilio-sms-curl/"},"@context":"http://schema.org"}</script>
+{"description":"This is a short note on how to send SMS messages using BASH and curl in macOS and Linux. Windows users can use GIT BASH.","@type":"BlogPosting","url":"http://localhost:4000/2018/12/22/twilio-sms-curl/","headline":"Use BASH to send texts with Twilio","dateModified":"2018-12-22T00:00:00-05:00","datePublished":"2018-12-22T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/12/22/twilio-sms-curl/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -183,10 +183,10 @@
 
 
 <div class="post">
-  <h1 class="post-title">Using BASH to send texts with Twilio</h1>
+  <h1 class="post-title">Use BASH to send texts with Twilio</h1>
   <span class="post-date">22 Dec 2018 <i class="fa fa-tags"></i> <a href="/blog/tag/twilio/">#Twilio</a> <!--comma--><a href="/blog/tag/bash/">#Bash</a> </span>
 
-  <p>This is a short note on how to send SMS messages using <code class="highlighter-rouge">BASH</code> and <code class="highlighter-rouge">curl</code>in macOS and Linux. Windows users can use <a href="https://gitforwindows.org">GIT BASH</a> to follow along.</p>
+  <p>This is a short note on how to send SMS messages using <code class="highlighter-rouge">BASH</code> and <code class="highlighter-rouge">curl</code> in macOS and Linux. Windows users can use <a href="https://gitforwindows.org">GIT BASH</a>.</p>
 
 <!--more-->
 
@@ -198,7 +198,7 @@
 curl <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="s2">"https://api.twilio.com/2010-04-01/Accounts/{AccountSID}/Messages"</span> <span class="se">\</span>
     <span class="nt">--data-urlencode</span> <span class="s2">"From=+1xxxxxxxxxx"</span> <span class="se">\</span>
-    <span class="nt">--data-urlencode</span> <span class="s2">"Body=I'm using curl to send a text with a Twilio number."</span> <span class="se">\</span>
+    <span class="nt">--data-urlencode</span> <span class="s2">"Body=I'm using curl to send a text from a Twilio number."</span> <span class="se">\</span>
     <span class="nt">--data-urlencode</span> <span class="s2">"To=+1xxxxxxxxxx"</span> <span class="se">\</span>
     <span class="nt">-u</span> <span class="s2">"{AccountSID}:{AuthToken}"</span>
 
@@ -213,9 +213,9 @@ curl <span class="nt">-X</span> POST <span class="se">\</span>
 curl <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="s2">"https://api.twilio.com/2010-04-01/Accounts/1a2b3c4d5e6f7g8h9i0j/Messages"</span> <span class="se">\</span>
     <span class="nt">--data-urlencode</span> <span class="s2">"From=+15552392613"</span> <span class="se">\</span>
-    <span class="nt">--data-urlencode</span> <span class="s2">"Body=I'm using curl to send a text with a Twilio number."</span> <span class="se">\</span>
+    <span class="nt">--data-urlencode</span> <span class="s2">"Body=I'm using curl to send a text from a Twilio number."</span> <span class="se">\</span>
     <span class="nt">--data-urlencode</span> <span class="s2">"To=+15554345978"</span> <span class="se">\</span>
-    <span class="nt">-u</span> <span class="s2">"1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1"</span> <span class="o">&gt;</span> <span class="s2">"sms-test.json"</span>
+    <span class="nt">-u</span> <span class="s2">"1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1"</span> <span class="o">&gt;</span> sms-test.json
 
 </code></pre></div></div>
 

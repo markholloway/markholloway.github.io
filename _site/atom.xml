@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-30T18:48:02-05:00</updated>
+ <updated>2018-12-30T19:34:00-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,11 +13,11 @@
 
  
  <entry>
-   <title>Using BASH to send texts with Twilio</title>
+   <title>Use BASH to send texts with Twilio</title>
    <link href="http://localhost:4000/2018/12/22/twilio-sms-curl/"/>
    <updated>2018-12-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/22/twilio-sms-curl</id>
-   <content type="html">&lt;p&gt;This is a short note on how to send SMS messages using &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt;in macOS and Linux. Windows users can use &lt;a href=&quot;https://gitforwindows.org&quot;&gt;GIT BASH&lt;/a&gt; to follow along.&lt;/p&gt;
+   <content type="html">&lt;p&gt;This is a short note on how to send SMS messages using &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; in macOS and Linux. Windows users can use &lt;a href=&quot;https://gitforwindows.org&quot;&gt;GIT BASH&lt;/a&gt;.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -29,7 +29,7 @@
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/{AccountSID}/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number.&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text from a Twilio number.&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;To=+1xxxxxxxxxx&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;{AccountSID}:{AuthToken}&quot;&lt;/span&gt;
 
@@ -44,9 +44,9 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
 curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;https://api.twilio.com/2010-04-01/Accounts/1a2b3c4d5e6f7g8h9i0j/Messages&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;From=+15552392613&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text with a Twilio number.&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text from a Twilio number.&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;To=+15554345978&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sms-test.json&quot;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; sms-test.json
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </content>
