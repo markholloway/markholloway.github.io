@@ -22,7 +22,7 @@ Zend Engine v3.1.0, Copyright (c) 1998-2018 Zend Technologies
 ```
 ## Which PHP
 
-To see what version of `php` macOS is using run the `which` command. 
+To see what version of `php` macOS is runs by default use the `which` command. In most cases it will be `/usr/bin/php` unless a separate install has been done. 
 
 ```bash
 
@@ -30,7 +30,7 @@ macbookpro:~ mh$ which php
 /usr/bin/php
 
 ```
-There may be multiple php versions installed.  If `/usr/local/bin/php` is shown there is a chance another version of php has been installed with a package manager such as [`homebrew`](https://brew.sh).
+Adding the `-a` will indicate if there is more than one version of php installed.
 
 ```bash
 

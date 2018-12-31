@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-31T15:36:50-05:00</updated>
+ <updated>2018-12-31T15:44:04-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -34,14 +34,14 @@ Zend Engine v3.1.0, Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h2 id=&quot;which-php&quot;&gt;Which PHP&lt;/h2&gt;
 
-&lt;p&gt;To see what version of &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; macOS is using run the &lt;code class=&quot;highlighter-rouge&quot;&gt;which&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;To see what version of &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; macOS is runs by default use the &lt;code class=&quot;highlighter-rouge&quot;&gt;which&lt;/code&gt; command. In most cases it will be &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/php&lt;/code&gt; unless a separate install has been done.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;which php
 /usr/bin/php
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;There may be multiple php versions installed.  If &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/bin/php&lt;/code&gt; is shown there is a chance another version of php has been installed with a package manager such as &lt;a href=&quot;https://brew.sh&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;homebrew&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Adding the &lt;code class=&quot;highlighter-rouge&quot;&gt;-a&lt;/code&gt; will indicate if there is more than one version of php installed.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;which &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; php
