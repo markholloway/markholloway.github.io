@@ -4,7 +4,7 @@ title: Install composer and globally initialize php projects on macOS
 tags: [php, bash]
 ---
 
-Apple includes `php` with macOS. Use the `composer` package manager to initialize php projects and install dependencies locally in the project folder. Run the php's web server locally to test your project.
+Apple includes `php` with macOS. Use the `composer` package manager to initialize php projects and install dependencies locally in the project folder. Run php's web server locally to test your project.
 
 <!--more-->
 
