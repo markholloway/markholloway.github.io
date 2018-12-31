@@ -57,7 +57,7 @@ curl -sS https://getcomposer.org/installer | php
 macbookpro:~ mh$ sudo mv composer.phar /usr/local/bin
 
 ```
-Add the following line to `.bash_profile` in your home directory.  This allows `composer` to run from folder.
+Add the following line to `.bash_profile` in your home directory.  This allows `composer` to be executed from any folder.
 
 ```bash
 

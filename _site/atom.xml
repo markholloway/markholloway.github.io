@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-31T17:05:20-05:00</updated>
+ <updated>2018-12-31T17:08:55-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -51,7 +51,7 @@ macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;which &lt;span cl
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Assuming &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/php&lt;/code&gt; copy &lt;code class=&quot;highlighter-rouge&quot;&gt;php.ini.default&lt;/code&gt; and name it &lt;code class=&quot;highlighter-rouge&quot;&gt;php.ini&lt;/code&gt; which will be used by &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Assuming &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/php&lt;/code&gt; copy &lt;code class=&quot;highlighter-rouge&quot;&gt;php.ini.default&lt;/code&gt; and name it &lt;code class=&quot;highlighter-rouge&quot;&gt;php.ini&lt;/code&gt; that will be used by &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;cp /private/etc/php.ini.default php.ini
@@ -65,7 +65,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-sS&lt;/span&gt; https://getcomposer.org/i
 macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mv composer.phar /usr/local/bin
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Add the following line to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; in your home directory.  This allows &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt; to run from folder.&lt;/p&gt;
+&lt;p&gt;Add the following line to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; in your home directory.  This allows &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt; to be executed from any folder.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 &lt;span class=&quot;nb&quot;&gt;echo alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;composer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/usr/local/bin/composer.phar&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.bash_profile
