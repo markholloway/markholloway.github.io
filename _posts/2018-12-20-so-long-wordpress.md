@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Install composer and globally initialize php projects on macOS
+title: So Long Wordpress, Hello Jeckyll
 tags: [php, bash]
 ---
 
-Apple includes `php` with macOS. Use the `composer` package manager to initialize php projects and install dependencies locally in the project folder. Run the php's web server locally to test your project.
+After ten years of WordPress and the [greyzed](https://wordpress.org/themes/greyzed/) theme I've decided it is time to burry the hatchet and say goodbye.
 
 <!--more-->
 
-## PHP version
+## Acme Packet, Broadosft, and the end of an era
 
-Check the php version
+Around 14 years ago was the first time I first experienced working with an Acme Packet Session Border Controller. Not only were they the coolest looking hardware appliances, but the. Together with Broadsoft the two companies were an unstoppable force and I was 
 
 ```bash
 

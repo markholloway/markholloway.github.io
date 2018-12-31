@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-31T13:06:00-05:00</updated>
+ <updated>2018-12-31T15:34:36-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -17,7 +17,7 @@
    <link href="http://localhost:4000/2018/12/31/php-composer-macos/"/>
    <updated>2018-12-31T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/31/php-composer-macos</id>
-   <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; with macOS. Use the &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt; package manager to initialize php projects and install dependencies locally in the project folder.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; with macOS. Use the &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt; package manager to initialize php projects and install dependencies locally in the project folder. Run the php’s web server locally to test your project.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -171,6 +171,130 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Body=I'm using curl to send a text from a Twilio number.&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;To=+15554345978&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; sms-test.json
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>So Long Wordpress, Hello Jeckyll</title>
+   <link href="http://localhost:4000/2018/12/20/so-long-wordpress/"/>
+   <updated>2018-12-20T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2018/12/20/so-long-wordpress</id>
+   <content type="html">&lt;p&gt;After ten years of WordPress and the &lt;a href=&quot;https://wordpress.org/themes/greyzed/&quot;&gt;greyzed&lt;/a&gt; theme I’ve decided it is time to burry the hatchet and say goodbye.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;acme-packet-broadosft-and-the-end-of-an-era&quot;&gt;Acme Packet, Broadosft, and the end of an era&lt;/h2&gt;
+
+&lt;p&gt;Around 14 years ago was the first time I first experienced working with an Acme Packet Session Border Controller. Not only were they the coolest looking hardware appliances, but the. Together with Broadsoft the two companies were an unstoppable force and I was&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;php &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+PHP 7.1.19 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;cli&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;built: Aug 17 2018 20:10:18&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; NTS &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 1997-2018 The PHP Group
+Zend Engine v3.1.0, Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 1998-2018 Zend Technologies
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;which-php&quot;&gt;Which PHP&lt;/h2&gt;
+
+&lt;p&gt;To see what version of &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; macOS is using run the &lt;code class=&quot;highlighter-rouge&quot;&gt;which&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;which php
+/usr/bin/php
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;There may be multiple php versions installed.  If &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/bin/php&lt;/code&gt; is shown there is a chance another version of php has been installed with a package manager such as &lt;a href=&quot;https://brew.sh&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;homebrew&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;which &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; php
+/usr/bin/php
+/usr/locall/bin/php
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Copy &lt;code class=&quot;highlighter-rouge&quot;&gt;php.ini.default&lt;/code&gt; and name it &lt;code class=&quot;highlighter-rouge&quot;&gt;php.ini&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;cp /private/etc/php.ini.default php.ini
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Download &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; and move the file to &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/bin&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+curl &lt;span class=&quot;nt&quot;&gt;-sS&lt;/span&gt; https://getcomposer.org/installer | php
+
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mv composer.phar /usr/local/bin
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Add the following line to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; in your home directory.  This allows &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt; to run from folder.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nb&quot;&gt;echo alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;composer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/usr/local/bin/composer.phar&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.bash_profile
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Close terminal and re-open it.  Make a new folder called &lt;code class=&quot;highlighter-rouge&quot;&gt;myphp&lt;/code&gt; for the new php project.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+mkdir ~/Projects/myphp
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Initialize the project with &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+mbpbookpro:myphp mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;composer init
+
+                                            
+  Welcome to the Composer config generator  
+                                            
+This &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;will guide you through creating your composer.json config.
+
+Package name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&amp;lt;vendor&amp;gt;/&amp;lt;name&amp;gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mh/myphp]: 
+Description &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;: My PHP Project
+Author &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Mark Holloway, n to skip]: 
+Minimum Stability &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;: 
+Package Type &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;e.g. library, project, metapackage, composer-plugin&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;: project
+License &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;: 
+
+Define your dependencies.
+
+Would you like to define your dependencies &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;require&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; interactively &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;yes]? 
+Search &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a package: twilio/sdk
+Enter the version constraint to require &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;or leave blank to use the latest version&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: 
+Using version ^5.27 &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;twilio/sdk
+Search &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a package: 
+Would you like to define your dev dependencies &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;require-dev&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; interactively &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;yes]? 
+Search &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a package: 
+
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;mh/myphp&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;description&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;My PHP Project&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;project&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;require&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;twilio/sdk&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;^5.27&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;authors&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Mark Holloway&quot;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+Do you confirm generation &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;yes]? 
+Would you like to install dependencies now &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;yes]? 
+Loading composer repositories with package information
+Updating dependencies &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;including require-dev&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Package operations: 1 install, 0 updates, 0 removals
+  - Installing twilio/sdk &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;5.27.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: Loading from cache
+Writing lock file
+Generating autoload files
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Use the internal php web server for testing during development.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+php &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; 127.0.0.1:5000
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </content>
