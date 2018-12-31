@@ -41,7 +41,7 @@ macbookpro:~ mh$ which -a php
 
 ```
 
-Assuming `/usr/bin/php` copy `php.ini.default` and name it `php.ini` which will be used by `composer`
+Assuming `/usr/bin/php` copy `php.ini.default` and name it `php.ini` that will be used by `composer`
 
 ```bash
 
