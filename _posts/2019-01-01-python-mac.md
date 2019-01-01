@@ -55,14 +55,14 @@ sudo easy_install pip
 
 ```
 
-Add the following line to `.bash_profile` in your home directory. This will install packages locally and avoids permission problems. It is not recommend to install package as `suso` in the macOS system folders. 
+Add the following line to `.bash_profile` in your home directory. This will install packages locally and avoids permission problems. It is not recommend to install packages in macOS system folders as `sudo`. 
 
 ```bash
 
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 
 ```
-Close terminal and re-open it or source the file.
+Close terminal and re-open it, or `source` the file.
 
 ```bash
 

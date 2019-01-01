@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-01T01:48:26-05:00</updated>
+ <updated>2019-01-01T01:49:32-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -63,13 +63,13 @@ which &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; pip
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Add the following line to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; in your home directory. This will install packages locally and avoids permission problems. It is not recommend to install package as &lt;code class=&quot;highlighter-rouge&quot;&gt;suso&lt;/code&gt; in the macOS system folders.&lt;/p&gt;
+&lt;p&gt;Add the following line to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; in your home directory. This will install packages locally and avoids permission problems. It is not recommend to install packages in macOS system folders as &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/Library/Python/2.7/bin:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Close terminal and re-open it or source the file.&lt;/p&gt;
+&lt;p&gt;Close terminal and re-open it, or &lt;code class=&quot;highlighter-rouge&quot;&gt;source&lt;/code&gt; the file.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bash_profile
