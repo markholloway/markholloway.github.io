@@ -4,13 +4,89 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-12-31T21:43:07-05:00</updated>
+ <updated>2019-01-01T01:36:10-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Using Apple Python and pip2 in macOS</title>
+   <link href="http://localhost:4000/2019/01/01/python-mac/"/>
+   <updated>2019-01-01T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2019/01/01/python-mac</id>
+   <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;python 2.7&lt;/code&gt; with macOS. Although &lt;code class=&quot;highlighter-rouge&quot;&gt;python 3&lt;/code&gt; is widely adopted it is not backwards compatible with python 2 and many industries such as visual fx still rely on python 2 for it’s speed, flexibility, and compatibly.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;python-version&quot;&gt;Python version&lt;/h2&gt;
+
+&lt;p&gt;Check the python version in macOS&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+python &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+Python 2.7.10
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;which-python&quot;&gt;Which Python&lt;/h2&gt;
+
+&lt;p&gt;Check the &lt;code class=&quot;highlighter-rouge&quot;&gt;python&lt;/code&gt; binary macOS executes by default using the &lt;code class=&quot;highlighter-rouge&quot;&gt;which&lt;/code&gt; command. In most cases it will be &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/python&lt;/code&gt; unless another version of python has been installed.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+which python
+/usr/bin/python
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Adding &lt;code class=&quot;highlighter-rouge&quot;&gt;-a&lt;/code&gt; will indicate if there is more than one version of python installed such as an installation from a &lt;a href=&quot;gttp://brew.sh&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;homebrew&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+which &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; python
+/usr/bin/python
+/usr/local/opt/python/libexec/bin/python
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Assuming &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/python&lt;/code&gt; ensure the pip package manager is installed&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+which &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; pip
+/usr/bin/pip
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;If pip is not present run &lt;code class=&quot;highlighter-rouge&quot;&gt;easy_install&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;easy_install pip
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the following line to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; in your home directory. This will install packages locally and avoids using sudo or running into permission problems.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/Library/Python/2.7/bin:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Close terminal and re-open it or source the file.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bash_profile
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Install &lt;code class=&quot;highlighter-rouge&quot;&gt;pylint&lt;/code&gt; which is used for code analysis, error detction, and support by many IDEs.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+pip install pylint
+Installing pylint &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /Users/mh/Library/Python/2.7/lib/python/site-packages &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.9.3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Apple python 2.7 should now be ready for developer use. Next we will look at using &lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Install composer and globally initialize php projects in macOS</title>
