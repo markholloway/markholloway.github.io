@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-01T02:15:32-05:00</updated>
+ <updated>2019-01-01T02:17:17-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -90,7 +90,7 @@ Installing pylint &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /Users/mh/Libr
 pip install pipenv &lt;span class=&quot;nt&quot;&gt;--user&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Make a new directory for a python project and run &lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt; and sepcify the exact pythong version the project should run.&lt;/p&gt;
+&lt;p&gt;Make a new directory for a python project and run &lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt; and sepcify the python version the project will use.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Documents/GitHub

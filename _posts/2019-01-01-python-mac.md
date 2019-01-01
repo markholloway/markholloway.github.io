@@ -86,7 +86,7 @@ Install `pipenv` for managing a python project and virtual environment, as well 
 pip install pipenv --user
 
 ```
-Make a new directory for a python project and run `pipenv` and sepcify the exact pythong version the project should run.
+Make a new directory for a python project and run `pipenv` and sepcify the python version the project will use.
 
 ```bash
 
