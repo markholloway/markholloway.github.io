@@ -55,7 +55,7 @@ sudo easy_install pip
 
 ```
 
-Add the following line to `.bash_profile` in your home directory. This will install packages locally and avoids using sudo or running into permission problems. 
+Add the following line to `.bash_profile` in your home directory. This will install packages locally and avoids permission problems. It is not recommend to install package as `suso` in the macOS system folders. 
 
 ```bash
 
