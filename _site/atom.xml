@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-01T02:17:17-05:00</updated>
+ <updated>2019-01-01T12:10:51-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,11 +13,11 @@
 
  
  <entry>
-   <title>Using Apple python and pip2 in macOS</title>
+   <title>Using Apple python 2.7 and pip2 in macOS</title>
    <link href="http://localhost:4000/2019/01/01/python-mac/"/>
    <updated>2019-01-01T00:00:00-05:00</updated>
    <id>http://localhost:4000/2019/01/01/python-mac</id>
-   <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;python 2.7&lt;/code&gt; with macOS. Although &lt;code class=&quot;highlighter-rouge&quot;&gt;python 3&lt;/code&gt; is widely adopted it is not backwards compatible with python 2 and many industries continue relying on python 2 for it’s speed, flexibility, and libraries.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;python&lt;/code&gt; with macOS. Although &lt;code class=&quot;highlighter-rouge&quot;&gt;python 3&lt;/code&gt; is well adopted it is not backwards compatible with python 2 and many industries continue relying on python 2 for it’s speed, flexibility, and libraries.&lt;/p&gt;
 
 &lt;!--more--&gt;
 

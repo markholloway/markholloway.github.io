@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Using Apple python and pip2 in macOS
+title: Using Apple python 2.7 and pip2 in macOS
 tags: [python, bash]
 ---
 
-Apple includes `python 2.7` with macOS. Although `python 3` is widely adopted it is not backwards compatible with python 2 and many industries continue relying on python 2 for it's speed, flexibility, and libraries.
+Apple includes `python` with macOS. Although `python 3` is well adopted it is not backwards compatible with python 2 and many industries continue relying on python 2 for it's speed, flexibility, and libraries.
 
 <!--more-->
 
