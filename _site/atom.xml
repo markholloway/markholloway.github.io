@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-01T01:46:45-05:00</updated>
+ <updated>2019-01-01T01:47:52-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -40,7 +40,7 @@ which python
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Adding &lt;code class=&quot;highlighter-rouge&quot;&gt;-a&lt;/code&gt; will indicate if there is more than one version of python installed either as a direct download from &lt;a href=&quot;http://www.python.org&quot;&gt;python.org&lt;/a&gt; or from a package manager such as &lt;a href=&quot;gttp://brew.sh&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;homebrew&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Adding &lt;code class=&quot;highlighter-rouge&quot;&gt;-a&lt;/code&gt; will indicate if there is more than one version of python installed either as a direct download from &lt;a href=&quot;http://www.python.org&quot;&gt;python.org&lt;/a&gt; or from a package manager such as &lt;a href=&quot;gttp://brew.sh&quot;&gt;homebrew&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 which &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; python

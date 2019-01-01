@@ -29,7 +29,7 @@ which python
 
 ```
 
-Adding `-a` will indicate if there is more than one version of python installed either as a direct download from [python.org](http://www.python.org) or from a package manager such as [`homebrew`](gttp://brew.sh)
+Adding `-a` will indicate if there is more than one version of python installed either as a direct download from [python.org](http://www.python.org) or from a package manager such as [homebrew](gttp://brew.sh)
 
 ```bash
 
