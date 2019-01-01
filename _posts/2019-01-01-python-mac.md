@@ -70,11 +70,11 @@ source ~/.bash_profile
 
 ```
 
-Install `pylint` which is used for code analysis, error detction, and support by many IDEs. 
+Install `pylint` which is a linter used for code analysis, error detction, and is supported by many IDEs. 
 
 ```bash
 
-pip install pylint
+pip install pylint --user
 Installing pylint in /Users/mh/Library/Python/2.7/lib/python/site-packages (1.9.3)
 
 ```
