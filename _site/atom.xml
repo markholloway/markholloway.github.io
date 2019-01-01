@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-01T01:52:41-05:00</updated>
+ <updated>2019-01-01T02:15:32-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -84,7 +84,34 @@ Installing pylint &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /Users/mh/Libr
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Apple python 2.7 should now be ready for developer use. Next we will look at using &lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt; to keep all dependencies and installation local within the project folder.&lt;/p&gt;
+&lt;p&gt;Install &lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt; for managing a python project and virtual environment, as well as adding/removing packages within the project folder itself rather than in macOS folders.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+pip install pipenv &lt;span class=&quot;nt&quot;&gt;--user&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Make a new directory for a python project and run &lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt; and sepcify the exact pythong version the project should run.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Documents/GitHub
+mkdir myproject
+
+mbp2017:myproject mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pipenv &lt;span class=&quot;nt&quot;&gt;--python&lt;/span&gt; 2.7
+Creating a virtualenv &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;this project...
+Pipfile: /Users/mh/Documents/GitHub/myproject/Pipfile
+Using /usr/bin/python &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.7.10&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; to create virtualenv...
+⠹ Creating virtual environment...Already using interpreter /usr/bin/python
+New python executable &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /Users/mh/.local/share/virtualenvs/myproject-MzfeKDeP/bin/python
+Installing setuptools, pip, wheel...
+&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+
+✔ Successfully created virtual environment! 
+Virtualenv location: /Users/mh/.local/share/virtualenvs/myproject-MzfeKDeP
+Creating a Pipfile &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;this project...
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Read more on &lt;a href=&quot;https://pypi.org/project/pipenv/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt;&lt;/a&gt; and check &lt;a href=&quot;https://gist.github.com/bradtraversy/c70a93d6536ed63786c434707b898d55&quot;&gt;this&lt;/a&gt; handy list of common commands.&lt;/p&gt;
 </content>
  </entry>
  

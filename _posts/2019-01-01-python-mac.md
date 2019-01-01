@@ -79,4 +79,33 @@ Installing pylint in /Users/mh/Library/Python/2.7/lib/python/site-packages (1.9.
 
 ```
 
-Apple python 2.7 should now be ready for developer use. Next we will look at using `pipenv` to keep all dependencies and installation local within the project folder.
+Install `pipenv` for managing a python project and virtual environment, as well as adding/removing packages within the project folder itself rather than in macOS folders.
+
+```bash
+
+pip install pipenv --user
+
+```
+Make a new directory for a python project and run `pipenv` and sepcify the exact pythong version the project should run.
+
+```bash
+
+cd ~/Documents/GitHub
+mkdir myproject
+
+mbp2017:myproject mh$ pipenv --python 2.7
+Creating a virtualenv for this project...
+Pipfile: /Users/mh/Documents/GitHub/myproject/Pipfile
+Using /usr/bin/python (2.7.10) to create virtualenv...
+⠹ Creating virtual environment...Already using interpreter /usr/bin/python
+New python executable in /Users/mh/.local/share/virtualenvs/myproject-MzfeKDeP/bin/python
+Installing setuptools, pip, wheel...
+done.
+
+✔ Successfully created virtual environment! 
+Virtualenv location: /Users/mh/.local/share/virtualenvs/myproject-MzfeKDeP
+Creating a Pipfile for this project...
+
+```
+
+Read more on [`pipenv`](https://pypi.org/project/pipenv/) and check [this](https://gist.github.com/bradtraversy/c70a93d6536ed63786c434707b898d55) handy list of common commands.
