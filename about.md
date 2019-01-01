@@ -10,7 +10,7 @@ title: About
 [github.com/markholloway](https://github.com/markholloway)
 
 
-## Mark Holloway - Blog Info
+## Blog Info
 
 This blog is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site.hyde_version }}) for [Poole](http://getpoole.com), using [Ruby](https://www.ruby-lang.org/en/) and [Jekyll](https://jekyllrb.com), running on [Github Pages](https://pages.github.com) but with some modifications:
 
