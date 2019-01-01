@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-01T01:51:58-05:00</updated>
+ <updated>2019-01-01T01:52:41-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -84,7 +84,7 @@ Installing pylint &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /Users/mh/Libr
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Apple python 2.7 should now be ready for developer use. Next we will look at using &lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Apple python 2.7 should now be ready for developer use. Next we will look at using &lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt; to keep all dependencies and installation local within the project folder.&lt;/p&gt;
 </content>
  </entry>
  

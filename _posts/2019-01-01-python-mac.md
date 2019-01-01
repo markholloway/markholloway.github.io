@@ -79,4 +79,4 @@ Installing pylint in /Users/mh/Library/Python/2.7/lib/python/site-packages (1.9.
 
 ```
 
-Apple python 2.7 should now be ready for developer use. Next we will look at using `pipenv`
+Apple python 2.7 should now be ready for developer use. Next we will look at using `pipenv` to keep all dependencies and installation local within the project folder.
