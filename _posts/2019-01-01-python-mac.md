@@ -39,7 +39,7 @@ which -a python
 
 ```
 
-Assuming `/usr/bin/python` ensure the pip package manager is installed
+Assuming `/usr/bin/python` ensure the `pip` package manager is installed
 
 ```bash
 
