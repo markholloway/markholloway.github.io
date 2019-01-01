@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Using Apple python 2.7 and pip2 in macOS
+title: Using Apple python 2.7 and pip in macOS
 tags: [python, bash]
 ---
 
@@ -29,7 +29,7 @@ which python
 
 ```
 
-Adding `-a` will indicate if there is more than one version of python installed either as a direct download from [python.org](http://www.python.org) or from a package manager such as [homebrew](gttp://brew.sh)
+Adding `-a` will indicate if there is more than one version of python installed. This may be from [python.org](http://www.python.org) or a package manager such as [homebrew](gttp://brew.sh) which allows a isolate Python 2.7 and 3.7 installation to co-exist. 
 
 ```bash
 
@@ -47,11 +47,22 @@ which -a pip
 /usr/bin/pip
 
 ```
-If pip is not present run `easy_install`
+If pip is not installed run `easy_install`. 
 
 ```bash
 
 sudo easy_install pip
+Password:
+Searching for pip
+Best match: pip 18.1
+Adding pip 18.1 to easy-install.pth file
+Installing pip script to /usr/local/bin
+Installing pip3.7 script to /usr/local/bin
+Installing pip3 script to /usr/local/bin
+
+Using /Library/Python/2.7/site-packages
+Processing dependencies for pip
+Finished processing dependencies for pip
 
 ```
 
