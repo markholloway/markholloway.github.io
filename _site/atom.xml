@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-01T01:36:10-05:00</updated>
+ <updated>2019-01-01T01:39:01-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Using Apple Python and pip2 in macOS</title>
+   <title>Using Apple python and pip2 in macOS</title>
    <link href="http://localhost:4000/2019/01/01/python-mac/"/>
    <updated>2019-01-01T00:00:00-05:00</updated>
    <id>http://localhost:4000/2019/01/01/python-mac</id>

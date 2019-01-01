@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Using Apple Python and pip2 in macOS
+title: Using Apple python and pip2 in macOS
 tags: [python, bash]
 ---
 
