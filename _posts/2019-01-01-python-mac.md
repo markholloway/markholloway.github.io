@@ -70,7 +70,7 @@ source ~/.bash_profile
 
 ```
 
-Install `pylint` which is a linter used for code analysis, error detction, and is supported by many IDEs. 
+Install `pylint` which is a linter used for code analysis, error detection, and is supported by many IDEs. 
 
 ```bash
 
