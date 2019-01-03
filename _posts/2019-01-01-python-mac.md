@@ -4,9 +4,10 @@ title: Using Apple python 2.7 and pip in macOS
 tags: [python, bash]
 ---
 
-Apple includes `python` with macOS. Although `python 3` is well adopted it is not backwards compatible with python 2 and many industries continue relying on python 2 for it's speed, flexibility, and libraries.
+Apple includes `python 2.7` with macOS. This brief overview explains how to use python 2.7 in macOS without the need for `sudo` or writing to system folders.
 
-<!--more-->
+<!--more--> 
+ Most users install python 2.7 using the [homebrew](http://brew.sh) package manager or directly downloading python 2.7 from [pythong.org](http://python.org). This is a third option that uses python 2.7 included with macOS and installing pip packages in a user directory rather than systems folders, which is not good practice and often why users avoid this approach. 
 
 ## Python version
 
@@ -103,8 +104,9 @@ Make a new directory for a python project and run `pipenv` and sepcify the pytho
 
 cd ~/Documents/GitHub
 mkdir myproject
+cd myproject
 
-mbp2017:myproject mh$ pipenv --python 2.7
+pipenv --python 2.7
 Creating a virtualenv for this project...
 Pipfile: /Users/mh/Documents/GitHub/myproject/Pipfile
 Using /usr/bin/python (2.7.10) to create virtualenv...
@@ -119,4 +121,4 @@ Creating a Pipfile for this project...
 
 ```
 
-Read more on [`pipenv`](https://pypi.org/project/pipenv/) and check [this](https://gist.github.com/bradtraversy/c70a93d6536ed63786c434707b898d55) handy list of common commands.
+Read more on [`pipenv`](https://pypi.org/project/pipenv/) and check [this](https://gist.github.com/bradtraversy/c70a93d6536ed63786c434707b898d55) handy list of common commands from Brad Traversy.
