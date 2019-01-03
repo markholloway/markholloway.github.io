@@ -21,7 +21,7 @@ Python 2.7.10
 ```
 ## Which Python
 
-Check the `python` binary macOS executes by default using the `which` command. In most cases it will be `/usr/bin/python` unless another version of python has been installed. 
+Check the `python` binary file macOS executes by default using the `which` command. In most cases it will default to `/usr/bin/python` unless another version of python has been installed. 
 
 ```bash
 
@@ -30,7 +30,7 @@ which python
 
 ```
 
-Adding `-a` will indicate if there is more than one version of python installed. This may be from [python.org](http://www.python.org) or a package manager such as [homebrew](gttp://brew.sh) which allows a isolate Python 2.7 and 3.7 installation to co-exist. 
+Adding `-a` will indicate if there is more than one version installed.
 
 ```bash
 
