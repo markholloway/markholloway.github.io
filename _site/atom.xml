@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-02T20:58:58-05:00</updated>
+ <updated>2019-01-02T21:23:36-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -20,7 +20,7 @@
    <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;python 2.7&lt;/code&gt; with macOS. This brief overview explains how to use python 2.7 in macOS without the need for &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt; or writing to system folders.&lt;/p&gt;
 
 &lt;!--more--&gt;
-&lt;p&gt;Most users install python 2.7 using the &lt;a href=&quot;http://brew.sh&quot;&gt;homebrew&lt;/a&gt; package manager or directly downloading python 2.7 from &lt;a href=&quot;http://python.org&quot;&gt;pythong.org&lt;/a&gt;. This is a third option that uses python 2.7 included with macOS and installing pip packages in a user directory rather than systems folders, which is not good practice and often why users avoid this approach.&lt;/p&gt;
+&lt;p&gt;Most users install python 2.7 using the &lt;a href=&quot;http://brew.sh&quot;&gt;homebrew&lt;/a&gt; package manager or directly downloading python 2.7 from &lt;a href=&quot;http://python.org&quot;&gt;python.org&lt;/a&gt;. This is a third option that uses python 2.7 included with macOS and installing pip packages in a user directory rather than systems folders, which is not good practice and often why users avoid this approach.&lt;/p&gt;
 
 &lt;h2 id=&quot;python-version&quot;&gt;Python version&lt;/h2&gt;
 
@@ -124,7 +124,7 @@ Creating a Pipfile &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;this project
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Read more on &lt;a href=&quot;https://pypi.org/project/pipenv/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt;&lt;/a&gt; and check &lt;a href=&quot;https://gist.github.com/bradtraversy/c70a93d6536ed63786c434707b898d55&quot;&gt;this&lt;/a&gt; handy list of common commands from Brad Traversy.&lt;/p&gt;
+&lt;p&gt;Read more on &lt;a href=&quot;https://pypi.org/project/pipenv/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pipenv&lt;/code&gt;&lt;/a&gt; and check &lt;a href=&quot;https://gist.github.com/bradtraversy/c70a93d6536ed63786c434707b898d55&quot;&gt;this&lt;/a&gt; handy list of common commands from &lt;a href=&quot;http://traversymedia.com&quot;&gt;Brad Traversy&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  
