@@ -7,7 +7,7 @@ tags: [python, bash]
 Apple includes `python 2.7` with macOS. This brief overview explains how to use python 2.7 in macOS without the need for `sudo` or writing to system folders.
 
 <!--more--> 
- Most users install python 2.7 using the [homebrew](http://brew.sh) package manager or directly downloading python 2.7 from [python.org](http://python.org). This is a third option that uses python 2.7 included with macOS and installing pip packages in a user directory rather than systems folders, which is not good practice and often why users avoid this approach. 
+ Most users install python 2.7 using the [homebrew](http://brew.sh) package manager or directly downloading python 2.7 from [python.org](http://python.org). Below is a third option that uses python 2.7 included with macOS and safely installs pip packages in a user directory rather than systems folders. 
 
 ## Python version
 
