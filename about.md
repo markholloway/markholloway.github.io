@@ -11,7 +11,7 @@ title: About
 
 ## Blog Info
 
-This blog is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) with additional modifications by Fredrick Averpil:
+This blog is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) with modifications by Fredrick Averpil:
 
 - Tags
 - Post archive
