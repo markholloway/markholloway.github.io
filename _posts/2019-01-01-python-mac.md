@@ -67,7 +67,7 @@ Finished processing dependencies for pip
 
 ```
 
-Add the following line to `.bash_profile` in your home directory. This will install packages locally and avoids permission problems. It is not recommend to install packages in macOS system folders as `sudo`. 
+Add the following line to `.bash_profile` in your home directory. This follows best practices and will install packages in a local user folder without the need for root privilages or accessing system folders. 
 
 ```bash
 
@@ -82,7 +82,7 @@ source ~/.bash_profile
 
 ```
 
-Install `pylint` which is a linter used for code analysis, error detection, and is supported by many IDEs. 
+Installing `pylint` helps with code analysis, error detection, and is supported by many editors. 
 
 ```bash
 
@@ -91,7 +91,7 @@ Installing pylint in /Users/mh/Library/Python/2.7/lib/python/site-packages (1.9.
 
 ```
 
-Install `pipenv` for managing a python project and virtual environment, as well as adding/removing packages within the project folder itself rather than in macOS folders.
+Install `pipenv` for managing python projects in a virtual environment. Highly recommended.
 
 ```bash
 
