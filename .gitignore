@@ -49,3 +49,4 @@ Gemfile.lock
 
 # Custom domain, managed by Github
 CNAME
+.DS_Store

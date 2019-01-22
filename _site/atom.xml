@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-03T01:59:24-05:00</updated>
+ <updated>2019-01-22T04:33:57-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -15,7 +15,7 @@
  <entry>
    <title>Using Apple python 2.7 and pip in macOS</title>
    <link href="http://localhost:4000/2019/01/01/python-mac/"/>
-   <updated>2019-01-01T00:00:00-05:00</updated>
+   <updated>2019-01-01T00:00:00-06:00</updated>
    <id>http://localhost:4000/2019/01/01/python-mac</id>
    <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;python 2.7&lt;/code&gt; with macOS. This brief overview explains how to use python 2.7 without the need for &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt; or installing to system folders.&lt;/p&gt;
 
@@ -131,7 +131,7 @@ Creating a Pipfile &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;this project
  <entry>
    <title>Install composer and globally initialize php projects in macOS</title>
    <link href="http://localhost:4000/2018/12/30/php-composer-mac/"/>
-   <updated>2018-12-30T00:00:00-05:00</updated>
+   <updated>2018-12-30T00:00:00-06:00</updated>
    <id>http://localhost:4000/2018/12/30/php-composer-mac</id>
    <content type="html">&lt;p&gt;Apple includes &lt;code class=&quot;highlighter-rouge&quot;&gt;php&lt;/code&gt; with macOS. The &lt;code class=&quot;highlighter-rouge&quot;&gt;composer&lt;/code&gt; package manager initializes php projects and installs dependencies locally in the project folder. Use php’s built in web server locally for project testing.&lt;/p&gt;
 
@@ -256,7 +256,7 @@ macbookpro:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;php &lt;span clas
  <entry>
    <title>Use BASH to send texts with Twilio</title>
    <link href="http://localhost:4000/2018/12/22/twilio-sms-curl/"/>
-   <updated>2018-12-22T00:00:00-05:00</updated>
+   <updated>2018-12-22T00:00:00-06:00</updated>
    <id>http://localhost:4000/2018/12/22/twilio-sms-curl</id>
    <content type="html">&lt;p&gt;This is a short note on how to send SMS messages using &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; in macOS and Linux. Windows users can use &lt;a href=&quot;https://gitforwindows.org&quot;&gt;GIT BASH&lt;/a&gt;.&lt;/p&gt;
 
