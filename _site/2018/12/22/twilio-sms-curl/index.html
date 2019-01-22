@@ -178,6 +178,14 @@
       
         
       
+        
+          
+        
+      
+        
+          
+        
+      
 
       <p>
         <a class="sidebar-nav-icons" href="/atom.xml" target="blank"><img src="/public/rss_icon_32x32.png" alt="RSS feed" width="16" height="16"></a>
@@ -222,7 +230,7 @@ curl <span class="nt">-X</span> POST <span class="se">\</span>
 </code></pre></div></div>
 <p>Replace {AccountSID} in the <code class="highlighter-rouge">URL</code> portion with a valid SID. Repalce the <code class="highlighter-rouge">-u</code> credentials {AccountSID:AuthToken} with the matching SID and Token.  They must be separated by <code class="highlighter-rouge">:</code> or verification will fail. Replace <code class="highlighter-rouge">From=+1xxxxxxxxxx</code> to with the Twilio number and replace <code class="highlighter-rouge">To=+1xxxxxxxxxx</code> with the destination number.</p>
 
-<p>Adding <code class="highlighter-rouge">&gt; sms-test.json</code> at the end of the script will allow the response to be easily read in a <code class="highlighter-rouge">JSON</code> viewer. Otherwise the response is squashed together in the BASH terminal and difficult to read.</p>
+<p>Adding <code class="highlighter-rouge">sms-test.json</code> at the end of the script will allow the response to be easily read in a <code class="highlighter-rouge">JSON</code> viewer. Otherwise the response is squashed together in the BASH terminal and difficult to read.</p>
 
 <p>Below is the final format of the script to paste and send a text message.</p>
 

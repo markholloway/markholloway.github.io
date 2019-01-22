@@ -24,7 +24,7 @@ curl -X POST \
 ```
 Replace {AccountSID} in the `URL` portion with a valid SID. Repalce the `-u` credentials {AccountSID:AuthToken} with the matching SID and Token.  They must be separated by `:` or verification will fail. Replace `From=+1xxxxxxxxxx` to with the Twilio number and replace `To=+1xxxxxxxxxx` with the destination number. 
 
-Adding `> sms-test.json` at the end of the script will allow the response to be easily read in a `JSON` viewer. Otherwise the response is squashed together in the BASH terminal and difficult to read.
+Adding `sms-test.json` at the end of the script will allow the response to be easily read in a `JSON` viewer. Otherwise the response is squashed together in the BASH terminal and difficult to read.
 
 Below is the final format of the script to paste and send a text message.
 

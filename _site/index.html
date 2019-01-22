@@ -52,6 +52,7 @@
 <link rel="canonical" href="http://localhost:4000/" />
 <meta property="og:url" content="http://localhost:4000/" />
 <meta property="og:site_name" content="Mark Holloway" />
+<link rel="next" href="http://localhost:4000/page2" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@twilion2" />
 <script type="application/ld+json">
@@ -176,6 +177,14 @@
       
         
       
+        
+          
+        
+      
+        
+          
+        
+      
 
       <p>
         <a class="sidebar-nav-icons" href="/atom.xml" target="blank"><img src="/public/rss_icon_32x32.png" alt="RSS feed" width="16" height="16"></a>
@@ -210,56 +219,6 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2019/01/01/python-mac/">
-        Using Apple python 2.7 and pip in macOS
-      </a>
-    </h1>
-
-    
-
-
-
-    <span class="post-date">01 Jan 2019 <i class="fa fa-tags"></i> <a href="/blog/tag/python/">#python</a> <!--comma--><a href="/blog/tag/bash/">#bash</a> </span>
-
-    <p>Apple includes <code class="highlighter-rouge">python 2.7</code> with macOS. This brief overview explains how to use python 2.7 without the need for <code class="highlighter-rouge">sudo</code> or installing to system folders.</p>
-
-
-    
-    
-    
-     <a href="/2019/01/01/python-mac/">Read more...</a>
-
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/2018/12/30/php-composer-mac/">
-        Install composer and globally initialize php projects in macOS
-      </a>
-    </h1>
-
-    
-
-
-
-    <span class="post-date">30 Dec 2018 <i class="fa fa-tags"></i> <a href="/blog/tag/php/">#php</a> <!--comma--><a href="/blog/tag/bash/">#bash</a> </span>
-
-    <p>Apple includes <code class="highlighter-rouge">php</code> with macOS. The <code class="highlighter-rouge">composer</code> package manager initializes php projects and installs dependencies locally in the project folder. Use php’s built in web server locally for project testing.</p>
-
-
-    
-    
-    
-     <a href="/2018/12/30/php-composer-mac/">Read more...</a>
-
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
       <a href="/2018/12/22/twilio-sms-curl/">
         Use BASH to send texts with Twilio
       </a>
@@ -283,11 +242,111 @@
 
   </div>
   
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2012/11/19/acme-packet-load-limit/">
+        Acme Packet SBC “load-limit” Command Option
+      </a>
+    </h1>
+
+    
+
+
+
+    <span class="post-date">19 Nov 2012 <i class="fa fa-tags"></i> <a href="/blog/tag/acme/">#acme packet</a> <!--comma--><a href="/blog/tag/sbc/">#sbc</a> <!--comma--><a href="/blog/tag/sip/">#sip</a> </span>
+
+    <p>The Acme Packet SBC has an optional parameter that may be added under <code class="highlighter-rouge">sip-config</code> that allows the SBC to gracefully handle traffic in the event the SBC’s main processor reaches a certain threshold.</p>
+
+
+    
+    
+    
+     <a href="/2012/11/19/acme-packet-load-limit/">Read more...</a>
+
+    
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2012/06/19/acme-packet-packet-trace/">
+        Acme Packet SBC “packet-trace” Command (capturing SIP signaling)
+      </a>
+    </h1>
+
+    
+
+
+
+    <span class="post-date">19 Jun 2012 <i class="fa fa-tags"></i> <a href="/blog/tag/acme/">#acme packet</a> <!--comma--><a href="/blog/tag/sbc/">#sbc</a> <!--comma--><a href="/blog/tag/sip/">#sip</a> </span>
+
+    <p>The <code class="highlighter-rouge">packet-trace</code> ACLI command allows the Acme Packet SBC (Session Director) to capture SIP signaling communication between two endpoints and send the capture to external server such as Wireshark.The SBC uses the network interfaces (ie. media interfaces) to send the capture.</p>
+
+
+    
+    
+    
+     <a href="/2012/06/19/acme-packet-packet-trace/">Read more...</a>
+
+    
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2012/01/24/acme-packet-sbc-register-grace-timer/">
+        Acme Packet SBC Register Grace Timer
+      </a>
+    </h1>
+
+    
+
+
+
+    <span class="post-date">24 Jan 2012 <i class="fa fa-tags"></i> <a href="/blog/tag/acme/">#acme packet</a> <!--comma--><a href="/blog/tag/sbc/">#sbc</a> <!--comma--><a href="/blog/tag/sip/">#sip</a> </span>
+
+    <p>The Acme Packet SBC contains an optional parameter that may be added to the configuration which helps avoid a SIP avalanche from occurring.</p>
+
+
+    
+    
+    
+     <a href="/2012/01/24/acme-packet-sbc-register-grace-timer/">Read more...</a>
+
+    
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2011/11/09/acme-packet-sbc-media-aggregation/">
+        Acme Packet SBC Media Aggregation
+      </a>
+    </h1>
+
+    
+
+
+
+    <span class="post-date">09 Nov 2011 <i class="fa fa-tags"></i> <a href="/blog/tag/acme/">#acme packet</a> <!--comma--><a href="/blog/tag/sbc/">#sbc</a> <!--comma--><a href="/blog/tag/sip/">#sip</a> </span>
+
+    <p>The Acme Packet 3800 and 4500 series Session Border Controllers come with an NIU (Network Interface Unit) that includes four Gigabit ports.  In rare cases one may need to support <code class="highlighter-rouge">Media Aggregation</code> where two of the Gigabit interfaces need to be look like they are “bonded” to accommodate a large number of calls (with media anchored).</p>
+
+
+    
+    
+    
+     <a href="/2011/11/09/acme-packet-sbc-media-aggregation/">Read more...</a>
+
+    
+
+  </div>
+  
 </div>
 
 <div class="pagination">
   
-    <span class="pagination-item older">Older</span>
+    <a class="pagination-item older" href="/page2">Older</a>
   
   
     <span class="pagination-item newer">Newer</span>
