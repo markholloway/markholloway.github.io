@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-23T04:46:02-06:00</updated>
+ <updated>2019-01-23T07:40:12-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -49,6 +49,170 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; sms-test.json
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Active Directory based Call Routing on the Acme Packet SBC</title>
+   <link href="http://localhost:4000/2015/01/27/acme-packet-active-directory/"/>
+   <updated>2015-01-27T00:00:00-06:00</updated>
+   <id>http://localhost:4000/2015/01/27/acme-packet-active-directory</id>
+   <content type="html">&lt;p&gt;Many Enterprises have migrated to &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Trunking&lt;/code&gt; for PSTN access. For an Enterprise with a single IP PBX platform and an SBC on the edge, call routing from the PSTN to the internal network is typically very straight forward because all DID’s point to one IP platform.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Example of a common &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Trunk&lt;/code&gt; model&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-ad01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When another SIP communication platform is introduced into the Enterprise topology it raises the question of what IP platform is considered the call routing decision maker for calls coming from the PSTN SIP Trunk.&lt;/p&gt;
+
+&lt;p&gt;This is an example of a less-than-desirable implementation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-ad02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Usually one of these is the common way an Enterprise integrates their IP PBX with another IP platform (such as Lync):&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;All calls go to the IP PBX and then &lt;code class=&quot;highlighter-rouge&quot;&gt;fork&lt;/code&gt; to Lync&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;All calls go to Lync and use Lync’s &lt;code class=&quot;highlighter-rouge&quot;&gt;Simultaneous Ring&lt;/code&gt; feature to ring the IP PBX&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;SBC &lt;code class=&quot;highlighter-rouge&quot;&gt;forks&lt;/code&gt; the SIP Invite to the IP PBX and Lync simultaneously&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Although many IP PBX’s deployed with Lync use one of the above methods, there is a much better way for this integration to occur.&lt;/p&gt;
+
+&lt;p&gt;The Acme Packet SBC supports &lt;code class=&quot;highlighter-rouge&quot;&gt;Active Directory&lt;/code&gt; integration for call routing decisions. The beauty of this is in most organizations Active Directory is already used to store various phone numbers for users within the Enterprise.&lt;/p&gt;
+
+&lt;p&gt;When the &lt;code class=&quot;highlighter-rouge&quot;&gt;local-policy&lt;/code&gt; is configured to support Active Directory (LDAP) and a SIP Invite is received from the PSTN, the SBC will query Active Directory to see if the phone number is assigned to a user.  If it is, the SBC will see if it’s part of the Active Directory field attribute &lt;code class=&quot;highlighter-rouge&quot;&gt;telephoneNumber&lt;/code&gt; for a desk phone, or &lt;code class=&quot;highlighter-rouge&quot;&gt;msRTCSIP&lt;/code&gt; for a Lync phone number. Other attributes are supported and are explained further in this discussion.&lt;/p&gt;
+
+&lt;p&gt;This is an example of an Active Directory query from the SBC to determine if the call should be sent to CUCM or Lync.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-ad03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In a similar regard to the above diagram, if the dialed digits are the Lync phone number and the Active Directory query shows the dialed digits belong to the msRTCSIP attribute, the Acme Packet SBC knows the &lt;code class=&quot;highlighter-rouge&quot;&gt;next hop&lt;/code&gt; should be the realm and session agent for Lync.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-ad04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is where the power of Active Directory integration in the SBC becomes very interesting..&lt;/p&gt;
+
+&lt;p&gt;The Acme Packet SBC’s &lt;code class=&quot;highlighter-rouge&quot;&gt;local-policy&lt;/code&gt; may be configured in such a way that if the dialed digits +1-404-555-1000 match telephoneNumber in Active Directory, but msRTCSIP is also populated with a separate Lync phone number (in this case +1-404-555-9595) the SBC’s local-policy preference will route the call to Lync instead of the IP PBX. If msRTCSIP is not populated, the call will simply route the to the IP PBX. This is a very flexible way of handling call routing. What this comes down to in this particular case is an environment where some users are exclusively on CUCM and others are CUCM and Lync, but the Enterprise may want Lync users to always receive calls on Lync first regardless of the dialed digits coming from the PSTN.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-ad05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now for even more flexibility..&lt;/p&gt;
+
+&lt;p&gt;The Acme Packet SBC may also be configured in such a way that it recognizes both &lt;code class=&quot;highlighter-rouge&quot;&gt;telephoneNumber&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;msRTCSIP&lt;/code&gt; being populated, each with their own phone numbers, but if the SIP Invite to the first platform experiences a SIP Invite timeout or failure, a SIP Invite may be sent to the &lt;code class=&quot;highlighter-rouge&quot;&gt;next destination&lt;/code&gt;. You are not limited to just two destinations.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-ad06.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, having calls &lt;code class=&quot;highlighter-rouge&quot;&gt;reroute&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;PSTN&lt;/code&gt; during an internal network outage is also possible by using the Active Directory attribute field &lt;code class=&quot;highlighter-rouge&quot;&gt;mobile&lt;/code&gt;. If this field is populated and the SBC’s local-policy is setup to recognize the digits in the mobile field, calls that fail to setup internally (in this case, to Lync and the IP PBX) may route back out the PSTN SIP Trunk to the user’s mobile phone.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-ad07.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Configuration examples:&lt;/p&gt;
+
+&lt;p&gt;The two critical configuration elements to examine for Active Directory integration are &lt;code class=&quot;highlighter-rouge&quot;&gt;local-policy&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ldap-config&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;First we will look at local-policy. This is very straight forward as the only difference when using Active Directory integration is the next-hop policy-attribute will reference ldap.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-adconf01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The next configuration element to talk about is &lt;code class=&quot;highlighter-rouge&quot;&gt;ldap-config&lt;/code&gt;. This is where you define the Active Directory criteria and how call routing should be handled. You may have have more than one ldap-config on the SBC.&lt;/p&gt;
+
+&lt;p&gt;The example below is similar to our simple SIP Trunk diagram at the start of this blog post. There is a single IP PBX platform on the internal network. However, the mobile field in Active Directory is also populated with digits. The way this local-policy is configured, if a SIP Invite timeout occurs to CUCM, the &lt;code class=&quot;highlighter-rouge&quot;&gt;policy&lt;/code&gt; will &lt;code class=&quot;highlighter-rouge&quot;&gt;reroute&lt;/code&gt; the failed call back out the SIP Trunk to the Active Directory user’s mobile number.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-adconf02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this next example the local-policy uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;attribute order&lt;/code&gt;. This means if the dialed digits match an IP PBX phone number (telephoneNumber) but the user also has a Lync phone number populated in Active Directory under msRTCSIP, send the SIP Invite to Lync.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-adconf03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see from the above example one of the most useful elements in the ldap-cfg-attributes is the use of regular expressions for phone number formatting.&lt;/p&gt;
+
+&lt;p&gt;Other cool features in 6.4f1:&lt;/p&gt;
+
+&lt;p&gt;Support for &lt;code class=&quot;highlighter-rouge&quot;&gt;RFC 6341&lt;/code&gt; (SIP-based Media Recording – aka SIPREC) on the Linux version of the Acme Packet SBC.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-ad08.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Acme Packet SBC and Configuring “Selective” Early Media Suppression</title>
+   <link href="http://localhost:4000/2014/12/30/acme-packet-early-media/"/>
+   <updated>2014-12-30T00:00:00-06:00</updated>
+   <id>http://localhost:4000/2014/12/30/acme-packet-early-media</id>
+   <content type="html">&lt;p&gt;The Acme Packet SBC includes support for &lt;code class=&quot;highlighter-rouge&quot;&gt;Early Media Suppression&lt;/code&gt;. This allows you to decide what &lt;code class=&quot;highlighter-rouge&quot;&gt;Realms&lt;/code&gt; can and cannot support Early Media and in what direction Early Media is allowed.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Taking it one step further, the Acme Packet SBC also supports &lt;code class=&quot;highlighter-rouge&quot;&gt;Selective&lt;/code&gt; Early Media Suppression. This means that even if a realm is configured to receive Early Media for all calls, the SBC can still be configured to deny Early Media from certain realms (even if those realms can send early media to other destinations) through the use of Realm Groups.&lt;/p&gt;
+
+&lt;p&gt;Early Media is defined by an endpoint sending &lt;code class=&quot;highlighter-rouge&quot;&gt;RTP/RTCP&lt;/code&gt; packets &lt;code class=&quot;highlighter-rouge&quot;&gt;before&lt;/code&gt; a &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP session&lt;/code&gt; is established by a &lt;code class=&quot;highlighter-rouge&quot;&gt;200 OK&lt;/code&gt;. Otherwise, the expected behavior is media does not begin flowing between endpoints until 200 OK is received. Instances where early media may occur is when a user calls the PSTN and an announcement is immediately played or a custom ringtone (ie. music) is heard when calling a mobile phone.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-early-media01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There may be a variety of reasons why one does not want to &lt;code class=&quot;highlighter-rouge&quot;&gt;allow Early Media&lt;/code&gt; under specific conditions. For example (real world) a Service Provider supporting Hosted IP PBX subscribers and SIP Trunking customers sends PSTN traffic from their network to multiple PSTN Media Gateways. One gateway supports outbound Local and Domestic Long Distance calls and the other media gateway supports outbound International calls. The Service Provider doesn’t want to allow Early Media from the International gateway to flow inbound to their Hosted IP PBX customer base, but they will allow Early Media to flow from the International media gateway to their SIP Trunking customer base. The Local and Domestic Long Distance media gateway is allowed to send Early Media to either customer base.&lt;/p&gt;
+
+&lt;p&gt;First, it’s important to cover the basics of implementing Early Media Suppression. This may be configured within a Realm or a &lt;code class=&quot;highlighter-rouge&quot;&gt;Session Agent&lt;/code&gt; using the &lt;code class=&quot;highlighter-rouge&quot;&gt;early-media-allow&lt;/code&gt; parameter. When a call egresses the SBC to a specific realm, the matching realm’s early-media-allow setting will be applied to either allow-all, block-all, or block one-way early media until a 200 OK is received. Media must be anchored to the SBC in order for Early Media settings to have any effect. In this example, calls are originated from the Access (Hosted IP PBX) realm to the PSTN (Access realm’s next-hop is the Core realm).&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+APKT-6300(realm-config)# show
+
+realm-config
+    identifier                  Core
+    description                 PSTN Media Gateway
+    addr-prefix                 0.0.0.0
+    network-interface           s0p0:0
+    mm-in-realm                 enabled
+...
+    symetric-latching           disabled
+    early-media-allow           none
+
+APKT-6300(realm-config)# early-media-allow ?
+
+&amp;lt;enumeration&amp;gt; how to handle early media
+    &amp;lt;none, reverse, both&amp;gt;
+    none: no early media allowed
+    reverse: allow early media in the direction of calling endpoint
+    both: allow early media in both directions
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This example has &lt;code class=&quot;highlighter-rouge&quot;&gt;early-media-allow&lt;/code&gt; set to &lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; in the realm configuration. Early Media is not allowed in either direction. Therefore, if an Access subscriber calls the PSTN, no Early Media is permitted back to the Access realm, and vice-versa.&lt;/p&gt;
+
+&lt;p&gt;~&lt;a href=&quot;/blog/assets/apkt/apkt-early-media02.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This example has &lt;code class=&quot;highlighter-rouge&quot;&gt;early-media-allow&lt;/code&gt; set to &lt;code class=&quot;highlighter-rouge&quot;&gt;reverse&lt;/code&gt; which in this case allows a Hosted IP PBX subscriber to place a call to BroadWorks or the PSTN and hear early media. However, the subscribers are not permitted to send Early Media in the other direction since early-media-allow is set to reverse and not both.&lt;/p&gt;
+
+&lt;p&gt;~&lt;a href=&quot;/blog/assets/apkt/apkt-early-media03.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So far we have statically defined to always always allow &lt;code class=&quot;highlighter-rouge&quot;&gt;Early Media&lt;/code&gt; from one direction. Now for a scenario that is a little more tricky. Lets say calls originating from the Access realm which route to the ITSP-1 realm/media gateway &lt;code class=&quot;highlighter-rouge&quot;&gt;are not allowed&lt;/code&gt; to hear Early Media. However, calls originating from the Access realm which route to the ITSP-2 realm/media gateway &lt;code class=&quot;highlighter-rouge&quot;&gt;are allowed&lt;/code&gt; to hear Early Media. However, ITSP-1 is allowed to send Early Media to other realms (ie. Acces-2, Acces-3, etc.). Only the “Access” realm cannot receive Early Media from ITSP-1.&lt;/p&gt;
+
+&lt;p&gt;The trick in this topology is all media gateways are allowed to send Early Media to any realm, and Access is allowed to receive Early Media from any realm. We want to &lt;code class=&quot;highlighter-rouge&quot;&gt;selectively suppress&lt;/code&gt; only when the Early Media RTP traverses specifically from ITSP-1 to Access.&lt;/p&gt;
+
+&lt;p&gt;By using &lt;code class=&quot;highlighter-rouge&quot;&gt;Realm Groups&lt;/code&gt;, we can essentially build a logical binding of source and destination realms together and customize Early Media settings just for calls flowing across those two realms.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+APKT-6300# config t
+APKT-6300(configure)# media-manager
+APKT-6300(media-manager)# realm-group
+APKT-6300(realm-group)# source-realm &quot;Access, ITSP-1&quot;
+APKT-6300(realm-group)# destination-realm &quot;Access&quot;
+APKT-6300(realm-group)# early-media-allow-direction none
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now only calls that are originated from the &lt;code class=&quot;highlighter-rouge&quot;&gt;Access&lt;/code&gt; realm to &lt;code class=&quot;highlighter-rouge&quot;&gt;ITSP-1&lt;/code&gt; realm will be prohibited from receiving early media from the ITSP-1 Media Gateway. If the same call routes to &lt;code class=&quot;highlighter-rouge&quot;&gt;ITSP-2&lt;/code&gt;, Early Media is allowed.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/assets/apkt/apkt-early-media04.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
 </content>
  </entry>
  
