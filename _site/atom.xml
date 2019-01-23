@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-22T17:27:52-06:00</updated>
+ <updated>2019-01-23T04:46:02-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -49,6 +49,324 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; sms-test.json
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>How to “grep” the Acme Packet SBC Configuration (ACLI)</title>
+   <link href="http://localhost:4000/2014/04/20/acme-packet-grep/"/>
+   <updated>2014-04-20T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2014/04/20/acme-packet-grep</id>
+   <content type="html">&lt;p&gt;The grep tool is a very popular Unix command line utility used to match a regular expression. Although &lt;code class=&quot;highlighter-rouge&quot;&gt;grep&lt;/code&gt; doesn’t specifically exist on the Acme Packet SBC the &lt;code class=&quot;highlighter-rouge&quot;&gt;find&lt;/code&gt; command serves a similar purpose.  This feature was introduced in ACLI release 6.4.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NNOS-SD# find [configuration | running-config | command]  [attribute]
+
+NNOS-SD# find ?
+
+&amp;lt;string&amp;gt;                find the specified string
+command                 find command within menus
+configuration           find in editing configuration
+running-config          find in running configuration
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;My SBC has a &lt;code class=&quot;highlighter-rouge&quot;&gt;realm&lt;/code&gt; called &lt;code class=&quot;highlighter-rouge&quot;&gt;Access&lt;/code&gt; and I want to know where Access resides in the configuration&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+NNOS-SD# find running-config Access
+
+session-router -&amp;gt; local-policy [Access; *; *]
+source-realm Access
+description Access to Core
+
+system -&amp;gt; network-interface [s0p0:0]
+description Access
+
+media-manager -&amp;gt; realm-config [Access]
+identifier Access
+
+session-router -&amp;gt; sip-interface [Access]
+realm-id Access
+
+media-manager -&amp;gt; steering-pool [72.12.135.250=16384+Access]
+realm-id Access
+
+Found 6 instances
+
+NNOS-SD# find running-config Core
+
+session-router -&amp;gt; local-policy [Access; *; *]
+description Access to Core
+
+session-router -&amp;gt; local-policy [Access; *; *] -&amp;gt; local-policy-attribute [Core; SAG:BW-APP-SERVERS]
+realm Core
+realm Core
+
+system -&amp;gt; network-interface [s1p0:0]
+description Core
+
+media-manager -&amp;gt; realm-config [Core]
+identifier Core
+
+session-router -&amp;gt; session-agent [as1]
+realm-id Core
+
+session-router -&amp;gt; sip-config
+home-realm-id Core
+
+session-router -&amp;gt; sip-interface [Core]
+realm-id Core
+
+media-manager -&amp;gt; steering-pool [10.12.135.250=16384+Core]
+realm-id Core
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I want to know what configuration elements support &lt;code class=&quot;highlighter-rouge&quot;&gt;local-policy&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+NNOS-SD# find local-policy
+Command menu
+(root) show configuration local-policy
+(root) show running-config local-policy
+(configure) session-router local-policy
+
+Running configuration
+
+Found 3 instances
+NNOS-SD#
+
+NNOS-SD# find force
+Command menu
+(root) halt force
+(root) reboot force
+(root) reboot fast force
+(root) show configuration enforcement-profile
+(root) show running-config enforcement-profile
+(configure) media-manager realm-config enforcement-profile
+(configure) session-router enforcement-profile
+(configure) session-router session-agent enforcement-profile
+(configure) session-router session-router force-report-trunk-info
+(configure) session-router sip-config enforcement-profile
+(configure) session-router sip-interface enforcement-profile
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Acme Packet SBC Remote SIP Survivability</title>
+   <link href="http://localhost:4000/2014/03/30/acme-packet-sbc-remote-survivability/"/>
+   <updated>2014-03-30T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2014/03/30/acme-packet-sbc-remote-survivability</id>
+   <content type="html">&lt;p&gt;With the release of Acme Packet 6.4m2 software the SBC now supports &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Remote Survivability&lt;/code&gt;. This is applicable for a Service Provider offering &lt;code class=&quot;highlighter-rouge&quot;&gt;Hosted IP PBX&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;UCaaS&lt;/code&gt; using SIP phones which register to a centralized Data Center or Cloud model.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;In this example I will focus primarily on the Service Provider model, although it’s just as relevant to the Enterprise model mentioned above since we are talking about remote phones registering over the WAN to a &lt;code class=&quot;highlighter-rouge&quot;&gt;Softswitch&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;IP PBX&lt;/code&gt;. In the diagram below the SIP phones register from the Enterprise site over the Internet or &lt;code class=&quot;highlighter-rouge&quot;&gt;MPLS&lt;/code&gt; network to the Service Provider core where a Broadsoft &lt;code class=&quot;highlighter-rouge&quot;&gt;BroadWorks&lt;/code&gt; Softswitch resides. For those note familiar with BroadWorks, think of it as a very large software platform that has the ability to virtualize what looks like many IP PBX’s, each for dedicated customers. Most notably in large deployments it is common to see some sort of SIP enabled Firewall, ALG, or SBC (preferred) on the Enterprise premise. All SIP communication, including SIP registration and originated SIP calls, will egress the Enterprise phones through the SBC up into the Service Provider’s SBC and to BroadWorks. Even if calls are destined for another phone extension in the same Enterprise premise the call must go through the carrier core where CDR’s will be generated and any other Class 5 features may be provided for the call hair pinning back into the Enterprise to a different extension.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-remote-survivability01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;One of the biggest challenges is what happens if the SP core is unreachable. All registrations and call processing will fail, even for calls destined to another phone extension in the same Enterprise, since the &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Invite&lt;/code&gt; must be able to reach the BroadWorks Softswitch or IP PBX to ring another extension in the same location.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-remote-survivability01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If the Enterprise is using an Acme Packet SBC on premise the &lt;code class=&quot;highlighter-rouge&quot;&gt;Survivability Mode&lt;/code&gt; will use either the &lt;code class=&quot;highlighter-rouge&quot;&gt;P-Asserted Identity&lt;/code&gt; from the SIP endpoint or optionally the BroadWorks Survivability method using XML. When the SP Core or Enterprise data center becomes unreachable the Survivability Health Score degrades and the SBC knows to process registration and call traffic locally without sending the traffic to the SP Core.&lt;/p&gt;
+
+&lt;p&gt;In Survivability Mode phone A has the ability to call phone C even when the SP Core is unreachable. If the Enterprise normally uses abbreviated dialing such as 4-digit extensions, this will still continue to work, as well as dialing the full phone number.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-remote-survivability03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some Enterprises may want to have a local &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Gateway&lt;/code&gt; (such as a Cisco ISR or Adtran Total Access IAD) on premise and utilize one or more PRI’s connected for PSTN access when the SP Core is unreachable. Depending on the Service Provider, the same SP used for SIP Services may also route to the PRI for overflow/outage scenarios so the Enterprise has both inbound and outbound redundancy on premise. The call originated from the SIP network the PSTN where there is no matching Address of Record for SIP phones, the SBC will route the calls to the SIP-PSTN Gateway.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-remote-survivability04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Below is a basic Remote Survivability configuration.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+NNOS-SD# config t
+NNOS-SD(configure)# session-router
+NNOS-SD(session-router)# sip-interface
+NNOS-SD(sip-interface)# service-tag SipTrunk1 &amp;lt;- Your SIP Interface
+NNOS-SD(sip-interface)# done
+NNOS-SD(sip-interface)# exit
+NNOS-SD(session-router)# survivbility
+NNOS-SD(survivability)# enabled
+NNOS-SD(survivability)# done
+NNOS-SD(survivability)# exit
+NNOS-SD(sip-interface)# service-health
+NNOS-SD(service-health)# service-tag-list
+NNOS-SD(serviceTag)# service-tag-string SipTrunk1
+NNOS-SD(serviceTag)# sa-health-profile
+NNOS-SD(sa-health-profile)# session-agent-hostname VzB-Trunk01 &amp;lt;- Session Agent to Monitor
+NNOS-SD(sa-health-profile)# session-agent-health 100 &amp;lt;- Engage Survivability when below 100
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Best-practice is to enable &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Options&lt;/code&gt; ping for each &lt;code class=&quot;highlighter-rouge&quot;&gt;Session Agent&lt;/code&gt;. This way the SBC will pro-actively know when a Session Agent is in-service or out of service and degrade the health score appropriately.&lt;/p&gt;
+
+&lt;p&gt;The following has been a basic introduction to the Acme Packet Remote Survivability feature. There is more functionality and detail that may be applied and is well documented in the E-CX Maintenance Guide. Although a subset of this functionality has existed on other SIP ALG platforms in the past, Acme Packet has introduced many great new features relevant for Remote Survivability that do not exist elsewhere. All the resiliency and High-Availability that is inherent to the Acme Packet platform remains intact even when Remote Survivability is engaged.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>How to “tail” sipmsg.log on the Acme Packet SBC command line (ACLI)</title>
+   <link href="http://localhost:4000/2014/03/19/acme-packet-tail-sipmsglog/"/>
+   <updated>2014-03-19T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2014/03/19/acme-packet-tail-sipmsglog</id>
+   <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;tail&lt;/code&gt; program is available on Unix operating systems and is used to view the tail end of a text file or piped data.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Once tail is running for a particular log file, and as the log file get populated with new data, the newly populated content is displayed on the screen real-time. This saves a step from having to use more or cat after the fact where a user would have to scroll all the way through the log file to the end in order to view the newly added data (and more data may continuously be added making it even more inconvenient).&lt;/p&gt;
+
+&lt;p&gt;In the case of the Acme Packet SBC, retrieving log files for viewing typically requires downloading them via FTP/SFTP. The Acme Packet SBC now supports &lt;code class=&quot;highlighter-rouge&quot;&gt;tail from ACLI&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the following example I want to see what dialog is happening when trying to register a SIP phone through the SBC.  It is possible to tail different log files.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NNOS-VM# notify sipd siplog
+
+NNOS-VM# tail-logfile-open sipd sipmsg.log
+
+waiting 1200 for response to request
+completed
+
+14:44.154 On [0:0]72.12.135.250:5060 received from 72.12.135.2:56883
+REGISTER sip:acmepacket.local SIP/2.0
+Via: SIP/2.0/UDP 172.20.10.4:56883;rport;branch=z9hG4bKPjjWHgcYsrr-T9bPbaZ1-hzFTE-U70g.F2
+Route: &amp;lt;sip:acmepacket.local;lr&amp;gt;
+Max-Forwards: 70
+From: “Mark Holloway-8001″ &amp;lt;sip:7818018001@acmepacket.local&amp;gt;;tag=q.wbz5RZXd30uc7RwV2IP4GmSCGKDTwl
+To: “Mark Holloway-8001″ &amp;lt;sip:7818018001@acmepacket.local&amp;gt;
+Call-ID: VV5Yro3MQmi7fXX1CDeDax79zDnR.5jN
+CSeq: 55540 REGISTER
+User-Agent: Telephone 1.1.4
+Contact: “Mark Holloway-8001″ &amp;lt;sip:7818018001@172.20.10.4:56883;ob&amp;gt;
+Expires: 300
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length: 0
+
+—————————————-
+
+14:44.158 On [0:0]72.12.135.250:5060 sent to 72.12.135.2:56883
+SIP/2.0 404 Not Found
+Via: SIP/2.0/UDP 172.20.10.4:56883;received=72.12.135.2;branch=z9hG4bKPjjWHgcYsrr-T9bPbaZ1-hzFTE-U70g.F2;rport=56883
+From: “Mark Holloway-8001″ &amp;lt;sip:7818018001@acmepacket.local&amp;gt;;tag=q.wbz5RZXd30uc7RwV2IP4GmSCGKDTwl
+To: “Mark Holloway-8001″ &amp;lt;sip:7818018001@acmepacket.local&amp;gt;;tag=aprqngfrt-ejkv9p0000m9f
+Call-ID: VV5Yro3MQmi7fXX1CDeDax79zDnR.5jN
+CSeq: 55540 REGISTER
+
+—————————————-
+
+NNOS-VM# notify sipd nosiplog
+
+NNOS-VM# tail-logfile-close sipd sipmsg.log
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Acme Packet SBC Command Line “more” Option for “show running-config”</title>
+   <link href="http://localhost:4000/2013/10/13/acme-packet-more-acli-command/"/>
+   <updated>2013-10-13T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2013/10/13/acme-packet-more-acli-command</id>
+   <content type="html">&lt;p&gt;This short tip helps if you prefer not to have your SBC output display all at once simply enable the &lt;code class=&quot;highlighter-rouge&quot;&gt;more&lt;/code&gt; ACLI element.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-acme-sbc-more01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Also, you can display just the specific show run element you are looking for. The example below will show whatever &lt;code class=&quot;highlighter-rouge&quot;&gt;local-policy&lt;/code&gt; elements are configured on the system.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-acme-sbc-more02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There is the ability to filter output based on specific criteria. Options will vary depending on which &lt;code class=&quot;highlighter-rouge&quot;&gt;running-config&lt;/code&gt; element entered.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-acme-sbc-more03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Either the entire output of the &lt;code class=&quot;highlighter-rouge&quot;&gt;running-config&lt;/code&gt; or the sub-elements may be output to a file and retrieved through FTP via the management interface.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-acme-sbc-more04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Acme Packet SBC IP Endpoint Registration (avoiding SIP overload and registration flooding)</title>
+   <link href="http://localhost:4000/2012/12/21/acme-packet-sip-overload/"/>
+   <updated>2012-12-21T00:00:00-06:00</updated>
+   <id>http://localhost:4000/2012/12/21/acme-packet-sip-overload</id>
+   <content type="html">&lt;p&gt;BGP Route flaps, accidental fiber cuts, equipment failure, these are all things that trigger &lt;code class=&quot;highlighter-rouge&quot;&gt;outages&lt;/code&gt; and cause traffic to behave erratically and unpredictably.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;In the moment of crisis, a five minute voice outage feels like an eternity. What many people do not realize is, just when the network begins to &lt;code class=&quot;highlighter-rouge&quot;&gt;normalize&lt;/code&gt; itself, this will cause a massive SIP registration flood pouring into the network as potentially hundreds of thousands of endpoints (or more) will send their SIP registrations which would typically severely spike CPU on the Softswitch infrastructure, thus causing a second outage for the VoIP network.&lt;/p&gt;
+
+&lt;p&gt;There are ways to protect the core network with the Acme Packet SBC. The Acme Packet &lt;code class=&quot;highlighter-rouge&quot;&gt;Net-SAFE&lt;/code&gt; architecture definitely warrants its own deep dive discussion and is the official word on SBC security. It’s not my intention to try and cover it here. However, having worked with similar topologies and dealing with short, bursty outages where endpoints disappear for anywhere from 3 to 15 minutes then come back in massive waves, there are a couple of simple steps one can take to keep the network healthy and avoid a second outage due to a SIP Registration Overload condition occurring after the network layer has resolved itself..&lt;/p&gt;
+
+&lt;p&gt;The following is a simple example of a Hosted IP PBX topology where &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP endpoint registration&lt;/code&gt; is targeted to an Acme Packet Session Load Balancer &lt;code class=&quot;highlighter-rouge&quot;&gt;(SLB)&lt;/code&gt; which distributes the registrations to multiple SBC cluster members. Typically the cluster members are geographically located in different cities, states, or countries, supporting millions of subscribers (this scenario only shows three cluster members, but more are supported by the SLB).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-slb01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now lets say that all of a sudden the Internet experiences a &lt;code class=&quot;highlighter-rouge&quot;&gt;BGP route flap&lt;/code&gt;. That’s at least 3 minutes of downtime while the routers converge. The SIP phones will lose the ability to communicate with the SBC and the cached SIP Registrations in the SBC will expire and be flushed out. In Hosted NAT Traversal environments it is common for the SIP registration &lt;code class=&quot;highlighter-rouge&quot;&gt;expires timer&lt;/code&gt; in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Contact header&lt;/code&gt; to be set anywhere from 60 – 180 seconds by the SBC.  The reason for the low number is the SBC wants the Firewall to keep the UDP ports open. Firewalls tend to close them quick and since the SBC detects that the phone is behind NAT, it forces the registration to occur more frequently. Otherwise, if the Firewall close the UDP ports, the phone will not be able to receive calls.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-slb02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Without utilizing any additional &lt;code class=&quot;highlighter-rouge&quot;&gt;sip-config&lt;/code&gt; options in the SBC configuration, the SBC will forward all the registrations it receives from the SIP Endpoint to the core Softswitch when network service is back up and running. Note that if recommended DDoS security settings are in place (ie. Net-SAFE) the SBC will gracefully throttle the traffic entering the core so the Softswitch infrastructure does not get overwhelmed. The important things to note here is if a SIP registration cache entry expires, the SBC will forward the “new” registration to the core Softswitch once the network has normalized (as shown below). This could easily result in a flood of registrations happening all at once and put the Softswitch at risk.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-slb03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By utilizing the &lt;code class=&quot;highlighter-rouge&quot;&gt;register-grace-timer&lt;/code&gt; option under sip-config, the Acme Packet SBC will extend the life of the cached registration entries. Typical settings are between 600 and 900 seconds. The result is that when there is a network outage and SIP endpoints lose their connectivity to the SBC, the SBC will keep the binding of the endpoint in its cache. When the network is restored and all the SIP endpoints are able to communicate successfully with the SBC again (within the register-grace-timer period) there is no need for the SBC to forward all these registrations to the core Softswitch again. The Softswitch has no knowledge that an outage on the Public network occurred since the SBC is doing all the topology hiding and registration management that interfaces to the core.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-slb04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Adding the following will enable the &lt;code class=&quot;highlighter-rouge&quot;&gt;register-grace-timer&lt;/code&gt; value for &lt;code class=&quot;highlighter-rouge&quot;&gt;900 seconds&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;–pic&lt;/p&gt;
+
+&lt;p&gt;So far the solution outlined above work great when SIP endpoints have a single ingress point into the network (Session Load Balancer) and the SBC cluster members are geographically dispersed in different cities, states, or countries.&lt;/p&gt;
+
+&lt;p&gt;The next example shows a topology where the Service Provider may have two different SBC pairs in two different geographic locations. In this case SIP Endpoints rely on &lt;code class=&quot;highlighter-rouge&quot;&gt;DNS SRV records&lt;/code&gt; (or multiple static IP entries in the phone configuration files) to reach these SBC’s. The condition to consider here is intermittent network behavior. The network isn’t necessarily down hard where all endpoints would simply fail over to the second site. Instead, the primary site is flapping up and down, so phones are intermittently flapping their SIP registration between the primary and secondary sites.&lt;/p&gt;
+
+&lt;p&gt;The following is an example of a deployment where each site has its own independent High Availability pair of Acme Packet SBC’s. SIP Endpoints rely on DNS SRV records to support registration failover between Site 1 and Site 2.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-slb05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The unfortunate and somewhat dysfunctional behavior in this topology is some SIP endpoints do not honor the &lt;code class=&quot;highlighter-rouge&quot;&gt;expires= timer&lt;/code&gt; value sent by the SBC in a &lt;code class=&quot;highlighter-rouge&quot;&gt;200 OK&lt;/code&gt; response to their SIP registration. For example, if the SBC sends expires=180 seconds for the registration refresh, some endpoints reduce the value by as much as 50% and  send their registration at 90 seconds instead of 180 seconds. The law of SIP (RFC 3261) states that a SIP Endpoint should attempt the primary IP each time it tries to register. During an intermittent outage what will happen is the SIP endpoint is already registered with a cached entry at the primary site, then 90 seconds later fails to the secondary site, then 90 seconds later may fail back to the primary site again, then perhaps a fourth time to the secondary site again. Of course this leads to issues if the register-grace-timer is set since the registrations are cached and as a result will not be forwarded to the Softswitch again.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-slb06.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If the &lt;code class=&quot;highlighter-rouge&quot;&gt;register-grace-timer&lt;/code&gt; is set to a value higher than 0 like the previous example where we used a value of 900, the SBC maintains the registration cache entry even though it has expired. For this particular topology, the register-grace-timer should be set to 0. This is critical when the SIP Endpoint flaps back and forth between the two sites, the registration will now be seen as a “new” entry anytime the SIP Endpoint is moving between sites. It’s not the ideal behavior we would like to see, but at minimum the SIP Endpoint is able to support Inbound and Outbound calls without completely failing.&lt;/p&gt;
+
+&lt;p&gt;Depending on which Softswitch vendor you are using, it may also be useful to add the &lt;code class=&quot;highlighter-rouge&quot;&gt;force-unregistration&lt;/code&gt; option in sip-config. This way when the registration cache entry expires in the SBC, the SBC will also notify the Softswitch of the expired entry so it is removed and no SIP Invites are forked to both SBC’s when the subscriber receives a call.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+sip-config
+    state                   enabled
+    operation-mode          dialog
+    dialog-transparency     disabled
+    home-realm-id           Core
+    egress-realm-id         
+...
+    options
+
+PHOENIX(sip-config)# options load-limit=&amp;lt;cpu-percentage&amp;gt;
+PHOENIX(sip-config)# done
+
+sip-config
+    state                   enabled
+    operation-mode          dialog
+    dialog-transparency     disabled
+    home-realm-id           Core
+    egress-realm-id
+...
+    options                 load-limit=90
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 </content>
  </entry>
  
