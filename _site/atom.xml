@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-23T07:40:12-06:00</updated>
+ <updated>2019-01-24T16:25:23-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -15,7 +15,7 @@
  <entry>
    <title>Use BASH to send texts with Twilio</title>
    <link href="http://localhost:4000/2018/12/22/twilio-sms-curl/"/>
-   <updated>2018-12-22T00:00:00-06:00</updated>
+   <updated>2018-12-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/22/twilio-sms-curl</id>
    <content type="html">&lt;p&gt;This is a short note on how to send SMS messages using &lt;code class=&quot;highlighter-rouge&quot;&gt;BASH&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; in macOS and Linux. Windows users can use &lt;a href=&quot;https://gitforwindows.org&quot;&gt;GIT BASH&lt;/a&gt;.&lt;/p&gt;
 
@@ -53,9 +53,9 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
  </entry>
  
  <entry>
-   <title>Active Directory based Call Routing on the Acme Packet SBC</title>
+   <title>Active Directory based SIP Routing on the Acme Packet SBC</title>
    <link href="http://localhost:4000/2015/01/27/acme-packet-active-directory/"/>
-   <updated>2015-01-27T00:00:00-06:00</updated>
+   <updated>2015-01-27T00:00:00-05:00</updated>
    <id>http://localhost:4000/2015/01/27/acme-packet-active-directory</id>
    <content type="html">&lt;p&gt;Many Enterprises have migrated to &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Trunking&lt;/code&gt; for PSTN access. For an Enterprise with a single IP PBX platform and an SBC on the edge, call routing from the PSTN to the internal network is typically very straight forward because all DID’s point to one IP platform.&lt;/p&gt;
 
@@ -146,7 +146,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
  <entry>
    <title>Acme Packet SBC and Configuring “Selective” Early Media Suppression</title>
    <link href="http://localhost:4000/2014/12/30/acme-packet-early-media/"/>
-   <updated>2014-12-30T00:00:00-06:00</updated>
+   <updated>2014-12-30T00:00:00-05:00</updated>
    <id>http://localhost:4000/2014/12/30/acme-packet-early-media</id>
    <content type="html">&lt;p&gt;The Acme Packet SBC includes support for &lt;code class=&quot;highlighter-rouge&quot;&gt;Early Media Suppression&lt;/code&gt;. This allows you to decide what &lt;code class=&quot;highlighter-rouge&quot;&gt;Realms&lt;/code&gt; can and cannot support Early Media and in what direction Early Media is allowed.&lt;/p&gt;
 
@@ -156,7 +156,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
 
 &lt;p&gt;Early Media is defined by an endpoint sending &lt;code class=&quot;highlighter-rouge&quot;&gt;RTP/RTCP&lt;/code&gt; packets &lt;code class=&quot;highlighter-rouge&quot;&gt;before&lt;/code&gt; a &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP session&lt;/code&gt; is established by a &lt;code class=&quot;highlighter-rouge&quot;&gt;200 OK&lt;/code&gt;. Otherwise, the expected behavior is media does not begin flowing between endpoints until 200 OK is received. Instances where early media may occur is when a user calls the PSTN and an announcement is immediately played or a custom ringtone (ie. music) is heard when calling a mobile phone.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-early-media01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-early-media01.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;There may be a variety of reasons why one does not want to &lt;code class=&quot;highlighter-rouge&quot;&gt;allow Early Media&lt;/code&gt; under specific conditions. For example (real world) a Service Provider supporting Hosted IP PBX subscribers and SIP Trunking customers sends PSTN traffic from their network to multiple PSTN Media Gateways. One gateway supports outbound Local and Domestic Long Distance calls and the other media gateway supports outbound International calls. The Service Provider doesn’t want to allow Early Media from the International gateway to flow inbound to their Hosted IP PBX customer base, but they will allow Early Media to flow from the International media gateway to their SIP Trunking customer base. The Local and Domestic Long Distance media gateway is allowed to send Early Media to either customer base.&lt;/p&gt;
 
@@ -219,7 +219,7 @@ APKT-6300(realm-group)# early-media-allow-direction none
  <entry>
    <title>How to “grep” the Acme Packet SBC Configuration (ACLI)</title>
    <link href="http://localhost:4000/2014/04/20/acme-packet-grep/"/>
-   <updated>2014-04-20T00:00:00-05:00</updated>
+   <updated>2014-04-20T00:00:00-04:00</updated>
    <id>http://localhost:4000/2014/04/20/acme-packet-grep</id>
    <content type="html">&lt;p&gt;The grep tool is a very popular Unix command line utility used to match a regular expression. Although &lt;code class=&quot;highlighter-rouge&quot;&gt;grep&lt;/code&gt; doesn’t specifically exist on the Acme Packet SBC the &lt;code class=&quot;highlighter-rouge&quot;&gt;find&lt;/code&gt; command serves a similar purpose.  This feature was introduced in ACLI release 6.4.&lt;/p&gt;
 
@@ -323,7 +323,7 @@ Command menu
  <entry>
    <title>Acme Packet SBC Remote SIP Survivability</title>
    <link href="http://localhost:4000/2014/03/30/acme-packet-sbc-remote-survivability/"/>
-   <updated>2014-03-30T00:00:00-05:00</updated>
+   <updated>2014-03-30T00:00:00-04:00</updated>
    <id>http://localhost:4000/2014/03/30/acme-packet-sbc-remote-survivability</id>
    <content type="html">&lt;p&gt;With the release of Acme Packet 6.4m2 software the SBC now supports &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Remote Survivability&lt;/code&gt;. This is applicable for a Service Provider offering &lt;code class=&quot;highlighter-rouge&quot;&gt;Hosted IP PBX&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;UCaaS&lt;/code&gt; using SIP phones which register to a centralized Data Center or Cloud model.&lt;/p&gt;
 
@@ -378,7 +378,7 @@ NNOS-SD(sa-health-profile)# session-agent-health 100 &amp;lt;- Engage Survivabil
  <entry>
    <title>How to “tail” sipmsg.log on the Acme Packet SBC command line (ACLI)</title>
    <link href="http://localhost:4000/2014/03/19/acme-packet-tail-sipmsglog/"/>
-   <updated>2014-03-19T00:00:00-05:00</updated>
+   <updated>2014-03-19T00:00:00-04:00</updated>
    <id>http://localhost:4000/2014/03/19/acme-packet-tail-sipmsglog</id>
    <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;tail&lt;/code&gt; program is available on Unix operating systems and is used to view the tail end of a text file or piped data.&lt;/p&gt;
 
@@ -435,7 +435,7 @@ NNOS-VM# tail-logfile-close sipd sipmsg.log
  <entry>
    <title>Acme Packet SBC Command Line “more” Option for “show running-config”</title>
    <link href="http://localhost:4000/2013/10/13/acme-packet-more-acli-command/"/>
-   <updated>2013-10-13T00:00:00-05:00</updated>
+   <updated>2013-10-13T00:00:00-04:00</updated>
    <id>http://localhost:4000/2013/10/13/acme-packet-more-acli-command</id>
    <content type="html">&lt;p&gt;This short tip helps if you prefer not to have your SBC output display all at once simply enable the &lt;code class=&quot;highlighter-rouge&quot;&gt;more&lt;/code&gt; ACLI element.&lt;/p&gt;
 
@@ -461,7 +461,7 @@ NNOS-VM# tail-logfile-close sipd sipmsg.log
  <entry>
    <title>Acme Packet SBC IP Endpoint Registration (avoiding SIP overload and registration flooding)</title>
    <link href="http://localhost:4000/2012/12/21/acme-packet-sip-overload/"/>
-   <updated>2012-12-21T00:00:00-06:00</updated>
+   <updated>2012-12-21T00:00:00-05:00</updated>
    <id>http://localhost:4000/2012/12/21/acme-packet-sip-overload</id>
    <content type="html">&lt;p&gt;BGP Route flaps, accidental fiber cuts, equipment failure, these are all things that trigger &lt;code class=&quot;highlighter-rouge&quot;&gt;outages&lt;/code&gt; and cause traffic to behave erratically and unpredictably.&lt;/p&gt;
 
@@ -537,7 +537,7 @@ sip-config
  <entry>
    <title>Acme Packet SBC “load-limit” Command Option</title>
    <link href="http://localhost:4000/2012/11/19/acme-packet-load-limit/"/>
-   <updated>2012-11-19T00:00:00-06:00</updated>
+   <updated>2012-11-19T00:00:00-05:00</updated>
    <id>http://localhost:4000/2012/11/19/acme-packet-load-limit</id>
    <content type="html">&lt;p&gt;The Acme Packet SBC has an optional parameter that may be added under &lt;code class=&quot;highlighter-rouge&quot;&gt;sip-config&lt;/code&gt; that allows the SBC to gracefully handle traffic in the event the SBC’s main processor reaches a certain threshold.&lt;/p&gt;
 
@@ -601,7 +601,7 @@ sip-config
  <entry>
    <title>Acme Packet SBC “packet-trace” Command (capturing SIP signaling)</title>
    <link href="http://localhost:4000/2012/06/19/acme-packet-packet-trace/"/>
-   <updated>2012-06-19T00:00:00-05:00</updated>
+   <updated>2012-06-19T00:00:00-04:00</updated>
    <id>http://localhost:4000/2012/06/19/acme-packet-packet-trace</id>
    <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;packet-trace&lt;/code&gt; ACLI command allows the Acme Packet SBC (Session Director) to capture SIP signaling communication between two endpoints and send the capture to external server such as Wireshark.The SBC uses the network interfaces (ie. media interfaces) to send the capture.&lt;/p&gt;
 
@@ -634,7 +634,7 @@ Trace start for 217.154.63.10
  <entry>
    <title>Acme Packet SBC Register Grace Timer</title>
    <link href="http://localhost:4000/2012/01/24/acme-packet-sbc-register-grace-timer/"/>
-   <updated>2012-01-24T00:00:00-06:00</updated>
+   <updated>2012-01-24T00:00:00-05:00</updated>
    <id>http://localhost:4000/2012/01/24/acme-packet-sbc-register-grace-timer</id>
    <content type="html">&lt;p&gt;The Acme Packet SBC contains an optional parameter that may be added to the configuration which helps avoid a SIP avalanche from occurring.&lt;/p&gt;
 
@@ -686,7 +686,7 @@ sip-config
  <entry>
    <title>Acme Packet SBC Media Aggregation</title>
    <link href="http://localhost:4000/2011/11/09/acme-packet-sbc-media-aggregation/"/>
-   <updated>2011-11-09T00:00:00-06:00</updated>
+   <updated>2011-11-09T00:00:00-05:00</updated>
    <id>http://localhost:4000/2011/11/09/acme-packet-sbc-media-aggregation</id>
    <content type="html">&lt;p&gt;The Acme Packet 3800 and 4500 series Session Border Controllers come with an NIU (Network Interface Unit) that includes four Gigabit ports.  In rare cases one may need to support &lt;code class=&quot;highlighter-rouge&quot;&gt;Media Aggregation&lt;/code&gt; where two of the Gigabit interfaces need to be look like they are “bonded” to accommodate a large number of calls (with media anchored).&lt;/p&gt;
 
@@ -719,7 +719,7 @@ sip-config
  <entry>
    <title>Acme Packet SBC sag-lookup-on-redirect</title>
    <link href="http://localhost:4000/2011/10/27/acme-packet-sbc-sag-lookup-on-redirect/"/>
-   <updated>2011-10-27T00:00:00-05:00</updated>
+   <updated>2011-10-27T00:00:00-04:00</updated>
    <id>http://localhost:4000/2011/10/27/acme-packet-sbc-sag-lookup-on-redirect</id>
    <content type="html">&lt;p&gt;In most cases a SIP Redirect Server simply responds to a SIP Invite with a &lt;code class=&quot;highlighter-rouge&quot;&gt;302 Moved Temp&lt;/code&gt; message and provides multiple contacts in the Contact Header.&lt;/p&gt;
 
@@ -768,7 +768,7 @@ PHOENIX# show sipd agents
  <entry>
    <title>Acme Packet SBC Answer Seizure Ratio Based Routing</title>
    <link href="http://localhost:4000/2011/07/25/acme-packet-sbc-answer-seizure-ratio-routing/"/>
-   <updated>2011-07-25T00:00:00-05:00</updated>
+   <updated>2011-07-25T00:00:00-04:00</updated>
    <id>http://localhost:4000/2011/07/25/acme-packet-sbc-answer-seizure-ratio-routing</id>
    <content type="html">&lt;p&gt;Answer to Seizure Ratio &lt;code class=&quot;highlighter-rouge&quot;&gt;(ASR)&lt;/code&gt; is a term used in Telecommunications and helps determine when new call setup attempt should be routed to an alternate destination. The definition of ASR is the number of successfully answered calls divided by the total number of calls attempted &lt;code class=&quot;highlighter-rouge&quot;&gt;(seizures)&lt;/code&gt; multiplied by 100. The formula is (Answer / Seizure) * 100 = AnswerSeizureRatio.&lt;/p&gt;
 
@@ -807,7 +807,7 @@ session-agent
  <entry>
    <title>QoS Routing on the Acme Packet SBC</title>
    <link href="http://localhost:4000/2011/05/19/acme-packet-sbc-qos-routing/"/>
-   <updated>2011-05-19T00:00:00-05:00</updated>
+   <updated>2011-05-19T00:00:00-04:00</updated>
    <id>http://localhost:4000/2011/05/19/acme-packet-sbc-qos-routing</id>
    <content type="html">&lt;p&gt;QoS based Routing is a feature of the Acme Packet SBC (Session Director) that pro-actively observes and measures RTP quality on a given network path (realm) by using R-Factor (QoS measurement) to determine if quality is acceptable. If the R-Factor falls below a certain threshold then new calls are re-routed on another network path using a different realm. This works for both inbound and outbound calls.&lt;/p&gt;
 
@@ -826,7 +826,7 @@ session-agent
  <entry>
    <title>Testing SIP Header Manipulation Rules from the Acme Packet (ACLI) Command Line</title>
    <link href="http://localhost:4000/2011/05/09/acme-packet-sbc-testing-sip-hmr/"/>
-   <updated>2011-05-09T00:00:00-05:00</updated>
+   <updated>2011-05-09T00:00:00-04:00</updated>
    <id>http://localhost:4000/2011/05/09/acme-packet-sbc-testing-sip-hmr</id>
    <content type="html">&lt;p&gt;SIP Header Manipulation provides the flexibility to add, remove, or modify any attribute in a SIP message on the Acme Packet SBC. The most common reason for doing this is to fix an incompatibility problem between two SIP endpoints. This could range from anything such as Softswitch/PSTN incompatibility or an issue between two different IP PBX platforms in a multi-site Enterprise where calls between them fail due to issues in the SIP messaging.&lt;/p&gt;
 
@@ -883,7 +883,7 @@ Content-Length:255
  <entry>
    <title>Acme Packet SBC and Configuring Codec Policies for SIP Call Flows</title>
    <link href="http://localhost:4000/2011/02/20/acme-packet-sbc-code-policy/"/>
-   <updated>2011-02-20T00:00:00-06:00</updated>
+   <updated>2011-02-20T00:00:00-05:00</updated>
    <id>http://localhost:4000/2011/02/20/acme-packet-sbc-code-policy</id>
    <content type="html">&lt;p&gt;The Acme Packet Session Director (often referred to as a Session Border Controller) has the flexibility of re-ordering or completely removing certain codecs from SDP (Session Description Protocol) before passing a SIP Invite to the destination SIP endpoint.&lt;/p&gt;
 
@@ -1005,7 +1005,7 @@ lab-sd4500# activate-config
  <entry>
    <title>Acme Packet SBC and Useful ACLI Commands</title>
    <link href="http://localhost:4000/2011/01/21/acme-packet-sbc-acli-useful-commands/"/>
-   <updated>2011-01-21T00:00:00-06:00</updated>
+   <updated>2011-01-21T00:00:00-05:00</updated>
    <id>http://localhost:4000/2011/01/21/acme-packet-sbc-acli-useful-commands</id>
    <content type="html">&lt;p&gt;Recently someone asked what some of the most useful commands are on the Session Director after performing a fresh install/configuration of an SD.  The following was provided by one of the Acme Packet Systems Engineers in response to the inquiry.&lt;/p&gt;
 
@@ -1051,7 +1051,7 @@ lab-sd4500# activate-config
  <entry>
    <title>Acme Packet SBC SIP Header Manipulation Rules</title>
    <link href="http://localhost:4000/2010/04/23/apkt-sip-header-manipulation/"/>
-   <updated>2010-04-23T00:00:00-05:00</updated>
+   <updated>2010-04-23T00:00:00-04:00</updated>
    <id>http://localhost:4000/2010/04/23/apkt-sip-header-manipulation</id>
    <content type="html">&lt;p&gt;This is an example of how to modify a SIP header with an Acme Packet Session Border Controller (SBC).  An SBC is a device most commonly used by Service Providers and Enterprises to provide topology hiding between a SIP platform and an untrusted SIP network.  In the most simplistic terms think of it as a Cisco PIX or ASA but explicitly dedicated to Voice over IP (SIP, H.323, MGCP).&lt;/p&gt;
 

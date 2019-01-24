@@ -11,7 +11,7 @@ Taking it one step further, the Acme Packet SBC also supports `Selective` Early 
 
 Early Media is defined by an endpoint sending `RTP/RTCP` packets `before` a `SIP session` is established by a `200 OK`. Otherwise, the expected behavior is media does not begin flowing between endpoints until 200 OK is received. Instances where early media may occur is when a user calls the PSTN and an announcement is immediately played or a custom ringtone (ie. music) is heard when calling a mobile phone.
 
-![]({{ site.baseurl }}/blog/assets/apkt/apkt-early-media01.png)
+![]({{ site.baseurl }}/blog/assets/apkt/apkt-early-media01.jpg)
 
 There may be a variety of reasons why one does not want to `allow Early Media` under specific conditions. For example (real world) a Service Provider supporting Hosted IP PBX subscribers and SIP Trunking customers sends PSTN traffic from their network to multiple PSTN Media Gateways. One gateway supports outbound Local and Domestic Long Distance calls and the other media gateway supports outbound International calls. The Service Provider doesn’t want to allow Early Media from the International gateway to flow inbound to their Hosted IP PBX customer base, but they will allow Early Media to flow from the International media gateway to their SIP Trunking customer base. The Local and Domestic Long Distance media gateway is allowed to send Early Media to either customer base.
 

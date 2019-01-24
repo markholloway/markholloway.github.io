@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Active Directory based Call Routing on the Acme Packet SBC
+title: Active Directory based SIP Routing on the Acme Packet SBC
 tags: [acme,sbc,sip]
 ---
 Many Enterprises have migrated to `SIP Trunking` for PSTN access. For an Enterprise with a single IP PBX platform and an SBC on the edge, call routing from the PSTN to the internal network is typically very straight forward because all DID’s point to one IP platform.
