@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T08:29:21-05:00</updated>
+ <updated>2019-01-25T08:30:11-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -915,7 +915,7 @@ sip-monitoring
  </entry>
  
  <entry>
-   <title>Acme Packet SBC IP Endpoint Registration (avoiding SIP overload and registration flooding)</title>
+   <title>Acme Packet SBC SIP Overload Protection</title>
    <link href="http://localhost:4000/2012/12/21/acme-packet-sip-overload/"/>
    <updated>2012-12-21T00:00:00-05:00</updated>
    <id>http://localhost:4000/2012/12/21/acme-packet-sip-overload</id>
