@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T06:06:34-05:00</updated>
+ <updated>2019-01-25T06:09:04-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -172,7 +172,7 @@ Ratelimit Rejected Calls               0        0
  </entry>
  
  <entry>
-   <title>Acme Packet SBC QoS Media Policy and ToS HEX Values</title>
+   <title>QoS Media Policy on the Acme Packet SBC</title>
    <link href="http://localhost:4000/2017/03/10/apkt-tos-bit-qos/"/>
    <updated>2017-03-10T00:00:00-05:00</updated>
    <id>http://localhost:4000/2017/03/10/apkt-tos-bit-qos</id>

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Acme Packet SBC QoS Media Policy and ToS HEX Values
+title: QoS Media Policy on the Acme Packet SBC
 tags: [acme,sbc,sip]
 ---
 When configuring `QoS` for SIP and RTP on an Acme Packet SBC it is critical to use proper `ToS HEX` values. This is accomplished through a `Media Policy`.
