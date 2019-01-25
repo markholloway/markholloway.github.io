@@ -1,7 +1,7 @@
 ---
 layout: post
 title: How to Fix "No Schema Found" in Broadsoft
-tags: [acme,sbc,sip]
+tags: [broadsoft,sbc,sip]
 ---
 Broadworks failed to create the patch database on my primary application node after the R13 to R14 upgrade completed. When accessing the patching menu in `bwcli` or `listpatch.pl` in Linux, it returns `No Schema Found`.  
 

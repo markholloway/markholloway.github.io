@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Broadsoft Trunk Group Identity Configuration
-tags: [acme,sbc,sip]
+tags: [broadsof,sbc,sip]
 ---
 Broadworks Trunk Group Identity (TGI) is an option in the Trunk Group Profile that allows a unique identity to be provisioned and allow `Unscreened Calls` from the customer premise. 
 

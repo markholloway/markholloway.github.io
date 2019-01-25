@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Configure 802.3ad Link Aggregation for Broadsoft
-tags: [acme,sbc,sip]
+tags: [broadsoft,sbc,sip]
 ---
 The BroadWorks Software Management Guide provides an example for configuring active/standby Ethernet interfaces (called mode 1) when configuring `bonded` Ethernet transmission on a single Red Hat Enterprise server.  
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Broadsoft Updgrade with Red Hat "up2date"
-tags: [acme,sbc,sip]
+tags: [broadsoft,sbc,sip]
 ---
 Just over 2 months ago I started a massive project to upgrade Broadworks from Release 13 to `Release 14.SP8`.  R13/R14 requires RHEL4 and there is an issue I ran into when running the `up2date` process on my `dev` system. 
 

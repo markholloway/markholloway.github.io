@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Broadsoft Cluster Nodes "Out of Sync"
-tags: [acme,sbc,sip]
+tags: [broadsoft,sbc,sip]
 ---
 I am in the process of fixing two cluster installations which were originally performed by a third party consulting group.  The `peerctl` lists were not setup correctly and thus replication is not working from the primary node to the secondary node on either platform. 
 

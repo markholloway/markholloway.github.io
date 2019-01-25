@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Broadsoft Extreme Overload Controls
-tags: [acme,sbc,sip]
+tags: [broadsoft,sbc,sip]
 ---
 The `BroadWorks` platform uses an enhanced algorithm called Overload Control to offer protection when a cluster node is under severe conditions. The goal is that during an overload period of 150% the throughput will be no less than 90%. 
 

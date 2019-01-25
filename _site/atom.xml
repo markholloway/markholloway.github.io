@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T09:02:48-05:00</updated>
+ <updated>2019-01-25T09:15:31-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -57,7 +57,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
    <link href="http://localhost:4000/2017/06/14/apkt-fraud/"/>
    <updated>2017-06-14T00:00:00-04:00</updated>
    <id>http://localhost:4000/2017/06/14/apkt-fraud</id>
-   <content type="html">&lt;p&gt;Acme Packet ECZ730m1 software introduces the ACLI command &lt;code class=&quot;highlighter-rouge&quot;&gt;fraud-protection&lt;/code&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;Acme Packet EcZ-730m1 software introduces the ACLI command &lt;code class=&quot;highlighter-rouge&quot;&gt;fraud-protection&lt;/code&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -1878,6 +1878,38 @@ as2$ stoppt.pl
 as2$ startpt.pl
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Broadsoft R14.SP9 Generic SIP Smart Proxy bug</title>
+   <link href="http://localhost:4000/2009/09/18/broadsoft-sip-smart-proxy/"/>
+   <updated>2009-09-18T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2009/09/18/broadsoft-sip-smart-proxy</id>
+   <content type="html">&lt;p&gt;I ran across this during an upgrade from &lt;code class=&quot;highlighter-rouge&quot;&gt;Broadworks R14.SP8 to SP9&lt;/code&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;BroadWorks appears to contain a bug when using the &lt;code class=&quot;highlighter-rouge&quot;&gt;Generic SIP Smart Proxy&lt;/code&gt; device in SP9. At the time I am writing this post Broadsoft TAC has not officially acknowledged this as a bug.  The behavior did not exist in any prior version of Broadworks and I am confident Broadsoft Engineering did not intend this behavior to occur.&lt;/p&gt;
+
+&lt;p&gt;In this particular scenario there is an Acme Packet SBC between a &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP endpoint&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;BroadWorks&lt;/code&gt;. SIP registration traverses through the SBC and rewrites the &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP URI&lt;/code&gt; which contains a cookie in the &lt;code class=&quot;highlighter-rouge&quot;&gt;SD-Contact&lt;/code&gt; after the phone number &lt;code class=&quot;highlighter-rouge&quot;&gt;7025551234&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+acme01# show sip endpoint-ip 7025551234
+User &amp;lt;sip:7025551234@65.110.156.250&amp;gt;
+Contact ID=98488082 exp=1819
+UA-Contact: UDP
+realm=Access local=65.110.156.250:5060 UA=63.110.156.130:4618
+SD-Contact: &amp;lt;sip:7025551234-rjbrh1f7n2m68@10.110.156.250:5060&amp;gt; realm=Core
+Call-ID: MjVhYjQxZTcyMDA3ZDAyODAwMzA1NTI5MzFjNzU3MjE.’
+SA=10.110.156.250  &amp;lt;– Broadworks AS
+Via-Key: 63.110.156.130:4618#Access!sip:7025551234@63.110.156.130:4618!
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In Broadworks the SIP registration for this number would show the SIP URI exactly as it appears with the cookie.  However, with SP9 Broadworks sets up a SIP invite to the number and sends &lt;code class=&quot;highlighter-rouge&quot;&gt;7025551234@10.110.156.250:5060&lt;/code&gt; rather than &lt;code class=&quot;highlighter-rouge&quot;&gt;sip:7025551234-rjbrh1f7n2m68@10.110.156.250:5060&lt;/code&gt;.  The cookie portion of the URI is missing and the SBC responds with a 604 global failure response.&lt;/p&gt;
+
+&lt;p&gt;Sheer luck would have it that enabling the &lt;code class=&quot;highlighter-rouge&quot;&gt;Use Business Trunking Contact&lt;/code&gt; under System &amp;gt; Resources &amp;gt; Identity/Device Profile Types would clear up the issue.  Otherwise each number for every BroadWorks Group using &lt;code class=&quot;highlighter-rouge&quot;&gt;GSSP&lt;/code&gt; would need to be reassigned to another Device type in Broadworks and would be service impacting.&lt;/p&gt;
 </content>
  </entry>
  

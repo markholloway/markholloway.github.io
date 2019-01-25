@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Resizing the Broadsoft Datastore
-tags: [acme,sbc,sip]
+tags: [broadsoft,sbc,sip]
 ---
 As the database grows on the BroadWorks Application and Network servers there will be a need to change the `memory allocation` for the `TimesTen` datastore. 
 
