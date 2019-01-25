@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T00:42:32-05:00</updated>
+ <updated>2019-01-25T06:06:34-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -57,7 +57,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
    <link href="http://localhost:4000/2017/06/14/apkt-fraud/"/>
    <updated>2017-06-14T00:00:00-04:00</updated>
    <id>http://localhost:4000/2017/06/14/apkt-fraud</id>
-   <content type="html">&lt;p&gt;Acme Packet ECZ730m1 software introduces the ACLI command &lt;code class=&quot;highlighter-rouge&quot;&gt;fraud-protection&lt;/code&gt;.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Acme Packet ECZ730m1 software introduces the ACLI command &lt;code class=&quot;highlighter-rouge&quot;&gt;fraud-protection&lt;/code&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -167,6 +167,63 @@ Blacklist Rejected Calls               0        0
 Ratelimit Rejected Calls               0        0
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Acme Packet SBC QoS Media Policy and ToS HEX Values</title>
+   <link href="http://localhost:4000/2017/03/10/apkt-tos-bit-qos/"/>
+   <updated>2017-03-10T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2017/03/10/apkt-tos-bit-qos</id>
+   <content type="html">&lt;p&gt;When configuring &lt;code class=&quot;highlighter-rouge&quot;&gt;QoS&lt;/code&gt; for SIP and RTP on an Acme Packet SBC it is critical to use proper &lt;code class=&quot;highlighter-rouge&quot;&gt;ToS HEX&lt;/code&gt; values. This is accomplished through a &lt;code class=&quot;highlighter-rouge&quot;&gt;Media Policy&lt;/code&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;The first step is to create a Media Policy as shown.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+sd4500-02# config t
+sd4500-02(configure)# media-manager
+sd4500-02(media-manager)# media-policy
+sd4500-02(media-policy)# name QoS-Audio
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The signaling &lt;code class=&quot;highlighter-rouge&quot;&gt;media-type&lt;/code&gt; should be set to &lt;code class=&quot;highlighter-rouge&quot;&gt;message&lt;/code&gt; and the proper &lt;code class=&quot;highlighter-rouge&quot;&gt;tos-value&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;0×60&lt;/code&gt; (CoS 3, DSCP 24). For RTP the media-type value should be set to &lt;code class=&quot;highlighter-rouge&quot;&gt;audio&lt;/code&gt; and the proper tos-value for RTP traffic is &lt;code class=&quot;highlighter-rouge&quot;&gt;0xb8&lt;/code&gt; (Cos 5, DSCP 46).&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+media-policy
+    name                QoS-Audio
+    tos-settings        
+        media-type          audio
+        media-sub-type      
+        tos-value           0xb8
+        media-attributes
+    tos-settings
+        media-type          message
+        media-sub-type      sip
+        tos-value           0x60
+        media-attributes
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Setting these values in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Media Policy&lt;/code&gt; does not invoke QoS. This is simply a set of instructions of what should be applied to signaling and RTP packets but we need to tell the SBC where to apply it.  This is done on a &lt;code class=&quot;highlighter-rouge&quot;&gt;realm&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+realm-config
+    identifier          Access
+    description         Public Facing-Untrusted
+    addr-prefix         208.57.21.0/24
+    network-interface   m00:226
+...
+    dns-realm           
+    media-policy        QoS-Audio
+    media-sec-policy
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With the&lt;code class=&quot;highlighter-rouge&quot;&gt; media policy&lt;/code&gt; assigned to the &lt;code class=&quot;highlighter-rouge&quot;&gt;realm&lt;/code&gt; this answers the question of where to apply QoS so the policy is &lt;code class=&quot;highlighter-rouge&quot;&gt;enforced&lt;/code&gt;. Any traffic which passes through this realm will be marked, or re-marked, with the appropriate QoS values.&lt;/p&gt;
 
 </content>
  </entry>
@@ -640,6 +697,93 @@ NNOS-VM# notify sipd nosiplog
 NNOS-VM# tail-logfile-close sipd sipmsg.log
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Configure 802.3ad Link Aggregation for Broadsoft</title>
+   <link href="http://localhost:4000/2014/02/18/broadsoft-link-aggregation/"/>
+   <updated>2014-02-18T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2014/02/18/broadsoft-link-aggregation</id>
+   <content type="html">&lt;p&gt;The BroadWorks Software Management Guide provides an example for configuring active/standby Ethernet interfaces (called mode 1) when configuring &lt;code class=&quot;highlighter-rouge&quot;&gt;bonded&lt;/code&gt; Ethernet transmission on a single Red Hat Enterprise server.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Unfortunately with &lt;code class=&quot;highlighter-rouge&quot;&gt;mode 1&lt;/code&gt; only one Ethernet interface is transmitting and receiving traffic at a time while the other interface is in standby mode.  My preferred approach is &lt;code class=&quot;highlighter-rouge&quot;&gt;802.3ad&lt;/code&gt; Link Aggregation Control Protocol (LACP). &lt;code class=&quot;highlighter-rouge&quot;&gt;LACP&lt;/code&gt; creates aggregation groups that share the same speed and duplex settings across Ethernet interfaces on a server. It utilizes all slaves in the active aggregate according to the 802.3ad specification.  802.3ad requires an Ethernet switch that is capable of supporting LACP.&lt;/p&gt;
+
+&lt;h2 id=&quot;red-hat-enterprise-linux&quot;&gt;Red Hat Enterprise Linux&lt;/h2&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+#vi /etc/modprobe.conf
+alias eth0
+alias eth1
+alias bond0 bonding
+options bonding miimon=50 mode=4   (note: miimon = frequency in milliseconds to monitor interfaces)
+
+==AS1==
+#vi /etc/sysconfig/network
+NETWORKING=yes
+NETWORKING_IPV6=no
+HOSTNAME=as1
+NETWORKDELAY=25
+
+#cd /etc/sysconfig/network-scripts
+#vi ifcfg-bond0
+DEVICE=bond0
+BOOTPROTO=static
+ONBOOT=yes
+USERCTL=no
+BROADCAST=192.168.126.255
+IPADDR=192.168.126.145
+NETMASK=255.255.255.0
+NETWORK=192.168.126.0
+GATEWAY=192.168.126.1
+
+#vi ifcfg-eth0
+# Broadcom Corporation NetXtreme II BCM5708 Gigabit Ethernet
+DEVICE=eth0
+BOOTPROTO=none
+ONBOOT=yes
+MASTER=bond0
+SLAVE=yes
+
+#vi ifcfg-eth1
+# Broadcom Corporation NetXtreme II BCM5708 Gigabit Ethernet
+DEVICE=eth1
+BOOTPROTO=none
+ONBOOT=yes
+MASTER=bond0
+SLAVE=yes
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;cisco-switch&quot;&gt;Cisco Switch&lt;/h2&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+interface Port-channel30
+description Port-Channel to as1
+switchport
+switchport access vlan 12
+switchport mode access
+spanning-tree portfast
+
+interface GigabitEthernet3/24
+description [as1] IBM x3650 m2 – eth0
+switchport access vlan 12
+switchport mode access
+spanning-tree portfast
+channel-group 130 mode active
+
+interface GigabitEthernet6/24
+description [as1] IBM x3650 m2 – eth1
+switchport access vlan 12
+switchport mode access
+spanning-tree portfast
+channel-group 130 mode active
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Using active/standby &lt;code class=&quot;highlighter-rouge&quot;&gt;mode 1&lt;/code&gt; does not require any additional configuration beyond RHEL, so while it is more convenient and simplistic, this configuration does not fully maximize the capability of the servers.  This can be especially useful for the Media Servers, Conference Servers, or the Application Servers where Broadworks log files or Radius CDR’s are being offloaded to a separate server.&lt;/p&gt;
 </content>
  </entry>
  
@@ -1361,6 +1505,59 @@ lab-sd4500# activate-config
  </entry>
  
  <entry>
+   <title>Broadsoft Extreme Overload Controls</title>
+   <link href="http://localhost:4000/2010/05/27/broadsoft-overload/"/>
+   <updated>2010-05-27T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2010/05/27/broadsoft-overload</id>
+   <content type="html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;BroadWorks&lt;/code&gt; platform uses an enhanced algorithm called Overload Control to offer protection when a cluster node is under severe conditions. The goal is that during an overload period of 150% the throughput will be no less than 90%.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Behavior of the &lt;code class=&quot;highlighter-rouge&quot;&gt;Application Server&lt;/code&gt; is dependent upon a series of configuration parameters configured through &lt;code class=&quot;highlighter-rouge&quot;&gt;bwcli&lt;/code&gt;.  Extreme overload control provides message throttling at the decoding and encoding queues. The maximum packet age used during overload is different from that used during non-overload. Both the maximum packet age and maximum packet age during overload are configurable via the CLI.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+AS_CLI/System/OverloadControls&amp;gt; get
+enabled = true
+mgcpOverloadAction = error
+sipOverloadAction = error
+percentMemoryInUseToEnterYellow = 85
+percentMemoryInUseToEnterRed = 90
+percentMemoryInUseToLeaveYellow = 85
+percentMemoryInUseToLeaveRed = 85
+allowEmergencyCallsInOverload = true
+maxPacketAgeInMsecs = 3000
+maxPacketAgeDuringOverloadInMsecs = 1500
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;One of the most critical parameters to configure is the &lt;code class=&quot;highlighter-rouge&quot;&gt;sipOverloadAction&lt;/code&gt;.  This determines how Broadworks will respond during a period of an Overload. The three possible options are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;drop (silently discarded)&lt;/li&gt;
+  &lt;li&gt;redirect (302 Move Temp)&lt;/li&gt;
+  &lt;li&gt;error (503 Service Unavailable)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I do not recommend using &lt;code class=&quot;highlighter-rouge&quot;&gt;drop&lt;/code&gt; as this is the least graceful approach and will cause the User Agent Client to rely on its SIP expiration timer before initiating additional SIP messages.  While &lt;code class=&quot;highlighter-rouge&quot;&gt;error&lt;/code&gt; should be a viable option it does not guarantee the UAC will reattempt another SIP invite upon receiving a SIP 503 Service Unavailable message.  My recommendation and current best-practice is to use &lt;code class=&quot;highlighter-rouge&quot;&gt;redirect&lt;/code&gt;.  The Broadworks Application Server (AS1) will respond to the UAC with the address of the secondary Application Server (AS2) in the &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP contact header&lt;/code&gt;. The remaining dialog between the UAC and UAS will be carried out through AS2.&lt;/p&gt;
+
+&lt;p&gt;** NOTE: Registration Time Extension&lt;/p&gt;
+
+&lt;p&gt;During overload a &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP REGISTER&lt;/code&gt; messages may be discarded. To reduce the chances that a user’s registration is no longer valid (and cannot receive or possibly make calls), the extension should be set based on expected overload time, which is typically at least twice the non-callp minimum time in zone.&lt;/p&gt;
+
+&lt;p&gt;** Emergency Calls&lt;/p&gt;
+
+&lt;p&gt;If the system is configured to allow emergency calls during overload, then originations matching the call type &lt;code class=&quot;highlighter-rouge&quot;&gt;Emergency&lt;/code&gt; in the system calling plan are allowed to progress.&lt;/p&gt;
+
+&lt;p&gt;** Summary&lt;/p&gt;
+
+&lt;p&gt;Extreme Overload Controls are an important element for all Broadworks deployments. Setting the proper thresholds between the &lt;code class=&quot;highlighter-rouge&quot;&gt;Yellow&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Red Zones&lt;/code&gt; will provide the appropriate alarming and graceful call redirection while at the same time notifying an administrator when the platform is reaching its capacity for growth.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
    <title>Acme Packet SBC SIP Header Manipulation Rules</title>
    <link href="http://localhost:4000/2010/04/23/apkt-sip-header-manipulation/"/>
    <updated>2010-04-23T00:00:00-04:00</updated>
@@ -1452,6 +1649,70 @@ a=fmtp:101 0-15
 m=image 16484 udptl t38
 a=T38FaxUdpEC:t38UDPRedundancy
  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Resizing the Broadsoft Datastore</title>
+   <link href="http://localhost:4000/2009/10/09/broadsoft-resizing-datastore/"/>
+   <updated>2009-10-09T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2009/10/09/broadsoft-resizing-datastore</id>
+   <content type="html">&lt;p&gt;As the database grows on the BroadWorks Application and Network servers there will be a need to change the &lt;code class=&quot;highlighter-rouge&quot;&gt;memory allocation&lt;/code&gt; for the &lt;code class=&quot;highlighter-rouge&quot;&gt;TimesTen&lt;/code&gt; datastore.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;The rule of thumb is the allocated &lt;code class=&quot;highlighter-rouge&quot;&gt;perm&lt;/code&gt; size should not exceed more than 25% of total system memory and the &lt;code class=&quot;highlighter-rouge&quot;&gt;temp&lt;/code&gt; size should be equal to 25% of the perm size.&lt;/p&gt;
+
+&lt;p&gt;The following example assumes 8GB of memory on both AS1 and AS2.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+1. SSH to AS1 as bwadmin
+2. stopbw
+3. repctl stop
+4. su as root
+5. cd /usr/local/broadworks/bw_base/bin
+6. timesten.pl unload
+7. ./resizeDSN (perm=2048; temp=512)
+8. exit (return to bwadmin)
+9. repctl start
+10. startbw
+
+– Wait 10 minutes for buffered replication changes from AS2 –
+
+1. SSH to AS2 as bwadmin
+2. stopbw
+3. repctl stop
+4. su as root
+5. cd /usr/local/broadworks/bw_base/bin
+6. timesten.pl unload
+7. ./resizeDSN (perm=2047; temp=512)
+8. exit (return to bwadmin)
+9. importdb.pl AppServer as1 AppServer (replace as1 with your primary AS hostname or IP)
+10. repctl start
+11. startbw
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If everything went smoothly you should be able to run &lt;code class=&quot;highlighter-rouge&quot;&gt;sychcheck_basic.pl -a&lt;/code&gt; on AS2 and the database should show synchronized. If the &lt;code class=&quot;highlighter-rouge&quot;&gt;importdb.pl&lt;/code&gt; command in step 9 was unable to import the database, you will need to manually perform the backup and restore procedure as shown below.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+1. On AS1: bwBackup.pl AppServer dbBackup.db
+2. scp the file to AS2: scp dbBackup.db bwadmin@as2:dbBackup.db
+3. On AS2: stopbw
+4. repctl stop
+5. bwRestore.pl AppServer dbBackup.db
+6. repctl start
+7. startbw
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;On one other occasion AS1 would not start &lt;code class=&quot;highlighter-rouge&quot;&gt;replication&lt;/code&gt; after resizing the &lt;code class=&quot;highlighter-rouge&quot;&gt;DSN&lt;/code&gt; due to an error which stated AS2 was on a different patch version than AS1. The two nodes were patched identical, but the patch tool was not responding on AS2 and therefore AS1 could not verify appropriately thus reporting the error. The solution was simply &lt;code class=&quot;highlighter-rouge&quot;&gt;restarting&lt;/code&gt; the patch tool.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+as2$ stoppt.pl
+as2$ startpt.pl
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </content>
  </entry>
