@@ -3,7 +3,7 @@ layout: post
 title: Acme Packet SBC “fraud-protection” ACLI Command Configuration
 tags: [acme,sbc,sip]
 ---
-The release of Acme Packet ECZ730m1 software introduces the ACLI command `fraud-protection`. 
+Acme Packet ECZ730m1 software introduces the ACLI command `fraud-protection`. 
 
 <!--more-->
 
