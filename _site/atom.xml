@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T00:40:04-05:00</updated>
+ <updated>2019-01-25T00:40:39-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -53,7 +53,7 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
  </entry>
  
  <entry>
-   <title>Acme Packet SBC “fraud-protection” ACLI Command</title>
+   <title>Acme Packet SBC “fraud-protection” ACLI Command Configuration</title>
    <link href="http://localhost:4000/2017/06/14/apkt-fraud/"/>
    <updated>2017-06-14T00:00:00-04:00</updated>
    <id>http://localhost:4000/2017/06/14/apkt-fraud</id>
