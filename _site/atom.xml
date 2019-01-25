@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T08:30:11-05:00</updated>
+ <updated>2019-01-25T09:02:48-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -1120,7 +1120,7 @@ voice-class sip profiles 10
  </entry>
  
  <entry>
-   <title>Acme Packet SBC “packet-trace” Command (capturing SIP signaling)</title>
+   <title>Configuring “packet-trace” SIP on the Acme Packet SBC</title>
    <link href="http://localhost:4000/2012/06/19/acme-packet-packet-trace/"/>
    <updated>2012-06-19T00:00:00-04:00</updated>
    <id>http://localhost:4000/2012/06/19/acme-packet-packet-trace</id>
@@ -1157,7 +1157,7 @@ Trace start for 217.154.63.10
    <link href="http://localhost:4000/2012/01/24/acme-packet-sbc-register-grace-timer/"/>
    <updated>2012-01-24T00:00:00-05:00</updated>
    <id>http://localhost:4000/2012/01/24/acme-packet-sbc-register-grace-timer</id>
-   <content type="html">&lt;p&gt;The Acme Packet SBC contains an optional parameter that may be added to the configuration which helps avoid a SIP avalanche from occurring.&lt;/p&gt;
+   <content type="html">&lt;p&gt;The Acme Packet SBC contains an optional parameter that may be added to the configuration which helps avoid a &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP avalanche&lt;/code&gt; from occurring.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -1386,25 +1386,6 @@ bw_as1$ tail -f /var/broadworks/logs/appserver/XSLog2009.08.12-16.05.34.txt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;As BroadWorks writes to the log file the output will be displayed in real-time in the Unix shell.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>QoS Routing on the Acme Packet SBC</title>
-   <link href="http://localhost:4000/2011/05/19/acme-packet-sbc-qos-routing/"/>
-   <updated>2011-05-19T00:00:00-04:00</updated>
-   <id>http://localhost:4000/2011/05/19/acme-packet-sbc-qos-routing</id>
-   <content type="html">&lt;p&gt;QoS based Routing is a feature of the Acme Packet SBC (Session Director) that pro-actively observes and measures RTP quality on a given network path (realm) by using R-Factor (QoS measurement) to determine if quality is acceptable. If the R-Factor falls below a certain threshold then new calls are re-routed on another network path using a different realm. This works for both inbound and outbound calls.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;The example diagram show calls being received inbound from an ITSP. It is common for customers to deploy multiple SBC’s in different physical locations for geographic redundancy. Most people think of redundancy and failover occurring when the network is completely down or unreachable, but another factor to consider is a network condition where route flapping, DoS attacks on a router, or bad cabling play a role in an outage and there is intermittent network connectivity. In many cases having intermittent connectivity is actually worse than the network being completely unreachable. For example, if a SIP Invite is successfully setup, yet within seconds the network experiences flapping, the RTP traffic will be lost momentarily. This is where QoS based Routing can save the day.&lt;/p&gt;
-
-&lt;p&gt;This  diagram displays a primary and secondary SBC with two SIP paths from an ITSP to the customer’s network. In this case there is no service disruption occurring.&lt;/p&gt;
-
-&lt;p&gt;In order to utilize QoS based Routing on the SBC it requires the qos-enable value to be set to enabled under media-manager/realm-config. QoS based Routing uses R-Factor to measure quality on a per-realm basis to either cut back the traffic allowed through a realm or alternatively shut down all traffic on that realm.&lt;/p&gt;
-
-&lt;p&gt;When configuring QoS constraints per realm there are two categories: major and critical. The constraints set in the major category rejects a certain percentage of calls with a SIP 503 Service Unavailable message. The percentage value is configurable by the user using the call-load-reduction context entry with a value between 0 and 100 (0 represents no call reduction and 100 represents all calls rejected). Calls originating on the customer’s network towards the ITSP will automatically use another realm if there are other routes configured on the customer’s SBC, otherwise calls will be rejected if there are no alternative routes. The critical behavior functions very similar to major, however the user may specify when calls should resume on the realm based on a time-to-resume value which tells the SBC to wait until the R-Factor has achieved acceptable performance for a specific period of time.&lt;/p&gt;
 </content>
  </entry>
  

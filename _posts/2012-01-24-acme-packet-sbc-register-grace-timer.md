@@ -4,7 +4,7 @@ title: Acme Packet SBC Register Grace Timer
 tags: [acme,sbc,sip]
 ---
 
-The Acme Packet SBC contains an optional parameter that may be added to the configuration which helps avoid a SIP avalanche from occurring.  
+The Acme Packet SBC contains an optional parameter that may be added to the configuration which helps avoid a `SIP avalanche` from occurring.  
 
 <!--more-->
 

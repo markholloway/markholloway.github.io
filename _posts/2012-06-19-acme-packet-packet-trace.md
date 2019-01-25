@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Acme Packet SBC “packet-trace” Command (capturing SIP signaling)
+title: Configuring “packet-trace” SIP on the Acme Packet SBC
 tags: [acme,sbc,sip]
 ---
 
