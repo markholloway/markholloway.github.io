@@ -19,7 +19,7 @@ Below is an example of the GUI configuration elements for managing fraud-protect
 
 ![]({{ site.baseurl }}/blog/assets/apkt/apkt-fraud03.png)
 
-Below is an example of creating a new fraud-protection `XML` file in the ACLI called `test.xml`
+Below is an example of creating a new fraud-protection `XML` file in the ACLI called `fraudProtect.xml`
 
 ```text
 
@@ -30,7 +30,7 @@ sbc(fraud-protection)# select
 sbc(fraud-protection)# show
 fraud-protection
     mode                            local
-    file-name                       test.xml
+    file-name                       fraudProtect.xml
     options
     allow-remote-call-terminate     disabled
 
@@ -99,7 +99,7 @@ Whitelist   From        +441189240000   bt              5       7
              Total hits: 168
           Total entries: 6
 Total displayed entries: 6
-              File name: test.xml
+              File name: fraudProtect.xml
 
 ```
 
