@@ -4,14 +4,14 @@ title: Acme Packet SBC SIP Header Manipulation Rules
 tags: [acme,sbc,sip]
 ---
 
-This is an example of how to modify a SIP header with an Acme Packet Session Border Controller (SBC).  An SBC is a device most commonly used by Service Providers and Enterprises to provide topology hiding between a SIP platform and an untrusted SIP network.  In the most simplistic terms think of it as a Cisco PIX or ASA but explicitly dedicated to Voice over IP (SIP, H.323, MGCP).
+This is an example of how to `modify a SIP header` with an Acme Packet Session Border Controller (SBC).  An SBC is a device most commonly used by Service Providers and Enterprises to provide topology hiding between a SIP platform and an untrusted SIP network.  In the most simplistic terms think of it as a Cisco PIX or ASA but explicitly dedicated to Voice over IP (SIP, H.323, MGCP).
 
 <!--more-->
 
-This HMR provides the ability to populate Call Detail Record VSA’s with info from a SIP Header Manipulation Rule. It lets the HMR copy anything from the SIP message into one of 30 CDR fields of your choosing and works for RADIUS and CSV file CDR formats using VSA number range of 200-229 reserved for customer-specific requirements. 
+This `HMR` provides the ability to populate Call Detail Record VSA’s with info from a SIP Header Manipulation Rule. It lets the HMR `copy header content` from the SIP message into one of thirty CDR fields of your choosing and works for RADIUS and CSV file CDR formats using `VSA number range` of 200-229 reserved for customer-specific requirements. 
 
 
-```bash
+```text
 
 header-rule
 
@@ -34,7 +34,7 @@ header-rule
 
 ```
 
-```bash
+```text
 
 In this example a Nortel CS2K sends `m=audio` and `m=image` in a single SIP Invite which breaks Cisco ISR Faxing.
 An HMR is required to set `SDP` m=audio and m=image to `0` only when both are present. HMR cannot take

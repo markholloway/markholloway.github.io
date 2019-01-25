@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-24T16:25:23-05:00</updated>
+ <updated>2019-01-25T00:37:40-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -49,6 +49,192 @@ curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;
     &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1a2b3c4d5e6f7g8h9i0j:l0k9j8h7g6f5d4s3a2q1&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; sms-test.json
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Acme Packet SBC “fraud-protection” ACLI Command</title>
+   <link href="http://localhost:4000/2017/06/14/apkt-fraud/"/>
+   <updated>2017-06-14T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2017/06/14/apkt-fraud</id>
+   <content type="html">&lt;p&gt;The release of Acme Packet ECZ730m1 software introduces the ACLI command &lt;code class=&quot;highlighter-rouge&quot;&gt;fraud-protection&lt;/code&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;This allows the SBC to store multiple black lists, white lists, SIP redirect lists, and &lt;code class=&quot;highlighter-rouge&quot;&gt;rate limit&lt;/code&gt; entries for fraud prevention and call control. Multiple lists may exist where entries are stored in separate XML files.&lt;/p&gt;
+
+&lt;p&gt;Lists (XML files) may be initially created through &lt;code class=&quot;highlighter-rouge&quot;&gt;ACLI&lt;/code&gt; or web interface. If the preference is to manage lists manually then once a list is created it will need to be downloaded and the &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; file(s) edited with a text editor, similar to managing Local Route Tables (LRT). Otherwise, all entries may be added, modified, or deleted using the web interface.&lt;/p&gt;
+
+&lt;p&gt;Below is an example of the GUI configuration elements for managing fraud-protection.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-fraud01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-fraud02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-fraud03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Below is an example of creating a new fraud-protection &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; file in the ACLI called &lt;code class=&quot;highlighter-rouge&quot;&gt;test.xml&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+sbc# config t
+sbc(configuration)# system
+sbc(system)# fraud-protection
+sbc(fraud-protection)# select
+sbc(fraud-protection)# show
+fraud-protection
+    mode                            local
+    file-name                       test.xml
+    options
+    allow-remote-call-terminate     disabled
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In the example below, the &lt;code class=&quot;highlighter-rouge&quot;&gt;Whitelist&lt;/code&gt; section permits all calls based on the &lt;code class=&quot;highlighter-rouge&quot;&gt;From header&lt;/code&gt; matching acmepacket.com through the realm called &lt;code class=&quot;highlighter-rouge&quot;&gt;peer&lt;/code&gt;. Calls based on the &lt;code class=&quot;highlighter-rouge&quot;&gt;To header&lt;/code&gt; to a specific UK phone number on any realm is represented by a wildcard &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Blacklist&lt;/code&gt; section rejects calls based on a variety of criteria. Note that even though calls are blocked to &lt;code class=&quot;highlighter-rouge&quot;&gt;+44&lt;/code&gt; based on the To header, calls to &lt;code class=&quot;highlighter-rouge&quot;&gt;+441189240000&lt;/code&gt; are permitted since this is a more specific match in the Whitelist.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&amp;lt;?xml version='1.0' standalone='yes'?&amp;gt;
+&amp;lt;oracleSbcFraudProtectionApi version=&quot;1.0&quot;&amp;gt;
+    &amp;lt;call-whitelist&amp;gt;
+        &amp;lt;userEntry&amp;gt;
+            &amp;lt;from-hostname&amp;gt;acmepacket.com&amp;lt;/from-hostname&amp;gt;
+            &amp;lt;realm&amp;gt;peer&amp;lt;/realm&amp;gt;
+        &amp;lt;/userEntry&amp;gt;
+        &amp;lt;userEntry&amp;gt;
+            &amp;lt;to-hostname&amp;gt;+441189240000&amp;lt;/to-hostname&amp;gt;
+            &amp;lt;realm&amp;gt;*&amp;lt;/realm&amp;gt;
+        &amp;lt;/userEntry&amp;gt;
+    &amp;lt;/call-whitelist&amp;gt;
+    &amp;lt;call-blacklist&amp;gt;
+        &amp;lt;userEntry&amp;gt;
+            &amp;lt;from-hostname&amp;gt;robodialer.com&amp;lt;/from-hostname&amp;gt;
+            &amp;lt;realm&amp;gt;peer&amp;lt;/realm&amp;gt;
+        &amp;lt;/userEntry&amp;gt;
+        &amp;lt;userEntry&amp;gt;
+            &amp;lt;from-hostname&amp;gt;208.57.21.10&amp;lt;/from-hostname&amp;gt;
+            &amp;lt;realm&amp;gt;peer&amp;lt;/realm&amp;gt;
+        &amp;lt;/userEntry&amp;gt;
+        &amp;lt;userEntry&amp;gt;
+            &amp;lt;from-hostname&amp;gt;+14045551000&amp;lt;/from-hostname&amp;gt;
+            &amp;lt;realm&amp;gt;peer&amp;lt;/realm&amp;gt;
+        &amp;lt;/userEntry&amp;gt;
+        &amp;lt;userEntry&amp;gt;
+            &amp;lt;from-hostname&amp;gt;+44&amp;lt;/from-hostname&amp;gt;
+            &amp;lt;realm&amp;gt;*&amp;lt;/realm&amp;gt;
+        &amp;lt;/userEntry&amp;gt;
+    &amp;lt;/call-blacklist&amp;gt;
+    &amp;lt;call-redirect&amp;gt;
+    &amp;lt;/call-redirect&amp;gt;
+    &amp;lt;call-rate-limit&amp;gt;
+    &amp;lt;/call-rate-limit&amp;gt;
+&amp;lt;/oracleSbcFraudProtectionApi&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The command &lt;code class=&quot;highlighter-rouge&quot;&gt;show fraud-protection all&lt;/code&gt; will show  fraud definitions and if any matches exist.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+sbc# show fraud-protection all
+
+List Type   To/From     Match Value     Ingress Realm   No. of Hits
+                                                        Recent  Total
+.....................................................................
+Blacklist   From        robodialer.com  level3          3       7
+Blacklist   From        208.57.21.10    gx              10      23
+Blacklist   From        +14045551000    orange          1       3
+Blacklist   From        +44             bt              0       0
+Whitelist   From        acmepacket.com  att             32      128
+Whitelist   From        +441189240000   bt              5       7
+
+             Total hits: 168
+          Total entries: 6
+Total displayed entries: 6
+              File name: test.xml
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The command &lt;code class=&quot;highlighter-rouge&quot;&gt;show fraud-protection stats&lt;/code&gt; show a summary version of matches.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+Fraud Protection Engine State   ---- Lifetime ----
+                                 Recent   Total   
+Blacklisted Calls                     14       33
+Whitelisted Calls                     37      135
+Ratelimited Calls                      0        0
+Redirected Calls                       0        0
+Blacklist Rejected Calls               0        0
+Ratelimit Rejected Calls               0        0
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Acme Packet SBC and Configuring “Comfort Noise Generation”</title>
+   <link href="http://localhost:4000/2016/06/11/apkt-comfort-noise/"/>
+   <updated>2016-06-11T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2016/06/11/apkt-comfort-noise</id>
+   <content type="html">&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Comfort Noise&lt;/code&gt; (RFC 3389) is the &lt;code class=&quot;highlighter-rouge&quot;&gt;sound&lt;/code&gt; played in an RTP stream to prevent a user form hearing total silence on the connection.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Not all telephony systems have the ability to play music while a party is on hold. Without Comfort Noise (CN) the party on hold may think the connection dropped unless there is an indicator letting know the call has not been dropped..&lt;/p&gt;
+
+&lt;p&gt;Starting with &lt;code class=&quot;highlighter-rouge&quot;&gt;ECZ-7.4.0&lt;/code&gt; the Acme Packet SBC has the ability to &lt;code class=&quot;highlighter-rouge&quot;&gt;inject&lt;/code&gt; Comfort Noise into an RTP stream by analyzing the SDP Offer and SDP Answer from both SIP endpoints. &lt;code class=&quot;highlighter-rouge&quot;&gt;CN interworking&lt;/code&gt; is triggered on a per realm basis.&lt;/p&gt;
+
+&lt;p&gt;In the example below the &lt;code class=&quot;highlighter-rouge&quot;&gt;calling party&lt;/code&gt; (Skype for Business) SDP Offer contains CN and is traversing a realm called &lt;code class=&quot;highlighter-rouge&quot;&gt;core&lt;/code&gt; which has &lt;code class=&quot;highlighter-rouge&quot;&gt;CN&lt;/code&gt; interworking &lt;code class=&quot;highlighter-rouge&quot;&gt;enabled&lt;/code&gt;. The SBC forwards SDP to the &lt;code class=&quot;highlighter-rouge&quot;&gt;called party&lt;/code&gt;. If the called party SDP Answer contains CN the SBC does not do anything because both endpoints support Comfort Noise. If CN is &lt;code class=&quot;highlighter-rouge&quot;&gt;not present&lt;/code&gt; in the PSTN’s SDP Answer the SBC &lt;code class=&quot;highlighter-rouge&quot;&gt;adds CN&lt;/code&gt; to the egress SDP Answer (towards Skype for Business) and will take responsibility for injecting CN into the RTP stream.&lt;/p&gt;
+
+&lt;p&gt;Example SBC configuration:&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+sbc# config t
+sbc(configure)# media-manager
+sbc(media-manager)# realm-config
+sbc(realm-config)# spl-option +comfort-noise-generate
+sbc(realm-config)# done
+
+media-manager
+    realm-config
+        identifier          core
+        addr-prefix         10.24.124.0/24
+        network-interface   s1p0
+        mm-in-realm         enabled
+        spl-options         comfort-noise-generate
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>How to use “Conditional Logging” on the Acme Packet SBC</title>
+   <link href="http://localhost:4000/2015/03/12/apkt-logging/"/>
+   <updated>2015-03-12T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2015/03/12/apkt-logging</id>
+   <content type="html">&lt;p&gt;With the relase of Acme Packet OS 7.x one of the most useful new features is &lt;code class=&quot;highlighter-rouge&quot;&gt;Advanced Logging&lt;/code&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;This is similar to &lt;code class=&quot;highlighter-rouge&quot;&gt;debug output&lt;/code&gt; in a log file without having to enable full debug, which can drain CPU on just about any system. By setting a &lt;code class=&quot;highlighter-rouge&quot;&gt;condition&lt;/code&gt; (or set of conditions) the SBC will capture the interesting traffic to a log file.&lt;/p&gt;
+
+&lt;p&gt;The Advanced Logging feature was created using Session Plugin Language (SPL). For those not familiar with SPL it is a &lt;code class=&quot;highlighter-rouge&quot;&gt;LUA&lt;/code&gt; based scripting language for the SBC. SPL provides an easy way to expand the SBC’s capabilities.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-logging01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By adding the additional line below only calls &lt;code class=&quot;highlighter-rouge&quot;&gt;from 4045551212&lt;/code&gt; that route &lt;code class=&quot;highlighter-rouge&quot;&gt;to 7815551212&lt;/code&gt; will be logged.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-logging02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When finished it is recommended to &lt;code class=&quot;highlighter-rouge&quot;&gt;disable&lt;/code&gt; advanced-logging using &lt;code class=&quot;highlighter-rouge&quot;&gt;spl stop sip advanced-logging&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;It is possible to create different Advanced Logging profiles so they may be easily reused at another time without manually entering complex strings each time logging is enabled.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-logging03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The following are the advanced-logging options which may be set.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-logging04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -213,6 +399,31 @@ APKT-6300(realm-group)# early-media-allow-direction none
 
 &lt;p&gt;&lt;a href=&quot;/blog/assets/apkt/apkt-early-media04.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Acme Packet SBC and DNS-SRV Load Balancing “ping-all-addresses”</title>
+   <link href="http://localhost:4000/2014/07/29/apkt-dns-srv/"/>
+   <updated>2014-07-29T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2014/07/29/apkt-dns-srv</id>
+   <content type="html">&lt;p&gt;The Acme Packet SBC supports the ability to &lt;code class=&quot;highlighter-rouge&quot;&gt;load balance SIP traffic&lt;/code&gt; several difference ways. Simply stated, a SIP invite will ingress to the SBC. The SBC will lookup the destination and if it results in a Session Agent Group or &lt;code class=&quot;highlighter-rouge&quot;&gt;SAG&lt;/code&gt; configuration with two or more &lt;code class=&quot;highlighter-rouge&quot;&gt;Session Agents&lt;/code&gt;, the SBC will egress the SIP invite using one of the selected load balancing algorithms such as Least Busy.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;The SBC also supports &lt;code class=&quot;highlighter-rouge&quot;&gt;DNS SRV&lt;/code&gt; service records for load balancing. For those not familiar with DNS SRV, it’s a form of DNS that allows a single domain name (associated with a service and protocol) to resolve to many possible destinations. The destinations may be &lt;code class=&quot;highlighter-rouge&quot;&gt;equal&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;weighted differently&lt;/code&gt;. The following is an example of a DNS SRV record for SIP over UDP looks like. In this case all records have an equal weight of 10.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-dns-srv01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The domain name &lt;code class=&quot;highlighter-rouge&quot;&gt;sip.apkt.com&lt;/code&gt; will resolve to five different A records. The lookup must be a DNS SRV lookup for this to resolve correctly. In this case we are using &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP over UDP&lt;/code&gt; as the service which has been defined in Bind.&lt;/p&gt;
+
+&lt;p&gt;Here is how to &lt;code class=&quot;highlighter-rouge&quot;&gt;enable&lt;/code&gt; DNS SRV load balancing on the SBC. Note this complies with RFC 3263 “Locating SIP Servers”. Once the config has been saved and actives the SBC will &lt;code class=&quot;highlighter-rouge&quot;&gt;ping&lt;/code&gt; the address resolved by sip.apkt.com to see which IP’s are in service.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-dns-srv02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now when a SIP Invite &lt;code class=&quot;highlighter-rouge&quot;&gt;ingresses&lt;/code&gt; the SBC and matches a &lt;code class=&quot;highlighter-rouge&quot;&gt;local-policy&lt;/code&gt; where the destination next-hop utilizes DNS SRV load balancing the traffic will be balanced across &lt;code class=&quot;highlighter-rouge&quot;&gt;all nodes&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-dns-srv03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -455,6 +666,107 @@ NNOS-VM# tail-logfile-close sipd sipmsg.log
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-acme-sbc-more04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Acme Packet SBC and the New “SIP Monitoring and Tracing” Tool for Troubleshooting SIP Calls</title>
+   <link href="http://localhost:4000/2013/07/21/apkt-smt/"/>
+   <updated>2013-07-21T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2013/07/21/apkt-smt</id>
+   <content type="html">&lt;p&gt;Diagnosing a troubled &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP&lt;/code&gt; call has a tendency to be a real pain. Whether it’s running &lt;code class=&quot;highlighter-rouge&quot;&gt;wireshark&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;tcpdump&lt;/code&gt;, or collecting &lt;code class=&quot;highlighter-rouge&quot;&gt;debugs&lt;/code&gt;, having to sort through duplicate packets and attempting to merge different pcap files together does not provide a simple way to troubleshoot a single call while looking at both sides of the call in a single ladder diagram.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Fortunately the Acme Packet SBC now includes a free tool embedded in the code that once enabled, allows it turns the SBC into a &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP capture device&lt;/code&gt;. The distinct advantage here is seeing &lt;code class=&quot;highlighter-rouge&quot;&gt;both sides of a call&lt;/code&gt; in a &lt;code class=&quot;highlighter-rouge&quot;&gt;single ladder diagram&lt;/code&gt;. Even better, extra (and very useful) information is included in between each step of the ladder diagram referencing internal “logic decisions” as they occur as traffic passes through the SBC.  Finding a particular capture is easy using &lt;code class=&quot;highlighter-rouge&quot;&gt;Search Filters&lt;/code&gt; which allow you to specify just about any criteria.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-smt01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Pop-up context&lt;/code&gt; provides tool tips and additional information about a call depending on what area you are hovering over. It is also possible to export a capture locally so it may be emailed and viewed by others  rather than having a variety of users logging into the SBC’s web interface. Alternatively, &lt;code class=&quot;highlighter-rouge&quot;&gt;captures may be exported&lt;/code&gt; as ASCII text files with proper and readable formatting of the call information.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+---Session Summary---
+Startup Time: 2012-04-26 08:40:44.624
+State: TERMINATED-200
+Duration: 9
+From URI: sipp &amp;amp;lt:sip:sipp@172.16.34.10:5060&amp;amp;gt;;tag=25
+To URI: sut &amp;amp;lt;sip:service@172.16.34.226:5060&amp;amp;gt;;tag=3453
+Ingress Src Address: 172.16.34.10
+Ingress Src Port: 5060
+Ingress Dest Address: 172.16.34.226
+Ingress Dest Port: 5060
+Egress Source Address: 192.168.34.226
+Egress Source Port: 5060
+Egress Destination Address: 192.168.34.17
+Egress Destination Port: 5060
+Ingress Realm: Access
+Egress Realm: Core
+Ingress NetworkIf: s0p0
+Egress NetworkIf: s1p0
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;There are three main parts to viewing a captured call. The first is the &lt;code class=&quot;highlighter-rouge&quot;&gt;Session Summary&lt;/code&gt; view which contains information such as source and destination IP addresses, URI’s, Realms, etc..&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-smt02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The second viewing pane is &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Message Details&lt;/code&gt;. This is the actual &lt;code class=&quot;highlighter-rouge&quot;&gt;ladder diagram&lt;/code&gt; and SBC events.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-smt03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The third pane is for viewing &lt;code class=&quot;highlighter-rouge&quot;&gt;QoS&lt;/code&gt; statistics such as jitter, packet loss, delay, and MOS scores for the specified call.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-smt04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to enable web browser viewing of SIP Monitoring and Trace the web server must be set to the &lt;code class=&quot;highlighter-rouge&quot;&gt;enabled&lt;/code&gt; state.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+web-server-config
+    state               enabled
+    inactivity-timeout  5
+    http-state          enabled
+    http-port           80
+    https-state         enabled
+    https-port          443
+    tls-profile     
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The next step is to create one or more &lt;code class=&quot;highlighter-rouge&quot;&gt;filters&lt;/code&gt;. In the following example there is a filter called hostedIpPbx and in the user portion of the filter any SIP messages containing the phone number digits 781801 will be captured.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+sbc# config t
+sbc(configure)# session-router
+sbc(session-router)# filter-config
+sbc(filter-config)# select
+name:
+1. Broadsoft
+2. Cisco
+3. Genesys
+
+selection: 1
+sbc#(filter-config)# show
+    name            Broadsoft
+    address         0.0.0.0
+    user            781801 &amp;lt;- Phone prefix NPA-NXX to capture
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The next step is to enable sip-monitoring and identify which &lt;code class=&quot;highlighter-rouge&quot;&gt;monitoring filter&lt;/code&gt; should be used. Applying the filter here enabled the filter globally on the system. Usually filters are best applied to specific realms or session agents (under monitoring-filters) to capture only interesting traffic.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+sbc(sip-minitoring)# show
+sip-monitoring
+    state               enabled
+    monitoring-filters  Broadsoft
+    trigger-window      0
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this particular network there are IP phones behind a Cisco ASA firewall which NAT to the public internet and need to register to a BroadWorks SIP softswitch which is being “hidden” behind the SBC.&lt;/p&gt;
+
+&lt;p&gt;Below is the capture based on the filter above. Note the phone number starts with &lt;code class=&quot;highlighter-rouge&quot;&gt;781801xxxx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-smt05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -1053,13 +1365,13 @@ lab-sd4500# activate-config
    <link href="http://localhost:4000/2010/04/23/apkt-sip-header-manipulation/"/>
    <updated>2010-04-23T00:00:00-04:00</updated>
    <id>http://localhost:4000/2010/04/23/apkt-sip-header-manipulation</id>
-   <content type="html">&lt;p&gt;This is an example of how to modify a SIP header with an Acme Packet Session Border Controller (SBC).  An SBC is a device most commonly used by Service Providers and Enterprises to provide topology hiding between a SIP platform and an untrusted SIP network.  In the most simplistic terms think of it as a Cisco PIX or ASA but explicitly dedicated to Voice over IP (SIP, H.323, MGCP).&lt;/p&gt;
+   <content type="html">&lt;p&gt;This is an example of how to &lt;code class=&quot;highlighter-rouge&quot;&gt;modify a SIP header&lt;/code&gt; with an Acme Packet Session Border Controller (SBC).  An SBC is a device most commonly used by Service Providers and Enterprises to provide topology hiding between a SIP platform and an untrusted SIP network.  In the most simplistic terms think of it as a Cisco PIX or ASA but explicitly dedicated to Voice over IP (SIP, H.323, MGCP).&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-&lt;p&gt;This HMR provides the ability to populate Call Detail Record VSA’s with info from a SIP Header Manipulation Rule. It lets the HMR copy anything from the SIP message into one of 30 CDR fields of your choosing and works for RADIUS and CSV file CDR formats using VSA number range of 200-229 reserved for customer-specific requirements.&lt;/p&gt;
+&lt;p&gt;This &lt;code class=&quot;highlighter-rouge&quot;&gt;HMR&lt;/code&gt; provides the ability to populate Call Detail Record VSA’s with info from a SIP Header Manipulation Rule. It lets the HMR &lt;code class=&quot;highlighter-rouge&quot;&gt;copy header content&lt;/code&gt; from the SIP message into one of thirty CDR fields of your choosing and works for RADIUS and CSV file CDR formats using &lt;code class=&quot;highlighter-rouge&quot;&gt;VSA number range&lt;/code&gt; of 200-229 reserved for customer-specific requirements.&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 header-rule
 
     name                storeDiversion
@@ -1074,16 +1386,16 @@ header-rule
     header-name         P-Acme-VSA
     action              add
     comparison-type     boolean
-    match-value         &lt;span class=&quot;nv&quot;&gt;$storeDiversion&lt;/span&gt;
+    match-value         $storeDiversion
     msg-type            any
-    new-value           200:+&lt;span class=&quot;nv&quot;&gt;$storeDiversion&lt;/span&gt;.&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;
+    new-value           200:+$storeDiversion.$0
     new-value methods   INVITE
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-In this example a Nortel CS2K sends &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;audio&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; and &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;image&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;a single SIP Invite which breaks Cisco ISR Faxing.
-An HMR is required to &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;SDP&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;audio and &lt;span class=&quot;nv&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;image to &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;0&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; only when both are present. HMR cannot take
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+In this example a Nortel CS2K sends `m=audio` and `m=image` in a single SIP Invite which breaks Cisco ISR Faxing.
+An HMR is required to set `SDP` m=audio and m=image to `0` only when both are present. HMR cannot take
 effect when only one is present otherwise the FAX will fail.
 
 sip-manipulation
@@ -1095,7 +1407,7 @@ sip-manipulation
                 name                           setSdpZero
                 header-name                    content-type
                 action                         manipulate
-                comparison-type                &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-sensitive&lt;/span&gt;
+                comparison-type                case-sensitive
                 msg-type                       request
                 methods                        INVITE
                 match-value                    
@@ -1103,23 +1415,23 @@ sip-manipulation
                 element-rule
                         name                           setSdpZeroRule
                         parameter-name                 application/sdp
-                        &lt;span class=&quot;nb&quot;&gt;type                           &lt;/span&gt;mime
+                        type                           mime
                         action                         find-replace-all
                         match-val-type                 any
                         comparison-type                pattern-rule
-                        match-value                    &lt;span class=&quot;nv&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;audio&lt;span class=&quot;se&quot;&gt;\,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;image&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;0-9]&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1,5&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;.udptl[[:1:]]
+                        match-value                    m=audio\,*m=image([0-9]{1,5}).udptl[[:1:]]
                         new-value                      0
                         
 
 
 INVITE sip:8088881491@voip.hawaiiantel.net:5060 SIP/2.0
-Via: SIP/2.0/UDP 172.20.20.1:5060&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;branch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;z9hG4bKuucm4i10cg21fh8id4b0.1
-Record-Route: &amp;lt;sip:8088881491@172.20.20.1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;lr&amp;gt;
-From: &amp;lt;sip:8085463052@172.20.20.1:5060&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;phone&amp;gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1688407842-1296205260165-
-To: &lt;span class=&quot;s2&quot;&gt;&quot;A5_Lab Fax&quot;&lt;/span&gt; &amp;lt;sip:8088881491@172.20.20.1:5060&amp;gt;
+Via: SIP/2.0/UDP 172.20.20.1:5060;branch=z9hG4bKuucm4i10cg21fh8id4b0.1
+Record-Route: &amp;lt;sip:8088881491@172.20.20.1;lr&amp;gt;
+From: &amp;lt;sip:8085463052@172.20.20.1:5060;user=phone&amp;gt;;tag=1688407842-1296205260165-
+To: &quot;A5_Lab Fax&quot; &amp;lt;sip:8088881491@172.20.20.1:5060&amp;gt;
 Call-ID: BW230100165270111358024115@113.52.63.7
 CSeq: 636310211 INVITE
-Contact: &amp;lt;sip:8085463052@172.20.20.1:5060&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;transport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;udp&amp;gt;
+Contact: &amp;lt;sip:8085463052@172.20.20.1:5060;transport=udp&amp;gt;
 Supported: 100rel
 Max-forwards: 69
 Allow: ACK, BYE, CANCEL, INFO, INVITE, OPTIONS, PRACK, REFER, NOTIFY, UPDATE
@@ -1127,18 +1439,18 @@ Content-Type: application/sdp
 Accept: multipart/mixed, application/media_control+xml, application/sdp
 Content-Length:   257
  
-&lt;span class=&quot;nv&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0
-&lt;span class=&quot;nv&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;BroadWorks 644472 1 IN IP4 172.20.20.1
-&lt;span class=&quot;nv&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;-
-&lt;span class=&quot;nv&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;IN IP4 172.20.20.1
-&lt;span class=&quot;nv&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0 0
-&lt;span class=&quot;nv&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;audio 16480 RTP/AVP 0 8 18 101
-&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ptime:20
-&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;fmtp:18 &lt;span class=&quot;nv&quot;&gt;annexb&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;no
-&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rtpmap:101 telephone-event/8000
-&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;fmtp:101 0-15
-&lt;span class=&quot;nv&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;image 16484 udptl t38
-&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;T38FaxUdpEC:t38UDPRedundancy
+v=0
+o=BroadWorks 644472 1 IN IP4 172.20.20.1
+s=-
+c=IN IP4 172.20.20.1
+t=0 0
+m=audio 16480 RTP/AVP 0 8 18 101
+a=ptime:20
+a=fmtp:18 annexb=no
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-15
+m=image 16484 udptl t38
+a=T38FaxUdpEC:t38UDPRedundancy
  
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </content>
