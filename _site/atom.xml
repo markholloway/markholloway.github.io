@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T06:09:04-05:00</updated>
+ <updated>2019-01-25T06:17:58-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -1280,6 +1280,44 @@ session-agent
  </entry>
  
  <entry>
+   <title>Broadsoft Cluster Nodes &quot;Out of Sync&quot;</title>
+   <link href="http://localhost:4000/2011/05/10/broadsoft-out-of-sync/"/>
+   <updated>2011-05-10T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2011/05/10/broadsoft-out-of-sync</id>
+   <content type="html">&lt;p&gt;I am in the process of fixing two cluster installations which were originally performed by a third party consulting group.  The &lt;code class=&quot;highlighter-rouge&quot;&gt;peerctl&lt;/code&gt; lists were not setup correctly and thus replication is not working from the primary node to the secondary node on either platform.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;There are a few tasks you can perform to validate whether &lt;code class=&quot;highlighter-rouge&quot;&gt;replication&lt;/code&gt; to your secondary nodes are healthy.  First, ensure &lt;code class=&quot;highlighter-rouge&quot;&gt;dbSyncCheck&lt;/code&gt; is running in the maintenance scheduler for all AS and NS nodes.  Second, verify whether you are receiving alarms from your cluster nodes stating the datbase is out of sync.  Third, see if you can perform an &lt;code class=&quot;highlighter-rouge&quot;&gt;importdb.pl&lt;/code&gt; on the secondary node without it failing.  In the event your platform is not in sync or importdb.pl fails, you must reconfigure the &lt;code class=&quot;highlighter-rouge&quot;&gt;peerctl&lt;/code&gt; list on the primary server.  This example assumes your are setting the peerctl list for an application server cluster.&lt;/p&gt;
+
+&lt;p&gt;** On the primary AS&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+peerctl set &amp;lt;old peerctl name&amp;gt; &amp;lt;hostname&amp;gt; &amp;lt;ipaddress&amp;gt; | example: peerctl set as1.markholloway.com as1 192.168.1.10
+peerctl set &amp;lt;old peerctl name&amp;gt; &amp;lt;hostname&amp;gt; &amp;lt;ipaddress&amp;gt; | example: peerctl set as2.markholloway.com as2 192.168.1.11
+peerctl setprimary as1
+repctl restart
+bwBackup.pl AppServer db-JAN-11-2009.db
+scp db-JAN-11-2009.db as bwadmin to as2
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;** On the secondary AS&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+repctl stop
+stopbw
+bwRestore.pl AppServer db-JAN-11-2009.db
+importdb.pl AppServer 192.168.1.10 | Verifies importdb.pl works as expected
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You will now have proper &lt;code class=&quot;highlighter-rouge&quot;&gt;replication&lt;/code&gt; between your primary and secondary nodes.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
    <title>Testing SIP Header Manipulation Rules from the Acme Packet (ACLI) Command Line</title>
    <link href="http://localhost:4000/2011/05/09/acme-packet-sbc-testing-sip-hmr/"/>
    <updated>2011-05-09T00:00:00-04:00</updated>
@@ -1714,6 +1752,50 @@ as2$ stoppt.pl
 as2$ startpt.pl
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>How to Fix &quot;No Schema Found&quot; in Broadsoft</title>
+   <link href="http://localhost:4000/2009/03/10/broadsoft-no-schema-found/"/>
+   <updated>2009-03-10T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2009/03/10/broadsoft-no-schema-found</id>
+   <content type="html">&lt;p&gt;Broadworks failed to create the patch database on my primary application node after the R13 to R14 upgrade completed. When accessing the patching menu in &lt;code class=&quot;highlighter-rouge&quot;&gt;bwcli&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;listpatch.pl&lt;/code&gt; in Linux, it returns &lt;code class=&quot;highlighter-rouge&quot;&gt;No Schema Found&lt;/code&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;The second AS node in the cluster is ok and recognizes the &lt;code class=&quot;highlighter-rouge&quot;&gt;patch bundle&lt;/code&gt;, but this is irellevant since the first node needs to be patched before patching to second node.   There is a way to recover from this by executing the following commands.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+bwadmin@as1$ cd /usr/local/broadworks/patchtool/sbin
+bwadmin@as1$ ./listPatch.pl
+
+Patch Name State
+====================
+
+No schema found.
+bwadmin@as1$ ./createDSN.pl WS_Rel_14.sp8_1.57/createDSN.pl AS_Rel_14.sp8_1.57
+
+bwadmin@as1$ ./listPatch.pl
+Patch Name State
+======================
+listPatch command successfully executed.
+
+AS_CLI/Maintenance/Patching&amp;gt; 8
+Please wait while the database is updating (this could take up to a few
+minutes depending on the number of patches and the activity on the server).
+
+…………………………………………………
+AS_CLI/Maintenance/Patching&amp;gt; listBundle
+Patch Bundle Name
+=========================
+PB.as.14.sp8.57.pb20081201
+1 entry found.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The same procedure may be used with &lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt; of the Broadworks servers.  I had the same issue with both external web servers as well.&lt;/p&gt;
+
 </content>
  </entry>
  
