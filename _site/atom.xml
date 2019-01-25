@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T08:27:19-05:00</updated>
+ <updated>2019-01-25T08:29:21-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -814,7 +814,7 @@ channel-group 130 mode active
  </entry>
  
  <entry>
-   <title>Acme Packet SBC and the New “SIP Monitoring and Tracing” Tool for Troubleshooting SIP Calls</title>
+   <title>Acme Packet SBC “SIP Monitoring and Trace” Configuration</title>
    <link href="http://localhost:4000/2013/07/21/apkt-smt/"/>
    <updated>2013-07-21T00:00:00-04:00</updated>
    <id>http://localhost:4000/2013/07/21/apkt-smt</id>

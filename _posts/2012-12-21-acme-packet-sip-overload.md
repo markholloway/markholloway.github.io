@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Acme Packet SBC IP Endpoint Registration (avoiding SIP overload and registration flooding)
+title: Acme Packet SBC SIP Overload Protection 
 tags: [acme,sbc,sip]
 ---
 BGP Route flaps, accidental fiber cuts, equipment failure, these are all things that trigger `outages` and cause traffic to behave erratically and unpredictably. 
