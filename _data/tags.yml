@@ -38,5 +38,7 @@ sbc:
   name: sbc
 sip:
   name: sip
+broadsoft:
+  name: broadworks
   
   

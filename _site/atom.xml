@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T06:17:58-05:00</updated>
+ <updated>2019-01-25T06:44:46-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -1055,6 +1055,71 @@ sip-config
  </entry>
  
  <entry>
+   <title>Broadsoft Trunk Group Identity Configuration</title>
+   <link href="http://localhost:4000/2012/07/10/broadsoft-tg-identity/"/>
+   <updated>2012-07-10T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2012/07/10/broadsoft-tg-identity</id>
+   <content type="html">&lt;p&gt;Broadworks Trunk Group Identity (TGI) is an option in the Trunk Group Profile that allows a unique identity to be provisioned and allow &lt;code class=&quot;highlighter-rouge&quot;&gt;Unscreened Calls&lt;/code&gt; from the customer premise.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Unscreened Calls is common with &lt;code class=&quot;highlighter-rouge&quot;&gt;TDM&lt;/code&gt; (PRI) customers who want to send a &lt;code class=&quot;highlighter-rouge&quot;&gt;From&lt;/code&gt; phone number that does not reside in their Trunk Group. With SIP trunks delivering PRI at the customer premise, this type of call will fail unless the PBX sends an &lt;code class=&quot;highlighter-rouge&quot;&gt;ISDN Redirect&lt;/code&gt; on the PRI connected to the Gateway which generates &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Diversion&lt;/code&gt; to BroadWorks. Otherwise Broadworks sees a To and From that are both PSTN numbers and &lt;code class=&quot;highlighter-rouge&quot;&gt;rejects&lt;/code&gt; the call.&lt;/p&gt;
+
+&lt;p&gt;A common scenario where this instance occurs is a &lt;code class=&quot;highlighter-rouge&quot;&gt;PSTN&lt;/code&gt; caller calling a &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP&lt;/code&gt; subscriber and the call is forwarded to another PSTN number. The person receiving the forwarded call on the PSTN wants to see the caller ID of the original calling party not the SIP subscriber number. With Unscreened Calls enabled and Trunk Group Identity provisioned in the TG Profile the calls will be permitted even without SIP Diversion. This also requires an identical &lt;code class=&quot;highlighter-rouge&quot;&gt;TGI&lt;/code&gt; to be configured on a SIP endpoint such as a Cisco ISR or IAD.  When the SIP endpoint sends a SIP invite it will include the provisioned TGI in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Contact&lt;/code&gt; header.  As of August 14, 2009, Adtran TA900’s do not support TGI. A feature request has been submitted to Adtran.
+`
+Trunk Group Identity in Broadworks complies with &lt;code class=&quot;highlighter-rouge&quot;&gt;RFC 4904&lt;/code&gt;. Using &lt;code class=&quot;highlighter-rouge&quot;&gt;trgp&lt;/code&gt; and trunk-context is a requirement to be compliant with the RFC.&lt;/p&gt;
+
+&lt;p&gt;If you are using an &lt;code class=&quot;highlighter-rouge&quot;&gt;Acme Packet SB&lt;/code&gt;C you must configure the global &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP option&lt;/code&gt; to pass the Contact through to Broadworks. Otherwise the SBC will rewrite the Contact header and TGI will not pass.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+acme# config t
+acme(config)# session-router
+acme(session-router)# sip-config
+acme(session-router)# select
+acme(sip-config)# options +reg-cache-mode=none
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;All SIP Contact header information from the endpoint is now retained. It is important to note that using + means this option will be added to the SD sip-config and your other options will be retained as well. If you issue the show command you will see an example of this.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+acme(sip-config)# show
+
+options
+forward-reg-callid-change
+max-udp-length=0
+set-inv-exp-at-100-resp
+reg-cache-mode=none
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you do not prepend &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; in front the option you are adding, the SD will remove the old options and only apply the option you are currently adding.&lt;/p&gt;
+
+&lt;p&gt;The last item to configure is the SIP endpoint. In this case it is a Cisco ISR or IAD. There is no &lt;code class=&quot;highlighter-rouge&quot;&gt;TGI feature&lt;/code&gt; in IOS but IOS does offer the ability to modify SIP headers through the use of &lt;code class=&quot;highlighter-rouge&quot;&gt;SIP Profiles&lt;/code&gt; which are a feature of &lt;code class=&quot;highlighter-rouge&quot;&gt;CUBE&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the following example I am creating SIP profile 10 and this will serve two purposes. When the &lt;code class=&quot;highlighter-rouge&quot;&gt;sip-ua&lt;/code&gt; registers to Broadworks it will include the tgrp modification in the Contact header. The other modification must be executed though the use of a VoIP &lt;code class=&quot;highlighter-rouge&quot;&gt;dial peer&lt;/code&gt;. When the ISR/IAD sends a SIP invite to Broadworks (based on the VoIP dial peer) it will reference SIP profile 10 and include the modified statement for INVITE by injecting it into the Contact header.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+voice class sip-profiles 10
+request REGISTER sip-header Contact modify “&amp;lt;sip:(.*)@(.*)&amp;gt;” “&amp;lt;sip:\1;tgrp=9494289972;trunk-context=voip.markholloway.com@\2&amp;gt;”
+
+request INVITE sip-header Contact modify “&amp;lt;sip:(.*)@(.*)&amp;gt;” “&amp;lt;sip:\1;tgrp=9494289972;trunk-context=voip.markholloway.com@\2″
+
+dial-peer voice 949 voip
+(output omitted)
+voice-class sip profiles 10
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The example profile shows that we are taking all elements from the self-generated SIP registration and adding more information.  The second part of each &lt;code class=&quot;highlighter-rouge&quot;&gt;request&lt;/code&gt; is where we inject the &lt;code class=&quot;highlighter-rouge&quot;&gt;tgrp&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;trunk-context&lt;/code&gt; information.&lt;/p&gt;
+
+&lt;p&gt;The tgrp value in this example is the &lt;code class=&quot;highlighter-rouge&quot;&gt;Pilot User&lt;/code&gt; number &lt;code class=&quot;highlighter-rouge&quot;&gt;9494289972&lt;/code&gt;.  The value of the trunk-context is a service provider domain.&lt;/p&gt;
+
+&lt;p&gt;This example only highlights Unscreened Calls for SIP to PRI customers using a SIP endpoint that has the ability to support RFC 4904.  There is another method which may be used by building unique &lt;code class=&quot;highlighter-rouge&quot;&gt;session agents&lt;/code&gt; on the SBC.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Acme Packet SBC “packet-trace” Command (capturing SIP signaling)</title>
    <link href="http://localhost:4000/2012/06/19/acme-packet-packet-trace/"/>
    <updated>2012-06-19T00:00:00-04:00</updated>
@@ -1276,6 +1341,22 @@ session-agent
 &lt;p&gt;In order to utilize QoS based Routing on the SBC it requires the qos-enable value to be set to enabled under media-manager/realm-config. QoS based Routing uses R-Factor to measure quality on a per-realm basis to either cut back the traffic allowed through a realm or alternatively shut down all traffic on that realm.&lt;/p&gt;
 
 &lt;p&gt;When configuring QoS constraints per realm there are two categories: major and critical. The constraints set in the major category rejects a certain percentage of calls with a SIP 503 Service Unavailable message. The percentage value is configurable by the user using the call-load-reduction context entry with a value between 0 and 100 (0 represents no call reduction and 100 represents all calls rejected). Calls originating on the customer’s network towards the ITSP will automatically use another realm if there are other routes configured on the customer’s SBC, otherwise calls will be rejected if there are no alternative routes. The critical behavior functions very similar to major, however the user may specify when calls should resume on the realm based on a time-to-resume value which tells the SBC to wait until the R-Factor has achieved acceptable performance for a specific period of time.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Broadsoft Updgrade with Red Hat &quot;up2date&quot;</title>
+   <link href="http://localhost:4000/2011/05/10/broadsoft-up2date/"/>
+   <updated>2011-05-10T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2011/05/10/broadsoft-up2date</id>
+   <content type="html">&lt;p&gt;Just over 2 months ago I started a massive project to upgrade Broadworks from Release 13 to &lt;code class=&quot;highlighter-rouge&quot;&gt;Release 14.SP8&lt;/code&gt;.  R13/R14 requires RHEL4 and there is an issue I ran into when running the &lt;code class=&quot;highlighter-rouge&quot;&gt;up2date&lt;/code&gt; process on my &lt;code class=&quot;highlighter-rouge&quot;&gt;dev&lt;/code&gt; system.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;During the initial BroadWworks installation the application changes &lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/nice&lt;/code&gt; so nice may be run by &lt;code class=&quot;highlighter-rouge&quot;&gt;bwadmin&lt;/code&gt; and thus change application priority.  The up2date process installs files which change the permission of /bin/nice to be exclusively accessed by &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt;. This means bwadmin cannot access /bin/nice through its startup scripts.&lt;/p&gt;
+
+&lt;p&gt;The appropraite fix for this is executing &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod ug+s /bin/nice&lt;/code&gt; as &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt;.  After working through this issue I took the time to understand more about the &lt;code class=&quot;highlighter-rouge&quot;&gt;nice&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;renice&lt;/code&gt; process so I could have a better idea as to why it broke.&lt;/p&gt;
+
 </content>
  </entry>
  
