@@ -4,44 +4,13 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-26T22:45:35-05:00</updated>
+ <updated>2019-01-28T15:44:14-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
    <email></email>
  </author>
 
- 
- <entry>
-   <title>How to use “Conditional Logging” on the Acme Packet SBC</title>
-   <link href="http://localhost:4000/2019/01/26/flex-supervisor-monitoring-react/"/>
-   <updated>2019-01-26T00:00:00-05:00</updated>
-   <id>http://localhost:4000/2019/01/26/flex-supervisor-monitoring-react</id>
-   <content type="html">&lt;p&gt;With the relase of Acme Packet OS 7.x one of the most useful new features is &lt;code class=&quot;highlighter-rouge&quot;&gt;Advanced Logging&lt;/code&gt;.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;This is similar to &lt;code class=&quot;highlighter-rouge&quot;&gt;debug output&lt;/code&gt; in a log file without having to enable full debug, which can drain CPU on just about any system. By setting a &lt;code class=&quot;highlighter-rouge&quot;&gt;condition&lt;/code&gt; (or set of conditions) the SBC will capture the interesting traffic to a log file.&lt;/p&gt;
-
-&lt;p&gt;The Advanced Logging feature was created using Session Plugin Language (SPL). For those not familiar with SPL it is a &lt;code class=&quot;highlighter-rouge&quot;&gt;LUA&lt;/code&gt; based scripting language for the SBC. SPL provides an easy way to expand the SBC’s capabilities.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-logging01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;By adding the additional line below only calls &lt;code class=&quot;highlighter-rouge&quot;&gt;from 4045551212&lt;/code&gt; that route &lt;code class=&quot;highlighter-rouge&quot;&gt;to 7815551212&lt;/code&gt; will be logged.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-logging02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;When finished it is recommended to &lt;code class=&quot;highlighter-rouge&quot;&gt;disable&lt;/code&gt; advanced-logging using &lt;code class=&quot;highlighter-rouge&quot;&gt;spl stop sip advanced-logging&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;It is possible to create different Advanced Logging profiles so they may be easily reused at another time without manually entering complex strings each time logging is enabled.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-logging03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The following are the advanced-logging options which may be set.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/apkt/apkt-logging04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</content>
- </entry>
  
  <entry>
    <title>Use BASH to send texts with Twilio</title>
