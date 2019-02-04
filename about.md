@@ -3,7 +3,7 @@ layout: page
 title: About
 ---
 
-<!-- ![]({{ site.url }}/blog/assets/hackpackv4.png) -->
+<!-- ![]({{ site.url }}/blog/assets/hackpackv4.png)  -->
 <img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608">
 
 ## Blog Info
