@@ -7,8 +7,8 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              Hello, world!
-description:          Hello, world!
+tagline:              My personal blog – on Cloud Communications, Networking, and Python Programmability
+description:          My personal blog – on Cloud Communications, Networking, and Python Programmability
 url:                  https://markholloway.github.io
 baseurl:
 paginate:             5
