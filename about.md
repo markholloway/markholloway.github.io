@@ -6,9 +6,11 @@ title: About
 <!-- ![]({{ site.url }}/blog/assets/hackpackv4.png)  -->
 <img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608">
 
-<!-- ![]({{ site.url }}/blog/assets/fredrik.jpg) -->
+<!-- ![]({{ site.url }}/blog/assets/fredrik.jpg) 
 
 Throughout the years I have been spending my professional life within the digital domain of creativity; from web site design/development to 3D animation and digital visual effects for feature films. With professional experience within the field of 3D graphics since 2005, including co-founding [Filmgate](http://www.filmgate.se), I now take part in the extraordinary team of talent at [Industriromantik](http://www.industriromantik.se) as Technical Director. This is a multi-faceted role which involves a great deal of software architecting, programming and devops.
+
+-->
 
 ## Get in touch!
  
