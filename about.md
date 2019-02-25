@@ -23,7 +23,7 @@ I started my career back in 1997, fresh out of CCNA (beta) studies. It was in 20
 
 ## Blog Info
 
-This blog runs Jekyll and is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) with the following modifications:
+This blog runs [Jekyll](https://jekyllrb.com) and is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) with the following modifications:
 
 - Tags
 - Post archive
