@@ -12,6 +12,7 @@ Hi there! My name is Mark and I’m a Solutions Architect based in the Atlanta. 
 
 I started my career back in 1997, fresh out of CCNA (beta) studies. It was in 2004 that I was first introduced to Acme Packet, Broadsoft, and the world of SIP and VoIP! Since then I’ve been hooked on carrier grade networking and IP communications with a particular interest in the carrier core routing.
 
+</div>
 
 ## Get in touch!
  
@@ -37,4 +38,3 @@ This blog is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site
 
 The source code for this blog is available [here]({{ site.github.repo }}).
 
-</div>
