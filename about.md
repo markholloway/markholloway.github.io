@@ -6,11 +6,11 @@ title: About
 <!-- ![]({{ site.url }}/blog/assets/hackpackv4.png)  -->
 <img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608">
 
-<!-- ![]({{ site.url }}/blog/assets/fredrik.jpg) 
 
-Throughout the years I have been spending my professional life within the digital domain of creativity; from web site design/development to 3D animation and digital visual effects for feature films. With professional experience within the field of 3D graphics since 2005, including co-founding [Filmgate](http://www.filmgate.se), I now take part in the extraordinary team of talent at [Industriromantik](http://www.industriromantik.se) as Technical Director. This is a multi-faceted role which involves a great deal of software architecting, programming and devops.
+Hi there! My name is Mark and I’m a Solutions Architect based in the Atlanta. I am CCIE #27384, as well as holding a number of other industry certifications. I’m currently working for a Cloud Communications provider focusing on Programmable APIs for IP communications technologies such as Voice, SMS, Wireless, and Video. I also have a keen interest in network automation and programmability. Troubleshooting and problem solving are some of my favoured past times.
 
--->
+I started my career back in 1997, fresh out of CCNA (beta) studies. It was in 2004 that I was first introduced to Acme Packet, Broadsoft, and the world of SIP and VoIP! Since then I’ve been hooked on carrier grade networking and IP communications with a particular interest in the carrier core routing.
+
 
 ## Get in touch!
  
