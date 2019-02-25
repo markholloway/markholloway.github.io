@@ -6,6 +6,7 @@ title: About
 <!-- ![]({{ site.url }}/blog/assets/hackpackv4.png)  -->
 <img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608">
 
+<div style="text-align: justify">
 
 Hi there! My name is Mark and I’m a Solutions Architect based in the Atlanta. I am CCIE #27384, as well as holding a number of other industry certifications. I’m currently working for a Cloud Communications provider focusing on Programmable APIs for IP communications technologies such as Voice, SMS, Wireless, and Video. I also have a keen interest in network automation and programmability. Troubleshooting and problem solving are some of my favoured past times.
 
@@ -35,3 +36,5 @@ This blog is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site
 - Jekyll SEO
 
 The source code for this blog is available [here]({{ site.github.repo }}).
+
+</div>
