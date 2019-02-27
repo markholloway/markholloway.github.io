@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-02-25T03:41:21-05:00</updated>
+ <updated>2019-02-27T04:56:33-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -136,7 +136,7 @@ Ratelimit Rejected Calls               0        0
    <link href="http://localhost:4000/2017/03/10/apkt-tos-bit-qos/"/>
    <updated>2017-03-10T00:00:00-05:00</updated>
    <id>http://localhost:4000/2017/03/10/apkt-tos-bit-qos</id>
-   <content type="html">&lt;p&gt;When configuring &lt;code class=&quot;highlighter-rouge&quot;&gt;QoS&lt;/code&gt; for SIP and RTP on an Acme Packet SBC it is critical to use proper &lt;code class=&quot;highlighter-rouge&quot;&gt;ToS HEX&lt;/code&gt; values. This is accomplished through a &lt;code class=&quot;highlighter-rouge&quot;&gt;Media Policy&lt;/code&gt;.&lt;/p&gt;
+   <content type="html">&lt;p&gt;When configuring &lt;code class=&quot;highlighter-rouge&quot;&gt;QoS&lt;/code&gt; for SIP and RTP on an Acme Packet SBC it is critical to set &lt;code class=&quot;highlighter-rouge&quot;&gt;ToS HEX&lt;/code&gt; to correct alues. This is accomplished through a Media Policy.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -193,7 +193,7 @@ realm-config
    <link href="http://localhost:4000/2016/06/11/apkt-comfort-noise/"/>
    <updated>2016-06-11T00:00:00-04:00</updated>
    <id>http://localhost:4000/2016/06/11/apkt-comfort-noise</id>
-   <content type="html">&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Comfort Noise&lt;/code&gt; (RFC 3389) is the &lt;code class=&quot;highlighter-rouge&quot;&gt;sound&lt;/code&gt; played in an RTP stream to prevent a user form hearing total silence on the connection.&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Comfort Noise&lt;/code&gt; (RFC 3389) is the sound played in an RTP stream to prevent a user form hearing total silence on the connection.&lt;/p&gt;
 
 &lt;!--more--&gt;
 

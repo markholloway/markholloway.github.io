@@ -3,7 +3,7 @@ layout: post
 title: Acme Packet SBC and Configuring “Comfort Noise Generation”
 tags: [acme,sbc,sip]
 ---
-`Comfort Noise` (RFC 3389) is the `sound` played in an RTP stream to prevent a user form hearing total silence on the connection. 
+`Comfort Noise` (RFC 3389) is the sound played in an RTP stream to prevent a user form hearing total silence on the connection. 
 
 <!--more-->
 

@@ -7,11 +7,11 @@ title: About
 <img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608">
 
 <div style="text-align: justify">
-Hi there! My name is Mark and I’m a Solutions Architect based in Atlanta, Georgia. I am CCIE #27384, as well as holding a number of other industry certifications. I’m currently working for a Cloud Communications provider focusing on Programmable APIs for IP communications technologies such as Voice, SMS, Wireless, and Video. I also have a keen interest in network automation and programmability with Python. Troubleshooting and problem solving are some of my favoured past times.
+Ahoy there, friends! My name is Mark and I am a Solutions Architect based in Atlanta, Georgia. I am also CCIE #27384, as well as holding a number of other industry certifications. I’m currently working for a global communications provider allowing developers to integrate channels of communication such as Voice, SMS, Video, Chat, Social Media, RCS, 2FA, Push Notifications, and much more, into a variety of applications and services using Web APIs, SIP, and programmable Wireless 4G/LTE, EUICC, and Narrowband, running on top of a global supernetwork.  I have a keen interest in SDN, network automation, and programmability with Python. Troubleshooting and problem solving are some of my favored past times.
 </div>
 <br>
 <div style="text-align: justify">
-I started my career back in 1997, fresh out of CCNA (beta) studies. It was in 2004 that I was first introduced to Acme Packet, Broadsoft, and the world of SIP and VoIP! Combined with a background in Routing and Switching, I’ve been hooked on carrier grade networking and IP communications with a particular interest in the Service Provider core.
+I started my career back in 1997, fresh out of Cisco's CCNA studies. It was in 2004 that I was first introduced to Acme Packet, Broadsoft, and the world of carrier SIP, VoIP, and the very early days of what would become WebRTC. Combined with my background in Cisco Routing and Switching, and later earning my CCIE in Voice, I’ve been hooked on all-things having to do with carrier grade networking and IP based communications, with a particular interest in the service provider core, where the largest, most complex, and perhaps most expensive networks in the world are at my fingertips. 
 </div>
 
 

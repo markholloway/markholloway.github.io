@@ -69,8 +69,10 @@ body {
 /* No `:visited` state is required by default (browsers will use `a`) */
 /* Old color: #528bff; */
 a {
-  color: #8be9fd;
+  /* color: #8be9fd; */
   text-decoration: none;
+  color: #3e5e88;
+
 }
 a strong {
   color: inherit;
@@ -158,9 +160,10 @@ pre {
 code {
   padding: .25em .5em;
   font-size: 85%;
-  color: #ff79c6;
+  /* color: #ff79c6; */
+  /* color: #475c77; */
+  color: #fffc4f;
   background-color: #21252b;
-  border-radius: 3px;
 }
 pre {
   display: block;

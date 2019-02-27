@@ -7,8 +7,8 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              My personal blog – on Enterprise and Service Provider Networking, IP Communications, and Programmability
-description:          My personal blog – on Enterprise and Service Provider Networking, IP Communications, and Programmability
+tagline:              It's NetDevOps, mate
+description:          Technical Notes on Enterprise and Service Provider Networking and IP Communications 
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
@@ -22,7 +22,7 @@ gems:
 # SEO
 twitter:
   username:           twilion2
-  url:                https://twitter.com/twilion2
+  url:                https://twitter.com/ccie27384
 social:
   name:               Mark Holloway
   links:
