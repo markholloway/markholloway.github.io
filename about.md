@@ -4,6 +4,7 @@ title: About
 ---
 
 <!-- ![]({{ site.url }}/blog/assets/hackpackv4.png)  -->
+<!-- <img src="{{ site.baseurl }}/blog/assets/mark.jpg" width="400" height="608"> -->
 <img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608">
 
 <div style="text-align: justify">
@@ -11,7 +12,7 @@ Ahoy there, friends! My name is Mark and I am a Solutions Architect based in Atl
 </div>
 <br>
 <div style="text-align: justify">
-I started my career back in 1997, fresh out of Cisco's CCNA studies. It was in 2004 that I was first introduced to Acme Packet, Broadsoft, and the world of carrier SIP, VoIP, and the very early days of what would become WebRTC. Combined with my background in Cisco Routing and Switching, and later earning my CCIE in Voice, I’ve been hooked on all-things having to do with carrier grade networking and IP based communications, with a particular interest in the service provider core, where the largest, most complex, and perhaps most expensive networks in the world are at my fingertips. 
+I started my career back in 1997, fresh out of Cisco's CCNA studies. It was in 2004 that I was first introduced to Acme Packet, Broadsoft, and the world of carrier SIP, VoIP, and the very early days of what would become WebRTC. Combined with my background in Cisco Routing and Switching, and later earning my CCIE in Voice, I’ve been hooked on all-things realted to carrier networking and IP  communications, with a particular interest in the service provider core, where the largest, most complex, and reidiculously expensive networks in the world are at my fingertips. 
 </div>
 
 
