@@ -7,8 +7,8 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              It's NetDevOps, mate
-description:          Technical Notes on Enterprise and Service Provider Networking and IP Communications 
+tagline:              Technical Notes for IP Communications
+description:          Technical Notes on Enterprise and Service Provider Programmability and IP Communications 
 url:                  https://markholloway.com
 baseurl:
 paginate:             5

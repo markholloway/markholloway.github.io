@@ -8,7 +8,7 @@ title: About
 <img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608">
 
 <div style="text-align: justify">
-Ahoy there, friends! My name is Mark and I am a Solutions Architect based in Atlanta, Georgia. I am also CCIE #27384, as well as holding a number of other industry certifications. I’m currently working for a global communications provider allowing developers to integrate channels of communication such as Voice, SMS, Video, Chat, Social Media, RCS, 2FA, Push Notifications, and much more, into a variety of applications and services using Web APIs, SIP, and programmable Wireless 4G/LTE, EUICC, and Narrowband, running on top of a global supernetwork.  I have a keen interest in SDN, network automation, and programmability with Python. Troubleshooting and problem solving are some of my favored past times.
+Hello there, friends! My name is Mark and I am a Solutions Architect based in Atlanta, Georgia. I am also CCIE #27384, as well as holding a number of other industry certifications. I’m currently working for a global communications provider allowing developers to integrate channels of communication into a variety of applications and services using Web APIs, SIP, and programmable Wireless 4G/LTE, EUICC, and Narrowband, running on top of a global network.  I have a keen interest in SDN, network automation, and programmability with Python. Troubleshooting and problem solving are some of my favored past times.
 </div>
 <br>
 <div style="text-align: justify">
