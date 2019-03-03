@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lookup any NANP area code from Terminal
+title: Script to lookup U.S. and Canadian area codes
 tags: [bash]
 ---
 This is a script that looks up an area code in the United States or Canada and returns the city and state it is assigned to by the North American `NPA-NXX` Wire Center 
