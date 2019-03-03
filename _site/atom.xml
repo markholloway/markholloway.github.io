@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-03T13:56:10-05:00</updated>
+ <updated>2019-03-03T16:32:13-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -379,175 +379,176 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
  </entry>
  
  <entry>
-   <title>Macos Screencapture Terminal.md.tmp</title>
-   <link href="http://localhost:4000/2018/12/14/macos-screencapture-terminal.md.tmp/"/>
-   <updated>2018-12-14T00:00:00-05:00</updated>
-   <id>http://localhost:4000/2018/12/14/macos-screencapture-terminal.md.tmp</id>
-   <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;layout: post
-title: Automating macOS Screencaptures with BASH&lt;/p&gt;
-
-&lt;h2&gt;tags: [macos,bash]&lt;/h2&gt;
-
-&lt;p&gt;Apple includes a command line utility called &lt;code&gt;screencapture&lt;/code&gt; which allows macOS to take any number of screenshots silently in the background, hands-free, while the user is working. 
+   <title>Area Code lookup using BASH</title>
+   <link href="http://localhost:4000/2018/12/18/npa-lookup/"/>
+   <updated>2018-12-18T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2018/12/18/npa-lookup</id>
+   <content type="html">&lt;p&gt;This is a script that looks up an area code in the United States or Canada and returns the city and state it is assigned to by the North American &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA-NXX&lt;/code&gt; Wire Center 
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;p&gt;Keyboard shortcuts such as &lt;code&gt;Command+Shift+4&lt;/code&gt; will save a screencapture to the desktop and save the file as &lt;code&gt;.png&lt;/code&gt;.  Another frequently used shortcut &lt;code&gt;Command+Control+Shift+4&lt;/code&gt; copies the screencapture to the clipboard.&lt;/p&gt;
+&lt;p&gt;I wrote this script after becoming frustrated each time I needed to look up an area code to see what state it belongs to and realizing I’m wasting time searching. I kept telling myself I’ll write a script to do it. Well, I finally got around to it.&lt;/p&gt;
 
-&lt;p&gt;Beyond keyboard shortcuts there is a Screenshot utility located in &lt;code&gt;Applications &amp;gt; Utilities&lt;/code&gt;. This places a panel at the bottom of the desktop providing more control of individual screencaptures.&lt;/p&gt;
+&lt;h2 id=&quot;service-provider-lesson-of-the-day&quot;&gt;Service Provider Lesson of the Day&lt;/h2&gt;
 
-&lt;p&gt;The above methods assume the user doesn't need their hands at the time of taking the screencapture. It may also feel tedious to manually take screenshots one at a time if needing more then a few. The &lt;code&gt;screenshot&lt;/code&gt; command line utility solves this problem while providing significant flexibility.&lt;/p&gt;
+&lt;p&gt;In the United State and Canada the first 3 digits of a 10 digit phone number are referred to as the Number Plan Area or &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA&lt;/code&gt;. That’s what the rest of us call an Area Code. The second set of 3 digits are the the Exchange, or Central Switching Office Designation, and referred to as &lt;code class=&quot;highlighter-rouge&quot;&gt;NXX&lt;/code&gt;. The last 4 digits of a phone number are referred to as &lt;code class=&quot;highlighter-rouge&quot;&gt;XXXX&lt;/code&gt; and referred to as the &lt;code class=&quot;highlighter-rouge&quot;&gt;SLI&lt;/code&gt; or Subscriber Line Identifier.&lt;/p&gt;
 
-&lt;h3&gt;Viewing &lt;code&gt;screencapture&lt;/code&gt; options&lt;/h3&gt;
+&lt;p&gt;Standard formatting is represented as &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA-NXX-XXXX&lt;/code&gt;. In the number &lt;code class=&quot;highlighter-rouge&quot;&gt;415-523-8886&lt;/code&gt; the NPA is 415 and the NXX is 523. The SLI is 8886.&lt;/p&gt;
 
-&lt;p&gt;Open macOS Terminal and run screencapture from the command line to see the optional arguements.&lt;/p&gt;
+&lt;p&gt;Last item to note is the reason for all of this is to for the carriers to knwo what &lt;code class=&quot;highlighter-rouge&quot;&gt;LATA&lt;/code&gt; the NPA-NXX originates from. In telco terminology this is the &lt;code class=&quot;highlighter-rouge&quot;&gt;rate center&lt;/code&gt; your number belongs to. The LATA (Local Access and Transport Area) is the geographic barrier that determines a local call from a long distance call. There’s more to it but this is the high level view.&lt;/p&gt;
 
-&lt;p&gt;A few nice options worth noting are capturing the Touch Bar on a MacBook Pro, passing screencaptures directly to Mail, Preview, Messages, or the Clipboard, capturing desktop video and passing it to Quicktime, and Interactive Mode which allows changing what part of the screen should be captured.&lt;/p&gt;
+&lt;h2 id=&quot;review-the-final-script&quot;&gt;Review the final script&lt;/h2&gt;
 
-&lt;p&gt;&lt;code&gt;
-mbp2018:~ mh$ screencapture -h
-usage: screencapture [-icMPmwsWxSCUtoa] [files]
-    -c         force screen capture to go to the clipboard
-    -b         capture Touch Bar - non-interactive modes only
-    -C         capture the cursor as well as the screen. only in 
-               non-interactive modes
-    -d         display errors to the user graphically
-    -i         capture screen interactively, by selection or window
-                control key - causes screen shot to go to clipboard
-                space key   - toggle between mouse selection and
-                              window selection modes
-                escape key  - cancels interactive screen shot
-    -m         only capture the main monitor, undefined if -i is set
-    -D&amp;lt;display&amp;gt; screen capture or record from the display specified.
-                -D 1 is main display, -D 2 secondary, etc.
-    -o         in window capture mode, do not capture the shadow of window
-    -p         screen capture will use the default settings for capture. 
-               The files argument will be ignored
-    -M         screen capture output will go to a new Mail message
-    -P         screen capture output will open in Preview or 
-               QuickTime Player if video
-    -I         screen capture output will open in Messages
-    -B&amp;lt;bundleid&amp;gt; screen capture output will open in app with bundleid
-    -s         only allow mouse selection mode
-    -S         in window capture mode, capture the screen not the window
-    -J&amp;lt;style&amp;gt;  sets the starting of interfactive capture
-                selection       - captures screen in selection mode
-                window          - captures screen in window mode
-                video           - records screen in selection mode
-    -t&amp;lt;format&amp;gt; image format to create, default is png 
-               (other options include pdf, jpg, tiff and other formats)
-    -T&amp;lt;seconds&amp;gt; take the picture after a delay of &amp;lt;seconds&amp;gt;, default is 5
-    -w         only allow window selection mode
-    -W         start interaction in window selection mode
-    -x         do not play sounds
-    -a         do not include windows attached to selected windows
-    -r         do not add dpi meta data to image
-    -l&amp;lt;windowid&amp;gt; capture this windowsid
-    -R&amp;lt;x,y,w,h&amp;gt; capture screen rect
-    -v        capture video recording of the screen
-    -V&amp;lt;seconds&amp;gt; limits video capture to specified seconds
-    -A&amp;lt;id&amp;gt;    captures audio during a video recording using default input. 
-              Optional specify the id of the audio source
-    -k        show clicks in video recording mode
-    -U        Show interactive toolbar in interactive mode
-    -u        present UI after screencapture is complete. 
-              files passed to command line will be ignored
-    files     where to save the screen capture, 1 file per screen
-&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Below is the shell script &lt;code class=&quot;highlighter-rouge&quot;&gt;npa.sh&lt;/code&gt; in its final form.&lt;/p&gt;
 
-&lt;h2&gt;Building a script to automatate repetitive screencapture tasks&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#United States and Canada NPA Lookup&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#To run this script execute npa.sh followed by the three digit NPA&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# npa.sh 404&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# NPA 404 =  N Georgia: Atlanta and suburbs &lt;/span&gt;
 
-&lt;p&gt;I want to write a script that takes 45 screencaptures of my desktop every 30 seconds and saves them as &lt;code&gt;.jpg&lt;/code&gt;. &lt;/p&gt;
 
-&lt;p&gt;Open your preferred IDE or use macOS TextEdit. If using TextEdit it is important to save the file in plain text format. Save the file using the &lt;code&gt;.sh&lt;/code&gt; extension rather than &lt;code&gt;.txt&lt;/code&gt; since our goal is writig a &lt;code&gt;bash&lt;/code&gt; script and we will execute from the &lt;code&gt;shell&lt;/code&gt;&lt;/p&gt;
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://www.bennetyee.org/ucsd-pages/area.html&quot;&lt;/span&gt;
 
-&lt;p&gt;```bash&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+	&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Include a three digit NPA: npa.sh XXX&quot;&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;h1&gt;!/bin/bash&lt;/h1&gt;
+if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; | wc &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-ne&lt;/span&gt; 4 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+	&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;NPA must be three digits.&quot;&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;h1&gt;script to run screencapture every one second&lt;/h1&gt;
+if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; | sed &lt;span class=&quot;s1&quot;&gt;'s/[[:digit:]]//g'&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+	&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Letters are are not compliant with NPA formatting.&quot;&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;p&gt;screenshot=&quot;$(which screencapture) -x -m -C&quot;
-freq=30     #take a screenshot every 30 seconds
-maxshots=45 #take 45 screenshots then quit&lt;/p&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-dump&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$source&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;name=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	sed &lt;span class=&quot;s1&quot;&gt;'s/&amp;lt;[^&amp;gt;]*&amp;gt;//g;s/^ //g'&lt;/span&gt; | &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	cut &lt;span class=&quot;nt&quot;&gt;-f2-&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;| cut &lt;span class=&quot;nt&quot;&gt;-f1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+	
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;NPA &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; =&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$result&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 
-&lt;p&gt;while getopts &quot;af:m&quot; opt; do
-    case $opt in
-    f ) freq=$OPTARG;       ;;
-    m ) maxshots=$OPTARG;   ;;
-    ? ) echo &quot;Usage: $0 [-f frequency] [-m maxcaps]&quot; &gt;&amp;amp;2
-        exit 1
-    esac
-done&lt;/p&gt;
+&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;counter=1   #set startng number; incrementally append to filename&lt;/p&gt;
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
 
-&lt;p&gt;while [ $counter -lt $maxshots ] ; do
-    $screenshot screenshot${counter}.jpg
-    counter=$(( counter + 1 )) 
-    sleep $freq 
-done&lt;/p&gt;
+&lt;p&gt;I run the &lt;code class=&quot;highlighter-rouge&quot;&gt;npa.sh&lt;/code&gt; script and want to know what city and state NPA 404 belongs to. I immediately receive a result that says it’s North Georgia and includes Atlanta and the greater surrounding area.&lt;/p&gt;
 
-&lt;p&gt;exit
-```&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mbp2018&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npa.sh 404
 
-&lt;h2&gt;How it Works&lt;/h2&gt;
+NPA 404 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  N Georgia: Atlanta and suburbs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Before executing and testing the script I would like to explain what is happening. When the script runs it will take a screenshot of the desktop every 30 seconds and quit after 45 screenshots. This is set by the value &lt;code&gt;freq=30&lt;/code&gt; and &lt;code&gt;maxshots=45&lt;/code&gt;. &lt;/p&gt;
+&lt;h2 id=&quot;how-the-script-works&quot;&gt;How the Script Works&lt;/h2&gt;
 
-&lt;h2&gt;Making &lt;code&gt;screencap.sh&lt;/code&gt; executable&lt;/h2&gt;
+&lt;p&gt;First we assign the variable name &lt;code class=&quot;highlighter-rouge&quot;&gt;source&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;URL&lt;/code&gt; which is the source of our data where we extract the answer for the NPA query.&lt;/p&gt;
 
-&lt;p&gt;In order to run the shell script we must change its permission so it is excutable.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://www.bennetyee.org/ucsd-pages/area.html&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;```bash
-mbp2017:~ mh$ pwd
-/Users/mh/Desktop&lt;/p&gt;
+&lt;p&gt;The next three sections validate proper NPA formatting otherwise the result will fail. The NPA is referenced by the variable &lt;code class=&quot;highlighter-rouge&quot;&gt;$1&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;mbp2017:~ mh$ ls screen*
-screencap.sh&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+	&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Include a three digit NPA: npa.sh XXX&quot;&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;p&gt;mbp2017:~ mh$ chmod +x screencap.sh
-```&lt;/p&gt;
+if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; | wc &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-ne&lt;/span&gt; 4 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+	&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;NPA must be three digits.&quot;&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;p&gt;Execute the file. It will run silently in the background.&lt;/p&gt;
+if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; | sed &lt;span class=&quot;s1&quot;&gt;'s/[[:digit:]]//g'&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+	&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Letters are are not compliant with NPA formatting.&quot;&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;bash
-mbp2017:~ mh$ ./screencap.sh
-&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The next section is the core of the script. I will break it down into smaller components.&lt;/p&gt;
 
-&lt;p&gt;Once the script has finished there will be 45 &lt;code&gt;.jpg&lt;/code&gt; files in the folder where the script was run.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-dump&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$source&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;name=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	sed &lt;span class=&quot;s1&quot;&gt;'s/&amp;lt;[^&amp;gt;]*&amp;gt;//g;s/^ //g'&lt;/span&gt; | &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	cut &lt;span class=&quot;nt&quot;&gt;-f2-&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;| cut &lt;span class=&quot;nt&quot;&gt;-f1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;```
-mbp2017:~ mh$ ls&lt;/p&gt;
+&lt;p&gt;A variable &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt; is assigned to whatever the final output will be from the rest of the script. When returning the answer to the query we simply tell it to &lt;code class=&quot;highlighter-rouge&quot;&gt;echo&lt;/code&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt; back tot he user.&lt;/p&gt;
 
-&lt;p&gt;screenshot1.jpg
-screenshot2.jpg
-screenshot3.jpg
-screenshot4.jpg
-screenshot5.jpg
-screenshot6.jpg
-```&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2&gt;Overide the settings in the script&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; is a command line utility which supports many protocols including HTTPS to send and receive data. In this case curl is &lt;code class=&quot;highlighter-rouge&quot;&gt;-silently&lt;/code&gt; recevieving a &lt;code class=&quot;highlighter-rouge&quot;&gt;-dump&lt;/code&gt; of information from our &lt;code class=&quot;highlighter-rouge&quot;&gt;$source&lt;/code&gt; variable we identified (https URL).&lt;/p&gt;
 
-&lt;p&gt;View the script and notice &lt;code&gt;f&lt;/code&gt; and &lt;code&gt;m&lt;/code&gt; allow for optional arguements using &lt;code&gt;$OPTARG&lt;/code&gt;. Whatever arguements are passed from the command line they will override the pre-configured settings.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-dump&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$source&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;This will change the frequency from 30 seconds to 8 seconds. Everything else remains at their default settings referenced in the script.&lt;/p&gt;
+&lt;p&gt;Paste the line below in your terminal to see what’s happening in realtime. This will return data in HTML format to your terminal window.&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;bash
-mbp2017:~ mh$ ./screencap.sh -f 8
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-dump&lt;/span&gt; https://www.bennetyee.org/ucsd-pages/area.html&lt;span class=&quot;s2&quot;&gt;&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Building on top of this script with additional default parameters and command line arguements makes the &lt;code&gt;screencapture&lt;/code&gt; app extremely powerful with many supported use cases. Capture you progress in &lt;a href=&quot;http://twilio.com/quest&quot;&gt;TwilioQuest&lt;/a&gt; and show off your high score to all your friends.&lt;/p&gt;
+&lt;p&gt;Once the source has dumped the data back to us we must &lt;code class=&quot;highlighter-rouge&quot;&gt;grep&lt;/code&gt; (search and match) the NPA we are looking for.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-dump&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$source&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;name=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you run the raw curl script above the results provide NPA data that looks like the following. This is what &lt;code class=&quot;highlighter-rouge&quot;&gt;grep&lt;/code&gt; is looking for.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;404&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;404&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Below is an example of the full section from the source that contains information about NPA 404. It’s more than we need and would not make for usable output on the terminal.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;align=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;404&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;404&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;align=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;GA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;align=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;-5&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt; N Georgia: Atlanta and suburbs &lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#678&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;678&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;, split &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#770&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;770&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sed&lt;/code&gt; is a standard Unix utility which uses regular expressions to manipulate interesting data. In this case remove the unnecessary HTML.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cut&lt;/code&gt; is another standard Unix utility used to extract specific alphanumeric content and write to a file or pipe to another output.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sed &lt;span class=&quot;s1&quot;&gt;'s/&amp;lt;[^&amp;gt;]*&amp;gt;//g;s/^ //g'&lt;/span&gt;
+cut &lt;span class=&quot;nt&quot;&gt;-f2-&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;| cut &lt;span class=&quot;nt&quot;&gt;-f1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once again everything in the last section shown together as a multi-stage script.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-dump&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$source&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;name=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	sed &lt;span class=&quot;s1&quot;&gt;'s/&amp;lt;[^&amp;gt;]*&amp;gt;//g;s/^ //g'&lt;/span&gt; | &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	cut &lt;span class=&quot;nt&quot;&gt;-f2-&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;| cut &lt;span class=&quot;nt&quot;&gt;-f1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The final line in the script takes the data stored in the &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt; variable to &lt;code class=&quot;highlighter-rouge&quot;&gt;echo&lt;/code&gt; the output on the screen.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;NPA &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; =&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$result&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;executing-npash-from-macos-terminal&quot;&gt;Executing &lt;code class=&quot;highlighter-rouge&quot;&gt;npa.sh&lt;/code&gt; from macOS Terminal&lt;/h2&gt;
+
+&lt;p&gt;I prefer to keep the script in &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/bin&lt;/code&gt; for faster execution. Otherwise there’s little to gain over using a web browser and searching online.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mbp2018&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npa.sh 404
+
+NPA 404 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  N Georgia: Atlanta and suburbs 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </content>
  </entry>
  
  <entry>
    <title>Automating macOS Screencaptures with BASH</title>
-   <link href="http://localhost:4000/2018/12/14/macos-screencapture-terminal/"/>
-   <updated>2018-12-14T00:00:00-05:00</updated>
-   <id>http://localhost:4000/2018/12/14/macos-screencapture-terminal</id>
+   <link href="http://localhost:4000/2018/11/14/macos-screencapture-terminal/"/>
+   <updated>2018-11-14T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2018/11/14/macos-screencapture-terminal</id>
    <content type="html">&lt;p&gt;Apple includes a command line utility called &lt;code class=&quot;highlighter-rouge&quot;&gt;screencapture&lt;/code&gt; which allows macOS to take any number of screenshots silently in the background, hands-free, while the user is working. 
 &lt;!--more--&gt;&lt;/p&gt;
 
