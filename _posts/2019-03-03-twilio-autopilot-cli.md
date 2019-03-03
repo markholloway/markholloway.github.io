@@ -75,7 +75,7 @@ File exported in Make_a_Reservation.json
 mark$ more Make_a_Reservation.json
 ```
 
-Below is the conents that makes up the `Make a Reservation` Assistant
+Below is the conents that makes up the `Make a Reservation` Assistant. It will be easiest to copy and paste into another application to view the entire contents of the file without scrolling.
 
 ```json
 {

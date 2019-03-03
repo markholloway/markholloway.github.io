@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-03T05:08:29-05:00</updated>
+ <updated>2019-03-03T05:10:04-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -83,7 +83,7 @@ File exported &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;Make_a_Reservation
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;more Make_a_Reservation.json
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Below is the conents that makes up the &lt;code class=&quot;highlighter-rouge&quot;&gt;Make a Reservation&lt;/code&gt; Assistant&lt;/p&gt;
+&lt;p&gt;Below is the conents that makes up the &lt;code class=&quot;highlighter-rouge&quot;&gt;Make a Reservation&lt;/code&gt; Assistant. It will be easiest to copy and paste into another application to view the entire contents of the file without scrolling.&lt;/p&gt;
 
 &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 	&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;friendlyName&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Restaurant&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
