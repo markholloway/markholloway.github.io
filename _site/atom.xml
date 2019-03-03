@@ -4,40 +4,13 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-03T04:33:53-05:00</updated>
+ <updated>2019-03-03T04:43:01-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
    <email></email>
  </author>
 
- 
- <entry>
-   <title>Twilio Autopilot Cli.md.tmp</title>
-   <link href="http://localhost:4000/2019/03/03/twilio-autopilot-cli.md.tmp/"/>
-   <updated>2019-03-03T00:00:00-05:00</updated>
-   <id>http://localhost:4000/2019/03/03/twilio-autopilot-cli.md.tmp</id>
-   <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;layout: post
-title: Twilio Autopilot CLI&lt;/p&gt;
-
-&lt;h2&gt;tags: [twilio,autopilot]&lt;/h2&gt;
-
-&lt;p&gt;!&lt;a href=&quot;/blog/assets/2019-03-03/ap-cli.png&quot;&gt;&lt;/a&gt;
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Autopilot&lt;/code&gt; is Twilio's artificially intelligent platform for Voice Bots, SMS, WhatsApp, Facebook Messenger, IVR, Slack, Alexa, and Google Assistant, while using natural langauge understanding and machine learning frameworks.&lt;/p&gt;
-
-&lt;p&gt;Everything required to build an Autopilot Assistant is provided in the Twilio &lt;a href=&quot;http://www.twilio.com/console&quot;&gt;Console&lt;/a&gt;. If you're like me and get excited anytime you can build someting using command line tools, you'll want to check out the Autopilot CLI. Once installed you will be able to create, update, and delete Autopilot Assistants as well as export an Assistant to JSON.&lt;/p&gt;
-
-&lt;p&gt;Autopilot CLI is installed using &lt;code&gt;npm&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;bash
-sudo npm install -g @twilio/autopilot-cli
-&lt;/code&gt;&lt;/p&gt;
-</content>
- </entry>
  
  <entry>
    <title>Twilio Autopilot CLI</title>
@@ -47,28 +20,24 @@ sudo npm install -g @twilio/autopilot-cli
    <content type="html">&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-03/ap-cli.png&quot; alt=&quot;&quot; /&gt;
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Autopilot&lt;/code&gt; is Twilio’s artificially intelligent platform for Voice Bots, SMS, WhatsApp, Facebook Messenger, IVR, Slack, Alexa, and Google Assistant, while using natural langauge understanding and machine learning frameworks.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Autopilot&lt;/code&gt; is Twilio’s artificially intelligent bot platform for Voice, SMS, WhatsApp, Facebook Messenger, IVR, Slack, Alexa, and Google Assistant, while using natural langauge understanding and machine learning frameworks.&lt;/p&gt;
 
-&lt;p&gt;Everything required to build an Autopilot Assistant is provided in the Twilio &lt;a href=&quot;http://www.twilio.com/console&quot;&gt;Console&lt;/a&gt; Web interface. It’s simple and intuitive to use and it’s possible to test the Assistant directly in the browser using the built in soft-client on the Autopilot page.&lt;/p&gt;
+&lt;p&gt;Everything required to build an Autopilot Assistant is provided in the Twilio &lt;a href=&quot;http://www.twilio.com/console&quot;&gt;Console&lt;/a&gt;. Once I received word there is a CLI option I was immediately all over it. I love working in CLI mode.&lt;/p&gt;
 
-&lt;p&gt;I enjoy command line tools. Perhaps it’s because I grew up on FreeBSD and have been using Cisco IOS for twenty years, but when I hear of a command line alternative to anything I tend to get excited.&lt;/p&gt;
-
-&lt;h2 id=&quot;installing-autopilot-cli&quot;&gt;Installing Autopilot CLI&lt;/h2&gt;
+&lt;h2 id=&quot;install-autopilot-cli-using-node-package-manager&quot;&gt;Install Autopilot CLI using Node Package Manager&lt;/h2&gt;
 
 &lt;p&gt;Autopilot CLI is installed using &lt;code class=&quot;highlighter-rouge&quot;&gt;npm&lt;/code&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @twilio/autopilot-cli
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @twilio/autopilot-cli
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;In your terminal window enter &lt;code class=&quot;highlighter-rouge&quot;&gt;ta&lt;/code&gt; and you should see the red ASCII art Twilio Autopilot logo like the picture above, plus the usage menu.&lt;/p&gt;
+&lt;p&gt;In your terminal window enter &lt;code class=&quot;highlighter-rouge&quot;&gt;ta&lt;/code&gt; to see output like the picture above.&lt;/p&gt;
 
 &lt;h2 id=&quot;configure-twilio-credentials&quot;&gt;Configure Twilio Credentials&lt;/h2&gt;
 
-&lt;p&gt;Autopilot CLI needs to know the SID and Auth Token for the account. Use the &lt;code class=&quot;highlighter-rouge&quot;&gt;--credentials&lt;/code&gt; option more than one account should be accessed from Autopilot CLI.&lt;/p&gt;
+&lt;p&gt;Autopilot CLI needs the SID and Auth Token for the account where Assistants will reside. Use the &lt;code class=&quot;highlighter-rouge&quot;&gt;--credentials&lt;/code&gt; option when more than one account should be accessed from Autopilot CLI.&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ta init
-
-mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ta init
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ta init
 
 Please visit https://www.twilio.com/console
 Fill &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;the Twilio ACCOUNT SID and Twilio AUTH TOKEN below 
@@ -79,28 +48,24 @@ to save/modify your Twilio credentials.
 
 ? Twilio AUTH TOKEN:
  feXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Once credentials are successfully added the Autopilot CLI will communicate with the Twilio platform to perform CLI actions.&lt;/p&gt;
 
-&lt;h2 id=&quot;list-current-assistants-for-the-account-sid&quot;&gt;List Current Assistants for the Account SID&lt;/h2&gt;
+&lt;h2 id=&quot;list-current-assistants-associated-with-the-account-sid&quot;&gt;List Current Assistants Associated with the Account SID&lt;/h2&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ta list
 
 UA52e35a7976b5fea8e544ba8 Make_a_Reservation
 UA1c59d8db97e01531ecc5d65 Schedule_an_Appointment
-UAda134911d1bce1aa68f2698 SMS_WhatsApp_FB_Customer_Service_Bot
-
-mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+UAda134911d1bce1aa68f2698 SMS_WhatsApp_FB_Customer_Service_Bot 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;To hear a demo of &lt;code class=&quot;highlighter-rouge&quot;&gt;Schedule an Appointment&lt;/code&gt; Autopilot Assistant dial &lt;code class=&quot;highlighter-rouge&quot;&gt;+1-213-319-4095&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To try a demo of &lt;code class=&quot;highlighter-rouge&quot;&gt;Schedule an Appointment&lt;/code&gt; dial &lt;code class=&quot;highlighter-rouge&quot;&gt;+1-213-319-4095&lt;/code&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;exporting-an-assistant-schema-as-json&quot;&gt;Exporting an Assistant Schema as JSON&lt;/h2&gt;
+&lt;h2 id=&quot;exporting-an-assistant-schema&quot;&gt;Exporting an Assistant Schema&lt;/h2&gt;
 
-&lt;p&gt;I would like to check the &lt;code class=&quot;highlighter-rouge&quot;&gt;Make a Reservation&lt;/code&gt; Assistant and see if there is anything to finish.&lt;/p&gt;
+&lt;p&gt;I would like to check the &lt;code class=&quot;highlighter-rouge&quot;&gt;Make a Reservation&lt;/code&gt; Assistant and see if there is anything to finish. To do this I must export the schema as JSON&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ta &lt;span class=&quot;nb&quot;&gt;export&lt;/span&gt;
 ? Choose your assistant:  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Use arrow keys&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
@@ -111,12 +76,11 @@ mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
 Exporting Assistant......
 
 File exported &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;Make_a_Reservation.json 
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;view-exported-json&quot;&gt;View Exported JSON&lt;/h2&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mark# more Make_a_Reservation.json
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;more Make_a_Reservation.json
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Below is the conents that makes up the &lt;code class=&quot;highlighter-rouge&quot;&gt;Make a Reservation&lt;/code&gt; Assistant&lt;/p&gt;

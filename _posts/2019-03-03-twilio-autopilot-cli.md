@@ -6,30 +6,26 @@ tags: [twilio,autopilot]
 ![]({{ site.baseurl }}/blog/assets/2019-03-03/ap-cli.png)
 <!--more-->
 
-`Autopilot` is Twilio's artificially intelligent platform for Voice Bots, SMS, WhatsApp, Facebook Messenger, IVR, Slack, Alexa, and Google Assistant, while using natural langauge understanding and machine learning frameworks.
+`Autopilot` is Twilio's artificially intelligent bot platform for Voice, SMS, WhatsApp, Facebook Messenger, IVR, Slack, Alexa, and Google Assistant, while using natural langauge understanding and machine learning frameworks.
 
 
-Everything required to build an Autopilot Assistant is provided in the Twilio [Console](http://www.twilio.com/console) Web interface. It's simple and intuitive to use and it's possible to test the Assistant directly in the browser using the built in soft-client on the Autopilot page.
+Everything required to build an Autopilot Assistant is provided in the Twilio [Console](http://www.twilio.com/console). Once I received word there is a CLI option I was immediately all over it. I love working in CLI mode.
 
-I enjoy command line tools. Perhaps it's because I grew up on FreeBSD and have been using Cisco IOS for twenty years, but when I hear of a command line alternative to anything I tend to get excited.
-
-## Installing Autopilot CLI 
+## Install Autopilot CLI using Node Package Manager
 
 Autopilot CLI is installed using `npm`
 
 ```bash
-sudo npm install -g @twilio/autopilot-cli
+mark$ sudo npm install -g @twilio/autopilot-cli
 ```
 
-In your terminal window enter `ta` and you should see the red ASCII art Twilio Autopilot logo like the picture above, plus the usage menu.
+In your terminal window enter `ta` to see output like the picture above.
 
 ## Configure Twilio Credentials
 
-Autopilot CLI needs to know the SID and Auth Token for the account. Use the `--credentials` option more than one account should be accessed from Autopilot CLI.
+Autopilot CLI needs the SID and Auth Token for the account where Assistants will reside. Use the `--credentials` option when more than one account should be accessed from Autopilot CLI.
 
 ```bash
-ta init
-
 mark$ ta init
 
 Please visit https://www.twilio.com/console
@@ -41,29 +37,25 @@ to save/modify your Twilio credentials.
 
 ? Twilio AUTH TOKEN:
  feXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-mark$ 
 ```
 
 Once credentials are successfully added the Autopilot CLI will communicate with the Twilio platform to perform CLI actions.
 
-## List Current Assistants for the Account SID
+## List Current Assistants Associated with the Account SID
 
 ```bash
 mark$ ta list
 
 UA52e35a7976b5fea8e544ba8 Make_a_Reservation
 UA1c59d8db97e01531ecc5d65 Schedule_an_Appointment
-UAda134911d1bce1aa68f2698 SMS_WhatsApp_FB_Customer_Service_Bot
-
-mark$ 
+UAda134911d1bce1aa68f2698 SMS_WhatsApp_FB_Customer_Service_Bot 
 ```
 
-To hear a demo of `Schedule an Appointment` Autopilot Assistant dial `+1-213-319-4095`
+To try a demo of `Schedule an Appointment` dial `+1-213-319-4095`
 
-## Exporting an Assistant Schema as JSON
+## Exporting an Assistant Schema
 
-I would like to check the `Make a Reservation` Assistant and see if there is anything to finish.
+I would like to check the `Make a Reservation` Assistant and see if there is anything to finish. To do this I must export the schema as JSON
 
 ```bash
 mark$ ta export
@@ -75,13 +67,12 @@ mark$ ta export
 Exporting Assistant......
 
 File exported in Make_a_Reservation.json 
-
 ```
 
 ## View Exported JSON
 
 ```bash
-mark# more Make_a_Reservation.json
+mark$ more Make_a_Reservation.json
 ```
 
 Below is the conents that makes up the `Make a Reservation` Assistant
