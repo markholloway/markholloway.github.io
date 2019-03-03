@@ -162,7 +162,7 @@ result="$(curl -s -dump $source | grep "name=\"$1" | \
 	cut -f2- -d\ | cut -f1 -d\()"
 ```
 
-The final line in the script takes the data stored in the `result` variable to `echo` the output on the screen. 
+The final line in the script takes the data stored in the `result` variable and will `echo` the output on the terminal. 
 
 ```bash
 echo "NPA $1 =$result"

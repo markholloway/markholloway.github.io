@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-03T16:41:05-05:00</updated>
+ <updated>2019-03-03T17:10:11-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -528,7 +528,7 @@ cut &lt;span class=&quot;nt&quot;&gt;-f2-&lt;/span&gt; &lt;span class=&quot;nt&q
 	cut &lt;span class=&quot;nt&quot;&gt;-f2-&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;| cut &lt;span class=&quot;nt&quot;&gt;-f1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The final line in the script takes the data stored in the &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt; variable to &lt;code class=&quot;highlighter-rouge&quot;&gt;echo&lt;/code&gt; the output on the screen.&lt;/p&gt;
+&lt;p&gt;The final line in the script takes the data stored in the &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt; variable and will &lt;code class=&quot;highlighter-rouge&quot;&gt;echo&lt;/code&gt; the output on the terminal.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;NPA &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; =&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$result&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
