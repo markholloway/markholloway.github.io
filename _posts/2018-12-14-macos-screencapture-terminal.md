@@ -3,14 +3,14 @@ layout: post
 title: Automating macOS Screencaptures with BASH
 tags: [macos,bash]
 ---
-Taking a `screencapture` in macOS is easy and there are several ways to do it on the desktop. There is a lesser known command line tool that is native to macOS to automate taking screenshots. 
+Taking a `screencapture` in macOS is straightforward using keyb unless you want the screencapture to take place while typing or working. The solution is using a lesser known command line tool that is native to macOS to automate taking screenshots. 
 <!--more-->
 
-When taking a screenshot in macOS there are two commonly used keyboard shortcuts. one of two shortcut options. `Command + Shift + 4` will save the image to the desktop and `Command + Control + Shift + 4` copies to the clipboard.
+macOS screencaptures can be quickly captured using keyboard shortcuts. `Command+Shift+4` will save the screencapture to the desktop as a `.png` file and `Command+Control+Shift+4` copies the screencapture to the clipboard.
 
-Beyond the keyboard shortcuts there is a Screenshot utility located in Applications > Utilities > Screenshot. This will place a small control bar at the bottom of the desktop to allow continuous use rather than a one time capture.
+Beyond keyboard shortcuts there is a Screenshot utility located in Applications > Utilities > Screenshot. This places a small panel at the bottom of the desktop providing more control of screencaptures.
 
-While both options mentioned are great when using the keyboard or mouse there is no simple way to take screenshots as your are working. This where the `screenshot` command line utility is helpful for hands-free continuous screencapturing.
+While both options work great they assume the user doesn't need their hands for something else. It can also become tedious to manually take screenshots if needing more then a few. This is where the `screenshot` command line utility is helpful and provides hands-free continuous screencapturing with a variety of customization arguements.
 
 ### Viewing `screencapture` options
 
