@@ -3,18 +3,20 @@ layout: post
 title: Automating macOS Screencaptures with BASH
 tags: [macos,bash]
 ---
-Taking a `screencapture` in macOS is straightforward using keyb unless you want the screencapture to take place while typing or working. The solution is using a lesser known command line tool that is native to macOS to automate taking screenshots. 
+Apple includes a command line utility called `screencapture` which allows macOS to take any number of screenshots silently in the background, hands-free, while the user is working. 
 <!--more-->
 
-macOS screencaptures can be quickly captured using keyboard shortcuts. `Command+Shift+4` will save the screencapture to the desktop as a `.png` file and `Command+Control+Shift+4` copies the screencapture to the clipboard.
+Keyboard shortcuts such as `Command+Shift+4` will save a screencapture to the desktop and save the file as `.png`.  Another frequently used shortcut `Command+Control+Shift+4` copies the screencapture to the clipboard.
 
-Beyond keyboard shortcuts there is a Screenshot utility located in Applications > Utilities > Screenshot. This places a small panel at the bottom of the desktop providing more control of screencaptures.
+Beyond keyboard shortcuts there is a Screenshot utility located in `Applications > Utilities`. This places a panel at the bottom of the desktop providing more control of individual screencaptures.
 
-While both options work great they assume the user doesn't need their hands for something else. It can also become tedious to manually take screenshots if needing more then a few. This is where the `screenshot` command line utility is helpful and provides hands-free continuous screencapturing with a variety of customization arguements.
+The above methods assume the user doesn't need their hands at the time of taking the screencapture. It may also feel tedious to manually take screenshots one at a time if needing more then a few. The `screenshot` command line utility solves this problem while providing significant flexibility.
 
 ### Viewing `screencapture` options
 
-Open macOS Terminal and run screencapture from the command line 
+Open macOS Terminal and run screencapture from the command line to see the optional arguements.
+
+A few nice options worth noting are capturing the Touch Bar on a MacBook Pro, passing screencaptures directly to Mail, Preview, Messages, or the Clipboard, capturing desktop video and passing it to Quicktime, and Interactive Mode which allows changing what part of the screen should be captured.
 
 ```
 mbp2018:~ mh$ screencapture -h
@@ -60,19 +62,19 @@ usage: screencapture [-icMPmwsWxSCUtoa] [files]
 	files   where to save the screen capture, 1 file per screen
 ```
 
-## Building a script to automatate screencapture
+## Building a script to automatate repetitive screencapture tasks
 
-I want to write a script that takes a screencapture of my desktop every one second. 
+I want to write a script that takes 45 screencaptures of my desktop every 30 seconds and saves them as `.jpg`. 
 
-Open your preferred IDE or use macOS TextEdit. If using TextEdit it is important to save the file in plain text format. I saved my file as `screencap.sh` since it is a `bash` script and we will execute from the `shell`
+Open your preferred IDE or use macOS TextEdit. If using TextEdit it is important to save the file in plain text format. Save the file using the `.sh` extension rather than `.txt` since our goal is writig a `bash` script and we will execute from the `shell`
 
 ```bash
 #!/bin/bash
 # script to run screencapture every one second
 
 screenshot="$(which screencapture) -x -m -C"
-freq=1		#take a screenshot every one second
-maxshots=6	#take six screenshots then quit
+freq=30		#take a screenshot every 30 seconds
+maxshots=45	#take 45 screenshots then quit
 
 while getopts "af:m" opt; do
 	case $opt in
@@ -96,11 +98,11 @@ exit
 
 ## How it Works
 
-Before executing and testing the script I would like to explain what is happening. When the script runs it will take a screenshot of the desktop every one second and quit after the sixth screenshot. This is set by the value `freq=1` and `maxshots=6`. 
+Before executing and testing the script I would like to explain what is happening. When the script runs it will take a screenshot of the desktop every 30 seconds and quit after 45 screenshots. This is set by the value `freq=30` and `maxshots=45`. 
 
 ## Making `screencap.sh` executable
 
-In order to run the shell script we must change its permission so it is excutable
+In order to run the shell script we must change its permission so it is excutable.
 
 ```bash
 mbp2017:~ mh$ pwd
@@ -118,7 +120,7 @@ Execute the file. It will run silently in the background.
 mbp2017:~ mh$ ./screencap.sh
 ```
 
-Once the script has executed there should be six `.jpg` files in the folder where the scripts was run
+Once the script has finished there will be 45 `.jpg` files in the folder where the script was run.
 
 ```
 mbp2017:~ mh$ ls
@@ -133,9 +135,9 @@ screenshot6.jpg
 
 ## Overide the settings in the script
 
-View the script and notice `f` and `m` allow for optional arguements using `$OPTARG`. Whatever arguements are added to the launch of the script will be passed with the executable and override the pre-configured settings.
+View the script and notice `f` and `m` allow for optional arguements using `$OPTARG`. Whatever arguements are passed from the command line they will override the pre-configured settings.
 
-This will change the frequency from one second to eight seconds
+This will change the frequency from 30 seconds to 8 seconds. Everything else remains at their default settings referenced in the script.
 
 ```bash
 mbp2017:~ mh$ ./screencap.sh -f 8

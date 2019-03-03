@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-03T12:51:49-05:00</updated>
+ <updated>2019-03-03T13:41:03-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -383,18 +383,20 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
    <link href="http://localhost:4000/2018/12/14/macos-screencapture-terminal/"/>
    <updated>2018-12-14T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/14/macos-screencapture-terminal</id>
-   <content type="html">&lt;p&gt;Taking a &lt;code class=&quot;highlighter-rouge&quot;&gt;screencapture&lt;/code&gt; in macOS is straightforward using keyb unless you want the screencapture to take place while typing or working. The solution is using a lesser known command line tool that is native to macOS to automate taking screenshots. 
+   <content type="html">&lt;p&gt;Apple includes a command line utility called &lt;code class=&quot;highlighter-rouge&quot;&gt;screencapture&lt;/code&gt; which allows macOS to take any number of screenshots silently in the background, hands-free, while the user is working. 
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;p&gt;macOS screencaptures can be quickly captured using keyboard shortcuts. &lt;code class=&quot;highlighter-rouge&quot;&gt;Command+Shift+4&lt;/code&gt; will save the screencapture to the desktop as a &lt;code class=&quot;highlighter-rouge&quot;&gt;.png&lt;/code&gt; file and &lt;code class=&quot;highlighter-rouge&quot;&gt;Command+Control+Shift+4&lt;/code&gt; copies the screencapture to the clipboard.&lt;/p&gt;
+&lt;p&gt;Keyboard shortcuts such as &lt;code class=&quot;highlighter-rouge&quot;&gt;Command+Shift+4&lt;/code&gt; will save a screencapture to the desktop and save the file as &lt;code class=&quot;highlighter-rouge&quot;&gt;.png&lt;/code&gt;.  Another frequently used shortcut &lt;code class=&quot;highlighter-rouge&quot;&gt;Command+Control+Shift+4&lt;/code&gt; copies the screencapture to the clipboard.&lt;/p&gt;
 
-&lt;p&gt;Beyond keyboard shortcuts there is a Screenshot utility located in Applications &amp;gt; Utilities &amp;gt; Screenshot. This places a small panel at the bottom of the desktop providing more control of screencaptures.&lt;/p&gt;
+&lt;p&gt;Beyond keyboard shortcuts there is a Screenshot utility located in &lt;code class=&quot;highlighter-rouge&quot;&gt;Applications &amp;gt; Utilities&lt;/code&gt;. This places a panel at the bottom of the desktop providing more control of individual screencaptures.&lt;/p&gt;
 
-&lt;p&gt;While both options work great they assume the user doesn’t need their hands for something else. It can also become tedious to manually take screenshots if needing more then a few. This is where the &lt;code class=&quot;highlighter-rouge&quot;&gt;screenshot&lt;/code&gt; command line utility is helpful and provides hands-free continuous screencapturing with a variety of customization arguements.&lt;/p&gt;
+&lt;p&gt;The above methods assume the user doesn’t need their hands at the time of taking the screencapture. It may also feel tedious to manually take screenshots one at a time if needing more then a few. The &lt;code class=&quot;highlighter-rouge&quot;&gt;screenshot&lt;/code&gt; command line utility solves this problem while providing significant flexibility.&lt;/p&gt;
 
 &lt;h3 id=&quot;viewing-screencapture-options&quot;&gt;Viewing &lt;code class=&quot;highlighter-rouge&quot;&gt;screencapture&lt;/code&gt; options&lt;/h3&gt;
 
-&lt;p&gt;Open macOS Terminal and run screencapture from the command line&lt;/p&gt;
+&lt;p&gt;Open macOS Terminal and run screencapture from the command line to see the optional arguements.&lt;/p&gt;
+
+&lt;p&gt;A few nice options worth noting are capturing the Touch Bar on a MacBook Pro, passing screencaptures directly to Mail, Preview, Messages, or the Clipboard, capturing desktop video and passing it to Quicktime, and Interactive Mode which allows changing what part of the screen should be captured.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mbp2018:~ mh$ screencapture -h
 usage: screencapture [-icMPmwsWxSCUtoa] [files]
@@ -439,18 +441,18 @@ usage: screencapture [-icMPmwsWxSCUtoa] [files]
 	files   where to save the screen capture, 1 file per screen
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;building-a-script-to-automatate-screencapture&quot;&gt;Building a script to automatate screencapture&lt;/h2&gt;
+&lt;h2 id=&quot;building-a-script-to-automatate-repetitive-screencapture-tasks&quot;&gt;Building a script to automatate repetitive screencapture tasks&lt;/h2&gt;
 
-&lt;p&gt;I want to write a script that takes a screencapture of my desktop every one second.&lt;/p&gt;
+&lt;p&gt;I want to write a script that takes 45 screencaptures of my desktop every 30 seconds and saves them as &lt;code class=&quot;highlighter-rouge&quot;&gt;.jpg&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Open your preferred IDE or use macOS TextEdit. If using TextEdit it is important to save the file in plain text format. I saved my file as &lt;code class=&quot;highlighter-rouge&quot;&gt;screencap.sh&lt;/code&gt; since it is a &lt;code class=&quot;highlighter-rouge&quot;&gt;bash&lt;/code&gt; script and we will execute from the &lt;code class=&quot;highlighter-rouge&quot;&gt;shell&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Open your preferred IDE or use macOS TextEdit. If using TextEdit it is important to save the file in plain text format. Save the file using the &lt;code class=&quot;highlighter-rouge&quot;&gt;.sh&lt;/code&gt; extension rather than &lt;code class=&quot;highlighter-rouge&quot;&gt;.txt&lt;/code&gt; since our goal is writig a &lt;code class=&quot;highlighter-rouge&quot;&gt;bash&lt;/code&gt; script and we will execute from the &lt;code class=&quot;highlighter-rouge&quot;&gt;shell&lt;/code&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# script to run screencapture every one second&lt;/span&gt;
 
 &lt;span class=&quot;nv&quot;&gt;screenshot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;which screencapture&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -x -m -C&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1		&lt;span class=&quot;c&quot;&gt;#take a screenshot every one second&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;maxshots&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;6	&lt;span class=&quot;c&quot;&gt;#take six screenshots then quit&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;30		&lt;span class=&quot;c&quot;&gt;#take a screenshot every 30 seconds&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;maxshots&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;45	&lt;span class=&quot;c&quot;&gt;#take 45 screenshots then quit&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;getopts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;af:m&quot;&lt;/span&gt; opt&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
 	case&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$opt&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in
@@ -474,11 +476,11 @@ done
 
 &lt;h2 id=&quot;how-it-works&quot;&gt;How it Works&lt;/h2&gt;
 
-&lt;p&gt;Before executing and testing the script I would like to explain what is happening. When the script runs it will take a screenshot of the desktop every one second and quit after the sixth screenshot. This is set by the value &lt;code class=&quot;highlighter-rouge&quot;&gt;freq=1&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;maxshots=6&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Before executing and testing the script I would like to explain what is happening. When the script runs it will take a screenshot of the desktop every 30 seconds and quit after 45 screenshots. This is set by the value &lt;code class=&quot;highlighter-rouge&quot;&gt;freq=30&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;maxshots=45&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;making-screencapsh-executable&quot;&gt;Making &lt;code class=&quot;highlighter-rouge&quot;&gt;screencap.sh&lt;/code&gt; executable&lt;/h2&gt;
 
-&lt;p&gt;In order to run the shell script we must change its permission so it is excutable&lt;/p&gt;
+&lt;p&gt;In order to run the shell script we must change its permission so it is excutable.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mbp2017:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
 /Users/mh/Desktop
@@ -494,7 +496,7 @@ mbp2017:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chmod +x screencap.s
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mbp2017:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./screencap.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Once the script has executed there should be six &lt;code class=&quot;highlighter-rouge&quot;&gt;.jpg&lt;/code&gt; files in the folder where the scripts was run&lt;/p&gt;
+&lt;p&gt;Once the script has finished there will be 45 &lt;code class=&quot;highlighter-rouge&quot;&gt;.jpg&lt;/code&gt; files in the folder where the script was run.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mbp2017:~ mh$ ls
 
@@ -508,9 +510,9 @@ screenshot6.jpg
 
 &lt;h2 id=&quot;overide-the-settings-in-the-script&quot;&gt;Overide the settings in the script&lt;/h2&gt;
 
-&lt;p&gt;View the script and notice &lt;code class=&quot;highlighter-rouge&quot;&gt;f&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; allow for optional arguements using &lt;code class=&quot;highlighter-rouge&quot;&gt;$OPTARG&lt;/code&gt;. Whatever arguements are added to the launch of the script will be passed with the executable and override the pre-configured settings.&lt;/p&gt;
+&lt;p&gt;View the script and notice &lt;code class=&quot;highlighter-rouge&quot;&gt;f&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; allow for optional arguements using &lt;code class=&quot;highlighter-rouge&quot;&gt;$OPTARG&lt;/code&gt;. Whatever arguements are passed from the command line they will override the pre-configured settings.&lt;/p&gt;
 
-&lt;p&gt;This will change the frequency from one second to eight seconds&lt;/p&gt;
+&lt;p&gt;This will change the frequency from 30 seconds to 8 seconds. Everything else remains at their default settings referenced in the script.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mbp2017:~ mh&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./screencap.sh &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; 8
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
