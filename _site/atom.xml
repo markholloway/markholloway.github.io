@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-03T12:30:41-05:00</updated>
+ <updated>2019-03-03T12:35:22-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -386,11 +386,11 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
    <content type="html">&lt;p&gt;Taking a &lt;code class=&quot;highlighter-rouge&quot;&gt;screencapture&lt;/code&gt; in macOS is easy and there are several ways to do it on the desktop. There is a lesser known command line tool that is native to macOS to automate taking screenshots. 
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;p&gt;When taking a screenshot in macOS I often use one of two shortcut options. The sequence &lt;code class=&quot;highlighter-rouge&quot;&gt;Command + Shift + 4&lt;/code&gt; will save the image to the desktop and &lt;code class=&quot;highlighter-rouge&quot;&gt;Command + Control + Shift + 4&lt;/code&gt; copies it to the clipboard so it may be pasted in another applications.&lt;/p&gt;
+&lt;p&gt;When taking a screenshot in macOS there are two commonly used keyboard shortcuts. one of two shortcut options. &lt;code class=&quot;highlighter-rouge&quot;&gt;Command + Shift + 4&lt;/code&gt; will save the image to the desktop and &lt;code class=&quot;highlighter-rouge&quot;&gt;Command + Control + Shift + 4&lt;/code&gt; copies to the clipboard.&lt;/p&gt;
 
-&lt;p&gt;By default the images are saved as in &lt;code class=&quot;highlighter-rouge&quot;&gt;PNG&lt;/code&gt; format. For anything more than a simple screencapture and annotation there is the &lt;code class=&quot;highlighter-rouge&quot;&gt;screenshot&lt;/code&gt; application located in Applications &amp;gt; Utilities &amp;gt; Screenshot. This will place a small control bar at the bottom of the desktop to allow continuous use rather than a one time capture.&lt;/p&gt;
+&lt;p&gt;Beyond the keyboard shortcuts there is a Screenshot utility located in Applications &amp;gt; Utilities &amp;gt; Screenshot. This will place a small control bar at the bottom of the desktop to allow continuous use rather than a one time capture.&lt;/p&gt;
 
-&lt;p&gt;Apple loads up the screencapture command line utility with a wide range of options including saving in multiple image formats, capturing the touchbar display, automatically send the screenshot to Mail, Quicktime, or Preview, set an option whether the cursor should be captured, you likely get the idea. With a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;bash&lt;/code&gt; script the screencapture tool can run silently in the background.&lt;/p&gt;
+&lt;p&gt;While both options mentioned are great when using the keyboard or mouse there is no simple way to take screenshots as your are working. This where the &lt;code class=&quot;highlighter-rouge&quot;&gt;screenshot&lt;/code&gt; command line utility is helpful for hands-free continuous screencapturing.&lt;/p&gt;
 
 &lt;h3 id=&quot;viewing-screencapture-options&quot;&gt;Viewing &lt;code class=&quot;highlighter-rouge&quot;&gt;screencapture&lt;/code&gt; options&lt;/h3&gt;
 

@@ -6,11 +6,11 @@ tags: [macos,bash]
 Taking a `screencapture` in macOS is easy and there are several ways to do it on the desktop. There is a lesser known command line tool that is native to macOS to automate taking screenshots. 
 <!--more-->
 
-When taking a screenshot in macOS I often use one of two shortcut options. The sequence `Command + Shift + 4` will save the image to the desktop and `Command + Control + Shift + 4` copies it to the clipboard so it may be pasted in another applications.
+When taking a screenshot in macOS there are two commonly used keyboard shortcuts. one of two shortcut options. `Command + Shift + 4` will save the image to the desktop and `Command + Control + Shift + 4` copies to the clipboard.
 
-By default the images are saved as in `PNG` format. For anything more than a simple screencapture and annotation there is the `screenshot` application located in Applications > Utilities > Screenshot. This will place a small control bar at the bottom of the desktop to allow continuous use rather than a one time capture.
+Beyond the keyboard shortcuts there is a Screenshot utility located in Applications > Utilities > Screenshot. This will place a small control bar at the bottom of the desktop to allow continuous use rather than a one time capture.
 
-Apple loads up the screencapture command line utility with a wide range of options including saving in multiple image formats, capturing the touchbar display, automatically send the screenshot to Mail, Quicktime, or Preview, set an option whether the cursor should be captured, you likely get the idea. With a simple `bash` script the screencapture tool can run silently in the background.  
+While both options mentioned are great when using the keyboard or mouse there is no simple way to take screenshots as your are working. This where the `screenshot` command line utility is helpful for hands-free continuous screencapturing.
 
 ### Viewing `screencapture` options
 
