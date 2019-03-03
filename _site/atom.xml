@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-03T04:57:12-05:00</updated>
+ <updated>2019-03-03T05:08:29-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -65,13 +65,13 @@ UAda134911d1bce1aa68f2698 SMS_WhatsApp_FB_Customer_Service_Bot
 
 &lt;h2 id=&quot;exporting-an-assistant-schema&quot;&gt;Exporting an Assistant Schema&lt;/h2&gt;
 
-&lt;p&gt;I would like to check the &lt;code class=&quot;highlighter-rouge&quot;&gt;Make a Reservation&lt;/code&gt; Assistant and see if there is anything to finish. To do this I must export the schema as JSON&lt;/p&gt;
+&lt;p&gt;I would like to check &lt;code class=&quot;highlighter-rouge&quot;&gt;Make a Reservation&lt;/code&gt; and see if there is more work to be done building the Assistant. To do this I must export the schema as JSON&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mark&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ta &lt;span class=&quot;nb&quot;&gt;export&lt;/span&gt;
 ? Choose your assistant:  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Use arrow keys&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 ❯   Make_a_Reservation 
-	Schedule_an_Appointment
-	SMS_WhatsApp_FB_Customer_Service_Bot
+    Schedule_an_Appointment
+    SMS_WhatsApp_FB_Customer_Service_Bot
 
 Exporting Assistant......
 

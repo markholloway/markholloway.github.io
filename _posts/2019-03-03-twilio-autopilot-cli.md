@@ -55,14 +55,14 @@ To try a demo of `Schedule an Appointment` dial `+1-213-319-4095`
 
 ## Exporting an Assistant Schema
 
-I would like to check the `Make a Reservation` Assistant and see if there is anything to finish. To do this I must export the schema as JSON
+I would like to check `Make a Reservation` and see if there is more work to be done building the Assistant. To do this I must export the schema as JSON
 
 ```bash
 mark$ ta export
 ? Choose your assistant:  (Use arrow keys)
 ❯   Make_a_Reservation 
-	Schedule_an_Appointment
-	SMS_WhatsApp_FB_Customer_Service_Bot
+    Schedule_an_Appointment
+    SMS_WhatsApp_FB_Customer_Service_Bot
 
 Exporting Assistant......
 
