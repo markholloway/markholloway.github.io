@@ -24,14 +24,18 @@ voice:
   name: voice
 flex:
   name: flex
+autopilot:
+  name: autopilot
+proxy:
+  name: proxy
+authy:
+  name: authy
 linux:
   name: linux
 macos:
   name: macOS
 php:
   name: php
-laravel:
-  name: laravel
 acme:
   name: acme packet
 sbc:

@@ -3,10 +3,6 @@ layout: page
 title: About
 ---
 
-<!-- ![]({{ site.url }}/blog/assets/hackpackv4.png)  -->
-<!-- <img src="{{ site.baseurl }}/blog/assets/mark.jpg" width="400" height="608"> -->
-<!-- <img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608"> -->
-
 <div class="parent">
   <img class="hackpackv4" src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608" />
   <img class="hackpackv4-lights" src="{{ site.baseurl }}/blog/assets/hackpackv4-lights.gif" width="400" height="608" />

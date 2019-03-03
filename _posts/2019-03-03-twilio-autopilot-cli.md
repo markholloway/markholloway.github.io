@@ -1,0 +1,324 @@
+---
+layout: post
+title: Twilio Autopilot CLI
+tags: [twilio,autopilot]
+---
+![]({{ site.baseurl }}/blog/assets/2019-03-03/ap-cli.png)
+<!--more-->
+
+`Autopilot` is Twilio's artificially intelligent platform for Voice Bots, SMS, WhatsApp, Facebook Messenger, IVR, Slack, Alexa, and Google Assistant, while using natural langauge understanding and machine learning frameworks.
+
+
+Everything required to build an Autopilot Assistant is provided in the Twilio [Console](http://www.twilio.com/console) Web interface. It's simple and intuitive to use and it's possible to test the Assistant directly in the browser using the built in soft-client on the Autopilot page.
+
+I enjoy command line tools. Perhaps it's because I grew up on FreeBSD and have been using Cisco IOS for twenty years, but when I hear of a command line alternative to anything I tend to get excited.
+
+## Installing Autopilot CLI 
+
+Autopilot CLI is installed using `npm`
+
+```bash
+sudo npm install -g @twilio/autopilot-cli
+```
+
+In your terminal window enter `ta` and you should see the red ASCII art Twilio Autopilot logo like the picture above, plus the usage menu.
+
+## Configure Twilio Credentials
+
+Autopilot CLI needs to know the SID and Auth Token for the account. Use the `--credentials` option more than one account should be accessed from Autopilot CLI.
+
+```bash
+ta init
+
+mark$ ta init
+
+Please visit https://www.twilio.com/console
+Fill in the Twilio ACCOUNT SID and Twilio AUTH TOKEN below 
+to save/modify your Twilio credentials.
+
+? Twilio ACCOUNT SID:
+ ACXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+? Twilio AUTH TOKEN:
+ feXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+mark$ 
+```
+
+Once credentials are successfully added the Autopilot CLI will communicate with the Twilio platform to perform CLI actions.
+
+## List Current Assistants for the Account SID
+
+```bash
+mark$ ta list
+
+UA52e35a7976b5fea8e544ba8 Make_a_Reservation
+UA1c59d8db97e01531ecc5d65 Schedule_an_Appointment
+UAda134911d1bce1aa68f2698 SMS_WhatsApp_FB_Customer_Service_Bot
+
+mark$ 
+```
+
+To hear a demo of `Schedule an Appointment` Autopilot Assistant dial `+1-213-319-4095`
+
+## Exporting an Assistant Schema as JSON
+
+I would like to check the `Make a Reservation` Assistant and see if there is anything to finish.
+
+```bash
+mark$ ta export
+? Choose your assistant:  (Use arrow keys)
+❯   Make_a_Reservation 
+	Schedule_an_Appointment
+	SMS_WhatsApp_FB_Customer_Service_Bot
+
+Exporting Assistant......
+
+File exported in Make_a_Reservation.json 
+
+```
+
+## View Exported JSON
+
+```bash
+mark# more Make_a_Reservation.json
+```
+
+Below is the conents that makes up the `Make a Reservation` Assistant
+
+```json
+{
+	"friendlyName" : "Restaurant",
+	"logQueries" : true,
+	"uniqueName" : "Restaurant",
+	"defaults" : {
+		"defaults" : {
+			"assistant_initiation" : "task://initiation-task",
+			"fallback" : "task://initiation-task",
+			"collect" : {
+				"validate_on_failure" : "task://initiation-task"
+			}
+		}
+	},
+	"styleSheet" : {
+		"style_sheet" : {
+			"collect" : {
+				"validate" : {
+					"on_failure" : {
+						"repeat_question" : false,
+						"messages" : [
+							{
+								"say" : "I'm sorry, can you please say that again"
+							},
+							{
+								"say" : "hmm I still did'nt catch that, can you please repeat"
+							},
+							{
+								"say" : "Let's give it one more try. Please say it one more time"
+							}
+						]
+					},
+					"on_success" : { "say" : "" },
+					"max_attempts" : 4
+				}
+			},
+			"voice" : {
+				"say_voice" : "Polly.Matthew"
+			}
+		}
+	},
+	"fieldTypes" : [],
+	"tasks" : [
+		{
+			"uniqueName" : "confirm-reservation",
+			"actions" : {
+				"actions" : [
+					{
+						"redirect" : {
+							"uri" : "https://sand-mallard-4168.twil.io/deep-table-make-reservation"
+						}
+					}
+				]
+			},
+			"fields" : [],
+			"samples" : [
+				{
+					"language" : "en-US",
+					"taggedText" : "confirm reservation"
+				}
+			]
+		},
+		{
+			"uniqueName" : "make-reservation",
+			"actions" : {
+				"actions" : [
+					{
+						"collect" : {
+							"on_complete" : {
+								"redirect" : "task://confirm-reservation"
+							},
+							"name" : "make_reservation",
+							"questions" : [
+								{
+									"type" : "Twilio.FIRST_NAME",
+									"question" : {
+										"say" : "Great, I can help you with that. What's your first name?"
+									},
+									"name" : "first_name"
+								},
+								{
+									"type" : "Twilio.DATE",
+									"question" : {
+										"say" : "When day would you like your reservation for?"
+									},
+									"name" : "date"
+								},
+								{
+									"type" : "Twilio.TIME",
+									"question" : {
+										"say" : "Great at what time?"
+									},
+									"name" : "time"
+								},
+								{
+									"type" : "Twilio.NUMBER",
+									"question" : {
+										"say" : "For how many people"
+									},
+									"name" : "party_size"
+								}
+							]
+						}
+					}
+				]
+			},
+			"fields" : [],
+			"samples" : [
+				{
+					"language" : "en-US",
+					"taggedText" : "How do I make a reservation?"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "Can I make a reservation?"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "I would like to make a reservation"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "reservation tonight"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "can i make a reservation"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "reservations"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "reservation for"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "i would like to make a reservation"
+				}
+			]
+		},
+		{
+			"uniqueName" : "get-specials",
+			"actions" : {
+				"actions" : [
+					{
+						"say" : "Today's special is seasoned prime rib with roasted mashed potatoes, super recommended, is there anything else I can help you with?"
+					},
+					{ "listen" : true }
+				]
+			},
+			"fields" : [],
+			"samples" : [
+				{
+					"language" : "en-US",
+					"taggedText" : "the specials for today"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "specials"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "get today's special"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "today's special"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "dinner special"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "I want today's special"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "What's the special going on right now"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "I would like to know what the specials are"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "Doyou have any specials today?"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "What's today's specials?"
+				}
+			]
+		},
+		{
+			"uniqueName" : "initiation-task",
+			"actions" : {
+				"actions" : [
+					{
+						"say" : "Welcome to Deep Table, the worlds smartest restaurant, I'm Deep Table's Virtual Assistant, I can tell you about todays special or help you make a reservation, What would you like to do today?"
+					},
+					{ "listen" : true }
+				]
+			},
+			"fields" : [],
+			"samples" : [
+				{
+					"language" : "en-US",
+					"taggedText" : "Hi there"
+				},
+				{
+					"language" : "en-US",
+					"taggedText" : "Hello"
+				}
+			]
+		}
+	],
+	"modelBuild" : { "uniqueName" : "v0.10" }
+}
+```
+
+## Modify Schema and Publish to Twilio
+
+Once changes have been completed it is very easy to publish them to Twilio
+
+```bash
+markh$ ta update --schema Make_a_Reservation.json
+
+Updating assistant.....
+
+Assistant "Make_a_Reservation" was updated
+```
+
+Working with Autopilot CLI provides a clean, simple, and efficient way of working with Autopilot. If managing multiple Assistants the ability to export multiple schemas and automate scripts to batch process changes is very powerful. 

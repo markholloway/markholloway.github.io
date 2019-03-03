@@ -1,0 +1,220 @@
+{
+    "friendlyName" : "Restaurant",
+    "logQueries" : true,
+    "uniqueName" : "Restaurant",
+    "defaults" : {
+        "defaults" : {
+            "assistant_initiation" : "task://initiation-task",
+            "fallback" : "task://initiation-task",
+            "collect" : {
+                "validate_on_failure" : "task://initiation-task"
+            }
+        }
+    },
+    "styleSheet" : {
+        "style_sheet" : {
+            "collect" : {
+                "validate" : {
+                    "on_failure" : {
+                        "repeat_question" : false,
+                        "messages" : [
+                            {
+                                "say" : "I'm sorry, can you please say that again"
+                            },
+                            {
+                                "say" : "hmm I still did'nt catch that, can you please repeat"
+                            },
+                            {
+                                "say" : "Let's give it one more try. Please say it one more time"
+                            }
+                        ]
+                    },
+                    "on_success" : { "say" : "" },
+                    "max_attempts" : 4
+                }
+            },
+            "voice" : {
+                "say_voice" : "Polly.Matthew"
+            }
+        }
+    },
+    "fieldTypes" : [],
+    "tasks" : [
+        {
+            "uniqueName" : "confirm-reservation",
+            "actions" : {
+                "actions" : [
+                    {
+                        "redirect" : {
+                            "uri" : "https://sand-mallard-4168.twil.io/deep-table-make-reservation"
+                        }
+                    }
+                ]
+            },
+            "fields" : [],
+            "samples" : [
+                {
+                    "language" : "en-US",
+                    "taggedText" : "confirm reservation"
+                }
+            ]
+        },
+        {
+            "uniqueName" : "make-reservation",
+            "actions" : {
+                "actions" : [
+                    {
+                        "collect" : {
+                            "on_complete" : {
+                                "redirect" : "task://confirm-reservation"
+                            },
+                            "name" : "make_reservation",
+                            "questions" : [
+                                {
+                                    "type" : "Twilio.FIRST_NAME",
+                                    "question" : {
+                                        "say" : "Great, I can help you with that. What's your first name?"
+                                    },
+                                    "name" : "first_name"
+                                },
+                                {
+                                    "type" : "Twilio.DATE",
+                                    "question" : {
+                                        "say" : "When day would you like your reservation for?"
+                                    },
+                                    "name" : "date"
+                                },
+                                {
+                                    "type" : "Twilio.TIME",
+                                    "question" : {
+                                        "say" : "Great at what time?"
+                                    },
+                                    "name" : "time"
+                                },
+                                {
+                                    "type" : "Twilio.NUMBER",
+                                    "question" : {
+                                        "say" : "For how many people"
+                                    },
+                                    "name" : "party_size"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "fields" : [],
+            "samples" : [
+                {
+                    "language" : "en-US",
+                    "taggedText" : "How do I make a reservation?"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "Can I make a reservation?"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "I would like to make a reservation"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "reservation tonight"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "can i make a reservation"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "reservations"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "reservation for"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "i would like to make a reservation"
+                }
+            ]
+        },
+        {
+            "uniqueName" : "get-specials",
+            "actions" : {
+                "actions" : [
+                    {
+                        "say" : "Today's special is seasoned prime rib with roasted mashed potatoes, super recommended, is there anything else I can help you with?"
+                    },
+                    { "listen" : true }
+                ]
+            },
+            "fields" : [],
+            "samples" : [
+                {
+                    "language" : "en-US",
+                    "taggedText" : "the specials for today"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "specials"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "get today's special"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "today's special"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "dinner special"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "I want today's special"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "What's the special going on right now"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "I would like to know what the specials are"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "Doyou have any specials today?"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "What's today's specials?"
+                }
+            ]
+        },
+        {
+            "uniqueName" : "initiation-task",
+            "actions" : {
+                "actions" : [
+                    {
+                        "say" : "Welcome to Deep Table, the worlds smartest restaurant, I'm Deep Table's Virtual Assistant, I can tell you about todays special or help you make a reservation, What would you like to do today?"
+                    },
+                    { "listen" : true }
+                ]
+            },
+            "fields" : [],
+            "samples" : [
+                {
+                    "language" : "en-US",
+                    "taggedText" : "Hi there"
+                },
+                {
+                    "language" : "en-US",
+                    "taggedText" : "Hello"
+                }
+            ]
+        }
+    ],
+    "modelBuild" : { "uniqueName" : "v0.10" }
+}
