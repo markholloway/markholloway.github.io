@@ -20,11 +20,6 @@ I began my career back in 1997, fresh out of Cisco's CCNA studies, and quickly d
 I started this blog as a place holder for my technical notes.  I had a difficult time finding resources on the internet for SIP related technologies specific to Service Provider and large Enterprise VoIP architectures. I knew that if I write my notes on paper they would get lost, so I created a blog for my own personal storage of information. I soon realized this is a superior method and I would no longer invest in spiral bound notebooks. I began receiving messages from others who work with similar technologies who found the information to be useful for them. As technology continues to evolve, so does this blog. 
 </div>
 
-<!-- ## Get in touch!
- 
-[github.com/markholloway](https://github.com/markholloway)  
-[linkedin.com/in/mholloway](http://www.linkedin.com/in/mholloway/)
--->
 ## Try TwilioQuest  
 [<img src="{{ site.baseurl }}/blog/assets/base-avatar.png" width="80" height="80">](https://www.twilio.com/quest) 
 
