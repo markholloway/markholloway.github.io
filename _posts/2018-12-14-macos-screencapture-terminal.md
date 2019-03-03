@@ -23,28 +23,33 @@ mbp2018:~ mh$ screencapture -h
 usage: screencapture [-icMPmwsWxSCUtoa] [files]
 	-c         force screen capture to go to the clipboard
 	-b         capture Touch Bar - non-interactive modes only
-	-C         capture the cursor as well as the screen. only in non-interactive modes
+	-C         capture the cursor as well as the screen. only in 
+			   non-interactive modes
 	-d         display errors to the user graphically
 	-i         capture screen interactively, by selection or window
-							 control key - causes screen shot to go to clipboard
-							 space key   - toggle between mouse selection and
-														 window selection modes
-							 escape key  - cancels interactive screen shot
+				control key - causes screen shot to go to clipboard
+				space key   - toggle between mouse selection and
+				              window selection modes
+				escape key  - cancels interactive screen shot
 	-m         only capture the main monitor, undefined if -i is set
-	-D<display> screen capture or record from the display specified. -D 1 is main display, -D 2 secondary, etc.
-	-o         in window capture mode, do not capture the shadow of the window
-	-p         screen capture will use the default settings for capture. The files argument will be ignored
+	-D<display> screen capture or record from the display specified.
+	 			-D 1 is main display, -D 2 secondary, etc.
+	-o         in window capture mode, do not capture the shadow of window
+	-p         screen capture will use the default settings for capture. 
+			   The files argument will be ignored
 	-M         screen capture output will go to a new Mail message
-	-P         screen capture output will open in Preview or QuickTime Player if video
+	-P         screen capture output will open in Preview or 
+	           QuickTime Player if video
 	-I         screen capture output will open in Messages
 	-B<bundleid> screen capture output will open in app with bundleid
 	-s         only allow mouse selection mode
 	-S         in window capture mode, capture the screen not the window
 	-J<style>  sets the starting of interfactive capture
-							 selection       - captures screen in selection mode
-							 window          - captures screen in window mode
-							 video           - records screen in selection mode
-	-t<format> image format to create, default is png (other options include pdf, jpg, tiff and other formats)
+				selection       - captures screen in selection mode
+				window          - captures screen in window mode
+				video           - records screen in selection mode
+	-t<format> image format to create, default is png 
+			   (other options include pdf, jpg, tiff and other formats)
 	-T<seconds> take the picture after a delay of <seconds>, default is 5
 	-w         only allow window selection mode
 	-W         start interaction in window selection mode
@@ -55,11 +60,13 @@ usage: screencapture [-icMPmwsWxSCUtoa] [files]
 	-R<x,y,w,h> capture screen rect
 	-v        capture video recording of the screen
 	-V<seconds> limits video capture to specified seconds
-	-A<id>    captures audio during a video recording using default input. Optional specify the id of the audio source
+	-A<id>    captures audio during a video recording using default input. 
+			  Optional specify the id of the audio source
 	-k        show clicks in video recording mode
 	-U        Show interactive toolbar in interactive mode
-	-u        present UI after screencapture is complete. files passed to command line will be ignored
-	files   where to save the screen capture, 1 file per screen
+	-u        present UI after screencapture is complete. 
+	          files passed to command line will be ignored
+	files     where to save the screen capture, 1 file per screen
 ```
 
 ## Building a script to automatate repetitive screencapture tasks
@@ -143,6 +150,6 @@ This will change the frequency from 30 seconds to 8 seconds. Everything else rem
 mbp2017:~ mh$ ./screencap.sh -f 8
 ```
 
-Building on top of this script with additional default parameters and command line arguements makes the `screencapture` app extremely powerful with many supported use cases. Capture you progress in [TwilioQuest](http://twilio.com/quest) and show off your high score to all your friends.
+Building on top of this script with additional default parameters and command line arguements makes the `screencapture` utility convenient and powerful.
 
 
