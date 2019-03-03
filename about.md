@@ -5,22 +5,28 @@ title: About
 
 <!-- ![]({{ site.url }}/blog/assets/hackpackv4.png)  -->
 <!-- <img src="{{ site.baseurl }}/blog/assets/mark.jpg" width="400" height="608"> -->
-<img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608">
+<!-- <img src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608"> -->
+
+<div class="parent">
+  <img class="hackpackv4" src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608" />
+  <img class="hackpackv4-lights" src="{{ site.baseurl }}/blog/assets/hackpackv4-lights.gif" width="400" height="608" />
+</div>
 
 <div style="text-align: justify">
-Hello there, friends! My name is Mark and I am a Solutions Architect based in Atlanta, Georgia. I am also CCIE #27384, as well as holding a number of other industry certifications. I’m currently working for a global communications provider allowing developers to integrate channels of communication into a variety of applications and services using Web APIs, SIP, and programmable Wireless 4G/LTE, EUICC, and Narrowband, running on top of a global network.  I have a keen interest in SDN, network automation, and programmability with Python. Troubleshooting and problem solving are some of my favored past times.
+I began my career back in 1997, fresh out of Cisco's CCNA studies, and quickly developed a passion for IP networking technologies. In 2004 I started working with SIP and VoIP communications for a Service Provider and before long focused primarily on Acme Packet and Broadsoft technologies. With a background in Cisco Routing and Switching, and in 2010 earning my CCIE in Voice, I merged skills and worked as a Solutions Architect supporting Service Provider and Enterprise customers deploying SIP at the core and edge of their networks. I've expanded my skills to include Python, which I rely on for everything that is programmable or has an API, such as real-time Voice, SMS, and SIP communications, or SDN, NetDevOps, and Programmability. 
 </div>
 <br>
 <div style="text-align: justify">
-I started my career back in 1997, fresh out of Cisco's CCNA studies. It was in 2004 that I was first introduced to Acme Packet, Broadsoft, and the world of carrier SIP, VoIP, and the very early days of what would become WebRTC. Combined with my background in Cisco Routing and Switching, and later earning my CCIE in Voice, I’ve been hooked on all-things realted to carrier networking and IP  communications, with a particular interest in the service provider core, where the largest, most complex, and reidiculously expensive networks in the world are at my fingertips. 
+I started this blog as a place holder for my technical notes.  I had a difficult time finding resources on the internet for SIP related technologies specific to Service Provider and large Enterprise VoIP architectures. I knew that if I write my notes on paper they would get lost, so I created a blog for my own personal storage of information. I soon realized this is a superior method and I would no longer invest in spiral bound notebooks. I began receiving messages from others who work with similar technologies who found the information to be useful for them. As technology continues to evolve, so does this blog. 
 </div>
 
-
-## Get in touch!
+<!-- ## Get in touch!
  
 [github.com/markholloway](https://github.com/markholloway)  
 [linkedin.com/in/mholloway](http://www.linkedin.com/in/mholloway/)
-
+-->
+## Try TwilioQuest  
+[<img src="{{ site.baseurl }}/blog/assets/base-avatar.png" width="80" height="80">](https://www.twilio.com/quest) 
 
 ## Blog Info
 

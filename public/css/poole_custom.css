@@ -336,6 +336,25 @@ tbody tr:nth-child(odd) th {
  * page is wrapped in `.page` and is only used on the page layout.
  */
 
+ /* 
+  * Hackpack v4 and Blinking Lights 
+  */
+ .parent {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.hackpackv4 {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.hackpackv4-lights {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
 .page,
 .post {
   margin-bottom: 4em;
