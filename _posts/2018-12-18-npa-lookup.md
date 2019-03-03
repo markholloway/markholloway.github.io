@@ -14,10 +14,10 @@ In the United State and Canada the first 3 digits of a 10 digit phone number are
 
 Standard formatting is represented as `NPA-NXX-XXXX`. In the number `415-523-8886` the NPA is 415 and the NXX is 523. The SLI is 8886.
 
-Last item to note is the reason for `NPA-NXX` is for carriers to knwo what `LATA` the NPA-NXX originates from. In telco terminology this is the `rate center` your number belongs to. The LATA (Local Access and Transport Area) is the geographic barrier that determines a local call from a long distance call. There's more to it than that, such as 911 and what `PSAP` you belong to and making sure the `ALI` database is correct, but that's a lesson for another day.
+Last item to note is the reason for `NPA-NXX` is for carriers to know what `LATA` (Local Access and Transport Area) the NPA-NXX originates from. In telco terminology this is the `rate center` your number belongs to. The LATA is the invisible line that determines when your call is local or long distance. There's more to it than that, but I'll save the rest for another day.
 
 
-## Review the final script
+## View the completed script
 
 Below is the shell script `npa.sh` in its final form.
 

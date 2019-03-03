@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-03T16:36:18-05:00</updated>
+ <updated>2019-03-03T16:41:05-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -394,9 +394,9 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
 
 &lt;p&gt;Standard formatting is represented as &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA-NXX-XXXX&lt;/code&gt;. In the number &lt;code class=&quot;highlighter-rouge&quot;&gt;415-523-8886&lt;/code&gt; the NPA is 415 and the NXX is 523. The SLI is 8886.&lt;/p&gt;
 
-&lt;p&gt;Last item to note is the reason for &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA-NXX&lt;/code&gt; is for carriers to knwo what &lt;code class=&quot;highlighter-rouge&quot;&gt;LATA&lt;/code&gt; the NPA-NXX originates from. In telco terminology this is the &lt;code class=&quot;highlighter-rouge&quot;&gt;rate center&lt;/code&gt; your number belongs to. The LATA (Local Access and Transport Area) is the geographic barrier that determines a local call from a long distance call. There’s more to it than that, such as 911 and what &lt;code class=&quot;highlighter-rouge&quot;&gt;PSAP&lt;/code&gt; you belong to and making sure the &lt;code class=&quot;highlighter-rouge&quot;&gt;ALI&lt;/code&gt; database is correct, but that’s a lesson for another day.&lt;/p&gt;
+&lt;p&gt;Last item to note is the reason for &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA-NXX&lt;/code&gt; is for carriers to know what &lt;code class=&quot;highlighter-rouge&quot;&gt;LATA&lt;/code&gt; (Local Access and Transport Area) the NPA-NXX originates from. In telco terminology this is the &lt;code class=&quot;highlighter-rouge&quot;&gt;rate center&lt;/code&gt; your number belongs to. The LATA is the invisible line that determines when your call is local or long distance. There’s more to it than that, but I’ll save the rest for another day.&lt;/p&gt;
 
-&lt;h2 id=&quot;review-the-final-script&quot;&gt;Review the final script&lt;/h2&gt;
+&lt;h2 id=&quot;view-the-completed-script&quot;&gt;View the completed script&lt;/h2&gt;
 
 &lt;p&gt;Below is the shell script &lt;code class=&quot;highlighter-rouge&quot;&gt;npa.sh&lt;/code&gt; in its final form.&lt;/p&gt;
 
