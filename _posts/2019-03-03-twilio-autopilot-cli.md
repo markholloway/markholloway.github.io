@@ -312,4 +312,63 @@ Updating assistant.....
 Assistant "Make_a_Reservation" was updated
 ```
 
-Working with Autopilot CLI provides a clean, simple, and efficient way of working with Autopilot. If managing multiple Assistants the ability to export multiple schemas and automate scripts to batch process changes is very powerful. 
+## Handoff
+
+It is possible to set a specifc number of times where Autopilot and the user are not progressing forward and the call should be re-routed to a live person. 
+
+If the call setup should occur on Programmable Voice modify the following code
+
+```json
+{
+	"actions": [
+		{
+			"say": "Hold on, we are connecting you with an agent"
+		},
+		{
+			"handoff": {
+				"channel": "voice",
+				"uri": "INSET YOUR TWIML_URL HERE",
+				"method": "POST"
+			}
+		}
+	]
+}
+```
+
+If the call should route to Twilio Taskrouter modify the following code
+
+```json
+{
+	"actions": [
+		{
+			"handoff": {
+				"channel": "voice",
+				"uri": "taskrouter://WW0123456789abcddef"
+			}
+		}
+	]
+}
+```
+
+If using Flex and the call should route to a Flex queue modify the following code
+
+```json
+{
+	"actions": [
+		{
+			"handoff": {
+				"channel": "voice",
+				"uri": "taskrouter://WW0123456789abcdef0",
+				"wait_url": "https://myapp.com/music.php",
+				"wait_url_method": "GET",
+				"action": "https://myapp.com/survey.php",
+				"priority": "5",
+				"timeout": "200"
+			}
+		}
+	]
+}
+```
+
+Working with Autopilot CLI cranks up the fun to a new level. Enjoy!
+ 

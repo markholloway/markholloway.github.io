@@ -4,8 +4,22 @@ bash:
   name: bash
 node:
   name: node.js
-react:
-  name: react
+cisco:
+  name: cisco cube
+cube:
+  name: cisco cube
+ios:
+  name: ios
+iosxr:
+  name: iosxr
+iosxe:
+  name: iosxe
+virl:
+  name: virl
+eve-ng:
+  name: eve-ng
+gns3:
+  name: gns3
 python:
   name: python
 docker:
