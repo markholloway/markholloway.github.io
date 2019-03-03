@@ -10,7 +10,7 @@ I wrote this script after becoming frustrated each time I needed to look up an a
 
 ## Service Provider Lesson of the Day
 
-In the United State and Canada the first 3 digits of a 10 digit phone number are referred to as the Number Plan Area or `NPA`. That's what the rest of us call an Area Code. The second set of 3 digits are the the Exchange, or Central Switching Office Designation, and referred to as `NXX`. The last 4 digits of a phone number are referred to as `XXXX` and referred to as the `SLI` or Subscriber Line Identifier. 
+In the United State and Canada the first 3 digits of a 10 digit phone number are referred to as the Number Plan Area or `NPA`. That's what the rest of us call an Area Code. The second set of 3 digits are the Exchange, or Central Switching Office Designation, and referred to as `NXX`. The last 4 digits of a phone number are `XXXX` and referred to as the `SLI` or Subscriber Line Identifier. 
 
 Standard formatting is represented as `NPA-NXX-XXXX`. In the number `415-523-8886` the NPA is 415 and the NXX is 523. The SLI is 8886.
 
