@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-03T18:49:01-05:00</updated>
+ <updated>2019-03-03T19:34:09-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -691,6 +691,37 @@ screenshot6.jpg
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Building on top of this script with additional default parameters and command line arguements makes the &lt;code class=&quot;highlighter-rouge&quot;&gt;screencapture&lt;/code&gt; utility convenient and powerful.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Using a Cisco router as a TFTP server</title>
+   <link href="http://localhost:4000/2018/04/19/cisco-ios-tftp-server/"/>
+   <updated>2018-04-19T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2018/04/19/cisco-ios-tftp-server</id>
+   <content type="html">&lt;p&gt;The ability to use a router as a &lt;code class=&quot;highlighter-rouge&quot;&gt;TFTP&lt;/code&gt; server can be very useful. Whether hosting router images, ringtones, or other bulk files, it’s less time consuming than configuring a server for the same purpose.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;The first thing I’ll mention is TFTP is not a secure protocol. There is no encryption within the TFTP protocol itself. Do not transmit sensitive data over TFTP, ever.&lt;/p&gt;
+
+&lt;p&gt;Using the &lt;code class=&quot;highlighter-rouge&quot;&gt;tftp-server&lt;/code&gt; command and specifying the file in flash to share makes the file accessible to any inbound TFTP requests for the file name.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;router# config t
+router(config)# tftp-server flash:c7200-adventerprisek9-mz.152.bin
+router(config)# end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If I want to restrict TFTP access so only device on a specific network can access the image I can create and &lt;code class=&quot;highlighter-rouge&quot;&gt;access list&lt;/code&gt; and reference it in the tftp-server configuration.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;router# config t
+router(config)# no tftp-server flash:c7200-adventerprisek9-mz.152.bin
+router(config)# access-list 40 permit 172.16.32.0 0.0.0.255
+router(config)# access-lkst 40 deny any
+router(config)# tftp-server flash:c7200-adventerprisek9-mz.152.bin 40
+router(config)# end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;By creating access-list &lt;code class=&quot;highlighter-rouge&quot;&gt;40&lt;/code&gt; I have defined what IP network is permitted access to the image and what should be denied. I then applied the access list number &lt;code class=&quot;highlighter-rouge&quot;&gt;40&lt;/code&gt; at the end of the &lt;code class=&quot;highlighter-rouge&quot;&gt;tftp-server&lt;/code&gt; statement which enforces the new &lt;code class=&quot;highlighter-rouge&quot;&gt;ACL&lt;/code&gt; rules.&lt;/p&gt;
 
 </content>
  </entry>
