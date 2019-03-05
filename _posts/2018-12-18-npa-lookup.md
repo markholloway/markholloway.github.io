@@ -3,7 +3,7 @@ layout: post
 title:  Match area codes to city and state with this BASH Script
 tags: [bash]
 ---
-This is a script that looks up an area code in the United States or Canada and returns the city and state it is assigned to by the North American `NPA-NXX` Wire Center 
+This is a script I wrote that looks up an area code in the United States or Canada and returns the city and state it is assigned to by the North American `NPA-NXX` Wire Center 
 <!--more-->
 
 I wrote this script after becoming frustrated each time I needed to look up an area code to see what state it belongs to and realizing I'm wasting time searching. I kept telling myself I'll write a script to do it. Well, I finally got around to it.

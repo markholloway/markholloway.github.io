@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-05T16:26:25-05:00</updated>
+ <updated>2019-03-05T16:33:33-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Build and publish Autopilot BOT Assistants with CLI tool</title>
+   <title>Build and publish Autopilot BOT Assistants with Twilio's CLI tool</title>
    <link href="http://localhost:4000/2019/03/03/twilio-autopilot-cli/"/>
    <updated>2019-03-03T00:00:00-05:00</updated>
    <id>http://localhost:4000/2019/03/03/twilio-autopilot-cli</id>
@@ -385,7 +385,7 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
    <link href="http://localhost:4000/2018/12/18/npa-lookup/"/>
    <updated>2018-12-18T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/18/npa-lookup</id>
-   <content type="html">&lt;p&gt;This is a script that looks up an area code in the United States or Canada and returns the city and state it is assigned to by the North American &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA-NXX&lt;/code&gt; Wire Center 
+   <content type="html">&lt;p&gt;This is a script I wrote that looks up an area code in the United States or Canada and returns the city and state it is assigned to by the North American &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA-NXX&lt;/code&gt; Wire Center 
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;I wrote this script after becoming frustrated each time I needed to look up an area code to see what state it belongs to and realizing I’m wasting time searching. I kept telling myself I’ll write a script to do it. Well, I finally got around to it.&lt;/p&gt;

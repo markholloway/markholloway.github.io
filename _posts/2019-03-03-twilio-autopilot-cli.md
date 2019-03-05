@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Build and publish Autopilot BOT Assistants with CLI tool
+title: Build and publish Autopilot BOT Assistants with Twilio's CLI tool
 tags: [twilio,autopilot]
 ---
 ![]({{ site.baseurl }}/blog/assets/2019-03-03/ap-cli.png)
