@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-05T16:17:13-05:00</updated>
+ <updated>2019-03-05T16:26:25-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Build Autopilot Assistants locally in your CLI</title>
+   <title>Build and publish Autopilot BOT Assistants with CLI tool</title>
    <link href="http://localhost:4000/2019/03/03/twilio-autopilot-cli/"/>
    <updated>2019-03-03T00:00:00-05:00</updated>
    <id>http://localhost:4000/2019/03/03/twilio-autopilot-cli</id>
@@ -381,7 +381,7 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
  </entry>
  
  <entry>
-   <title>Script to lookup U.S. and Canadian area codes</title>
+   <title>Match area codes to city and state with this BASH Script</title>
    <link href="http://localhost:4000/2018/12/18/npa-lookup/"/>
    <updated>2018-12-18T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/18/npa-lookup</id>
@@ -547,7 +547,7 @@ NPA 404 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  N Georgia: Atlanta and s
  </entry>
  
  <entry>
-   <title>Automating macOS Screencaptures with BASH</title>
+   <title>Automating macOS screen captures with BASH</title>
    <link href="http://localhost:4000/2018/11/14/macos-screencapture-terminal/"/>
    <updated>2018-11-14T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/11/14/macos-screencapture-terminal</id>

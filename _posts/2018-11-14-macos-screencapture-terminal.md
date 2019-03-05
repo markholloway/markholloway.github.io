@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Automating macOS Screencaptures with BASH
+title: Automating macOS screen captures with BASH
 tags: [macos,bash]
 ---
 Apple includes a command line utility called `screencapture` which allows macOS to take any number of screenshots silently in the background, hands-free, while the user is working. 
