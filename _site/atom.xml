@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-05T09:44:57-05:00</updated>
+ <updated>2019-03-05T16:17:13-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -17,8 +17,9 @@
    <link href="http://localhost:4000/2019/03/03/twilio-autopilot-cli/"/>
    <updated>2019-03-03T00:00:00-05:00</updated>
    <id>http://localhost:4000/2019/03/03/twilio-autopilot-cli</id>
-   <content type="html">&lt;p&gt;Twilio has provide a free &lt;code class=&quot;highlighter-rouge&quot;&gt;CLI&lt;/code&gt; utility to build and manage Autopilot Assistants locally. This is an example of how it works. 
-&lt;img src=&quot;/blog/assets/2019-03-03/ap-cli.png&quot; alt=&quot;&quot; /&gt;
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-03/ap-cli.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Twilio recently released a free &lt;code class=&quot;highlighter-rouge&quot;&gt;CLI&lt;/code&gt; utility to build and manage Autopilot Assistants locally. This demonstrates how to setup credentials and publish an Assistant
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;When building an Autopilot Assistant it’s typically done through the Twilio &lt;a href=&quot;http://www.twilio.com/console&quot;&gt;Console&lt;/a&gt;. What’s convenient about this is Twilio includes a &lt;code class=&quot;highlighter-rouge&quot;&gt;Test Your Assistant&lt;/code&gt; tool in the browser so it’s not necessary to dial in to a Twilio number for every test.&lt;/p&gt;
