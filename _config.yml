@@ -7,8 +7,8 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              Technical Notes for API Communications, Programmability, and Networking 
-description:          My personal blog - on Python Development, Cloud Communications, and Networking
+tagline:              Mark's Blog on Cloud Communications and API Programmability
+description:          My personal blog on the future of IP and Web API Communications
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
