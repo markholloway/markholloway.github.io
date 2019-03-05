@@ -1,15 +1,16 @@
 ---
 layout: post
-title: Twilio Autopilot CLI
+title: Build Autopilot Assistants locally in your CLI
 tags: [twilio,autopilot]
 ---
+Twilio has provide a free `CLI` utility to build and manage Autopilot Assistants locally. This is an example of how it works. 
 ![]({{ site.baseurl }}/blog/assets/2019-03-03/ap-cli.png)
 <!--more-->
 
-`Autopilot` is Twilio's artificially intelligent bot platform for Voice, SMS, WhatsApp, Facebook Messenger, IVR, Slack, Alexa, and Google Assistant, while using natural langauge understanding and machine learning frameworks.
+When building an Autopilot Assistant it's typically done through the Twilio [Console](http://www.twilio.com/console). What's convenient about this is Twilio includes a `Test Your Assistant` tool in the browser so it's not necessary to dial in to a Twilio number for every test.
 
+![]({{ site.baseurl }}/blog/assets/2019-03-03/test-assistant.png)
 
-Everything required to build an Autopilot Assistant is provided in the Twilio [Console](http://www.twilio.com/console). Once I received word there is a CLI option I was immediately all over it. I love working in CLI mode.
 
 ## Install Autopilot CLI using Node Package Manager
 

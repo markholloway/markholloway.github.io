@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-05T08:43:10-05:00</updated>
+ <updated>2019-03-05T09:03:47-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,16 +13,17 @@
 
  
  <entry>
-   <title>Twilio Autopilot CLI</title>
+   <title>Build Autopilot Assistants locally in your CLI</title>
    <link href="http://localhost:4000/2019/03/03/twilio-autopilot-cli/"/>
    <updated>2019-03-03T00:00:00-05:00</updated>
    <id>http://localhost:4000/2019/03/03/twilio-autopilot-cli</id>
-   <content type="html">&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-03/ap-cli.png&quot; alt=&quot;&quot; /&gt;
+   <content type="html">&lt;p&gt;Twilio has provide a free &lt;code class=&quot;highlighter-rouge&quot;&gt;CLI&lt;/code&gt; utility to build and manage Autopilot Assistants locally. This is an example of how it works. 
+&lt;img src=&quot;/blog/assets/2019-03-03/ap-cli.png&quot; alt=&quot;&quot; /&gt;
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Autopilot&lt;/code&gt; is Twilio’s artificially intelligent bot platform for Voice, SMS, WhatsApp, Facebook Messenger, IVR, Slack, Alexa, and Google Assistant, while using natural langauge understanding and machine learning frameworks.&lt;/p&gt;
+&lt;p&gt;When building an Autopilot Assistant it’s typically done through the Twilio &lt;a href=&quot;http://www.twilio.com/console&quot;&gt;Console&lt;/a&gt;. What’s convenient about this is Twilio includes a &lt;code class=&quot;highlighter-rouge&quot;&gt;Test Your Assistant&lt;/code&gt; tool in the browser so it’s not necessary to dial in to a Twilio number for every test.&lt;/p&gt;
 
-&lt;p&gt;Everything required to build an Autopilot Assistant is provided in the Twilio &lt;a href=&quot;http://www.twilio.com/console&quot;&gt;Console&lt;/a&gt;. Once I received word there is a CLI option I was immediately all over it. I love working in CLI mode.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-03/test-assistant.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;install-autopilot-cli-using-node-package-manager&quot;&gt;Install Autopilot CLI using Node Package Manager&lt;/h2&gt;
 
