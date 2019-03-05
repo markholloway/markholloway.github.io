@@ -7,8 +7,8 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              Mark's Blog on Cloud Communications and API Programmability
-description:          My personal blog on the future of IP and Web API Communications
+tagline:              Mark's Blog on VoIP, SIP, and API Communications
+description:          My personal blog on Service Provider and Enterprise IP and Cloud API Communications
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
