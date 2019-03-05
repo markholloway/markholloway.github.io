@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-05T16:33:33-05:00</updated>
+ <updated>2019-03-05T17:09:55-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -547,7 +547,7 @@ NPA 404 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  N Georgia: Atlanta and s
  </entry>
  
  <entry>
-   <title>Automating macOS screen captures with BASH</title>
+   <title>Script for macOS that automates taking desktop screenshots or video capture</title>
    <link href="http://localhost:4000/2018/11/14/macos-screencapture-terminal/"/>
    <updated>2018-11-14T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/11/14/macos-screencapture-terminal</id>
