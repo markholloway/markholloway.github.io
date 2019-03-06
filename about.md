@@ -7,7 +7,7 @@ title: About
   <img class="hackpackv4" src="{{ site.baseurl }}/blog/assets/hackpackv4.png" width="400" height="608" />
   <img class="hackpackv4-lights" src="{{ site.baseurl }}/blog/assets/hackpackv4-lights.gif" width="400" height="608" />
 </div>
-I started this blog as a place holder for my technical notes in 2009.  I had a difficult time finding resources on the Internet for SIP related technologies specific to Service Provider and large Enterprise VoIP deployments. I knew that if I write my notes on paper they would get lost, so I created a blog for my own personal storage of information. I started receiving messages from people who work with similar technologies that found the information to be useful. I continue to write about my technical experiences and hope others continue to find the information beneficial. 
+I started this blog as a place holder for my technical notes in 2009.  I had a difficult time finding resources on the Internet for SIP related technologies specific to Service Provider and large Enterprise VoIP deployments. I knew that if I write my notes on paper they would get lost, so I created a blog for my own personal storage of information. I started receiving messages from people who work with similar technologies that found the information to be useful. I continue to write about my technical experiences and hope others find the information interesting and beneficial. 
 {: style="text-align: justify"}
 
 ## Play TwilioQuest  

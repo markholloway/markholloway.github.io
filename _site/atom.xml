@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-05T17:09:55-05:00</updated>
+ <updated>2019-03-05T21:08:00-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -381,7 +381,7 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
  </entry>
  
  <entry>
-   <title>Match area codes to city and state with this BASH Script</title>
+   <title>Match area codes to city and state with this BASH script</title>
    <link href="http://localhost:4000/2018/12/18/npa-lookup/"/>
    <updated>2018-12-18T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/18/npa-lookup</id>
