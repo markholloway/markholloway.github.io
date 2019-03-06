@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Script for macOS that automates taking desktop screenshots or video capture
+title: Script for macOS that automates desktop screenshots and video capture
 tags: [macos,bash]
 ---
 Apple includes a command line utility called `screencapture` which allows macOS to take any number of screenshots silently in the background, hands-free, while the user is working. 

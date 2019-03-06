@@ -5,7 +5,7 @@ tags: [twilio,autopilot]
 ---
 ![]({{ site.baseurl }}/blog/assets/2019-03-03/ap-cli.png)
 
-Twilio recently released a free `CLI` utility to build and manage Autopilot Assistants locally. This demonstrates how to setup credentials and publish an Assistant
+Twilio recently released a `CLI` utility to build and manage Autopilot Assistants locally. This demonstrates how to setup credentials and publish an Assistant
 <!--more-->
 
 When building an Autopilot Assistant it's typically done through the Twilio [Console](http://www.twilio.com/console). What's convenient about this is Twilio includes a `Test Your Assistant` tool in the browser so it's not necessary to dial in to a Twilio number for every test.

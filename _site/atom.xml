@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-05T21:08:00-05:00</updated>
+ <updated>2019-03-06T06:18:05-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -19,7 +19,7 @@
    <id>http://localhost:4000/2019/03/03/twilio-autopilot-cli</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-03/ap-cli.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Twilio recently released a free &lt;code class=&quot;highlighter-rouge&quot;&gt;CLI&lt;/code&gt; utility to build and manage Autopilot Assistants locally. This demonstrates how to setup credentials and publish an Assistant
+&lt;p&gt;Twilio recently released a &lt;code class=&quot;highlighter-rouge&quot;&gt;CLI&lt;/code&gt; utility to build and manage Autopilot Assistants locally. This demonstrates how to setup credentials and publish an Assistant
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;When building an Autopilot Assistant it’s typically done through the Twilio &lt;a href=&quot;http://www.twilio.com/console&quot;&gt;Console&lt;/a&gt;. What’s convenient about this is Twilio includes a &lt;code class=&quot;highlighter-rouge&quot;&gt;Test Your Assistant&lt;/code&gt; tool in the browser so it’s not necessary to dial in to a Twilio number for every test.&lt;/p&gt;
@@ -547,7 +547,7 @@ NPA 404 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  N Georgia: Atlanta and s
  </entry>
  
  <entry>
-   <title>Script for macOS that automates taking desktop screenshots or video capture</title>
+   <title>Script for macOS that automates desktop screenshots and video capture</title>
    <link href="http://localhost:4000/2018/11/14/macos-screencapture-terminal/"/>
    <updated>2018-11-14T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/11/14/macos-screencapture-terminal</id>
