@@ -8,7 +8,8 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark's Blog on VoIP, SIP, and API Communications
-description:          My personal blog on Service Provider and Enterprise IP and Cloud Communications
+description:          Turning Telco into Code
+# description:          My personal blog on Service Provider and Enterprise IP and Cloud Communications
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
