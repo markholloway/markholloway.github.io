@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-08T15:24:29-05:00</updated>
+ <updated>2019-03-08T15:29:28-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -390,7 +390,7 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
 
 &lt;p&gt;I wrote this script after becoming frustrated each time I needed to look up an area code to see what state it belongs to and realizing I’m wasting time searching. I kept telling myself I’ll write a script to do it. Well, I finally got around to it.&lt;/p&gt;
 
-&lt;h2 id=&quot;service-provider-lesson-of-the-day&quot;&gt;Service Provider Lesson of the Day&lt;/h2&gt;
+&lt;h2 id=&quot;talking-telco&quot;&gt;Talking Telco&lt;/h2&gt;
 
 &lt;p&gt;In the United State and Canada the first 3 digits of a 10 digit phone number are referred to as the Number Plan Area or &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA&lt;/code&gt;. That’s what the rest of us call an Area Code. The second set of 3 digits are the Exchange, or Central Switching Office Designation, and referred to as &lt;code class=&quot;highlighter-rouge&quot;&gt;NXX&lt;/code&gt;. The last 4 digits of a phone number are &lt;code class=&quot;highlighter-rouge&quot;&gt;XXXX&lt;/code&gt; and referred to as the &lt;code class=&quot;highlighter-rouge&quot;&gt;SLI&lt;/code&gt; or Subscriber Line Identifier.&lt;/p&gt;
 

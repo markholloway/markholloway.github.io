@@ -8,7 +8,7 @@ This is a script I wrote that looks up an area code in the United States or Cana
 
 I wrote this script after becoming frustrated each time I needed to look up an area code to see what state it belongs to and realizing I'm wasting time searching. I kept telling myself I'll write a script to do it. Well, I finally got around to it.
 
-## Service Provider Lesson of the Day
+## Talking Telco
 
 In the United State and Canada the first 3 digits of a 10 digit phone number are referred to as the Number Plan Area or `NPA`. That's what the rest of us call an Area Code. The second set of 3 digits are the Exchange, or Central Switching Office Designation, and referred to as `NXX`. The last 4 digits of a phone number are `XXXX` and referred to as the `SLI` or Subscriber Line Identifier. 
 
