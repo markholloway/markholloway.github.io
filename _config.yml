@@ -7,7 +7,7 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              Mark's Blog on VoIP, SIP, and API Communications
+tagline:              Mark's Blog - on Coding for Telco and Networking
 description:          Turning Telco into Code
 # description:          My personal blog on Service Provider and Enterprise IP and Cloud Communications
 url:                  https://markholloway.com
@@ -22,7 +22,7 @@ gems:
 
 # SEO
 twitter:
-  username:           twilion2
+  username:           ccie27384
   url:                https://twitter.com/ccie27384
 social:
   name:               Mark Holloway
