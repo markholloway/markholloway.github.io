@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-16T17:14:42-04:00</updated>
+ <updated>2019-03-16T18:26:41-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,10 +13,84 @@
 
  
  <entry>
+   <title>Using the Lookup API for number validation and fraud prevention</title>
+   <link href="http://localhost:4000/2019/03/16/twilio-lookup-api/"/>
+   <updated>2019-03-16T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2019/03/16/twilio-lookup-api</id>
+   <content type="html">&lt;p&gt;With the Twilio &lt;code class=&quot;highlighter-rouge&quot;&gt;Lookup&lt;/code&gt; API it’s possible to obtain information about a caller such as caller name, carrier name, carrier type, number type, and porting history. 
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Twilio provides the &lt;code class=&quot;highlighter-rouge&quot;&gt;Lookup&lt;/code&gt; API as a way to validate if a number is real or ficticious and provide additional details associated with the number. The data Twilio provides is real-time. This is critical to knowing if a phone number was stolen and ported or sim-swapped. People who intend to commit fraud operate quickly and having real time data available is critical to fraud prevention.&lt;/p&gt;
+
+&lt;h2 id=&quot;use-cases-for-lookup&quot;&gt;Use cases for Lookup&lt;/h2&gt;
+
+&lt;p&gt;When users visit a web site and fill out a form they may be required to enter their mobile or home phone number. Lookup can instantly validate the formatting and make sure digits were not inadvertantly mistyped. If a user enters a landline in a mobile number field, which may also have an opt-in for SMS, Lookup will recognize the number entered is not a mobile number.&lt;/p&gt;
+
+&lt;p&gt;In other cases malicious users may obtain numbers in bulk with the intention of using them for fraud. Lookup can deifferentiate easily obtainable &lt;code class=&quot;highlighter-rouge&quot;&gt;VoIP&lt;/code&gt; numbers from other landline and mobile numbers.&lt;/p&gt;
+
+&lt;p&gt;Often times Contact Centers would like to know if callers are calling from a mobile phone and will use Lookup to note the information and make the Agent aware the user is calling from a mobile phone and present the “In case we get dropped…” script.&lt;/p&gt;
+
+&lt;h2 id=&quot;using-lookup&quot;&gt;Using Lookup&lt;/h2&gt;
+
+&lt;p&gt;To immediately see Lookup in action log in to the Twilio console and on the left side of the screen select Lookup. If you do not see Lookup click on the three &lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt; on the bottom left bar. Using Lookup in console is handy for demonstration purposes or manually performing a lookup request, such as the Disney World phone number in Orlando, Florida.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-16/lookup-console.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is an example of Lookup using &lt;code class=&quot;highlighter-rouge&quot;&gt;CURL&lt;/code&gt; for the same phone number. The results are returned by Twilio in JSON format. I use the &lt;code class=&quot;highlighter-rouge&quot;&gt;-o&lt;/code&gt; option to save the results in a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;lookup.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+curl -XGET &quot;https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCode=US&amp;amp;Type=carrier&quot; \
+-u '{SID}:{AuthToken}' \
+-o lookup.json
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;Node.js&lt;/code&gt; with the npm Twilio helper library&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-javacript&quot;&gt;
+const accountSid = '{SID}';
+const authToken = '{AuthToken}';
+const client = require('twilio')(accountSid, authToken);
+
+client.lookups.phoneNumbers('4079395277')
+              .fetch({type: 'caller-name'})
+              .then(phone_number =&amp;gt; console.log(phone_number.callerName));
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Results returned in &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; format&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;caller_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;caller_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;DISNEY RESV CTR&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;caller_type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;BUSINESS&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;error_code&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;country_code&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;US&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;phone_number&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;+14079395277&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;national_format&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;(407) 939-5277&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;carrier&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;mobile_country_code&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;mobile_network_code&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Smart City Telecommunications, LLC dba Smart City Telecom&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;landline&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;error_code&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;add_ons&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://lookups.twilio.com/v1/PhoneNumbers/+14079395277?Type=carrier&amp;amp;Type=caller-name&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>SMS phone number and message body redaction using Twilio</title>
-   <link href="http://localhost:4000/2019/03/14/twilio-sms-redaction/"/>
+   <link href="http://localhost:4000/2019/03/14/twilio-sms-redaction-copy/"/>
    <updated>2019-03-14T00:00:00-04:00</updated>
-   <id>http://localhost:4000/2019/03/14/twilio-sms-redaction</id>
+   <id>http://localhost:4000/2019/03/14/twilio-sms-redaction copy</id>
    <content type="html">&lt;p&gt;Twilio Programmable SMS provides the option to &lt;code class=&quot;highlighter-rouge&quot;&gt;redact&lt;/code&gt; phone number and message body data and prevents the information from being stored at the account level and message request level.
 &lt;!--more--&gt;&lt;/p&gt;
 
