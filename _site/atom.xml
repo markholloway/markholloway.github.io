@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-16T18:26:41-04:00</updated>
+ <updated>2019-03-16T18:38:58-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -26,9 +26,11 @@
 
 &lt;p&gt;When users visit a web site and fill out a form they may be required to enter their mobile or home phone number. Lookup can instantly validate the formatting and make sure digits were not inadvertantly mistyped. If a user enters a landline in a mobile number field, which may also have an opt-in for SMS, Lookup will recognize the number entered is not a mobile number.&lt;/p&gt;
 
-&lt;p&gt;In other cases malicious users may obtain numbers in bulk with the intention of using them for fraud. Lookup can deifferentiate easily obtainable &lt;code class=&quot;highlighter-rouge&quot;&gt;VoIP&lt;/code&gt; numbers from other landline and mobile numbers.&lt;/p&gt;
+&lt;p&gt;In other cases malicious users may obtain numbers in bulk with the intention of using them for fraud. Lookup can differentiate easily obtained &lt;code class=&quot;highlighter-rouge&quot;&gt;VoIP&lt;/code&gt; numbers from landline and mobile numbers.&lt;/p&gt;
 
 &lt;p&gt;Often times Contact Centers would like to know if callers are calling from a mobile phone and will use Lookup to note the information and make the Agent aware the user is calling from a mobile phone and present the “In case we get dropped…” script.&lt;/p&gt;
+
+&lt;p&gt;True story. A top C level of a crypto-currency company had his phone number stolen, ported to another carrier, and sim-swapped within minutes. A person with malicious intent began accessing financial accounts to start transferring money. 2FA with authorization codes sent via SMS to the mobile number were not an issue since the number was now controlled by someone else. This all went down within 45 minutes. There are many ways this could have been prevented, but one simple step is when a user’s mobile number has been very recently ported, whether minutes, hours, or days, do not allow financial transaction beyond a trivial amount.&lt;/p&gt;
 
 &lt;h2 id=&quot;using-lookup&quot;&gt;Using Lookup&lt;/h2&gt;
 
