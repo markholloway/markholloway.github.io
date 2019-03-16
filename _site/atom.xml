@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-16T17:10:35-04:00</updated>
+ <updated>2019-03-16T17:14:42-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -17,7 +17,7 @@
    <link href="http://localhost:4000/2019/03/14/twilio-sms-redaction/"/>
    <updated>2019-03-14T00:00:00-04:00</updated>
    <id>http://localhost:4000/2019/03/14/twilio-sms-redaction</id>
-   <content type="html">&lt;p&gt;Twilio Programmable SMS provides the option to &lt;code class=&quot;highlighter-rouge&quot;&gt;redact&lt;/code&gt; phone number and message body data and prevents it from being stored in Twilio log files.
+   <content type="html">&lt;p&gt;Twilio Programmable SMS provides the option to &lt;code class=&quot;highlighter-rouge&quot;&gt;redact&lt;/code&gt; phone number and message body data and prevents the information from being stored at the account level and message request level.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;Access to the redaction feature must be requested by submiting a form &lt;a href=&quot;https://ahoy.twilio.com/message-body-redaction?_ga=2.114374407.109597969.1552660807-50235969.1532381789&quot;&gt;here&lt;/a&gt;. Once access has been granted the redaction options will appear under Programmable SMS.&lt;/p&gt;

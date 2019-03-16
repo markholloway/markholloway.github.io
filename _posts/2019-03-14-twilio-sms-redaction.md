@@ -3,7 +3,7 @@ layout: post
 title:  SMS phone number and message body redaction using Twilio
 tags: [bash]
 ---
-Twilio Programmable SMS provides the option to `redact` phone number and message body data and prevents it from being stored in Twilio log files.
+Twilio Programmable SMS provides the option to `redact` phone number and message body data and prevents the information from being stored at the account level and message request level.
 <!--more-->
 
 Access to the redaction feature must be requested by submiting a form [here](https://ahoy.twilio.com/message-body-redaction?_ga=2.114374407.109597969.1552660807-50235969.1532381789). Once access has been granted the redaction options will appear under Programmable SMS.
