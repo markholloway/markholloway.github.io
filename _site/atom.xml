@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-16T16:52:59-04:00</updated>
+ <updated>2019-03-16T17:10:35-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -17,14 +17,19 @@
    <link href="http://localhost:4000/2019/03/14/twilio-sms-redaction/"/>
    <updated>2019-03-14T00:00:00-04:00</updated>
    <id>http://localhost:4000/2019/03/14/twilio-sms-redaction</id>
-   <content type="html">&lt;p&gt;Twilio Programmable SMS offers the option to &lt;code class=&quot;highlighter-rouge&quot;&gt;redact&lt;/code&gt; phone number and message body data so it is never stores in log files. This includes MMS data as well.
+   <content type="html">&lt;p&gt;Twilio Programmable SMS provides the option to &lt;code class=&quot;highlighter-rouge&quot;&gt;redact&lt;/code&gt; phone number and message body data and prevents it from being stored in Twilio log files.
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;p&gt;In order to use redaction a form must be submitted for requesting access &lt;a href=&quot;https://ahoy.twilio.com/message-body-redaction?_ga=2.114374407.109597969.1552660807-50235969.1532381789&quot;&gt;here&lt;/a&gt;. Once access has been granted the redaction options will appear in Programmable SMS.&lt;/p&gt;
+&lt;p&gt;Access to the redaction feature must be requested by submiting a form &lt;a href=&quot;https://ahoy.twilio.com/message-body-redaction?_ga=2.114374407.109597969.1552660807-50235969.1532381789&quot;&gt;here&lt;/a&gt;. Once access has been granted the redaction options will appear under Programmable SMS.&lt;/p&gt;
+
+&lt;p&gt;With redaction enabled the full message body and MMS attachments will not be stored on Twilio. Phone number redaction removes the &lt;code class=&quot;highlighter-rouge&quot;&gt;SLI&lt;/code&gt; or Subscriber Line Identifider from a phone number and only the &lt;code class=&quot;highlighter-rouge&quot;&gt;NPA-NXX&lt;/code&gt; are present.&lt;/p&gt;
 
 &lt;h2 id=&quot;default-settings&quot;&gt;Default settings&lt;/h2&gt;
 
-&lt;p&gt;When permission is granted to the account the default action for SMS does not redact data. This may be toggled in the console so the default action enforces redaction on every SMS message. Phone number and message body redaction may be toggled independently. This can also be turned off at any time by the user.&lt;/p&gt;
+&lt;p&gt;When permission is granted to the master account the default action is SMS does not redact data. The console adminstrator has permission to change this setting at any time. Message body and phone number redaction are managed independently.&lt;/p&gt;
+
+&lt;h2 id=&quot;sub-accounts&quot;&gt;Sub-accounts&lt;/h2&gt;
+&lt;p&gt;Sub-accounts created prior to redaction being added will not inherit the master account settings. Sub-accounts created after redaction being added will inherit the master account behavior. Settings can still be changed for each sub-account.&lt;/p&gt;
 
 &lt;h2 id=&quot;redacting-on-selected-messages&quot;&gt;Redacting on selected messages&lt;/h2&gt;
 
@@ -36,7 +41,7 @@
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AddressRetention=obfuscate&lt;/code&gt; removes the phone number&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -X POST 'https://api.twilio.com/2010-04-01/Accounts/{Sid}/Messages.json' \
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -X POST 'https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json' \
 --data-urlencode 'To=+19737219507'  \
 --data-urlencode 'From=+12133194095'  \
 --data-urlencode 'ContentRetention=discard' \
@@ -47,7 +52,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;retain&lt;/code&gt; will not redact on a per API request basis if redaction is the default action. This is helpful during development and troubleshooting.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -X POST 'https://api.twilio.com/2010-04-01/Accounts/{Sid}/Messages.json' \
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -X POST 'https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json' \
 --data-urlencode 'To=+19737219507'  \
 --data-urlencode 'From=+12133194095'  \
 --data-urlencode 'ContentRetention=retain' \
@@ -56,16 +61,16 @@
 -u {SID}:{AuthToken} 
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;At the time of writing the Twilio helper libraries do not include the redaction form data. Instead use http &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; within your code.&lt;/p&gt;
+&lt;p&gt;At the time of writing the Twilio helper libraries do not include the redaction form data. Use http &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; instead.&lt;/p&gt;
 
-&lt;p&gt;The example demonstrates performing redaction for a single API request using &lt;code class=&quot;highlighter-rouge&quot;&gt;Node.js&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Here is a &lt;code class=&quot;highlighter-rouge&quot;&gt;Node.js&lt;/code&gt; example with redaction enabled for a single API request.&lt;/p&gt;
 
 &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'request'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
 &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'POST'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://api.twilio.com/2010-04-01/Accounts/'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;accountSid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/Messages.json'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;AuthToken&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
