@@ -21,7 +21,7 @@ True story. A top C level of a crypto-currency company had his phone number stol
 
 ## Using Lookup
 
-To immediately see Lookup in action log in to the Twilio console and on the left side of the screen select Lookup. If you do not see Lookup click on the three `...` on the bottom left bar. Using Lookup in console is handy for demonstration purposes or manually performing a lookup request, such as the Disney World phone number in Orlando, Florida.
+To immediately see Lookup in action for Disney World's number `4079395277` log in to the Twilio console and on the left side of the screen select Lookup. If you do not see Lookup click on the three `...` on the bottom left bar. Using Lookup in console is handy for demonstration purposes or manually performing a lookup request.
 
 ![]({{ site.baseurl }}/blog/assets/2019-03-16/lookup-console.png)
 
@@ -37,7 +37,7 @@ curl -XGET "https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCode=US
 
 Using `Node.js` with the npm Twilio helper library 
 
-```javacript
+```javascript
 
 const accountSid = '{SID}';
 const authToken = '{AuthToken}';

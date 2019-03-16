@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-16T18:38:58-04:00</updated>
+ <updated>2019-03-16T18:56:18-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -34,7 +34,7 @@
 
 &lt;h2 id=&quot;using-lookup&quot;&gt;Using Lookup&lt;/h2&gt;
 
-&lt;p&gt;To immediately see Lookup in action log in to the Twilio console and on the left side of the screen select Lookup. If you do not see Lookup click on the three &lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt; on the bottom left bar. Using Lookup in console is handy for demonstration purposes or manually performing a lookup request, such as the Disney World phone number in Orlando, Florida.&lt;/p&gt;
+&lt;p&gt;To immediately see Lookup in action for Disney World’s number &lt;code class=&quot;highlighter-rouge&quot;&gt;4079395277&lt;/code&gt; log in to the Twilio console and on the left side of the screen select Lookup. If you do not see Lookup click on the three &lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt; on the bottom left bar. Using Lookup in console is handy for demonstration purposes or manually performing a lookup request.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-16/lookup-console.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -49,17 +49,17 @@ curl -XGET &quot;https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCo
 
 &lt;p&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;Node.js&lt;/code&gt; with the npm Twilio helper library&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-javacript&quot;&gt;
-const accountSid = '{SID}';
-const authToken = '{AuthToken}';
-const client = require('twilio')(accountSid, authToken);
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;accountSid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{SID}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;authToken&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{AuthToken}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'twilio'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;accountSid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;authToken&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-client.lookups.phoneNumbers('4079395277')
-              .fetch({type: 'caller-name'})
-              .then(phone_number =&amp;gt; console.log(phone_number.callerName));
+&lt;span class=&quot;nx&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lookups&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;phoneNumbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'4079395277'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'caller-name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;phone_number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;phone_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;callerName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
 
 
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Results returned in &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; format&lt;/p&gt;
 
