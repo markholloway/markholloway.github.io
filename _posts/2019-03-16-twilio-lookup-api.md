@@ -3,7 +3,7 @@ layout: post
 title:  Using the Lookup API for number validation and fraud prevention
 tags: [twilio,lookup]
 ---
-With the Twilio `Lookup` API it's possible to obtain information about a caller such as caller name, carrier name, carrier type, number type, and porting history. 
+With the Twilio `Lookup` API it's possible to obtain information about a caller such as caller name, carrier name, carrier type, number type, and porting history, in les than one second. 
 <!--more-->
 
 Twilio provides the `Lookup` API as a way to validate if a number is real or ficticious and provide additional details associated with the number. The data Twilio provides is real-time. This is critical to knowing if a phone number was stolen and ported or sim-swapped. People who intend to commit fraud operate quickly and having real time data available is critical to fraud prevention. 
