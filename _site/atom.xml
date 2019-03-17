@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-17T05:07:51-04:00</updated>
+ <updated>2019-03-17T05:09:14-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -102,7 +102,7 @@ curl -XGET &quot;https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCo
 
 &lt;p&gt;Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice.  There are advantages of Authy over Google Authenticator, especially if your mobile device’s battery dies or worse, the device is lost.&lt;/p&gt;
 
-&lt;p&gt;Epic Games is 100% compatible with Authy and 2FA. This step adds an extra layer of security ensuring no one maliciously logs into your Epic Games account.&lt;/p&gt;
+&lt;p&gt;Epic Games is 100% compatible with Authy and 2FA. Following these steps will add an extra layer of security to your Epic Games account ensuring no one maliciously logs into your ID.&lt;/p&gt;
 
 &lt;h2 id=&quot;download-authy-mobile-app&quot;&gt;Download Authy mobile app&lt;/h2&gt;
 

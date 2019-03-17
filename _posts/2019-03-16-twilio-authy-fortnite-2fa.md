@@ -12,7 +12,7 @@ There's not doubt `Fortnite` has dominated the gaming market since its release. 
 
 Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice.  There are advantages of Authy over Google Authenticator, especially if your mobile device's battery dies or worse, the device is lost. 
 
-Epic Games is 100% compatible with Authy and 2FA. This step adds an extra layer of security ensuring no one maliciously logs into your Epic Games account. 
+Epic Games is 100% compatible with Authy and 2FA. Following these steps will add an extra layer of security to your Epic Games account ensuring no one maliciously logs into your ID. 
 
 ## Download Authy mobile app
 
