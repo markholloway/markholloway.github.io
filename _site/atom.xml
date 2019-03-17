@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-17T05:04:49-04:00</updated>
+ <updated>2019-03-17T05:07:51-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -150,11 +150,13 @@ curl -XGET &quot;https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCo
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NOTE&lt;/code&gt; that clicking Generate Codes will provide a list of codes you can use one time each if you do not have access to your mobile device. Keep them in a safe and secure place.&lt;/p&gt;
+
 &lt;h2 id=&quot;each-time-you-login-open-authy-to-enter-the-token-digits&quot;&gt;Each time you login open Authy to enter the token digits&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/12.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;When clicking the Generate Codes option this will allow you to sign in to your Epic Games account without having access to your mobile device. Hide the codes so only you know how to retrieve them and battle away!&lt;/p&gt;
+&lt;p&gt;Battle away!&lt;/p&gt;
 </content>
  </entry>
  

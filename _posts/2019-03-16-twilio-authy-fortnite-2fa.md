@@ -60,8 +60,10 @@ Download Authy for iOS or Android
 
 ![]({{ site.baseurl }}/blog/assets/2019-03-17/11.png)
 
+`NOTE` that clicking Generate Codes will provide a list of codes you can use one time each if you do not have access to your mobile device. Keep them in a safe and secure place.
+
 ## Each time you login open Authy to enter the token digits
 
 ![]({{ site.baseurl }}/blog/assets/2019-03-17/12.png)
 
-When clicking the Generate Codes option this will allow you to sign in to your Epic Games account without having access to your mobile device. Hide the codes so only you know how to retrieve them and battle away!
+Battle away!
