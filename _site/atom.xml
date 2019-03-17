@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-17T04:54:55-04:00</updated>
+ <updated>2019-03-17T05:04:49-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -100,9 +100,9 @@ curl -XGET &quot;https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCo
 
 &lt;h2 id=&quot;2fa--2-factor-authentication&quot;&gt;2FA = 2 Factor Authentication&lt;/h2&gt;
 
-&lt;p&gt;Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice.  There are advantages of Authy over Google Authenticator, especially if your mobile device’s battery dies or you worse, the device is lost.&lt;/p&gt;
+&lt;p&gt;Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice.  There are advantages of Authy over Google Authenticator, especially if your mobile device’s battery dies or worse, the device is lost.&lt;/p&gt;
 
-&lt;p&gt;Epic Games is 100% compatible with Authy and 2FA. This adds an extra layer of security ensuring no one maliciously logs into your Epic Games account.&lt;/p&gt;
+&lt;p&gt;Epic Games is 100% compatible with Authy and 2FA. This step adds an extra layer of security ensuring no one maliciously logs into your Epic Games account.&lt;/p&gt;
 
 &lt;h2 id=&quot;download-authy-mobile-app&quot;&gt;Download Authy mobile app&lt;/h2&gt;
 
@@ -134,27 +134,27 @@ curl -XGET &quot;https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCo
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;select-scan-qr-code-and-use-the-camera-on-your-mobile-device&quot;&gt;Select scan QR code and use the camera on your mobile device&lt;/h2&gt;
+&lt;h2 id=&quot;select-scan-qr-code&quot;&gt;Select “Scan QR code”&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;name-the-account-epic-games&quot;&gt;Name the account Epic Games&lt;/h2&gt;
+&lt;h2 id=&quot;note-the-game-token&quot;&gt;Note the game token&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;note-the-game-token&quot;&gt;Note the game token&lt;/h2&gt;
+&lt;h2 id=&quot;enter-the-token-digits-and-select-activate&quot;&gt;Enter the token digits and select Activate&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;enter-digits-under-sign-in-with-your-security-code&quot;&gt;Enter digits under Sign in with your security code&lt;/h2&gt;
+&lt;h2 id=&quot;authenticator-app-should-now-be-enabled&quot;&gt;Authenticator App should now be enabled&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;authenticator-app-should-now-show-enabled&quot;&gt;Authenticator App should now show enabled&lt;/h2&gt;
+&lt;h2 id=&quot;each-time-you-login-open-authy-to-enter-the-token-digits&quot;&gt;Each time you login open Authy to enter the token digits&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/12.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;When clicking the Generate Codes option this will allow you to sign in to your Epic Games account without having access to your mobile device. Hide the codes so only you know how to retrieve them!&lt;/p&gt;
+&lt;p&gt;When clicking the Generate Codes option this will allow you to sign in to your Epic Games account without having access to your mobile device. Hide the codes so only you know how to retrieve them and battle away!&lt;/p&gt;
 </content>
  </entry>
  

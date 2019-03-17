@@ -10,9 +10,9 @@ There's not doubt `Fortnite` has dominated the gaming market since its release. 
 
 ## 2FA = 2 Factor Authentication
 
-Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice.  There are advantages of Authy over Google Authenticator, especially if your mobile device's battery dies or you worse, the device is lost. 
+Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice.  There are advantages of Authy over Google Authenticator, especially if your mobile device's battery dies or worse, the device is lost. 
 
-Epic Games is 100% compatible with Authy and 2FA. This adds an extra layer of security ensuring no one maliciously logs into your Epic Games account. 
+Epic Games is 100% compatible with Authy and 2FA. This step adds an extra layer of security ensuring no one maliciously logs into your Epic Games account. 
 
 ## Download Authy mobile app
 
@@ -44,24 +44,24 @@ Download Authy for iOS or Android
 
 ![]({{ site.baseurl }}/blog/assets/2019-03-17/7.png)
 
-## Select scan QR code and use the camera on your mobile device
+## Select "Scan QR code"
 
 ![]({{ site.baseurl }}/blog/assets/2019-03-17/8.png)
 
-## Name the account Epic Games
+## Note the game token
 
 ![]({{ site.baseurl }}/blog/assets/2019-03-17/9.png)
 
-## Note the game token
+## Enter the token digits and select Activate
 
 ![]({{ site.baseurl }}/blog/assets/2019-03-17/10.png)
 
-## Enter digits under Sign in with your security code
+## Authenticator App should now be enabled
 
 ![]({{ site.baseurl }}/blog/assets/2019-03-17/11.png)
 
-## Authenticator App should now show enabled
+## Each time you login open Authy to enter the token digits
 
 ![]({{ site.baseurl }}/blog/assets/2019-03-17/12.png)
 
-When clicking the Generate Codes option this will allow you to sign in to your Epic Games account without having access to your mobile device. Hide the codes so only you know how to retrieve them! 
+When clicking the Generate Codes option this will allow you to sign in to your Epic Games account without having access to your mobile device. Hide the codes so only you know how to retrieve them and battle away!
