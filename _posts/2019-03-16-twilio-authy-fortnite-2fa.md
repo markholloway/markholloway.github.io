@@ -6,13 +6,13 @@ tags: [twilio,authy]
 ![]({{ site.baseurl }}/blog/assets/2019-03-17/1.jpg)
 <!--more-->
 
-There's not doubt `Fortnite` has dominated the gaming market since its release. To play Fortnite users must login to their Epic Games account. Given its popularity it is common for gamers to login on consoles or computers that do not belong to them. Whether at a friend's house or a tournament, if the login is [remembered]then anyone can hop on your account. 
+There's not doubt `Fortnite` has dominated the gaming market since its release. To play Fortnite users must login to their Epic Games account. Given its popularity it is common for gamers to login on consoles or computers that do not belong to them. Whether at a friend's house or a tournament, if the login is [remembered]by the system, this leaves the account vulnerable to a takeover.
 
-## 2FA = 2 Factor Authentication
+## Authy
 
-Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice.  There are advantages of Authy over Google Authenticator, especially if your mobile device's battery dies or worse, the device is lost. 
+Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice verification.  There are advantages of Authy over Google Authenticator and others, especially if your mobile device's battery dies, or worse, the device is lost. 
 
-Epic Games is 100% compatible with Authy and 2FA. Following these steps will add an extra layer of security to your Epic Games account ensuring no one maliciously logs into your ID. 
+Epic Games is work with Authy and supports tokens, the most secure method of `2FA` or `MFA`. Following these steps will add an extra layer of security to your Epic Games account ensuring no one maliciously logs in for a takeover. 
 
 ## Download Authy mobile app
 

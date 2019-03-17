@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-17T05:09:14-04:00</updated>
+ <updated>2019-03-17T05:14:28-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -96,13 +96,13 @@ curl -XGET &quot;https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCo
    <content type="html">&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/1.jpg&quot; alt=&quot;&quot; /&gt;
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;p&gt;There’s not doubt &lt;code class=&quot;highlighter-rouge&quot;&gt;Fortnite&lt;/code&gt; has dominated the gaming market since its release. To play Fortnite users must login to their Epic Games account. Given its popularity it is common for gamers to login on consoles or computers that do not belong to them. Whether at a friend’s house or a tournament, if the login is [remembered]then anyone can hop on your account.&lt;/p&gt;
+&lt;p&gt;There’s not doubt &lt;code class=&quot;highlighter-rouge&quot;&gt;Fortnite&lt;/code&gt; has dominated the gaming market since its release. To play Fortnite users must login to their Epic Games account. Given its popularity it is common for gamers to login on consoles or computers that do not belong to them. Whether at a friend’s house or a tournament, if the login is [remembered]by the system, this leaves the account vulnerable to a takeover.&lt;/p&gt;
 
-&lt;h2 id=&quot;2fa--2-factor-authentication&quot;&gt;2FA = 2 Factor Authentication&lt;/h2&gt;
+&lt;h2 id=&quot;authy&quot;&gt;Authy&lt;/h2&gt;
 
-&lt;p&gt;Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice.  There are advantages of Authy over Google Authenticator, especially if your mobile device’s battery dies or worse, the device is lost.&lt;/p&gt;
+&lt;p&gt;Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice verification.  There are advantages of Authy over Google Authenticator and others, especially if your mobile device’s battery dies, or worse, the device is lost.&lt;/p&gt;
 
-&lt;p&gt;Epic Games is 100% compatible with Authy and 2FA. Following these steps will add an extra layer of security to your Epic Games account ensuring no one maliciously logs into your ID.&lt;/p&gt;
+&lt;p&gt;Epic Games is work with Authy and supports tokens, the most secure method of &lt;code class=&quot;highlighter-rouge&quot;&gt;2FA&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;MFA&lt;/code&gt;. Following these steps will add an extra layer of security to your Epic Games account ensuring no one maliciously logs in for a takeover.&lt;/p&gt;
 
 &lt;h2 id=&quot;download-authy-mobile-app&quot;&gt;Download Authy mobile app&lt;/h2&gt;
 
