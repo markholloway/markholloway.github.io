@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Using the Lookup API for number validation and fraud prevention
+title:  Using Twilio Lookup API for phone number validation and fraud prevention
 tags: [twilio,lookup]
 ---
 With the Twilio `Lookup` API it's possible to instantly obtain information about a caller such as caller name, carrier name, carrier type, number type, and porting history. 

@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-16T18:59:12-04:00</updated>
+ <updated>2019-03-17T04:54:55-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Using the Lookup API for number validation and fraud prevention</title>
+   <title>Using Twilio Lookup API for phone number validation and fraud prevention</title>
    <link href="http://localhost:4000/2019/03/16/twilio-lookup-api/"/>
    <updated>2019-03-16T00:00:00-04:00</updated>
    <id>http://localhost:4000/2019/03/16/twilio-lookup-api</id>
@@ -89,10 +89,80 @@ curl -XGET &quot;https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCo
  </entry>
  
  <entry>
+   <title>Protect your V-Bucks by adding 2FA to your Fortnite login with Twilio Authy</title>
+   <link href="http://localhost:4000/2019/03/16/twilio-authy-fortnite-2fa/"/>
+   <updated>2019-03-16T00:00:00-04:00</updated>
+   <id>http://localhost:4000/2019/03/16/twilio-authy-fortnite-2fa</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/1.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;There’s not doubt &lt;code class=&quot;highlighter-rouge&quot;&gt;Fortnite&lt;/code&gt; has dominated the gaming market since its release. To play Fortnite users must login to their Epic Games account. Given its popularity it is common for gamers to login on consoles or computers that do not belong to them. Whether at a friend’s house or a tournament, if the login is [remembered]then anyone can hop on your account.&lt;/p&gt;
+
+&lt;h2 id=&quot;2fa--2-factor-authentication&quot;&gt;2FA = 2 Factor Authentication&lt;/h2&gt;
+
+&lt;p&gt;Twilio Authy API is a platform for providing secure authentication using PUSH Notifications, Tokens, SMS, and Voice.  There are advantages of Authy over Google Authenticator, especially if your mobile device’s battery dies or you worse, the device is lost.&lt;/p&gt;
+
+&lt;p&gt;Epic Games is 100% compatible with Authy and 2FA. This adds an extra layer of security ensuring no one maliciously logs into your Epic Games account.&lt;/p&gt;
+
+&lt;h2 id=&quot;download-authy-mobile-app&quot;&gt;Download Authy mobile app&lt;/h2&gt;
+
+&lt;p&gt;Download Authy for iOS or Android&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/authyapp.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;login-to-epic-games&quot;&gt;Login to Epic Games&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;navigate-to-passwords-and-security&quot;&gt;Navigate to Passwords and Security&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;scroll-down-and-select-enable-authenticator-app&quot;&gt;Scroll down and select Enable Authenticator App&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;confirm-your-email-with-epic&quot;&gt;Confirm your email with Epic&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;you-will-see-a-qr-code-on-your-epic-games-screen&quot;&gt;You will see a QR code on your Epic Games screen&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;open-the-authy-mobile-app-and-select-add-account&quot;&gt;Open the Authy mobile app and select Add Account&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;select-scan-qr-code-and-use-the-camera-on-your-mobile-device&quot;&gt;Select scan QR code and use the camera on your mobile device&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;name-the-account-epic-games&quot;&gt;Name the account Epic Games&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;note-the-game-token&quot;&gt;Note the game token&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;enter-digits-under-sign-in-with-your-security-code&quot;&gt;Enter digits under Sign in with your security code&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;authenticator-app-should-now-show-enabled&quot;&gt;Authenticator App should now show enabled&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2019-03-17/12.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When clicking the Generate Codes option this will allow you to sign in to your Epic Games account without having access to your mobile device. Hide the codes so only you know how to retrieve them!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>SMS phone number and message body redaction using Twilio</title>
-   <link href="http://localhost:4000/2019/03/14/twilio-sms-redaction-copy/"/>
+   <link href="http://localhost:4000/2019/03/14/twilio-sms-redaction/"/>
    <updated>2019-03-14T00:00:00-04:00</updated>
-   <id>http://localhost:4000/2019/03/14/twilio-sms-redaction copy</id>
+   <id>http://localhost:4000/2019/03/14/twilio-sms-redaction</id>
    <content type="html">&lt;p&gt;Twilio Programmable SMS provides the option to &lt;code class=&quot;highlighter-rouge&quot;&gt;redact&lt;/code&gt; phone number and message body data and prevents the information from being stored at the account level and message request level.
 &lt;!--more--&gt;&lt;/p&gt;
 
