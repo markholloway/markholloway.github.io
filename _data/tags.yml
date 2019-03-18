@@ -5,9 +5,9 @@ bash:
 node:
   name: node.js
 cisco:
-  name: cisco cube
+  name: cisco
 cube:
-  name: cisco cube
+  name: cube
 ios:
   name: ios
 iosxr:
@@ -44,6 +44,8 @@ proxy:
   name: proxy
 authy:
   name: authy
+lookup:
+  name: lookup
 linux:
   name: linux
 macos:
