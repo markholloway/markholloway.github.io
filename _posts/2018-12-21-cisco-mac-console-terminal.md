@@ -25,7 +25,6 @@ ls /dev/*usbser*
 
 /dev/cu.usbserial-AH06ORDE
 ```
-
 And there it is! 
 
 ## Console connectivity
@@ -47,7 +46,7 @@ Current image running: Boot ROM0
 
 Last reset cause: PowerOn
 C1111-8PWB platform with 4194304 Kbytes of main memory
-...
+```
 
 Success! Screen has an active console connection to my router 
 

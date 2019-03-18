@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-17T22:17:39-04:00</updated>
+ <updated>2019-03-17T22:18:49-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -656,40 +656,38 @@ Current image running: Boot ROM0
 
 Last reset cause: PowerOn
 C1111-8PWB platform with 4194304 Kbytes of main memory
-...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-Success! Screen has an active console connection to my router 
+&lt;p&gt;Success! Screen has an active console connection to my router&lt;/p&gt;
 
-![](/blog/assets/2018-12-27/1.png)
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2018-12-27/1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
+&lt;p&gt;Pressing &lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt; shows the screen menu&lt;/p&gt;
 
-Pressing `CTRL-A` then `?` shows the screen menu
+&lt;p&gt;&lt;img src=&quot;/blog/assets/2018-12-27/2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-![](/blog/assets/2018-12-27/2.png)
+&lt;h2 id=&quot;additional-screen-commands&quot;&gt;Additional screen commands&lt;/h2&gt;
 
-## Additional screen commands
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt; will create another console window&lt;/p&gt;
 
-`CTRL-A` then `c` will create another console window
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;SHIFT-A&lt;/code&gt; will allow renaming the current console&lt;/p&gt;
 
-`CTRL-A` then `SHIFT-A` will allow renaming the current console
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&lt;/code&gt; display both terminals&lt;/p&gt;
 
-`CTRL-A` then `&quot;` display both terminals
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; moves to next or previous windows&lt;/p&gt;
 
-`CTRL-A` then `n` or `p` moves to next or previous windows
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;SHIFT-S&lt;/code&gt; displays terminals as split screen&lt;/p&gt;
 
-`CTRL-A` then `SHIFT-S` displays terminals as split screen
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;Tab&lt;/code&gt; toggles between split screen windows&lt;/p&gt;
 
-`CTRL-A` then `Tab` toggles between split screen windows
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; to identify which is the active window&lt;/p&gt;
 
-`CTRL-A` then `i` to identify which is the active window
+&lt;p&gt;Open another terminal window to list all active screen sessions&lt;/p&gt;
 
-Open another terminal window to list all active screen sessions
-
-```bash
-$ screen -list
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;screen &lt;span class=&quot;nt&quot;&gt;-list&lt;/span&gt;
 There is a screen on:
-	93529.ttys001.2594	(Attached)
-1 Socket in /var/folders/sb/7dkxrqcs32z948hv4zpxjzfx5cxpbq/T/.screen.
+	93529.ttys001.2594	&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Attached&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+1 Socket &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /var/folders/sb/7dkxrqcs32z948hv4zpxjzfx5cxpbq/T/.screen.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;d&lt;/code&gt; detaches from the session and display the terminal prompt&lt;/p&gt;
