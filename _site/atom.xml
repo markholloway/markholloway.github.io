@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-17T22:02:28-04:00</updated>
+ <updated>2019-03-17T22:09:41-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -612,11 +612,11 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
  </entry>
  
  <entry>
-   <title>Using the macOS screen app to manage serial console access to Cisco devices</title>
+   <title>Using macOS screen cli app to manage serial console access to Cisco devices</title>
    <link href="http://localhost:4000/2018/12/21/cisco-mac-console-terminal/"/>
    <updated>2018-12-21T00:00:00-05:00</updated>
    <id>http://localhost:4000/2018/12/21/cisco-mac-console-terminal</id>
-   <content type="html">&lt;p&gt;Today brought me one step closer to being completely dongle free and standardizing on one type of cable connection. Upon receiving my USB-C Cisco console cable I decided experiemnt with &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt; beyond just the basics of establishing Cisco serial console connectivity.
+   <content type="html">&lt;p&gt;Today brought me one step closer to being completely dongle free on my Mac and standardizing on one type of cable connection. Upon receiving my USB-C Cisco console cable I decided to experiemnt using the &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt; terminal app and go beyond  the basics of console port connectivity to understanding screen’s other features.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;whats-the-dev-ice-name&quot;&gt;What’s the /dev-ice name&lt;/h2&gt;

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Using the macOS screen app to manage serial console access to Cisco devices
+title: Using macOS screen cli app to manage serial console access to Cisco devices
 tags: [cisco]
 ---
-Today brought me one step closer to being completely dongle free and standardizing on one type of cable connection. Upon receiving my USB-C Cisco console cable I decided experiemnt with `screen` beyond just the basics of establishing Cisco serial console connectivity.
+Today brought me one step closer to being completely dongle free on my Mac and standardizing on one type of cable connection. Upon receiving my USB-C Cisco console cable I decided to experiemnt using the `screen` terminal app and go beyond  the basics of console port connectivity to understanding screen's other features.
 <!--more-->
 
 ## What's the /dev-ice name
