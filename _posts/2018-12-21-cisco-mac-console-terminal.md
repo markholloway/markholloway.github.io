@@ -35,7 +35,7 @@ This tells terminal to use 9600 baud rate. Note that 8N1 is already the default 
 /dev/cu.usbserial-AH06ORDE 9600
 ```
 
-Things don't look all that different in terminal. Time to power on the router.
+Time to power on the router.
 
 ```
 System Bootstrap, Version 16.9(1r), RELEASE SOFTWARE

@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-17T22:18:49-04:00</updated>
+ <updated>2019-03-17T22:20:08-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -636,7 +636,6 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
 
 /dev/cu.usbserial-AH06ORDE
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
 &lt;p&gt;And there it is!&lt;/p&gt;
 
 &lt;h2 id=&quot;console-connectivity&quot;&gt;Console connectivity&lt;/h2&gt;
@@ -646,7 +645,7 @@ Assistant &lt;span class=&quot;s2&quot;&gt;&quot;Make_a_Reservation&quot;&lt;/sp
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/dev/cu.usbserial-AH06ORDE 9600
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Things don’t look all that different in terminal. Time to power on the router.&lt;/p&gt;
+&lt;p&gt;Time to power on the router.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;System Bootstrap, Version 16.9(1r), RELEASE SOFTWARE
 Copyright (c) 1994-2018  by cisco Systems, Inc.
