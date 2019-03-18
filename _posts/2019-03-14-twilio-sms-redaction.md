@@ -51,9 +51,9 @@ curl -X POST 'https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json' \
 -u {SID}:{AuthToken} 
 
 ```
-At the time of writing the Twilio helper libraries do not include the redaction form data. Use http `POST` instead.
+At the time of writing the Twilio helper libraries do not include the redaction form data. HTTP POST must be used within the API request.
 
-Here is a `Node.js` example with redaction enabled for a single API request.
+## Node.js example
 
 ```javascript
 
@@ -83,3 +83,20 @@ request(options, function (error, response, body) {
 
 ```
 
+## Python example
+
+```python
+
+import requests
+
+data = {
+  'To': ' 19737219507',
+  'From': ' 12133194095',
+  'ContentRetention': 'retain',
+  'AddressRetention': 'retain',
+  'Body': 'You cannot see what I am sending!'
+}
+
+response = requests.post('https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json', data=data, auth=('{SID}', '{AuthToken}'))
+
+```
