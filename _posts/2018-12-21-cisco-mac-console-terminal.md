@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Using macOS screen cli app to manage serial console access to Cisco devices
+title: Serial console access to Cisco devices with macOS screen
 tags: [cisco]
 ---
 Today brought me one step closer to being completely dongle free on my Mac and standardizing on one type of cable connection. Upon receiving my USB-C Cisco console cable I decided to experiemnt using the `screen` terminal app and go beyond  the basics of console port connectivity to understanding screen's other features.
@@ -32,7 +32,7 @@ And there it is!
 This tells terminal to use 9600 baud rate. Note that 8N1 is already the default asynchronous mode.
 
 ```bash
-/dev/cu.usbserial-AH06ORDE 9600
+$ screen /dev/cu.usbserial-AH06ORDE 9600
 ```
 
 Time to power on the router.
