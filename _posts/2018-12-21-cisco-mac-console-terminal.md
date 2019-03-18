@@ -6,7 +6,7 @@ tags: [cisco]
 Today brought me one step closer to being completely dongle free on my Mac and standardizing on one type of cable connection. Upon receiving my USB-C Cisco console cable I decided to experiemnt using the `screen` terminal app and go beyond  the basics of console port connectivity to understanding screen's other features.
 <!--more-->
 
-## What's the /dev-ice name
+## Displaying the device name
 
 The first thing to do when connecting the USB-C console cable is identify the device name of the cable itself. The command `ls /dev` will list all devices connected to my MacBook Pro but since this is a USB serial cable I will use `*usbser*` to minimize the results.
 
