@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-17T22:20:08-04:00</updated>
+ <updated>2019-03-17T22:23:14-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -675,11 +675,11 @@ C1111-8PWB platform with 4194304 Kbytes of main memory
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; moves to next or previous windows&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;SHIFT-S&lt;/code&gt; displays terminals as split screen&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;SHIFT-S&lt;/code&gt; displays the terminals as split screen&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;Tab&lt;/code&gt; toggles between split screen windows&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; to identify which is the active window&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; identifies which is the active window&lt;/p&gt;
 
 &lt;p&gt;Open another terminal window to list all active screen sessions&lt;/p&gt;
 
@@ -691,12 +691,12 @@ There is a screen on:
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL-A&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;d&lt;/code&gt; detaches from the session and display the terminal prompt&lt;/p&gt;
 
-&lt;p&gt;To re-attach back to screen session, or if you accidentally close terminal and need to get back to your console session.&lt;/p&gt;
+&lt;p&gt;To re-attach to a screen session, or if you accidentally close terminal and need to get back to your console session.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;screen &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Create .screenrc if it does not exist&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;.screenrc&lt;/code&gt; if it does not exist&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~
 touch .screenrc

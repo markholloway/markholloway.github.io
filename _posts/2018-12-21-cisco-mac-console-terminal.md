@@ -67,11 +67,11 @@ Pressing `CTRL-A` then `?` shows the screen menu
 
 `CTRL-A` then `n` or `p` moves to next or previous windows
 
-`CTRL-A` then `SHIFT-S` displays terminals as split screen
+`CTRL-A` then `SHIFT-S` displays the terminals as split screen
 
 `CTRL-A` then `Tab` toggles between split screen windows
 
-`CTRL-A` then `i` to identify which is the active window
+`CTRL-A` then `i` identifies which is the active window
 
 Open another terminal window to list all active screen sessions
 
@@ -84,13 +84,13 @@ There is a screen on:
 
 `CTRL-A` then `d` detaches from the session and display the terminal prompt
 
-To re-attach back to screen session, or if you accidentally close terminal and need to get back to your console session.
+To re-attach to a screen session, or if you accidentally close terminal and need to get back to your console session.
 
 ```bash
 $ screen -r
 ```
 
-Create .screenrc if it does not exist
+Create `.screenrc` if it does not exist
 
 ```bash
 cd ~
