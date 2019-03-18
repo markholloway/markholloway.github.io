@@ -54,6 +54,9 @@ client.lookups.phoneNumbers('+14079395277')
 
 ```python
 
+from twilio.rest import Client
+
+
 account_sid = '{SID}'
 auth_token = '{AuthToken}'
 client = Client(account_sid, auth_token)
