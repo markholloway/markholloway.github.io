@@ -35,7 +35,7 @@ curl -XGET "https://lookups.twilio.com/v1/PhoneNumbers/4079395277?CountryCode=US
 
 ```
 
-Using `Node.js` with the npm Twilio helper library 
+## Node.js example
 
 ```javascript
 
@@ -43,13 +43,28 @@ const accountSid = '{SID}';
 const authToken = '{AuthToken}';
 const client = require('twilio')(accountSid, authToken);
 
-client.lookups.phoneNumbers('4079395277')
+client.lookups.phoneNumbers('+14079395277')
               .fetch({type: 'caller-name'})
               .then(phone_number => console.log(phone_number.callerName));
 
 
 ```
 
+## Python example
+
+```python
+
+account_sid = '{SID}'
+auth_token = '{AuthToken}'
+client = Client(account_sid, auth_token)
+
+phone_number = client.lookups.phone_numbers('+14079395277').fetch(
+                                                                type='caller-name'
+                                                            )
+
+print(phone_number.callerName)
+
+```
 
 Results returned in `JSON` format
 
