@@ -75,13 +75,20 @@ html {
   color: #fff;
 }
 
-/* About section */
+/* About section */ 
 
-.sidebar-about h1 {
+/* .sidebar-about h1 {
   color: #fff;
   margin-top: 0;
   font-family: "Abril Fatface", serif;
   font-size: 3.25rem;
+} */
+.sidebar-about h1 {
+  color: #fff;
+  margin-top: 0;
+  font-family: "Exo 2", sans-serif;
+  font-size: 3.25rem;
+  font-weight: bold;
 }
 .sidebar-nav-item {
   display: block;
