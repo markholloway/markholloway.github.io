@@ -7,22 +7,21 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              Mark's Blog - on Coding for Telco and Networking
+tagline:              Mark Holloway Blog
 description:          Turning Telco into Code
-# description:          My personal blog on Service Provider and Enterprise IP and Cloud Communications
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
 name:                 Mark Holloway
 
-gems:
+plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-gist
 
 # SEO
 twitter:
-  username:           ccie27384
+  username:           twilion2
   url:                https://twitter.com/ccie27384
 social:
   name:               Mark Holloway
