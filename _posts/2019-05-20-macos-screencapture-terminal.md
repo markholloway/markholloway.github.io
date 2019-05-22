@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Script for macOS that automates desktop screenshots and video capture
+title: Automate desktop screenshots and video capture in macOS
 tags: [macos,bash]
 ---
 Apple includes a command line utility called `screencapture` which allows macOS to take any number of screenshots silently in the background, hands-free, while the user is working. 
 <!--more-->
 
-Keyboard shortcuts such as `Command+Shift+4` will save a screencapture to the desktop and save the file as `.png`.  Another frequently used shortcut `Command+Control+Shift+4` copies the screencapture to the clipboard.
+Keyboard shortcuts such as `Command+Shift+4` will save a screencapture to the desktop and save the file as a PNG.  Another frequently used shortcut `Command+Control+Shift+4` copies the screencapture to the clipboard.
 
-Beyond keyboard shortcuts there is a Screenshot utility located in `Applications > Utilities`. This places a panel at the bottom of the desktop providing more control of individual screencaptures.
+Beyond keyboard shortcuts there is a Screenshot utility located in Applications > Utilities. This places a panel at the bottom of the desktop providing more control of individual screencaptures.
 
 The above methods assume the user doesn't need their hands at the time of taking the screencapture. It may also feel tedious to manually take screenshots one at a time if needing more then a few. The `screenshot` command line utility solves this problem while providing significant flexibility.
 
@@ -26,14 +26,6 @@ usage: screencapture [-icMPmwsWxSCUtoa] [files]
 	-C         capture the cursor as well as the screen. only in 
 			   non-interactive modes
 	-d         display errors to the user graphically
-	-i         capture screen interactively, by selection or window
-				control key - causes screen shot to go to clipboard
-				space key   - toggle between mouse selection and
-				              window selection modes
-				escape key  - cancels interactive screen shot
-	-m         only capture the main monitor, undefined if -i is set
-	-D<display> screen capture or record from the display specified.
-	 			-D 1 is main display, -D 2 secondary, etc.
 	-o         in window capture mode, do not capture the shadow of window
 	-p         screen capture will use the default settings for capture. 
 			   The files argument will be ignored
