@@ -4,7 +4,7 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-06-17T13:42:37-04:00</updated>
+ <updated>2019-06-17T14:07:37-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Automate desktop screenshots and video capture in macOS</title>
+   <title>Automate screenshots and video capture in macOS using with Terminal</title>
    <link href="http://localhost:4000/2019/05/20/macos-screencapture-terminal/"/>
    <updated>2019-05-20T00:00:00-04:00</updated>
    <id>http://localhost:4000/2019/05/20/macos-screencapture-terminal</id>
@@ -39,42 +39,14 @@ usage: screencapture [-icMPmwsWxSCUtoa] [files]
 	-C         capture the cursor as well as the screen. only in 
 			   non-interactive modes
 	-d         display errors to the user graphically
-	-o         in window capture mode, do not capture the shadow of window
-	-p         screen capture will use the default settings for capture. 
-			   The files argument will be ignored
-	-M         screen capture output will go to a new Mail message
-	-P         screen capture output will open in Preview or 
-	           QuickTime Player if video
-	-I         screen capture output will open in Messages
-	-B&amp;lt;bundleid&amp;gt; screen capture output will open in app with bundleid
-	-s         only allow mouse selection mode
-	-S         in window capture mode, capture the screen not the window
-	-J&amp;lt;style&amp;gt;  sets the starting of interfactive capture
-				selection       - captures screen in selection mode
-				window          - captures screen in window mode
-				video           - records screen in selection mode
-	-t&amp;lt;format&amp;gt; image format to create, default is png 
-			   (other options include pdf, jpg, tiff and other formats)
-	-T&amp;lt;seconds&amp;gt; take the picture after a delay of &amp;lt;seconds&amp;gt;, default is 5
-	-w         only allow window selection mode
-	-W         start interaction in window selection mode
-	-x         do not play sounds
-	-a         do not include windows attached to selected windows
-	-r         do not add dpi meta data to image
-	-l&amp;lt;windowid&amp;gt; capture this windowsid
-	-R&amp;lt;x,y,w,h&amp;gt; capture screen rect
-	-v        capture video recording of the screen
-	-V&amp;lt;seconds&amp;gt; limits video capture to specified seconds
-	-A&amp;lt;id&amp;gt;    captures audio during a video recording using default input. 
-			  Optional specify the id of the audio source
-	-k        show clicks in video recording mode
-	-U        Show interactive toolbar in interactive mode
-	-u        present UI after screencapture is complete. 
-	          files passed to command line will be ignored
-	files     where to save the screen capture, 1 file per screen
+	.
+	.
+	.
+	.
+	.etc
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;building-a-script-to-automatate-repetitive-screencapture-tasks&quot;&gt;Building a script to automatate repetitive screencapture tasks&lt;/h2&gt;
+&lt;h2 id=&quot;build-a-script-to-automatate-repetitive-screencapture-tasks&quot;&gt;Build a script to automatate repetitive screencapture tasks&lt;/h2&gt;
 
 &lt;p&gt;I want to write a script that takes 45 screencaptures of my desktop every 30 seconds and saves them as &lt;code class=&quot;highlighter-rouge&quot;&gt;.jpg&lt;/code&gt;.&lt;/p&gt;
 
