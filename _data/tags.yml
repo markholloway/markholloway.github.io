@@ -1,25 +1,31 @@
+filmlight:
+  name: filmlight
+baselight:
+  name: baselight
+autodesk:
+  name: autodesk
+flame:
+  name: flame
+lustre:
+  name: lustre
+maya:
+  name: maya
+foundry:
+  name: foundry
+nuke:
+  name: nuke
+hiero:
+  name: hiero
+sgo:
+  name: sgo
+mistika:
+  name: mistika
+scratch:
+  name: scratch
 api:
   name: API
 bash:
   name: bash
-node:
-  name: node.js
-cisco:
-  name: cisco
-cube:
-  name: cube
-ios:
-  name: ios
-iosxr:
-  name: iosxr
-iosxe:
-  name: iosxe
-virl:
-  name: virl
-eve-ng:
-  name: eve-ng
-gns3:
-  name: gns3
 python:
   name: python
 docker:
@@ -30,35 +36,10 @@ github-pages:
   name: github pages
 jekyll:
   name: jekyll
-twilio:
-  name: twilio
-sms:
-  name: sms
-voice:
-  name: voice
-flex:
-  name: flex
-autopilot:
-  name: autopilot
-proxy:
-  name: proxy
-authy:
-  name: authy
-lookup:
-  name: lookup
 linux:
   name: linux
 macos:
   name: macOS
-php:
-  name: php
-acme:
-  name: acme packet
-sbc:
-  name: sbc
-sip:
-  name: sip
-broadsoft:
-  name: broadworks
+
   
   

@@ -4,50 +4,13 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-05-21T20:54:07-04:00</updated>
+ <updated>2019-06-17T12:29:13-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
    <email></email>
  </author>
 
- 
- <entry>
-   <title>Configuring Autodesk Flame to use an eGPU on macOS</title>
-   <link href="http://localhost:4000/2019/05/21/flame-mac-egpu/"/>
-   <updated>2019-05-21T00:00:00-04:00</updated>
-   <id>http://localhost:4000/2019/05/21/flame-mac-egpu</id>
-   <content type="html">&lt;p&gt;There is currently a lack of documentation on how to configure &lt;code class=&quot;highlighter-rouge&quot;&gt;Flame&lt;/code&gt; to use an &lt;code class=&quot;highlighter-rouge&quot;&gt;eGPU&lt;/code&gt; on macOS. The following steps quickly show the proper way to set this up. 
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;finding-the-flame-launch-application&quot;&gt;Finding the Flame launch application&lt;/h3&gt;
-
-&lt;p&gt;Note the default Flame icon located in &lt;code class=&quot;highlighter-rouge&quot;&gt;Applications &amp;gt; Autodesk&lt;/code&gt; is an &lt;code class=&quot;highlighter-rouge&quot;&gt;alias&lt;/code&gt; that points to the Flame application in another location.&lt;/p&gt;
-
-&lt;p&gt;Press and hold &lt;code class=&quot;highlighter-rouge&quot;&gt;command&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;spacebar&lt;/code&gt; to open Spotlight. Enter the path &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/Autodesk&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Navigate to the appropraite Flame folder such as &lt;code class=&quot;highlighter-rouge&quot;&gt;Flame 2020&lt;/code&gt; and navigate to the &lt;code class=&quot;highlighter-rouge&quot;&gt;bin&lt;/code&gt; folder.&lt;/p&gt;
-
-&lt;p&gt;The full path for Flame 2020 would be &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/Autodesk/Flame 2020/bin&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;prefer-external-gpu&quot;&gt;Prefer External GPU&lt;/h3&gt;
-
-&lt;p&gt;Right click the Flame application and select &lt;code class=&quot;highlighter-rouge&quot;&gt;Get Info&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Tick the box &lt;code class=&quot;highlighter-rouge&quot;&gt;Prefer External GPU&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Flame will now prefer using an eGPU if one is present. If no eGPU is connected Flame will use the default GPU.&lt;/p&gt;
-
-&lt;h3 id=&quot;validating-flame-is-using-the-egpu&quot;&gt;Validating Flame is using the eGPU&lt;/h3&gt;
-
-&lt;p&gt;Open the Activity Monitor application in Applications &amp;gt; Utilities&lt;/p&gt;
-
-&lt;p&gt;Press and hold &lt;code class=&quot;highlighter-rouge&quot;&gt;command&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;4&lt;/code&gt; to display the GPU History floating window. The window will be visible on top of other applications and float in front of Flame.&lt;/p&gt;
-
-&lt;p&gt;Both the internal and external GPUs are displayed in the GPU History window. When using Flame there will be GPU cycles calulated for the eGPU showing it is in use.&lt;/p&gt;
-
-</content>
- </entry>
  
  <entry>
    <title>Automate desktop screenshots and video capture in macOS</title>
