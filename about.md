@@ -17,7 +17,7 @@ This blog runs [Jekyll](https://jekyllrb.com) and is based on the excellent [Hyd
 - Excerpts on index page
 - Pinch and zoom on touch devices
 - Video embeds with [fluidvids.js](https://blog.videojs.com)
-- [Rouge](https://github.com/jneen/rouge) syntax highlighter, modified version of [`dracula.css`](https://github.com/dracula/pygments)
+- [Rouge](https://github.com/jneen/rouge) syntax highlighter and customized [base16.dark] CSS theme
 - Google Analytics
 - Comment (option to use Google+ or Disqus)
 - Switch to https if accessing site through http
