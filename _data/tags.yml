@@ -20,8 +20,6 @@ sgo:
   name: sgo
 mistika:
   name: mistika
-scratch:
-  name: scratch
 api:
   name: API
 bash:
