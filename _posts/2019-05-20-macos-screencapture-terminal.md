@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Script for macOS that automates desktop screenshots and video capture
+title: Automate screenshots and video capture in macOS using Terminal
 tags: [macos,bash]
 ---
 Apple includes a command line utility called `screencapture` which allows macOS to take any number of screenshots silently in the background, hands-free, while the user is working. 
 <!--more-->
 
-Keyboard shortcuts such as `Command+Shift+4` will save a screencapture to the desktop and save the file as `.png`.  Another frequently used shortcut `Command+Control+Shift+4` copies the screencapture to the clipboard.
+Keyboard shortcuts such as `Command+Shift+4` will save a screencapture to the desktop and save the file as a PNG.  Another frequently used shortcut `Command+Control+Shift+4` copies the screencapture to the clipboard.
 
-Beyond keyboard shortcuts there is a Screenshot utility located in `Applications > Utilities`. This places a panel at the bottom of the desktop providing more control of individual screencaptures.
+Beyond keyboard shortcuts there is a Screenshot utility located in Applications > Utilities. This places a panel at the bottom of the desktop providing more control of individual screencaptures.
 
 The above methods assume the user doesn't need their hands at the time of taking the screencapture. It may also feel tedious to manually take screenshots one at a time if needing more then a few. The `screenshot` command line utility solves this problem while providing significant flexibility.
 
@@ -26,50 +26,14 @@ usage: screencapture [-icMPmwsWxSCUtoa] [files]
 	-C         capture the cursor as well as the screen. only in 
 			   non-interactive modes
 	-d         display errors to the user graphically
-	-i         capture screen interactively, by selection or window
-				control key - causes screen shot to go to clipboard
-				space key   - toggle between mouse selection and
-				              window selection modes
-				escape key  - cancels interactive screen shot
-	-m         only capture the main monitor, undefined if -i is set
-	-D<display> screen capture or record from the display specified.
-	 			-D 1 is main display, -D 2 secondary, etc.
-	-o         in window capture mode, do not capture the shadow of window
-	-p         screen capture will use the default settings for capture. 
-			   The files argument will be ignored
-	-M         screen capture output will go to a new Mail message
-	-P         screen capture output will open in Preview or 
-	           QuickTime Player if video
-	-I         screen capture output will open in Messages
-	-B<bundleid> screen capture output will open in app with bundleid
-	-s         only allow mouse selection mode
-	-S         in window capture mode, capture the screen not the window
-	-J<style>  sets the starting of interfactive capture
-				selection       - captures screen in selection mode
-				window          - captures screen in window mode
-				video           - records screen in selection mode
-	-t<format> image format to create, default is png 
-			   (other options include pdf, jpg, tiff and other formats)
-	-T<seconds> take the picture after a delay of <seconds>, default is 5
-	-w         only allow window selection mode
-	-W         start interaction in window selection mode
-	-x         do not play sounds
-	-a         do not include windows attached to selected windows
-	-r         do not add dpi meta data to image
-	-l<windowid> capture this windowsid
-	-R<x,y,w,h> capture screen rect
-	-v        capture video recording of the screen
-	-V<seconds> limits video capture to specified seconds
-	-A<id>    captures audio during a video recording using default input. 
-			  Optional specify the id of the audio source
-	-k        show clicks in video recording mode
-	-U        Show interactive toolbar in interactive mode
-	-u        present UI after screencapture is complete. 
-	          files passed to command line will be ignored
-	files     where to save the screen capture, 1 file per screen
+	.
+	.
+	.
+	.
+	.etc
 ```
 
-## Building a script to automatate repetitive screencapture tasks
+## Build a script to automatate repetitive screencapture tasks
 
 I want to write a script that takes 45 screencaptures of my desktop every 30 seconds and saves them as `.jpg`. 
 

@@ -56,8 +56,14 @@ html {
 .sidebar {
   text-align: center;
   padding: 2rem 1rem;
-  color: #9da5b4;
-  background-color: #21252b;
+  color: #656b75; 
+  /*  
+  Light Blue: 74afda  
+  Shotgun Blue: 00baff
+  Dark Grey: 656b75
+  Default Grey: 9da5b4  
+  */
+  background-color: #212221; 
 }
 @media (min-width: 48em) {
   .sidebar {
@@ -72,7 +78,7 @@ html {
 
 /* Sidebar links */
 .sidebar a {
-  color: #fff;
+  color: #e6e4e4;
 }
 
 /* About section */
@@ -85,7 +91,7 @@ html {
 
 /* Sidebar nav */
 .sidebar-nav {
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 .sidebar-nav-item {
   display: block;

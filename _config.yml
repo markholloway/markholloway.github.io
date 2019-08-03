@@ -8,7 +8,8 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark Holloway Blog
-description:          Turning Telco into Code
+description:          Technical Notes
+details:              Personal Blog
 url:                  https://markholloway.github.io
 baseurl:
 paginate:             5
@@ -21,8 +22,8 @@ plugins:
 
 # SEO
 twitter:
-  username:           twilion2
-  url:                https://twitter.com/ccie27384
+  username:           pyvfx
+  url:                https://twitter.com/pyvfx
 social:
   name:               Mark Holloway
   links:
