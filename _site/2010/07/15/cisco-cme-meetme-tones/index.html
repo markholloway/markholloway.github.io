@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Cisco CME join and leave tones for a MeetMe Conference &middot; Mark Holloway
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole_custom.css">
+  <link rel="stylesheet" href="/public/css/syntax_dracula.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde_custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface|Press+Start+2P|Exo+2:700">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+
+
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Force https -->
+  
+  <script>
+    var host = 'markholloway.github.io';
+    if (window.location.host == host && window.location.protocol != 'https:') {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+  
+
+  <!-- Jekyll SEO tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Cisco CME join and leave tones for a MeetMe Conference | Mark Holloway</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="Cisco CME join and leave tones for a MeetMe Conference" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="MeetMe conferencing with Call Manager Express allows a CME phone to go off hook, press the MeetMe softkey, and dial the MeetMe bridge number to start a conference. Any other CME subscriber or off-net party may dial the MeetMe number to join the conference." />
+<meta property="og:description" content="MeetMe conferencing with Call Manager Express allows a CME phone to go off hook, press the MeetMe softkey, and dial the MeetMe bridge number to start a conference. Any other CME subscriber or off-net party may dial the MeetMe number to join the conference." />
+<link rel="canonical" href="http://localhost:4000/2010/07/15/cisco-cme-meetme-tones/" />
+<meta property="og:url" content="http://localhost:4000/2010/07/15/cisco-cme-meetme-tones/" />
+<meta property="og:site_name" content="Mark Holloway" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-07-15T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@twilion2" />
+<script type="application/ld+json">
+{"description":"MeetMe conferencing with Call Manager Express allows a CME phone to go off hook, press the MeetMe softkey, and dial the MeetMe bridge number to start a conference. Any other CME subscriber or off-net party may dial the MeetMe number to join the conference.","@type":"BlogPosting","url":"http://localhost:4000/2010/07/15/cisco-cme-meetme-tones/","headline":"Cisco CME join and leave tones for a MeetMe Conference","dateModified":"2010-07-15T00:00:00-04:00","datePublished":"2010-07-15T00:00:00-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2010/07/15/cisco-cme-meetme-tones/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131536379-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  <body>
+    
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mark Holloway
+        </a>
+      </h1>
+      <p class="lead">Turning Telco into Code</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive/">Archive</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <p>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="/public/GitHub-Mark-Light-32px.png" alt="Github" width="18" height="18"></a>
+        <a class="sidebar-nav-icons" href="http://www.linkedin.com/in/mholloway/" target="blank"><img src="/public/linkedin.png" alt="LinkedIn" width="19" height="19"></a>
+      </p>
+
+    </nav>
+
+    <p><small>&copy; 2019 All rights reserved.</small></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      
+
+
+
+<div class="post">
+  <h1 class="post-title">Cisco CME join and leave tones for a MeetMe Conference</h1>
+  <span class="post-date">15 Jul 2010 <i class="fa fa-tag"></i> <a href="/blog/tag/cisco/">#cisco</a> </span>
+
+  <p><code class="highlighter-rouge">MeetMe</code> conferencing with Call Manager Express allows a CME phone to go off hook, press the MeetMe softkey, and dial the MeetMe bridge number to start a conference. Any other CME subscriber or off-net party may dial the MeetMe number to join the conference.
+<!--more--></p>
+
+<p>By default CME does not play <code class="highlighter-rouge">tones</code> when participants join or leave the bridge. Adding this capability requires the creation of a <code class="highlighter-rouge">voice class</code> for both the join tones and leave tones where tone frequencies are defined and then later referenced in the <code class="highlighter-rouge">dspfarm</code> profile.  In order to perform the following configuration you should already have hardware conferencing configured on CME.</p>
+
+<h2 id="configure-a-number-to-be-a-meetme-conference-bridge">Configure a number to be a MeetMe Conference Bridge</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ephone-dn  10  octo-line
+number 4454 no-reg primary
+conference meetme
+</code></pre></div></div>
+
+<h2 id="configure-an-ephone-template-that-includes-the-meetme-softkey-this-is-so-cme-subscribers-can-easily-start-a-conference">Configure an ephone template that includes the MeetMe Softkey. This is so CME subscribers can easily start a conference.</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ephone-template  1
+softkeys remote-in-use  CBarge Newcall
+softkeys seized  Redial Endcall Meetme Pickup Gpickup Cfwdall Callback
+softkeys connected  Hold Endcall LiveRcd Park Trnsfer Confrn
+
+ephone  1
+privacy-button
+mac-address 0022.90BA.2CC0
+ephone-template 1
+busy-trigger-per-button 4
+button  1:1 2:2
+</code></pre></div></div>
+
+<h2 id="configure-the-appropriate-voice-class-to-define-joinleave-tones">Configure the appropriate voice class to define Join/Leave tones</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>voice class custom-cptone conf-leave
+dualtone conference
+frequency 300 900
+cadence 300 150 300 100 300 50
+
+voice class custom-cptone conf-join
+dualtone conference
+frequency 600 900
+cadence 300 150 300 100 300 50
+</code></pre></div></div>
+
+<h2 id="assign-each-voice-class-to-the-dspfarm-profile-used-for-conferencing">Assign each voice class to the dspfarm profile used for conferencing</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dspfarm profile 1 conference
+codec g711ulaw
+codec g711alaw
+codec g729ar8
+codec g729abr8
+codec g729r8
+codec g729br8
+maximum sessions 2
+conference-join custom-cptone conf-join
+conference-leave custom-cptone conf-leave
+associate application SCCP
+</code></pre></div></div>
+
+
+</div>
+
+<!--
+<div class="donate">
+</div>
+
+-->
+
+
+
+<!-- fluidvids.js -->
+<script src="/public/js/fluidvids/dist/fluidvids.js"></script>
+<script>
+fluidvids.init({
+  selector: ['iframe'],
+  players: ['www.youtube.com', 'player.vimeo.com']
+});
+</script>
+
+
+
+  <!-- Disqus comments. -->
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2010/07/15/cisco-cme-meetme-tones/'; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2010/07/15/cisco-cme-meetme-tones/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+
+/**
+
+Using variables from _config.yml instead of static entries
+
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//mh-blog-2.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>

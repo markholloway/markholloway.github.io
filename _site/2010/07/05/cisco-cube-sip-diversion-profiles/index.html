@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Cisco CUBE and modifying SIP diversion with SIP profiles &middot; Mark Holloway
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole_custom.css">
+  <link rel="stylesheet" href="/public/css/syntax_dracula.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde_custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface|Press+Start+2P|Exo+2:700">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+
+
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Force https -->
+  
+  <script>
+    var host = 'markholloway.github.io';
+    if (window.location.host == host && window.location.protocol != 'https:') {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+  
+
+  <!-- Jekyll SEO tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Cisco CUBE and modifying SIP diversion with SIP profiles | Mark Holloway</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="Cisco CUBE and modifying SIP diversion with SIP profiles" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="When configuring a SIP Trunk with CUCM to a SIP Service Provider it is best practice to use an SBC or Session Border Controller such as CUBE (Cisco Unified Border Element) between CUCM and the provider’s SIP Trunk. One benefit is this automatically alleviates the challenges most IP PBX’s face with hosted nat traversal specific to SIP and RTP." />
+<meta property="og:description" content="When configuring a SIP Trunk with CUCM to a SIP Service Provider it is best practice to use an SBC or Session Border Controller such as CUBE (Cisco Unified Border Element) between CUCM and the provider’s SIP Trunk. One benefit is this automatically alleviates the challenges most IP PBX’s face with hosted nat traversal specific to SIP and RTP." />
+<link rel="canonical" href="http://localhost:4000/2010/07/05/cisco-cube-sip-diversion-profiles/" />
+<meta property="og:url" content="http://localhost:4000/2010/07/05/cisco-cube-sip-diversion-profiles/" />
+<meta property="og:site_name" content="Mark Holloway" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-07-05T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@twilion2" />
+<script type="application/ld+json">
+{"description":"When configuring a SIP Trunk with CUCM to a SIP Service Provider it is best practice to use an SBC or Session Border Controller such as CUBE (Cisco Unified Border Element) between CUCM and the provider’s SIP Trunk. One benefit is this automatically alleviates the challenges most IP PBX’s face with hosted nat traversal specific to SIP and RTP.","@type":"BlogPosting","url":"http://localhost:4000/2010/07/05/cisco-cube-sip-diversion-profiles/","headline":"Cisco CUBE and modifying SIP diversion with SIP profiles","dateModified":"2010-07-05T00:00:00-04:00","datePublished":"2010-07-05T00:00:00-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2010/07/05/cisco-cube-sip-diversion-profiles/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131536379-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  <body>
+    
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mark Holloway
+        </a>
+      </h1>
+      <p class="lead">Turning Telco into Code</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive/">Archive</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <p>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="/public/GitHub-Mark-Light-32px.png" alt="Github" width="18" height="18"></a>
+        <a class="sidebar-nav-icons" href="http://www.linkedin.com/in/mholloway/" target="blank"><img src="/public/linkedin.png" alt="LinkedIn" width="19" height="19"></a>
+      </p>
+
+    </nav>
+
+    <p><small>&copy; 2019 All rights reserved.</small></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      
+
+
+
+<div class="post">
+  <h1 class="post-title">Cisco CUBE and modifying SIP diversion with SIP profiles</h1>
+  <span class="post-date">05 Jul 2010 <i class="fa fa-tags"></i> <a href="/blog/tag/cisco/">#cisco</a> <!--comma--><a href="/blog/tag/cube/">#cube</a> </span>
+
+  <p>When configuring a <code class="highlighter-rouge">SIP Trunk</code> with <code class="highlighter-rouge">CUCM</code> to a SIP Service Provider it is best practice to use an <code class="highlighter-rouge">SBC</code> or Session Border Controller such as CUBE (Cisco Unified Border Element) between CUCM and the provider’s SIP Trunk.  One benefit is this automatically alleviates the challenges most IP PBX’s face with hosted nat traversal specific to SIP and RTP.
+<!--more--></p>
+
+<p>However, an even greater benefit is the power and flexibility that CUBE provides with its ability to <code class="highlighter-rouge">modify SIP headers</code> much like the larger and more costly Session Border Controllers used by SIP Service Providers.</p>
+
+<p>In this case the modification is for <code class="highlighter-rouge">SIP Diversion</code>. By default, when UCM forwards a call to another number over the SIP Trunk it sends the internal DN as the number performing the redirect. This is a problem when forwarding calls back to the PSTN as the provider expects 10 digits instead of 4 (or whatever the internal dial plan may be).  An easy solution to this problem is using a SIP Profile with CUBE and replacing the 4 digit number with the 10 digit Pilot Number (this is same number in your sip-ua portion of the router config).</p>
+
+<p>When CUBE is set to <code class="highlighter-rouge">allow sip to sip</code> it is possible to reference a SIP Profile that will modify a particular SIP message (or messages) traversing through the router. In this example it’s any SIP signaling message that contains a SIP header called <code class="highlighter-rouge">Diversion</code>.  The goal is to change 9948 (the 4 digit DN) to the full 10 digit phone number 9494289948 otherwise the SIP provider will reject a redirected call with only 4 digits in the user portion of the SIP URI in the Diversion header.</p>
+
+<p>Below is the <code class="highlighter-rouge">SIP Invite</code> in its entirety as originated by UCM and sent towards the Cisco router running CUBE where the original Diversion header only contains the 4 digit DN. The call flow is a PSTN call originated from 4802317040 to a number on UCM 9494289948 and the UCM number forwards back to PSTN 7023100500. Below is the forwarding part of the call-flow back to CUBE/PSTN.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*Oct 14 00:25:06.327: //-1/xxxxxxxxxxxx/SIP/Msg/ccsipDisplayMsg:
+Received:
+INVITE sip:17023100500@192.168.1.1:5060 SIP/2.0
+Date: Sat, 10 Jul 2010 20:09:26 GMT
+Allow: INVITE, OPTIONS, INFO, BYE, CANCEL, ACK, PRACK, UPDATE, REFER, SUBSCRIBE, NOTIFY
+From: “HOLLOWAY MARK  ” &lt;sip:4802317040@192.168.1.254&gt;;tag=9fc21ef0-b4f8-4240-a30e-86b6cfa8e8f7-27463414
+Allow-Events: presence
+P-Asserted-Identity: “HOLLOWAY MARK  ” &lt;sip:4802317040@192.168.1.254&gt;
+Supported: timer,resource-priority,replaces
+Supported: Geolocation
+Min-SE:  1800
+Diversion: “9948″ &lt;sip:9948@192.168.1.254&gt;;reason=unconditional;privacy=off;screen=yes
+Remote-Party-ID: “HOLLOWAY MARK  ” &lt;sip:4802317044@192.168.1.254&gt;;party=calling;screen=yes;privacy=off
+Content-Length: 214
+User-Agent: Cisco-CUCM7.1
+To: &lt;sip:17023100500@192.168.1.1&gt;
+Contact: &lt;sip:4802317040@192.168.1.254:5060&gt;
+Expires: 180
+Content-Type: application/sdp
+Call-ID: 8aa2480-c381d376-c6-fe01a8c0@192.168.1.254
+Via: SIP/2.0/UDP 192.168.1.254:5060;branch=z9hG4bK1b172bdcdc9
+CSeq: 101 INVITE
+Session-Expires:  1800
+Max-Forwards: 7
+</code></pre></div></div>
+
+<p>The following CUBE configuration modifies the User portion of the SIP URI to replace 9948 with 9494289948 which is our valid 10 digit number the Service Provider is expecting.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>voice service voip
+allow-connections sip to sip
+sip
+sip-profiles 1
+
+voice class sip-profiles 1
+request INVITE sip-header Diversion modify “&lt;sip:(.*)@(.*)&gt;” “&lt;sip:4804101040@voip.markholloway.net”
+</code></pre></div></div>
+
+<p>The characters  [.<em>@.</em>] in the first set of the expression identify all characters in the original Diversion header coming from UCM and the second set identifies what the first set will be replaced with.</p>
+
+<p>This is the new SIP Invite modified by CUBE in its entirety as it leaves CUBE and goes towards the SIP Service Provider.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*Oct 14 00:25:06.355: //-1/xxxxxxxxxxxx/SIP/Msg/ccsipDisplayMsg:
+Sent:
+INVITE sip:17023100500@voip.markholloway.net:5060 SIP/2.0
+Via: SIP/2.0/UDP 174.26.121.21:5060;branch=z9hG4bK81718
+From: “HOLLOWAY MARK  ” &lt;sip:4802317040@voip.markholloway.net&gt;;tag=2C06BC-1C60
+To: &lt;sip:17023100500@voip.markholloway.net&gt;
+Date: Wed, 14 Oct 2009 00:25:06 GMT
+Call-ID: DB7F2DFB-B78E11DE-801FA01B-F10CA800@174.26.121.21
+Supported: 100rel,timer,resource-priority,replaces,sdp-anat
+Min-SE:  1800
+Cisco-Guid: 3682385244-3079541214-2149163035-4044138496
+User-Agent: Cisco-SIPGateway/IOS-12.x
+Allow: INVITE, OPTIONS, BYE, CANCEL, ACK, PRACK, UPDATE, REFER, SUBSCRIBE, NOTIFY, INFO, REGISTER
+CSeq: 101 INVITE
+Timestamp: 1255479906
+Contact: &lt;sip:4802317040;tgrp=9494289948;trunk-context=voip.markholloway.net@174.26.121.21:5060&gt;
+Expires: 180
+Allow-Events: telephone-event
+Max-Forwards: 6
+Session-Expires:  1800
+Diversion: &lt;sip:9494289948@voip.markholloway.net&gt;;privacy=off;reason=unconditional;screen=yes
+Content-Type: application/sdp
+Content-Disposition: session;handling=required
+Content-Length: 216
+</code></pre></div></div>
+
+<p>You do not need to build the profile for multiple numbers since the router is using the pilot user from <code class="highlighter-rouge">sip-ua</code> as the Diversion number.  It’s common for Service Providers to build a trunk group in a parent-child hierarchy so if the redirect number is the pilot number, regardless of which DN is doing the forwarding, the call is permitted. This will not interfere with caller-id either.</p>
+
+<p>The following are more SIP Profile examples.  These are for supporting a Trunk Group Identifier.  Some SIP Provider platforms such as Broadworks and Sonus will allow tgrp to be used for validating a legitimate call rather than using a phone number from the trunk group.  This allows the customer to send any outbound caller-id they want without the call being rejected.</p>
+
+<p>In the following examples the customer in Broadworks would have their Trunk Group Identifier set by the Service Provider.  For simplicity, the Provider is using the main trunking number as the identifier.  It needs to be set for both SIP registrations and SIP Invites.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>request REGISTER sip-header Contact modify “&lt;sip:(.*)@(.*)&gt;” “&lt;sip:\1;tgrp=9494289948;trunk-context=voip.markholloway.net@\2&gt;”
+request INVITE sip-header Contact modify “&lt;sip:(.*)@(.*)&gt;” “&lt;sip:\1;tgrp=9494289948;trunk-context=voip.markholloway.net@\2&gt;”
+</code></pre></div></div>
+
+<p>Below is another example where a call coming from UCM includes the leading 9 for outside dial tone. Rather than stripping 9 on UCM it will be stripped by CUBE using a SIP Profile.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>response 183 sip-header Remote-Party-ID modify “(.*):9(.*)” “\1:\2″
+</code></pre></div></div>
+
+
+</div>
+
+<!--
+<div class="donate">
+</div>
+
+-->
+
+
+
+<!-- fluidvids.js -->
+<script src="/public/js/fluidvids/dist/fluidvids.js"></script>
+<script>
+fluidvids.init({
+  selector: ['iframe'],
+  players: ['www.youtube.com', 'player.vimeo.com']
+});
+</script>
+
+
+
+  <!-- Disqus comments. -->
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2010/07/05/cisco-cube-sip-diversion-profiles/'; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2010/07/05/cisco-cube-sip-diversion-profiles/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+
+/**
+
+Using variables from _config.yml instead of static entries
+
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//mh-blog-2.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>

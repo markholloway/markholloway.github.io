@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Active Directory based SIP Routing on the Acme Packet SBC &middot; Mark Holloway
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole_custom.css">
+  <link rel="stylesheet" href="/public/css/syntax_dracula.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde_custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface|Press+Start+2P|Exo+2:700">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+
+
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Force https -->
+  
+  <script>
+    var host = 'markholloway.github.io';
+    if (window.location.host == host && window.location.protocol != 'https:') {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+  
+
+  <!-- Jekyll SEO tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Active Directory based SIP Routing on the Acme Packet SBC | Mark Holloway</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="Active Directory based SIP Routing on the Acme Packet SBC" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Many Enterprises have migrated to SIP Trunking for PSTN access. For an Enterprise with a single IP PBX platform and an SBC on the edge, call routing from the PSTN to the internal network is typically very straight forward because all DID’s point to one IP platform." />
+<meta property="og:description" content="Many Enterprises have migrated to SIP Trunking for PSTN access. For an Enterprise with a single IP PBX platform and an SBC on the edge, call routing from the PSTN to the internal network is typically very straight forward because all DID’s point to one IP platform." />
+<link rel="canonical" href="http://localhost:4000/2015/01/27/acme-packet-active-directory/" />
+<meta property="og:url" content="http://localhost:4000/2015/01/27/acme-packet-active-directory/" />
+<meta property="og:site_name" content="Mark Holloway" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-01-27T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@twilion2" />
+<script type="application/ld+json">
+{"description":"Many Enterprises have migrated to SIP Trunking for PSTN access. For an Enterprise with a single IP PBX platform and an SBC on the edge, call routing from the PSTN to the internal network is typically very straight forward because all DID’s point to one IP platform.","@type":"BlogPosting","url":"http://localhost:4000/2015/01/27/acme-packet-active-directory/","headline":"Active Directory based SIP Routing on the Acme Packet SBC","dateModified":"2015-01-27T00:00:00-05:00","datePublished":"2015-01-27T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2015/01/27/acme-packet-active-directory/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131536379-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  <body>
+    
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mark Holloway
+        </a>
+      </h1>
+      <p class="lead">Turning Telco into Code</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive/">Archive</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <p>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="/public/GitHub-Mark-Light-32px.png" alt="Github" width="18" height="18"></a>
+        <a class="sidebar-nav-icons" href="http://www.linkedin.com/in/mholloway/" target="blank"><img src="/public/linkedin.png" alt="LinkedIn" width="19" height="19"></a>
+      </p>
+
+    </nav>
+
+    <p><small>&copy; 2019 All rights reserved.</small></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      
+
+
+
+<div class="post">
+  <h1 class="post-title">Active Directory based SIP Routing on the Acme Packet SBC</h1>
+  <span class="post-date">27 Jan 2015 <i class="fa fa-tags"></i> <a href="/blog/tag/acme/">#acme packet</a> <!--comma--><a href="/blog/tag/sbc/">#sbc</a> <!--comma--><a href="/blog/tag/sip/">#sip</a> </span>
+
+  <p>Many Enterprises have migrated to <code class="highlighter-rouge">SIP Trunking</code> for PSTN access. For an Enterprise with a single IP PBX platform and an SBC on the edge, call routing from the PSTN to the internal network is typically very straight forward because all DID’s point to one IP platform.</p>
+
+<!--more-->
+
+<p>Example of a common <code class="highlighter-rouge">SIP Trunk</code> model</p>
+
+<p><img src="/blog/assets/apkt/apkt-ad01.png" alt="" /></p>
+
+<p>When another SIP communication platform is introduced into the Enterprise topology it raises the question of what IP platform is considered the call routing decision maker for calls coming from the PSTN SIP Trunk.</p>
+
+<p>This is an example of a less-than-desirable implementation.</p>
+
+<p><img src="/blog/assets/apkt/apkt-ad02.png" alt="" /></p>
+
+<p>Usually one of these is the common way an Enterprise integrates their IP PBX with another IP platform (such as Lync):</p>
+
+<ul>
+  <li>
+    <p>All calls go to the IP PBX and then <code class="highlighter-rouge">fork</code> to Lync</p>
+  </li>
+  <li>
+    <p>All calls go to Lync and use Lync’s <code class="highlighter-rouge">Simultaneous Ring</code> feature to ring the IP PBX</p>
+  </li>
+  <li>
+    <p>SBC <code class="highlighter-rouge">forks</code> the SIP Invite to the IP PBX and Lync simultaneously</p>
+  </li>
+</ul>
+
+<p>Although many IP PBX’s deployed with Lync use one of the above methods, there is a much better way for this integration to occur.</p>
+
+<p>The Acme Packet SBC supports <code class="highlighter-rouge">Active Directory</code> integration for call routing decisions. The beauty of this is in most organizations Active Directory is already used to store various phone numbers for users within the Enterprise.</p>
+
+<p>When the <code class="highlighter-rouge">local-policy</code> is configured to support Active Directory (LDAP) and a SIP Invite is received from the PSTN, the SBC will query Active Directory to see if the phone number is assigned to a user.  If it is, the SBC will see if it’s part of the Active Directory field attribute <code class="highlighter-rouge">telephoneNumber</code> for a desk phone, or <code class="highlighter-rouge">msRTCSIP</code> for a Lync phone number. Other attributes are supported and are explained further in this discussion.</p>
+
+<p>This is an example of an Active Directory query from the SBC to determine if the call should be sent to CUCM or Lync.</p>
+
+<p><img src="/blog/assets/apkt/apkt-ad03.png" alt="" /></p>
+
+<p>In a similar regard to the above diagram, if the dialed digits are the Lync phone number and the Active Directory query shows the dialed digits belong to the msRTCSIP attribute, the Acme Packet SBC knows the <code class="highlighter-rouge">next hop</code> should be the realm and session agent for Lync.</p>
+
+<p><img src="/blog/assets/apkt/apkt-ad04.png" alt="" /></p>
+
+<p>This is where the power of Active Directory integration in the SBC becomes very interesting..</p>
+
+<p>The Acme Packet SBC’s <code class="highlighter-rouge">local-policy</code> may be configured in such a way that if the dialed digits +1-404-555-1000 match telephoneNumber in Active Directory, but msRTCSIP is also populated with a separate Lync phone number (in this case +1-404-555-9595) the SBC’s local-policy preference will route the call to Lync instead of the IP PBX. If msRTCSIP is not populated, the call will simply route the to the IP PBX. This is a very flexible way of handling call routing. What this comes down to in this particular case is an environment where some users are exclusively on CUCM and others are CUCM and Lync, but the Enterprise may want Lync users to always receive calls on Lync first regardless of the dialed digits coming from the PSTN.</p>
+
+<p><img src="/blog/assets/apkt/apkt-ad05.png" alt="" /></p>
+
+<p>Now for even more flexibility..</p>
+
+<p>The Acme Packet SBC may also be configured in such a way that it recognizes both <code class="highlighter-rouge">telephoneNumber</code> and <code class="highlighter-rouge">msRTCSIP</code> being populated, each with their own phone numbers, but if the SIP Invite to the first platform experiences a SIP Invite timeout or failure, a SIP Invite may be sent to the <code class="highlighter-rouge">next destination</code>. You are not limited to just two destinations.</p>
+
+<p><img src="/blog/assets/apkt/apkt-ad06.png" alt="" /></p>
+
+<p>Finally, having calls <code class="highlighter-rouge">reroute</code> to the <code class="highlighter-rouge">PSTN</code> during an internal network outage is also possible by using the Active Directory attribute field <code class="highlighter-rouge">mobile</code>. If this field is populated and the SBC’s local-policy is setup to recognize the digits in the mobile field, calls that fail to setup internally (in this case, to Lync and the IP PBX) may route back out the PSTN SIP Trunk to the user’s mobile phone.</p>
+
+<p><img src="/blog/assets/apkt/apkt-ad07.png" alt="" /></p>
+
+<p>Configuration examples:</p>
+
+<p>The two critical configuration elements to examine for Active Directory integration are <code class="highlighter-rouge">local-policy</code> and <code class="highlighter-rouge">ldap-config</code>.</p>
+
+<p>First we will look at local-policy. This is very straight forward as the only difference when using Active Directory integration is the next-hop policy-attribute will reference ldap.</p>
+
+<p><img src="/blog/assets/apkt/apkt-adconf01.png" alt="" /></p>
+
+<p>The next configuration element to talk about is <code class="highlighter-rouge">ldap-config</code>. This is where you define the Active Directory criteria and how call routing should be handled. You may have have more than one ldap-config on the SBC.</p>
+
+<p>The example below is similar to our simple SIP Trunk diagram at the start of this blog post. There is a single IP PBX platform on the internal network. However, the mobile field in Active Directory is also populated with digits. The way this local-policy is configured, if a SIP Invite timeout occurs to CUCM, the <code class="highlighter-rouge">policy</code> will <code class="highlighter-rouge">reroute</code> the failed call back out the SIP Trunk to the Active Directory user’s mobile number.</p>
+
+<p><img src="/blog/assets/apkt/apkt-adconf02.png" alt="" /></p>
+
+<p>In this next example the local-policy uses the <code class="highlighter-rouge">attribute order</code>. This means if the dialed digits match an IP PBX phone number (telephoneNumber) but the user also has a Lync phone number populated in Active Directory under msRTCSIP, send the SIP Invite to Lync.</p>
+
+<p><img src="/blog/assets/apkt/apkt-adconf03.png" alt="" /></p>
+
+<p>As you can see from the above example one of the most useful elements in the ldap-cfg-attributes is the use of regular expressions for phone number formatting.</p>
+
+<p>Other cool features in 6.4f1:</p>
+
+<p>Support for <code class="highlighter-rouge">RFC 6341</code> (SIP-based Media Recording – aka SIPREC) on the Linux version of the Acme Packet SBC.</p>
+
+<p><img src="/blog/assets/apkt/apkt-ad08.png" alt="" /></p>
+
+
+</div>
+
+<!--
+<div class="donate">
+</div>
+
+-->
+
+
+
+<!-- fluidvids.js -->
+<script src="/public/js/fluidvids/dist/fluidvids.js"></script>
+<script>
+fluidvids.init({
+  selector: ['iframe'],
+  players: ['www.youtube.com', 'player.vimeo.com']
+});
+</script>
+
+
+
+  <!-- Disqus comments. -->
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2015/01/27/acme-packet-active-directory/'; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2015/01/27/acme-packet-active-directory/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+
+/**
+
+Using variables from _config.yml instead of static entries
+
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//mh-blog-2.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>

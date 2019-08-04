@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Acme Packet SBC “fraud-protection” ACLI Command Configuration &middot; Mark Holloway
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole_custom.css">
+  <link rel="stylesheet" href="/public/css/syntax_dracula.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde_custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface|Press+Start+2P|Exo+2:700">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+
+
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Force https -->
+  
+  <script>
+    var host = 'markholloway.github.io';
+    if (window.location.host == host && window.location.protocol != 'https:') {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+  
+
+  <!-- Jekyll SEO tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Acme Packet SBC “fraud-protection” ACLI Command Configuration | Mark Holloway</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="Acme Packet SBC “fraud-protection” ACLI Command Configuration" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Acme Packet EcZ-730m1 software introduces the ACLI command fraud-protection" />
+<meta property="og:description" content="Acme Packet EcZ-730m1 software introduces the ACLI command fraud-protection" />
+<link rel="canonical" href="http://localhost:4000/2017/06/14/apkt-fraud/" />
+<meta property="og:url" content="http://localhost:4000/2017/06/14/apkt-fraud/" />
+<meta property="og:site_name" content="Mark Holloway" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-06-14T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@twilion2" />
+<script type="application/ld+json">
+{"description":"Acme Packet EcZ-730m1 software introduces the ACLI command fraud-protection","@type":"BlogPosting","url":"http://localhost:4000/2017/06/14/apkt-fraud/","headline":"Acme Packet SBC “fraud-protection” ACLI Command Configuration","dateModified":"2017-06-14T00:00:00-04:00","datePublished":"2017-06-14T00:00:00-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/06/14/apkt-fraud/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131536379-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  <body>
+    
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mark Holloway
+        </a>
+      </h1>
+      <p class="lead">Turning Telco into Code</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive/">Archive</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <p>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="/public/GitHub-Mark-Light-32px.png" alt="Github" width="18" height="18"></a>
+        <a class="sidebar-nav-icons" href="http://www.linkedin.com/in/mholloway/" target="blank"><img src="/public/linkedin.png" alt="LinkedIn" width="19" height="19"></a>
+      </p>
+
+    </nav>
+
+    <p><small>&copy; 2019 All rights reserved.</small></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      
+
+
+
+<div class="post">
+  <h1 class="post-title">Acme Packet SBC “fraud-protection” ACLI Command Configuration</h1>
+  <span class="post-date">14 Jun 2017 <i class="fa fa-tags"></i> <a href="/blog/tag/acme/">#acme packet</a> <!--comma--><a href="/blog/tag/sbc/">#sbc</a> <!--comma--><a href="/blog/tag/sip/">#sip</a> </span>
+
+  <p>Acme Packet EcZ-730m1 software introduces the ACLI command <code class="highlighter-rouge">fraud-protection</code></p>
+
+<!--more-->
+
+<p>This allows the SBC to store multiple black lists, white lists, SIP redirect lists, and <code class="highlighter-rouge">rate limit</code> entries for fraud prevention and call control. Multiple lists may exist where entries are stored in separate XML files.</p>
+
+<p>Lists (XML files) may be initially created through <code class="highlighter-rouge">ACLI</code> or web interface. If the preference is to manage lists manually then once a list is created it will need to be downloaded and the <code class="highlighter-rouge">XML</code> file(s) edited with a text editor, similar to managing Local Route Tables (LRT). Otherwise, all entries may be added, modified, or deleted using the web interface.</p>
+
+<p>Below is an example of the GUI configuration elements for managing fraud-protection.</p>
+
+<p><img src="/blog/assets/apkt/apkt-fraud01.png" alt="" /></p>
+
+<p><img src="/blog/assets/apkt/apkt-fraud02.png" alt="" /></p>
+
+<p><img src="/blog/assets/apkt/apkt-fraud03.png" alt="" /></p>
+
+<p>Below is an example of creating a new fraud-protection <code class="highlighter-rouge">XML</code> file in the ACLI called <code class="highlighter-rouge">fraudProtect.xml</code></p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+sbc# config t
+sbc(configuration)# system
+sbc(system)# fraud-protection
+sbc(fraud-protection)# select
+sbc(fraud-protection)# show
+fraud-protection
+    mode                            local
+    file-name                       fraudProtect.xml
+    options
+    allow-remote-call-terminate     disabled
+
+</code></pre></div></div>
+
+<p>In the example below, the <code class="highlighter-rouge">Whitelist</code> section permits all calls based on the <code class="highlighter-rouge">From header</code> matching acmepacket.com through the realm called <code class="highlighter-rouge">peer</code>. Calls based on the <code class="highlighter-rouge">To header</code> to a specific UK phone number on any realm is represented by a wildcard <code class="highlighter-rouge">*</code>.</p>
+
+<p>The <code class="highlighter-rouge">Blacklist</code> section rejects calls based on a variety of criteria. Note that even though calls are blocked to <code class="highlighter-rouge">+44</code> based on the To header, calls to <code class="highlighter-rouge">+441189240000</code> are permitted since this is a more specific match in the Whitelist.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+&lt;?xml version='1.0' standalone='yes'?&gt;
+&lt;oracleSbcFraudProtectionApi version="1.0"&gt;
+    &lt;call-whitelist&gt;
+        &lt;userEntry&gt;
+            &lt;from-hostname&gt;acmepacket.com&lt;/from-hostname&gt;
+            &lt;realm&gt;peer&lt;/realm&gt;
+        &lt;/userEntry&gt;
+        &lt;userEntry&gt;
+            &lt;to-hostname&gt;+441189240000&lt;/to-hostname&gt;
+            &lt;realm&gt;*&lt;/realm&gt;
+        &lt;/userEntry&gt;
+    &lt;/call-whitelist&gt;
+    &lt;call-blacklist&gt;
+        &lt;userEntry&gt;
+            &lt;from-hostname&gt;robodialer.com&lt;/from-hostname&gt;
+            &lt;realm&gt;peer&lt;/realm&gt;
+        &lt;/userEntry&gt;
+        &lt;userEntry&gt;
+            &lt;from-hostname&gt;208.57.21.10&lt;/from-hostname&gt;
+            &lt;realm&gt;peer&lt;/realm&gt;
+        &lt;/userEntry&gt;
+        &lt;userEntry&gt;
+            &lt;from-hostname&gt;+14045551000&lt;/from-hostname&gt;
+            &lt;realm&gt;peer&lt;/realm&gt;
+        &lt;/userEntry&gt;
+        &lt;userEntry&gt;
+            &lt;from-hostname&gt;+44&lt;/from-hostname&gt;
+            &lt;realm&gt;*&lt;/realm&gt;
+        &lt;/userEntry&gt;
+    &lt;/call-blacklist&gt;
+    &lt;call-redirect&gt;
+    &lt;/call-redirect&gt;
+    &lt;call-rate-limit&gt;
+    &lt;/call-rate-limit&gt;
+&lt;/oracleSbcFraudProtectionApi&gt;
+
+</code></pre></div></div>
+
+<p>The command <code class="highlighter-rouge">show fraud-protection all</code> will show  fraud definitions and if any matches exist.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+sbc# show fraud-protection all
+
+List Type   To/From     Match Value     Ingress Realm   No. of Hits
+                                                        Recent  Total
+.....................................................................
+Blacklist   From        robodialer.com  level3          3       7
+Blacklist   From        208.57.21.10    gx              10      23
+Blacklist   From        +14045551000    orange          1       3
+Blacklist   From        +44             bt              0       0
+Whitelist   From        acmepacket.com  att             32      128
+Whitelist   From        +441189240000   bt              5       7
+
+             Total hits: 168
+          Total entries: 6
+Total displayed entries: 6
+              File name: fraudProtect.xml
+
+</code></pre></div></div>
+
+<p>The command <code class="highlighter-rouge">show fraud-protection stats</code> show a summary version of matches.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Fraud Protection Engine State   ---- Lifetime ----
+                                 Recent   Total   
+Blacklisted Calls                     14       33
+Whitelisted Calls                     37      135
+Ratelimited Calls                      0        0
+Redirected Calls                       0        0
+Blacklist Rejected Calls               0        0
+Ratelimit Rejected Calls               0        0
+
+</code></pre></div></div>
+
+
+
+</div>
+
+<!--
+<div class="donate">
+</div>
+
+-->
+
+
+
+<!-- fluidvids.js -->
+<script src="/public/js/fluidvids/dist/fluidvids.js"></script>
+<script>
+fluidvids.init({
+  selector: ['iframe'],
+  players: ['www.youtube.com', 'player.vimeo.com']
+});
+</script>
+
+
+
+  <!-- Disqus comments. -->
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2017/06/14/apkt-fraud/'; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2017/06/14/apkt-fraud/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+
+/**
+
+Using variables from _config.yml instead of static entries
+
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//mh-blog-2.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>

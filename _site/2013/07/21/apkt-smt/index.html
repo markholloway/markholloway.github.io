@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Acme Packet SBC “SIP Monitoring and Trace” Configuration &middot; Mark Holloway
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole_custom.css">
+  <link rel="stylesheet" href="/public/css/syntax_dracula.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde_custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface|Press+Start+2P|Exo+2:700">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+
+
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Force https -->
+  
+  <script>
+    var host = 'markholloway.github.io';
+    if (window.location.host == host && window.location.protocol != 'https:') {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+  
+
+  <!-- Jekyll SEO tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Acme Packet SBC “SIP Monitoring and Trace” Configuration | Mark Holloway</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="Acme Packet SBC “SIP Monitoring and Trace” Configuration" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Diagnosing a troubled SIP call has a tendency to be a real pain. Whether it’s running wireshark, tcpdump, or collecting debugs, having to sort through duplicate packets and attempting to merge different pcap files together does not provide a simple way to troubleshoot a single call while looking at both sides of the call in a single ladder diagram." />
+<meta property="og:description" content="Diagnosing a troubled SIP call has a tendency to be a real pain. Whether it’s running wireshark, tcpdump, or collecting debugs, having to sort through duplicate packets and attempting to merge different pcap files together does not provide a simple way to troubleshoot a single call while looking at both sides of the call in a single ladder diagram." />
+<link rel="canonical" href="http://localhost:4000/2013/07/21/apkt-smt/" />
+<meta property="og:url" content="http://localhost:4000/2013/07/21/apkt-smt/" />
+<meta property="og:site_name" content="Mark Holloway" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-07-21T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@twilion2" />
+<script type="application/ld+json">
+{"description":"Diagnosing a troubled SIP call has a tendency to be a real pain. Whether it’s running wireshark, tcpdump, or collecting debugs, having to sort through duplicate packets and attempting to merge different pcap files together does not provide a simple way to troubleshoot a single call while looking at both sides of the call in a single ladder diagram.","@type":"BlogPosting","url":"http://localhost:4000/2013/07/21/apkt-smt/","headline":"Acme Packet SBC “SIP Monitoring and Trace” Configuration","dateModified":"2013-07-21T00:00:00-04:00","datePublished":"2013-07-21T00:00:00-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2013/07/21/apkt-smt/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131536379-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  <body>
+    
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mark Holloway
+        </a>
+      </h1>
+      <p class="lead">Turning Telco into Code</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive/">Archive</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <p>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="/public/GitHub-Mark-Light-32px.png" alt="Github" width="18" height="18"></a>
+        <a class="sidebar-nav-icons" href="http://www.linkedin.com/in/mholloway/" target="blank"><img src="/public/linkedin.png" alt="LinkedIn" width="19" height="19"></a>
+      </p>
+
+    </nav>
+
+    <p><small>&copy; 2019 All rights reserved.</small></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      
+
+
+
+<div class="post">
+  <h1 class="post-title">Acme Packet SBC “SIP Monitoring and Trace” Configuration</h1>
+  <span class="post-date">21 Jul 2013 <i class="fa fa-tags"></i> <a href="/blog/tag/acme/">#acme packet</a> <!--comma--><a href="/blog/tag/sbc/">#sbc</a> <!--comma--><a href="/blog/tag/sip/">#sip</a> </span>
+
+  <p>Diagnosing a troubled <code class="highlighter-rouge">SIP</code> call has a tendency to be a real pain. Whether it’s running <code class="highlighter-rouge">wireshark</code>, <code class="highlighter-rouge">tcpdump</code>, or collecting <code class="highlighter-rouge">debugs</code>, having to sort through duplicate packets and attempting to merge different pcap files together does not provide a simple way to troubleshoot a single call while looking at both sides of the call in a single ladder diagram.</p>
+
+<!--more-->
+
+<p>Fortunately the Acme Packet SBC now includes a free tool embedded in the code that once enabled, allows it turns the SBC into a <code class="highlighter-rouge">SIP capture device</code>. The distinct advantage here is seeing <code class="highlighter-rouge">both sides of a call</code> in a <code class="highlighter-rouge">single ladder diagram</code>. Even better, extra (and very useful) information is included in between each step of the ladder diagram referencing internal “logic decisions” as they occur as traffic passes through the SBC.  Finding a particular capture is easy using <code class="highlighter-rouge">Search Filters</code> which allow you to specify just about any criteria.</p>
+
+<p><img src="/blog/assets/apkt/apkt-smt01.png" alt="" /></p>
+
+<p><code class="highlighter-rouge">Pop-up context</code> provides tool tips and additional information about a call depending on what area you are hovering over. It is also possible to export a capture locally so it may be emailed and viewed by others  rather than having a variety of users logging into the SBC’s web interface. Alternatively, <code class="highlighter-rouge">captures may be exported</code> as ASCII text files with proper and readable formatting of the call information.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+---Session Summary---
+Startup Time: 2012-04-26 08:40:44.624
+State: TERMINATED-200
+Duration: 9
+From URI: sipp &amp;lt:sip:sipp@172.16.34.10:5060&amp;gt;;tag=25
+To URI: sut &amp;lt;sip:service@172.16.34.226:5060&amp;gt;;tag=3453
+Ingress Src Address: 172.16.34.10
+Ingress Src Port: 5060
+Ingress Dest Address: 172.16.34.226
+Ingress Dest Port: 5060
+Egress Source Address: 192.168.34.226
+Egress Source Port: 5060
+Egress Destination Address: 192.168.34.17
+Egress Destination Port: 5060
+Ingress Realm: Access
+Egress Realm: Core
+Ingress NetworkIf: s0p0
+Egress NetworkIf: s1p0
+
+</code></pre></div></div>
+<p>There are three main parts to viewing a captured call. The first is the <code class="highlighter-rouge">Session Summary</code> view which contains information such as source and destination IP addresses, URI’s, Realms, etc..</p>
+
+<p><img src="/blog/assets/apkt/apkt-smt02.png" alt="" /></p>
+
+<p>The second viewing pane is <code class="highlighter-rouge">SIP Message Details</code>. This is the actual <code class="highlighter-rouge">ladder diagram</code> and SBC events.</p>
+
+<p><img src="/blog/assets/apkt/apkt-smt03.png" alt="" /></p>
+
+<p>The third pane is for viewing <code class="highlighter-rouge">QoS</code> statistics such as jitter, packet loss, delay, and MOS scores for the specified call.</p>
+
+<p><img src="/blog/assets/apkt/apkt-smt04.png" alt="" /></p>
+
+<p>In order to enable web browser viewing of SIP Monitoring and Trace the web server must be set to the <code class="highlighter-rouge">enabled</code> state.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+web-server-config
+    state               enabled
+    inactivity-timeout  5
+    http-state          enabled
+    http-port           80
+    https-state         enabled
+    https-port          443
+    tls-profile     
+
+</code></pre></div></div>
+
+<p>The next step is to create one or more <code class="highlighter-rouge">filters</code>. In the following example there is a filter called hostedIpPbx and in the user portion of the filter any SIP messages containing the phone number digits 781801 will be captured.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+sbc# config t
+sbc(configure)# session-router
+sbc(session-router)# filter-config
+sbc(filter-config)# select
+name:
+1. Broadsoft
+2. Cisco
+3. Genesys
+
+selection: 1
+sbc#(filter-config)# show
+    name            Broadsoft
+    address         0.0.0.0
+    user            781801 &lt;- Phone prefix NPA-NXX to capture
+
+</code></pre></div></div>
+
+<p>The next step is to enable sip-monitoring and identify which <code class="highlighter-rouge">monitoring filter</code> should be used. Applying the filter here enabled the filter globally on the system. Usually filters are best applied to specific realms or session agents (under monitoring-filters) to capture only interesting traffic.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+sbc(sip-minitoring)# show
+sip-monitoring
+    state               enabled
+    monitoring-filters  Broadsoft
+    trigger-window      0
+
+</code></pre></div></div>
+
+<p>In this particular network there are IP phones behind a Cisco ASA firewall which NAT to the public internet and need to register to a BroadWorks SIP softswitch which is being “hidden” behind the SBC.</p>
+
+<p>Below is the capture based on the filter above. Note the phone number starts with <code class="highlighter-rouge">781801xxxx</code></p>
+
+<p><img src="/blog/assets/apkt/apkt-smt05.png" alt="" /></p>
+
+
+</div>
+
+<!--
+<div class="donate">
+</div>
+
+-->
+
+
+
+<!-- fluidvids.js -->
+<script src="/public/js/fluidvids/dist/fluidvids.js"></script>
+<script>
+fluidvids.init({
+  selector: ['iframe'],
+  players: ['www.youtube.com', 'player.vimeo.com']
+});
+</script>
+
+
+
+  <!-- Disqus comments. -->
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2013/07/21/apkt-smt/'; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2013/07/21/apkt-smt/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+
+/**
+
+Using variables from _config.yml instead of static entries
+
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//mh-blog-2.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      CUE Upgrade (Cisco Unity Express 7) &middot; Mark Holloway
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole_custom.css">
+  <link rel="stylesheet" href="/public/css/syntax_dracula.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde_custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface|Press+Start+2P|Exo+2:700">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+
+
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Force https -->
+  
+  <script>
+    var host = 'markholloway.github.io';
+    if (window.location.host == host && window.location.protocol != 'https:') {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+  
+
+  <!-- Jekyll SEO tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>CUE Upgrade (Cisco Unity Express 7) | Mark Holloway</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="CUE Upgrade (Cisco Unity Express 7)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I acquired a used CUE module running CUE 2.1.2 and wanted to proceed upgrading the module to CUE 7.0.3. The only way to upgrade CUE is through FTP. Here is the procedure." />
+<meta property="og:description" content="I acquired a used CUE module running CUE 2.1.2 and wanted to proceed upgrading the module to CUE 7.0.3. The only way to upgrade CUE is through FTP. Here is the procedure." />
+<link rel="canonical" href="http://localhost:4000/2009/11/25/cisco-unity-express-upgrade/" />
+<meta property="og:url" content="http://localhost:4000/2009/11/25/cisco-unity-express-upgrade/" />
+<meta property="og:site_name" content="Mark Holloway" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2009-11-25T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@twilion2" />
+<script type="application/ld+json">
+{"description":"I acquired a used CUE module running CUE 2.1.2 and wanted to proceed upgrading the module to CUE 7.0.3. The only way to upgrade CUE is through FTP. Here is the procedure.","@type":"BlogPosting","url":"http://localhost:4000/2009/11/25/cisco-unity-express-upgrade/","headline":"CUE Upgrade (Cisco Unity Express 7)","dateModified":"2009-11-25T00:00:00-05:00","datePublished":"2009-11-25T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2009/11/25/cisco-unity-express-upgrade/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131536379-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  <body>
+    
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mark Holloway
+        </a>
+      </h1>
+      <p class="lead">Turning Telco into Code</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive/">Archive</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <p>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="/public/GitHub-Mark-Light-32px.png" alt="Github" width="18" height="18"></a>
+        <a class="sidebar-nav-icons" href="http://www.linkedin.com/in/mholloway/" target="blank"><img src="/public/linkedin.png" alt="LinkedIn" width="19" height="19"></a>
+      </p>
+
+    </nav>
+
+    <p><small>&copy; 2019 All rights reserved.</small></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      
+
+
+
+<div class="post">
+  <h1 class="post-title">CUE Upgrade (Cisco Unity Express 7)</h1>
+  <span class="post-date">25 Nov 2009 <i class="fa fa-tag"></i> <a href="/blog/tag/cisco/">#cisco</a> </span>
+
+  <p>I acquired a used <code class="highlighter-rouge">CUE</code> module running CUE 2.1.2 and wanted to proceed upgrading the module to CUE 7.0.3.  The only way to upgrade CUE is through FTP.  Here is the procedure.
+<!--more--></p>
+
+<p>First thing I needed to do was install <code class="highlighter-rouge">vsftpd</code> on my RHEL 5 Client Workstation.  If you are running CentOS or Fedora you may already have vsftpd installed or you can easily install it using YUM.  The yum repository for RHEL5 Client Workstation does not include the option to install vsftpd through yum but you can login to your Red Hat account on their web site and search ‘vsftpd’ and there is an RPM you may download and install (with no dependency problems).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+rpm <span class="nt">-ivh</span> vsftpd-2.0.5-16.el5.x86_64.rpm to install vsftpd
+
+man vsftp to <span class="nb">read </span>the very short manual
+
+chkconfig vstpd on to start vsftpd on bootup
+
+service vsftpd stop|start|restart to reload the service at any <span class="nb">time</span>
+
+<span class="c">#Default ftp root directory is /var/ftp</span>
+
+<span class="nb">cd</span> /etc/vsftpd
+
+</code></pre></div></div>
+
+<p>Open vsftpd.conf and allow anonymous users (not required but makes things easier)</p>
+
+<p>From Cisco’s CCO page navigate to Cisco Unity Express 7.0.3 and download <code class="highlighter-rouge">cue-vm-k9.nm-aim.7.0.3.zip</code>. This file is for NM-CUE and AIM modules and there is a different zip file for NME-CUE. You also must download the appropriate license files for the number of mailboxes you are using and the IVR ports if applicable. I also had to include the specific language file cue-vm-en_US-langpack.nm-aim.7.0.3.prt1 in my FTP folder or the installation would fail regardless of the language pack being present. Extract all the zip files into the /var/ftp folder on your FTP server.</p>
+
+<p>Log in to your CME router populated with the CUE module.  You will need to open a session through enable mode (not config mode). You should already have your service-engine and service-module parameters configured. IP 177.3.11.1 is the default gateway on my router and 177.3.11.254 is the IP I have assigned to my CME service module.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+interface Service-Engine1/0
+ip unnumbered Vlan11
+service-module ip address 177.3.11.254 255.255.255.0
+service-module ip default-gateway 177.3.11.1
+
+router# service-module service-engine 0/1 session
+Trying… Open
+
+cue# show software version
+Cisco Unity Express version 2.1.2
+
+Be sure you can ping your FTP server form the CUE command prompt.
+
+cue# ping 177.3.11.2
+PING 177.3.11.2 (177.3.11.2) 56(84) bytes of data.
+64 bytes from 177.3.11.2: icmp_seq=1 ttl=255 time=0.506 ms
+64 bytes from 177.3.11.2: icmp_seq=2 ttl=255 time=0.287 ms
+64 bytes from 177.3.11.2: icmp_seq=3 ttl=255 time=0.252 ms
+64 bytes from 177.3.11.2: icmp_seq=4 ttl=255 time=0.257 ms
+64 bytes from 177.3.11.2: icmp_seq=5 ttl=255 time=0.272 ms
+
+— 177.3.11.2 ping statistics —
+5 packets transmitted, 5 received, 0% packet loss, time 2ms
+rtt min/avg/max/mdev = 0.252/0.314/0.506/0.098 ms, ipg/ewma 0.551/0.407 ms
+
+In this particular scenario I am performing a clean install. CUE offers the option of doing an upgrade instead of a clean install but you must refer to the Cisco Unity Express 7.0 Installation and Upgrade Guide to make sure the the existing version of CUE is at the correct version.
+
+cue# software install clean url ftp://177.3.11.2/cue-vm-k9.nm-aim.7.0.3.pkg username anonymous password anonymous@
+
+</code></pre></div></div>
+
+<p>The file cue-vm-k9.nm-aim.7.0.3.pkg is downloaded by CUE which then proceeds to download the remaining files from the CUE zip files that was extracted in to the FTP folder. You will be prompted to choose a language and this is where you must have the specific language pack in your FTP folder (referred to as language payload by CUE). CUE will run through a series of steps to install CUE 7.0.3 and prompt you to reload the module.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+cue# show software version
+Cisco Unity Express version (7.0.3)
+Technical Support: http://www.cisco.com/techsupport Copyright (c) 1986-2008 by Cisco Systems, Inc.
+
+Components:
+
+- CUE Voicemail Language Support version 7.0.3
+
+The license files must now be loaded. Be sure you downloaded the correct ones as one is for CCM and the other CME. Once you install one license type you cannot change the system to a different license unless you perform a clean install.
+
+cue# software install clean url ftp://177.3.11.2/cue-vm-license_12mbx_cme_7.0.3.pkg username anonymous password anonymous@
+
+cue# software install clean url ftp://177.3.11.2/cue-vm-license_4port_ivr_7.0.3.pkg username anonymous password anonymous@
+
+cue# reload
+
+cue# show software licenses
+Installed license files:
+- voicemail_lic.sig : 50 MAILBOX LICENSE
+- ivr_lic.sig : 4 PORT IVR BASE LICENSE
+
+Core:
+- Application mode: CCME
+- Total usable system ports: 8
+
+Voicemail/Auto Attendant:
+- Max system mailbox capacity time: 6000
+- Default # of general delivery mailboxes: 15
+- Default # of personal mailboxes: 50
+
+- Max # of configurable mailboxes: 65
+
+Interactive Voice Response:
+- Max # of IVR sessions: 4
+
+Languages:
+- Max installed languages: 5
+- Max enabled languages: 5
+
+</code></pre></div></div>
+
+<p>As I go through my CCIE Voice tasks I frequently need to wipe the CUE configuration and start with a fresh CUE 7 initialization:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cue# offline
+cue# restore factory default
+</code></pre></div></div>
+
+<p>To wipe the config and reboot into a fresh system prompt with the initialization questions do the following:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cue# erase startup-config
+</code></pre></div></div>
+
+<p>The first time you log into the web interface of CUE you will need to associate the administrator credentials of the router with CUE so CUE may access CME.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r3-br2(config-telephony)#web admin system name admin password cisco
+
+r3-br2(config)#ip http path flash:/gui
+</code></pre></div></div>
+
+<p>If you forget the last statement containing ip http path flash:/gui then CUE will fail to validate the admin/cisco credentials when entered in the CUE web interface.  CUE requires administrator access to CME.</p>
+
+
+
+</div>
+
+<!--
+<div class="donate">
+</div>
+
+-->
+
+
+
+<!-- fluidvids.js -->
+<script src="/public/js/fluidvids/dist/fluidvids.js"></script>
+<script>
+fluidvids.init({
+  selector: ['iframe'],
+  players: ['www.youtube.com', 'player.vimeo.com']
+});
+</script>
+
+
+
+  <!-- Disqus comments. -->
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2009/11/25/cisco-unity-express-upgrade/'; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2009/11/25/cisco-unity-express-upgrade/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+
+/**
+
+Using variables from _config.yml instead of static entries
+
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//mh-blog-2.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Broadsoft Trunk Group Identity Configuration &middot; Mark Holloway
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole_custom.css">
+  <link rel="stylesheet" href="/public/css/syntax_dracula.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde_custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface|Press+Start+2P|Exo+2:700">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+
+
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Force https -->
+  
+  <script>
+    var host = 'markholloway.github.io';
+    if (window.location.host == host && window.location.protocol != 'https:') {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+  
+
+  <!-- Jekyll SEO tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Broadsoft Trunk Group Identity Configuration | Mark Holloway</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="Broadsoft Trunk Group Identity Configuration" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Broadworks Trunk Group Identity (TGI) is an option in the Trunk Group Profile that allows a unique identity to be provisioned and allow Unscreened Calls from the customer premise." />
+<meta property="og:description" content="Broadworks Trunk Group Identity (TGI) is an option in the Trunk Group Profile that allows a unique identity to be provisioned and allow Unscreened Calls from the customer premise." />
+<link rel="canonical" href="http://localhost:4000/2012/07/10/broadsoft-tg-identity/" />
+<meta property="og:url" content="http://localhost:4000/2012/07/10/broadsoft-tg-identity/" />
+<meta property="og:site_name" content="Mark Holloway" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2012-07-10T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@twilion2" />
+<script type="application/ld+json">
+{"description":"Broadworks Trunk Group Identity (TGI) is an option in the Trunk Group Profile that allows a unique identity to be provisioned and allow Unscreened Calls from the customer premise.","@type":"BlogPosting","url":"http://localhost:4000/2012/07/10/broadsoft-tg-identity/","headline":"Broadsoft Trunk Group Identity Configuration","dateModified":"2012-07-10T00:00:00-04:00","datePublished":"2012-07-10T00:00:00-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2012/07/10/broadsoft-tg-identity/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131536379-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  <body>
+    
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mark Holloway
+        </a>
+      </h1>
+      <p class="lead">Turning Telco into Code</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive/">Archive</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <p>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="/public/GitHub-Mark-Light-32px.png" alt="Github" width="18" height="18"></a>
+        <a class="sidebar-nav-icons" href="http://www.linkedin.com/in/mholloway/" target="blank"><img src="/public/linkedin.png" alt="LinkedIn" width="19" height="19"></a>
+      </p>
+
+    </nav>
+
+    <p><small>&copy; 2019 All rights reserved.</small></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      
+
+
+
+<div class="post">
+  <h1 class="post-title">Broadsoft Trunk Group Identity Configuration</h1>
+  <span class="post-date">10 Jul 2012 <i class="fa fa-tags"></i> <a href="/blog/tag/sbc/">#sbc</a> <!--comma--><a href="/blog/tag/sip/">#sip</a> </span>
+
+  <p>Broadworks Trunk Group Identity (TGI) is an option in the Trunk Group Profile that allows a unique identity to be provisioned and allow <code class="highlighter-rouge">Unscreened Calls</code> from the customer premise.</p>
+
+<!--more-->
+
+<p>Unscreened Calls is common with <code class="highlighter-rouge">TDM</code> (PRI) customers who want to send a <code class="highlighter-rouge">From</code> phone number that does not reside in their Trunk Group. With SIP trunks delivering PRI at the customer premise, this type of call will fail unless the PBX sends an <code class="highlighter-rouge">ISDN Redirect</code> on the PRI connected to the Gateway which generates <code class="highlighter-rouge">SIP Diversion</code> to BroadWorks. Otherwise Broadworks sees a To and From that are both PSTN numbers and <code class="highlighter-rouge">rejects</code> the call.</p>
+
+<p>A common scenario where this instance occurs is a <code class="highlighter-rouge">PSTN</code> caller calling a <code class="highlighter-rouge">SIP</code> subscriber and the call is forwarded to another PSTN number. The person receiving the forwarded call on the PSTN wants to see the caller ID of the original calling party not the SIP subscriber number. With Unscreened Calls enabled and Trunk Group Identity provisioned in the TG Profile the calls will be permitted even without SIP Diversion. This also requires an identical <code class="highlighter-rouge">TGI</code> to be configured on a SIP endpoint such as a Cisco ISR or IAD.  When the SIP endpoint sends a SIP invite it will include the provisioned TGI in the <code class="highlighter-rouge">Contact</code> header.  As of August 14, 2009, Adtran TA900’s do not support TGI. A feature request has been submitted to Adtran.
+`
+Trunk Group Identity in Broadworks complies with <code class="highlighter-rouge">RFC 4904</code>. Using <code class="highlighter-rouge">trgp</code> and trunk-context is a requirement to be compliant with the RFC.</p>
+
+<p>If you are using an <code class="highlighter-rouge">Acme Packet SB</code>C you must configure the global <code class="highlighter-rouge">SIP option</code> to pass the Contact through to Broadworks. Otherwise the SBC will rewrite the Contact header and TGI will not pass.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+acme# config t
+acme(config)# session-router
+acme(session-router)# sip-config
+acme(session-router)# select
+acme(sip-config)# options +reg-cache-mode=none
+
+</code></pre></div></div>
+
+<p>All SIP Contact header information from the endpoint is now retained. It is important to note that using + means this option will be added to the SD sip-config and your other options will be retained as well. If you issue the show command you will see an example of this.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+acme(sip-config)# show
+
+options
+forward-reg-callid-change
+max-udp-length=0
+set-inv-exp-at-100-resp
+reg-cache-mode=none
+
+</code></pre></div></div>
+
+<p>If you do not prepend <code class="highlighter-rouge">+</code> in front the option you are adding, the SD will remove the old options and only apply the option you are currently adding.</p>
+
+<p>The last item to configure is the SIP endpoint. In this case it is a Cisco ISR or IAD. There is no <code class="highlighter-rouge">TGI feature</code> in IOS but IOS does offer the ability to modify SIP headers through the use of <code class="highlighter-rouge">SIP Profiles</code> which are a feature of <code class="highlighter-rouge">CUBE</code>.</p>
+
+<p>In the following example I am creating SIP profile 10 and this will serve two purposes. When the <code class="highlighter-rouge">sip-ua</code> registers to Broadworks it will include the tgrp modification in the Contact header. The other modification must be executed though the use of a VoIP <code class="highlighter-rouge">dial peer</code>. When the ISR/IAD sends a SIP invite to Broadworks (based on the VoIP dial peer) it will reference SIP profile 10 and include the modified statement for INVITE by injecting it into the Contact header.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+voice class sip-profiles 10
+request REGISTER sip-header Contact modify “&lt;sip:(.*)@(.*)&gt;” “&lt;sip:\1;tgrp=9494289972;trunk-context=voip.markholloway.com@\2&gt;”
+
+request INVITE sip-header Contact modify “&lt;sip:(.*)@(.*)&gt;” “&lt;sip:\1;tgrp=9494289972;trunk-context=voip.markholloway.com@\2″
+
+dial-peer voice 949 voip
+(output omitted)
+voice-class sip profiles 10
+
+</code></pre></div></div>
+
+<p>The example profile shows that we are taking all elements from the self-generated SIP registration and adding more information.  The second part of each <code class="highlighter-rouge">request</code> is where we inject the <code class="highlighter-rouge">tgrp</code> and <code class="highlighter-rouge">trunk-context</code> information.</p>
+
+<p>The tgrp value in this example is the <code class="highlighter-rouge">Pilot User</code> number <code class="highlighter-rouge">9494289972</code>.  The value of the trunk-context is a service provider domain.</p>
+
+<p>This example only highlights Unscreened Calls for SIP to PRI customers using a SIP endpoint that has the ability to support RFC 4904.  There is another method which may be used by building unique <code class="highlighter-rouge">session agents</code> on the SBC.</p>
+
+
+</div>
+
+<!--
+<div class="donate">
+</div>
+
+-->
+
+
+
+<!-- fluidvids.js -->
+<script src="/public/js/fluidvids/dist/fluidvids.js"></script>
+<script>
+fluidvids.init({
+  selector: ['iframe'],
+  players: ['www.youtube.com', 'player.vimeo.com']
+});
+</script>
+
+
+
+  <!-- Disqus comments. -->
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2012/07/10/broadsoft-tg-identity/'; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2012/07/10/broadsoft-tg-identity/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+
+/**
+
+Using variables from _config.yml instead of static entries
+
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//mh-blog-2.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>

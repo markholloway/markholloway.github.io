@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      SMS phone number and message body redaction using Twilio &middot; Mark Holloway
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole_custom.css">
+  <link rel="stylesheet" href="/public/css/syntax_dracula.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde_custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface|Press+Start+2P|Exo+2:700">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+
+
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Force https -->
+  
+  <script>
+    var host = 'markholloway.github.io';
+    if (window.location.host == host && window.location.protocol != 'https:') {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+  
+
+  <!-- Jekyll SEO tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>SMS phone number and message body redaction using Twilio | Mark Holloway</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="SMS phone number and message body redaction using Twilio" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Twilio Programmable SMS provides the option to redact phone number and message body data and prevents the information from being stored at the account level and message request level." />
+<meta property="og:description" content="Twilio Programmable SMS provides the option to redact phone number and message body data and prevents the information from being stored at the account level and message request level." />
+<link rel="canonical" href="http://localhost:4000/2019/03/14/twilio-sms-redaction/" />
+<meta property="og:url" content="http://localhost:4000/2019/03/14/twilio-sms-redaction/" />
+<meta property="og:site_name" content="Mark Holloway" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-14T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@twilion2" />
+<script type="application/ld+json">
+{"description":"Twilio Programmable SMS provides the option to redact phone number and message body data and prevents the information from being stored at the account level and message request level.","@type":"BlogPosting","url":"http://localhost:4000/2019/03/14/twilio-sms-redaction/","headline":"SMS phone number and message body redaction using Twilio","dateModified":"2019-03-14T00:00:00-04:00","datePublished":"2019-03-14T00:00:00-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/03/14/twilio-sms-redaction/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131536379-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  <body>
+    
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mark Holloway
+        </a>
+      </h1>
+      <p class="lead">Turning Telco into Code</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive/">Archive</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <p>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="/public/GitHub-Mark-Light-32px.png" alt="Github" width="18" height="18"></a>
+        <a class="sidebar-nav-icons" href="http://www.linkedin.com/in/mholloway/" target="blank"><img src="/public/linkedin.png" alt="LinkedIn" width="19" height="19"></a>
+      </p>
+
+    </nav>
+
+    <p><small>&copy; 2019 All rights reserved.</small></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      
+
+
+
+<div class="post">
+  <h1 class="post-title">SMS phone number and message body redaction using Twilio</h1>
+  <span class="post-date">14 Mar 2019 <i class="fa fa-tags"></i> <a href="/blog/tag/twilio/">#twilio</a> <!--comma--><a href="/blog/tag/sms/">#sms</a> </span>
+
+  <p>Twilio Programmable SMS provides the option to <code class="highlighter-rouge">redact</code> phone number and message body data and prevents the information from being stored at the account level and message request level.
+<!--more--></p>
+
+<p>Access to the redaction feature must be requested by submiting a form <a href="https://ahoy.twilio.com/message-body-redaction?_ga=2.114374407.109597969.1552660807-50235969.1532381789">here</a>. Once access has been granted the redaction options will appear under Programmable SMS.</p>
+
+<p>With redaction enabled the full message body and MMS attachments will not be stored on Twilio. Phone number redaction removes the <code class="highlighter-rouge">SLI</code> or Subscriber Line Identifider from a phone number and only the <code class="highlighter-rouge">NPA-NXX</code> are present.</p>
+
+<h2 id="default-settings">Default settings</h2>
+
+<p>When permission is granted to the master account the default action is SMS does not redact data. The console adminstrator has permission to change this setting at any time. Message body and phone number redaction are managed independently.</p>
+
+<h2 id="sub-accounts">Sub-accounts</h2>
+<p>Sub-accounts created prior to redaction being added will not inherit the master account settings. Sub-accounts created after redaction being added will inherit the master account behavior. Settings can still be changed for each sub-account.</p>
+
+<h2 id="redacting-on-selected-messages">Redacting on selected messages</h2>
+
+<p>Whether redaction is set as the default action or not, it is possible to include two parameters to perform the opposing action. For example, if redaction is disabled as the default action and there is a need to redact a particular SMS, passing the additional options  in the API request will enforce phone number and message body redaction for that message.</p>
+
+<p>Note the following in the CURL script which enforces redaction for the API request.</p>
+
+<p><code class="highlighter-rouge">ContentRetention=discard</code> removes the message body</p>
+
+<p><code class="highlighter-rouge">AddressRetention=obfuscate</code> removes the phone number</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X POST 'https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json' \
+--data-urlencode 'To=+19737219507'  \
+--data-urlencode 'From=+12133194095'  \
+--data-urlencode 'ContentRetention=discard' \
+--data-urlencode 'AddressRetention=obfuscate' \
+--data-urlencode 'Body=You cannot see what I am sending!' \
+-u {SID}:{AuthToken} 
+
+</code></pre></div></div>
+<p>Using <code class="highlighter-rouge">retain</code> will not redact on a per API request basis if redaction is the default action. This is helpful during development and troubleshooting.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X POST 'https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json' \
+--data-urlencode 'To=+19737219507'  \
+--data-urlencode 'From=+12133194095'  \
+--data-urlencode 'ContentRetention=retain' \
+--data-urlencode 'AddressRetention=retain' \
+--data-urlencode 'Body=Now you can see what I am sending!' \
+-u {SID}:{AuthToken} 
+
+</code></pre></div></div>
+<p>At the time of writing the Twilio helper libraries do not include the redaction form data. HTTP POST must be used within the API request.</p>
+
+<h2 id="nodejs-example">Node.js example</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json'</span><span class="p">,</span>
+    <span class="na">auth</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">user</span><span class="p">:</span> <span class="p">{</span><span class="nx">SID</span><span class="p">},</span>
+        <span class="na">pass</span><span class="p">:</span> <span class="p">{</span><span class="nx">AuthToken</span><span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">formData</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">To</span><span class="p">:</span> <span class="s1">'+19737219507'</span><span class="p">,</span>
+        <span class="na">From</span><span class="p">:</span> <span class="s1">'+12133194095'</span><span class="p">,</span>
+        <span class="na">Body</span><span class="p">:</span> <span class="s1">'You cannot see what I am sending!'</span><span class="p">,</span>
+        <span class="na">ContentRetention</span><span class="p">:</span> <span class="s1">'discard'</span><span class="p">,</span>
+        <span class="na">AddressRetention</span><span class="p">:</span> <span class="s1">'obfuscate'</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre></div></div>
+
+<h2 id="python-example">Python example</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'To'</span><span class="p">:</span> <span class="s">' 19737219507'</span><span class="p">,</span>
+  <span class="s">'From'</span><span class="p">:</span> <span class="s">' 12133194095'</span><span class="p">,</span>
+  <span class="s">'ContentRetention'</span><span class="p">:</span> <span class="s">'retain'</span><span class="p">,</span>
+  <span class="s">'AddressRetention'</span><span class="p">:</span> <span class="s">'retain'</span><span class="p">,</span>
+  <span class="s">'Body'</span><span class="p">:</span> <span class="s">'You cannot see what I am sending!'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'{SID}'</span><span class="p">,</span> <span class="s">'{AuthToken}'</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+
+</div>
+
+<!--
+<div class="donate">
+</div>
+
+-->
+
+
+
+<!-- fluidvids.js -->
+<script src="/public/js/fluidvids/dist/fluidvids.js"></script>
+<script>
+fluidvids.init({
+  selector: ['iframe'],
+  players: ['www.youtube.com', 'player.vimeo.com']
+});
+</script>
+
+
+
+  <!-- Disqus comments. -->
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2019/03/14/twilio-sms-redaction/'; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2019/03/14/twilio-sms-redaction/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+
+/**
+
+Using variables from _config.yml instead of static entries
+
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//mh-blog-2.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>
