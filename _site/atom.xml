@@ -4,7 +4,11 @@
  <title>Mark Holloway</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
+<<<<<<< HEAD
  <updated>2019-08-03T17:39:40-04:00</updated>
+=======
+ <updated>2019-07-01T16:54:46-04:00</updated>
+>>>>>>> 333b3a4d613b8c2896ab199fa370c07bb0cbe9be
  <id>http://localhost:4000</id>
  <author>
    <name></name>
