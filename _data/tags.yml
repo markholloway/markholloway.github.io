@@ -1,0 +1,44 @@
+api:
+  name: API
+bash:
+  name: bash
+python:
+  name: python
+docker:
+  name: docker
+github:
+  name: github
+github-pages:
+  name: github pages
+jekyll:
+  name: jekyll
+linux:
+  name: linux
+macos:
+  name: macOS
+autodesk:
+  name: autodesk
+flame:
+  name: flame
+lustre:
+  name: lustre
+maya:
+  name: maya
+filmlight:
+  name: filmlight
+baselight:
+  name: baselight
+foundry:
+  name: foundry
+nuke:
+  name: nuke
+hiero:
+  name: hiero
+sgo:
+  name: sgo
+mistika:
+  name: mistika
+
+
+  
+  
