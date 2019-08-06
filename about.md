@@ -2,10 +2,16 @@
 layout: page
 title: About
 ---
-
+<!--
 <div class="parent">
-  <img class="hackpackv4" src="{{ site.baseurl }}/blog/assets/mark.jpg" />
+  <img class="hackpackv4" src="{{ site.baseurl }}/blog/assets/hackpack-lights.gif" />
+  <img class="hackpackv4" src="{{ site.baseurl }}/blog/assets/hackpack.png" />
 </div>
+-->
+  <div style="position: relative; left: 0; top: 0;">
+		<img src="{{ site.baseurl }}/blog/assets/hackpack-lights.gif" class="hackpackv4-lights"/>
+		<img src="{{ site.baseurl }}/blog/assets/hackpack.png" class="hackpackv4"/>
+	</div>
 
 ## Blog Info
 

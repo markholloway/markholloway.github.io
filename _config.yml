@@ -9,8 +9,8 @@ permalink:            pretty
 title:                Mark Holloway
 tagline:              Mark Holloway Blog
 description:          Technical Notes
-details:              Personal Blog
-url:                  https://markholloway.github.io
+details:              mark@blog:~/hackstuff
+url:                  https://markholloway.com
 baseurl:
 paginate:             5
 name:                 Mark Holloway

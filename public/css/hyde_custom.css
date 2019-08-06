@@ -31,6 +31,8 @@
  * Update the foundational and global aspects of the page.
  */
 
+ 
+
 html {
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
 }
@@ -44,6 +46,20 @@ html {
     font-size: 20px;
   }
 }
+
+.hackpackv4
+{
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.hacpackv4-lights
+{
+  position: absolute;
+  top: 60px;
+  left: 80px;
+}
+
 
 
 /*
