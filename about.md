@@ -9,8 +9,8 @@ title: About
 </div>
 -->
   <div style="position: relative; left: 0; top: 0;">
-		<img src="{{ site.baseurl }}/blog/assets/hackpack-lights.gif" class="hackpackv4-lights"/>
-		<img src="{{ site.baseurl }}/blog/assets/hackpack.png" class="hackpackv4"/>
+		<img src="{{ site.baseurl }}/public/hackpack.png" class="hackpack"/>
+		<img src="{{ site.baseurl }}/public/hackpack-lights.gif" class="hackpack-lights"/>
 	</div>
 
 ## Blog Info
