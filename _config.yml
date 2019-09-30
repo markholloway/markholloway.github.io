@@ -8,9 +8,8 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark Holloway Blog
-description:          Technical Notes
-details:              mark@blog:~/hackstuff
-url:                  https://markholloway.github.io
+description:          My personal blog - on application development for communications
+url:                  https://markholloway.com
 baseurl:
 paginate:             5
 name:                 Mark Holloway
@@ -36,7 +35,7 @@ custom_pages:
   feed:               /atom.xml
 github:
     url:              https://github.com/markholloway
-    repo:             https://github.com/markholloway
+    repo:             https://github.com/markholloway/markholloway.github.io
 excerpt_separator:    <!--more-->
 google_analytics:     UA-131536379-1
 hyde_version:         2.1.0

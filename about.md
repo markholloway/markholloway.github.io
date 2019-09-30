@@ -8,8 +8,8 @@ title: About
 ## Get in touch!
  
 [keybase.io/fredrikaverpil](https://keybase.io/fredrikaverpil)  
-[github.com/fredrikaverpil](https://github.com/fredrikaverpil)  
-[linkedin.com/in/fredrik](https://linkedin.com/in/fredrik)
+[github.com/markholloway](https://github.com/markholloway)  
+[linkedin.com/in/mholloway](http://linkedin.com/in/mholloway)
 
 ## Blog Info
 
