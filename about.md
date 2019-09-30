@@ -4,7 +4,7 @@ title: About
 ---
 
    <p>
-        <a class="sidebar-nav-icons" href="https://hackpack.cc" target="blank"><img src="{{ site.baseurl }}/blog/assets/hackpack.gif" alt="Github" width="400" height="608"></a>
+        <a class="sidebar-nav-icons" href="https://hackpack.cc" target="blank"><img src="{{ site.baseurl }}/blog/assets/hackpack_v4.gif" alt="Github" width="400" height="608"></a>
    </p>
 
 ## Get in touch!
