@@ -2,32 +2,29 @@
 layout: page
 title: About
 ---
-<!--
-<div class="parent">
-  <img class="hackpackv4" src="{{ site.baseurl }}/blog/assets/hackpack-lights.gif" />
-  <img class="hackpackv4" src="{{ site.baseurl }}/blog/assets/hackpack.png" />
-</div>
--->
-  <div style="position: relative; left: 0; top: 0;">
-		<img src="{{ site.baseurl }}/public/hackpack.png" class="hackpack"/>
-		<img src="{{ site.baseurl }}/public/hackpack-lights.gif" class="hackpack-lights"/>
-	</div>
+
+![]({{ site.url }}/blog/assets/hackpack.png)
+
+## Get in touch!
+ 
+[keybase.io/fredrikaverpil](https://keybase.io/fredrikaverpil)  
+[github.com/fredrikaverpil](https://github.com/fredrikaverpil)  
+[linkedin.com/in/fredrik](https://linkedin.com/in/fredrik)
 
 ## Blog Info
 
-This blog runs [Jekyll](https://jekyllrb.com) and is based on the excellent [Hyde]({{ site.hyde_repo }}) theme (v{{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) with the following modifications:
+This blog is based on the excellent [Hyde]({{ site.hyde_repo }}) theme ({{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) but with some modifications:
 
 - Tags
 - Post archive
 - Footnotes (because kramdown)
 - Excerpts on index page
 - Pinch and zoom on touch devices
-- Video embeds with [fluidvids.js](https://blog.videojs.com)
-- [Rouge](https://github.com/jneen/rouge) syntax highlighter and customized [base16.dark] CSS theme
+- Video embeds with fluidvids.js
+- Rouge syntax highlighter, modified version of [`dracula.css`](https://github.com/dracula/pygments)
 - Google Analytics
-- Comment (option to use Google+ or Disqus)
+- Comments (option to use Google+ or Disqus)
 - Switch to https if accessing site through http
 - Jekyll SEO
 
 The source code for this blog is available [here]({{ site.github.repo }}).
-

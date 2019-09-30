@@ -49,10 +49,9 @@ body {
 }
 
 html {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  text-shadow: 3px 3px 3px rgb(41, 41, 41);
 }
 @media (min-width: 38em) {
   html {
@@ -61,12 +60,8 @@ html {
 }
 
 body {
-  /* color: #9da5b4;
-  background-color: #282c34; */
-  color: #9c9a9b;
-  background-color: #262727;
-  font-family: "Montserrat", sans-serif;
-  font-size: 18px;
+  color: #9da5b4;
+  background-color: #282c34;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -74,9 +69,7 @@ body {
 /* No `:visited` state is required by default (browsers will use `a`) */
 /* Old color: #528bff; */
 a {
-  color: #74afda;
-/* 74afda Python Blue 
-   94cc71 or 489243 Mistika Green */
+  color: #8be9fd;
   text-decoration: none;
 }
 a strong {
@@ -85,7 +78,7 @@ a strong {
 /* `:focus` is linked to `:hover` for basic accessibility */
 a:hover,
 a:focus {
-/*  text-decoration: underline; */
+  text-decoration: underline;
 }
 
 /* Headings */
@@ -165,9 +158,8 @@ pre {
 code {
   padding: .25em .5em;
   font-size: 85%;
-  color: #74afda;
-  /* pink color: #ff79c6; */
-  background-color: #222222;
+  color: #ff79c6;
+  background-color: #21252b;
   border-radius: 3px;
 }
 pre {

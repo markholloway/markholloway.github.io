@@ -1,12 +1,20 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
+    <!--
+        <center>
+        <p>
+           <a class="sidebar-nav-icons" href="https://markholloway.github.io" target="blank"><img src="{{ site.baseurl }}/public/code.png" alt="Mark Holloway" width="125" height="77"></a>
+        </p>
+      </center>
+    -->
       <h1>
         <a href="{{ site.baseurl }}/">
           {{ site.title }}
         </a>
       </h1>
-      <p class="lead">{{ site.description }}</p>
+      <!-- p class="lead">{{ site.description }}</p> -->
+      <p class="sidebar-nav-details">{{ site.details }}</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -27,13 +35,10 @@
       {% endfor %}
 
       <p>
-        <a class="sidebar-nav-icons" href="{{ site.custom_pages.feed }}" target="blank"><img src="{{ site.baseurl }}/public/rss_icon_32x32.png" alt="RSS feed" width="16" height="16"></a>
-        <a class="sidebar-nav-icons" href="https://feedly.com/i/subscription/feed/{{ site.url }}{{ site.custom_pages.feed }}" target="blank"><img id="feedlyFollow" src="{{ site.baseurl }}/public/feedly_icon_37x32.png" alt="Follow me in feedly" width="19" height="16"></a>
-        <a class="sidebar-nav-icons" href="https://github.com/fredrikaverpil" target="blank"><img src="{{ site.baseurl }}/public/GitHub-Mark-Light-32px.png" alt="Github" width="16" height="16"></a>
+        <a class="sidebar-nav-icons" href="https://github.com/markholloway" target="blank"><img src="{{ site.baseurl }}/public/GitHub-Mark-Light-32px.png" alt="Github" width="28 height="27"></a>
       </p>
-
     </nav>
 
-    <p><small>&copy; 2012-{{ site.time | date: "%Y" }} All rights reserved.</small></p>
+    <p><small>&copy; {{ site.time | date: "%Y" }} All rights reserved.</small></p>
   </div>
 </div>
