@@ -3,7 +3,7 @@ layout: page
 title: About
 ---
 
-![]({{ site.url }}/blog/assets/hackpack.png)
+![]({{ site.url }}/blog/assets/hackpack.gif)
 
 ## Get in touch!
  
