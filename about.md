@@ -3,11 +3,12 @@ layout: page
 title: About
 ---
 
-![]({{ site.url }}/blog/assets/hackpack.gif)
+   <p>
+        <a class="sidebar-nav-icons" href="https://hackpack.cc" target="blank"><img src="{{ site.baseurl }}/blog/assets/hackpack.gif" alt="Github" width="400" height="608"></a>
+   </p>
 
 ## Get in touch!
  
-[keybase.io/fredrikaverpil](https://keybase.io/fredrikaverpil)  
 [github.com/markholloway](https://github.com/markholloway)  
 [linkedin.com/in/mholloway](http://linkedin.com/in/mholloway)
 
