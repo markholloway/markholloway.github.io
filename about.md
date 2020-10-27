@@ -4,7 +4,7 @@ title: About
 ---
 
    <p>
-       <a class="sidebar-nav-icons"><img src="{{ site.baseurl }}/public/assets/about-mark.jpg" alt="Github" width="700" height="695"></a>
+       <a class="sidebar-nav-icons"><img src="{{ site.baseurl }}/public/about-mark.jpg" alt="Github" width="700" height="695"></a>
    </p>
 
 ## Get in touch!
