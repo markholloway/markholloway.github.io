@@ -8,7 +8,7 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark Holloway Blog
-description:          My personal blog - on application development for communications
+description:          Technical Notes on Service Provider SIP, VoIP, Networking, and CPaaS
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
@@ -21,8 +21,8 @@ plugins:
 
 # SEO
 twitter:
-  username:           twilion2
-  url:                https://twitter.com/twilion2
+  username:           _markholloway
+  url:                https://twitter.com/_markholloway
 social:
   name:               Mark Holloway
   links:

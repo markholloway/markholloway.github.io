@@ -4,7 +4,7 @@ title: About
 ---
 
    <p>
-       <a class="sidebar-nav-icons"><img src="{{ site.baseurl }}/blog/assets/hackpack_v4.gif" alt="Github" width="400" height="608"></a>
+       <a class="sidebar-nav-icons"><img src="{{ site.baseurl }}/public/assets/about-mark.jpg" alt="Github" width="400" height="608"></a>
    </p>
 
 ## Get in touch!
@@ -14,7 +14,7 @@ title: About
 
 ## Blog Info
 
-This site runs on ['Ruby'] and uses [`Jekyll`](https://jekyllrb.com), [Hyde]({{ site.hyde_repo }}) theme ({{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) but with some modifications:
+This site runs on [`Jekyll`](https://jekyllrb.com) using the [Hyde]({{ site.hyde_repo }}) theme ({{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) but with some modifications:
 
 - Tags
 - Post archive
@@ -28,4 +28,4 @@ This site runs on ['Ruby'] and uses [`Jekyll`](https://jekyllrb.com), [Hyde]({{ 
 - Switch to https if accessing site through http
 - Jekyll SEO
 
-The source code for this blog is available [here]({{ site.github.repo }}).
+Source code for this blog is available [here]({{ site.github.repo }}).
