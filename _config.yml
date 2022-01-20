@@ -8,7 +8,7 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark Holloway Blog
-description:          My personal notes - on Python development, UX, compositing, and other challenges.
+description:          My personal blog - on Python development, graphics, compositing, and motion design.
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
