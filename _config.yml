@@ -8,7 +8,7 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark Holloway Blog
-description:          Inferno, Flint, Flame, Smoke, Flare, Motion, Unix, and Python
+description:          Inferno, Flint, Flame, Smoke, Flare, Unix, and Python
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
@@ -21,8 +21,8 @@ plugins:
 
 # SEO
 twitter:
-  username:           _markholloway
-  url:                https://twitter.com/_markholloway
+  username:           <username>
+  url:                https://twitter.com/<username>
 social:
   name:               Mark Holloway
   links:
