@@ -1,18 +1,4 @@
-api:
-  name: API
-bash:
-  name: bash
-python:
-  name: python
-docker:
-  name: docker
-github:
-  name: github
-github-pages:
-  name: github pages
-jekyll:
-  name: jekyll
-linux:
+ linux: 
   name: linux
 macos:
   name: macOS
@@ -28,17 +14,25 @@ filmlight:
   name: filmlight
 baselight:
   name: baselight
-foundry:
-  name: foundry
+motion:
+  name: motion
+fcpx:
+  name: fcpx
 nuke:
   name: nuke
-hiero:
-  name: hiero
-sgo:
-  name: sgo
-mistika:
-  name: mistika
+c4d:
+  name: c4d
+genarts:
+  name: genarts
+borisfx:
+  name: borisfx
+film:
+  name: film
+vfx:
+  name: vfx
+sapphire:
+  name: sapphire
+bcc:
+  name: bcc
 
-
-  
   
