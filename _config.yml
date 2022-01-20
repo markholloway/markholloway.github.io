@@ -8,7 +8,7 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark Holloway Blog
-description:          Inferno, Flint, Flame, Smoke, Flare, Unix, and Python
+description:          My personal blog – on Python development, design, compositing, grading, and film.
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
