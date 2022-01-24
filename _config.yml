@@ -8,7 +8,7 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark Holloway Blog
-description:          My personal blog - on Python development, projection mapping, GLSL, and xR.
+description:          My personal blog - on Python development, 3D graphics, projection mapping, GLSL, and xR.
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
