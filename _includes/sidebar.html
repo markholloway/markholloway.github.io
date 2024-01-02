@@ -1,10 +1,5 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
-    {% comment %}
-    center>
-    img src=https://www.markholloway.com/public/M.png> /img>
-    /center>
-    {% endcomment %}
     <div class="sidebar-about">
       <h1>
         <a href="{{ site.baseurl }}/">
@@ -20,6 +15,12 @@
       {% comment %}
         The code below dynamically generates a sidebar nav of pages with
         `layout: page` in the front-matter. See readme for usage.
+      {% endcomment %}
+
+      {% comment %}
+      center>
+      img src=https://www.markholloway.com/public/M.png> /img>
+      /center>
       {% endcomment %}
 
       {% assign pages_list = site.pages %}
