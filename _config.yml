@@ -46,6 +46,6 @@ force_https:          true
   
 # Comments
 comments:
-  use_disqus:         true
+  use_disqus:         false
   use_googleplus:     false
   disqus_shortname:   mh-blog-2
