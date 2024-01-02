@@ -7,9 +7,9 @@ permalink:            pretty
 
 # Setup
 title:                Mark Holloway
-tagline:              Mark Holloway Blog
+tagline:              Mark Holloway Personal Site
 description:          My personal blog on - Python development and Color Science
-url:                  https://markholloway.com
+url:                  https://www.markholloway.com
 baseurl:
 paginate:             5
 name:                 Mark Holloway
