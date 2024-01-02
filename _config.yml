@@ -8,7 +8,7 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark Holloway Blog
-description:          My personal blog - on Art, Music, Film, and Coding.
+description:          My personal blog on - Python development and Color Science
 url:                  https://markholloway.com
 baseurl:
 paginate:             5
