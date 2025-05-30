@@ -14,7 +14,7 @@ title: About
 
 ## Blog Info
 
-This site runs on [`Jekyll`](https://jekyllrb.com) using the [Hyde]({{ site.hyde_repo }}) theme ({{ site.hyde_version }}) for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) but with some modifications:
+This site runs on [`Jekyll`](https://jekyllrb.com) using the [Hyde]({{ site.hyde_repo }}) theme {{ site.hyde_version }} for [Poole](http://getpoole.com), running on [Github Pages](https://pages.github.com) but with some modifications:
 
 - Tags
 - Post archive
