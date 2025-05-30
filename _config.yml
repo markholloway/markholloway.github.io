@@ -44,7 +44,7 @@ show_related_posts:   false
 force_https:          true
 
   
-# Comments
+# Comments 
 comments:
   use_disqus:         false
   use_googleplus:     false
