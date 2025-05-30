@@ -8,7 +8,7 @@ permalink:            pretty
 # Setup
 title:                Mark Holloway
 tagline:              Mark Holloway Personal Site
-description:          My personal blog - on Python development, 3D graphics, compositing, and film. 
+description:          My personal blog – on Python development, 3D graphics, compositing and cinematography.
 url:                  https://markholloway.github.io
 baseurl:
 paginate:             5
