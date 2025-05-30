@@ -9,7 +9,7 @@ permalink:            pretty
 title:                Mark Holloway
 tagline:              Mark Holloway Personal Site
 description:          My personal blog - on Python development, 3D graphics, compositing, and film. 
-url:                  https://www.markholloway.com
+url:                  https://markholloway.github.io
 baseurl:
 paginate:             5
 name:                 Mark Holloway
