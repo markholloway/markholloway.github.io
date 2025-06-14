@@ -4,8 +4,8 @@ autodesk:
   name: autodesk
 flame:
   name: flame
-lustre:
-  name: lustre
+maya:
+  name: maya
 filmlight:
   name: filmlight
 baselight:
@@ -18,8 +18,8 @@ katana:
   name: katana
 mari:
   name: mari
-film:
-  name: film
+python:
+  name: python
 vfx:
   name: vfx
 

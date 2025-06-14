@@ -8,7 +8,7 @@ Easily distribute a Python package to be run in applications such as Maya or Nuk
 
 Python can import  modules or packages even when zipped. Example, where b is our package and c.py is our actual program we want to run:
 
-## Example zip file
+## Example zip file structure
 
 ```
 a.zip
@@ -40,3 +40,7 @@ for _path in sys.path:
 
 from b import c
 ```
+
+Bonus: add a __main__.py to the zip file's root and you can execute it with python a.zip.
+
+In Maya users can create a Shelf button or even bundle a shelf MEL file, to be placed in e.g. ~/Documents/maya/2025/prefs/shelves
