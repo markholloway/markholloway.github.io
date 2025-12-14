@@ -10,7 +10,7 @@ logo_dark:
 # Color Scheme Settings
 color_scheme:
   default: dark # Default theme applied on the first visit (options: "light" or "dark")
-  toggle: true # Enable theme toggle
+  toggle: false # Enable theme toggle toggle = true to enable this feature 
 
 # Enables or disables the theme toggle functionality:
 # - true: Users can switch between light and dark modes using a toggle button.
@@ -52,7 +52,7 @@ hero:
   enable: true
   hero_avatar: /images/01-1.jpg
   hero_title: Hi! I’m Mark 👋
-  hero_subtitle: A digital explorer, coder, Berkley Unix advocate, full-time lover of all things tech. 
+  hero_subtitle: A digital explorer, coder, Unix advocate, full-time lover of all things tech. 
   hero_description: |
     I’m a digital explorer, coder, and advocate of Unix and Unix-like operating systems, including FreeBSD, macOS, and Linux. This blog is my personal knowledge base on productivity, programming, and the freedom of information.
 
