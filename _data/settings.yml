@@ -29,9 +29,9 @@ menu_settings:
       url: '/videos/'
     - title: 'Archive'
       url: '/archive/'
-    - title: 'Pages'
-    - url: '/about/'
+      - url: '/about/'
       title: 'About'
+    - title: 'Pages'
       submenu:
       - url: '/contact/'
         title: 'Contact'
