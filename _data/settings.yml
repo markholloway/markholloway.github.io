@@ -52,9 +52,9 @@ hero:
   enable: true
   hero_avatar: /images/01-1.jpg
   hero_title: Hi! I’m Mark 👋
-  hero_subtitle: A digital explorer, coder, and Linux advocate
+  hero_subtitle: A digital explorer, coder, and Berkley Unix advocate
   hero_description: |
-    I’m a digital explorer, coder, and Linux advocate. This blog is my personal knowledge base on productivity, programming, and the freedom of information.
+    I’m a digital explorer, coder, and advocate of Unix and Unix-like operating systems, including FreeBSD, macOS, and Linux. This blog is my personal knowledge base on productivity, programming, and the freedom of information.
 
     Here, I share ideas, tools, and methods that help me balance productivity with creativity while keeping control over my digital world. Dive in, get inspired, and feel free to share your thoughts!
   hero_image: /images/01.jpg
