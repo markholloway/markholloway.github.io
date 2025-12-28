@@ -11,7 +11,7 @@ Hey, I’m Mark - part developer, part digital explorer, and full-time lover of 
 {: .note }
 Even the most experienced developers don't know everything
 
-Over the years, my curiosity only deepened. I became a coder, learning languages like Python, JavaScript, and C++, and fell in love with the sheer power of programming. For me, coding isn’t just a skill; it’s a language for bringing ideas to life. The thrill of debugging, the satisfaction of building something from scratch, and the endless potential of code keep me motivated every day. Coding lets me shape my vision into reality, one line at a time.
+Over the years, my curiosity only deepened. I became a coder, learning a language like Python, and fell in love with the sheer power of programming. For me, coding isn’t just a skill; it’s a language for bringing ideas to life. The thrill of debugging, the satisfaction of building something from scratch, and the endless potential of code keep me motivated every day. Coding lets me shape my vision into reality, one line at a time.
 
 > Curiosity fuels my code, Linux keeps me grounded, and every bug is just a puzzle waiting to be solved.
 
