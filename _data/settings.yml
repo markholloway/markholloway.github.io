@@ -51,7 +51,7 @@ author:
 hero:
   enable: true
   hero_avatar: /images/01-1.jpg
-  hero_title: Ahoy! I’m Mark 👋
+  hero_title: Ahoy! I’m Mark 👋 
   hero_subtitle: A digital explorer, coder, tech evangelisst. 
   hero_description: |
     I’m a digital explorer, coder, full-time lover of all things tech. My domain expertise is building applications for real-time communications at scale, including agentic and generative AI. This blog is my personal knowledge base on productivity, programming, and the freedom of information.
