@@ -1,4 +1,4 @@
-module github.com/fredrikaverpil/fredrikaverpil.github.io
+module github.com/markholloway/markholloway.github.io
 
 go 1.25.5
 
