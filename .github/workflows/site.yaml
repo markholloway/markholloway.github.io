@@ -21,6 +21,6 @@ jobs:
       env:
         HUGO_VERSION: 0.68.3
         TARGET_REPO: markholloway/markholloway.github.io
-        TOKEN: ${{ secrets.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 }}
+        TOKEN: ${{ secrets.TOKEN }}
         CNAME: markholloway.com
 Copy
