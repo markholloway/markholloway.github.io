@@ -1,0 +1,91 @@
+baseURL = 'https://markholloway.github.io/'
+languageCode = 'en-us'
+title = 'Mark Holloway'
+author = 'Mark Holloway'
+copyright = '© Mark Holloway'
+enableRobotsTXT = true
+
+[pagination]
+pagerSize = 10
+
+[permalinks]
+blog = '/blog/:year/:month/:day/:slug/'
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+# Allow raw HTML (e.g. <details>, <summary>) in markdown files
+unsafe = true
+[markup.highlight]
+codeFences = true
+guessSyntax = true
+lineNos = false
+style = 'tango'    # Default style (will be overridden by CSS)
+noClasses = false  # Use classes so we can swap themes via CSS
+
+[params]
+description = "Notes from a curiosity-driven engineer."
+
+# Featured Projects for Homepage
+[[params.projects]]
+name = "neotest-golang"
+url = "https://github.com/fredrikaverpil/neotest-golang"
+description = "Neotest adapter for running Go tests in Neovim."
+[[params.projects]]
+name = "godoc.nvim"
+url = "https://github.com/fredrikaverpil/godoc.nvim"
+description = "Neovim plugin to view Go documentation."
+[[params.projects]]
+name = "multipr"
+url = "https://github.com/fredrikaverpil/multipr"
+description = "Create (and update) pull requests en masse."
+[[params.projects]]
+name = "pr.nvim"
+url = "https://github.com/fredrikaverpil/pr.nvim"
+description = "View PR, related to line under cursor in Neovim, in web browser."
+[[params.projects]]
+name = "dependabot-generate"
+url = "https://github.com/fredrikaverpil/dependabot-generate"
+description = "Opinionated dependabot.yml generator."
+[[params.projects]]
+name = "creosote"
+url = "https://github.com/fredrikaverpil/creosote"
+description = "Identify unused dependencies and avoid a bloated virtual environment."
+[[params.projects]]
+name = "dotfiles"
+url = "https://github.com/fredrikaverpil/dotfiles"
+description = "My configuration files for Neovim, the terminal, etc."
+
+# Social links (displayed in footer/header depending on layout)
+[[params.social]]
+name = "GitHub"
+url = "https://github.com/fredrikaverpil"
+[[params.social]]
+name = "Mastodon"
+url = "https://fosstodon.org/@fredrikaverpil"
+[[params.social]]
+name = "Bluesky"
+url = "https://bsky.app/profile/fredrikaverpil.bsky.social"
+[[params.social]]
+name = "LinkedIn"
+url = "https://linkedin.com/in/fredrik"
+[[params.social]]
+name = "RSS"
+url = "/blog/index.xml"
+[[params.social]]
+name = "Umami"
+url = "https://cloud.umami.is/share/tJcIgDO3dznRmeGX"
+
+[menu]
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+[[menu.main]]
+name = "Blog"
+url = "/blog/"
+weight = 2
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 3

@@ -1,0 +1,26 @@
+{{ define "main" }}
+<main>
+{{if not .IsHome }}
+<h1>{{ .Title | markdownify }}</h1>
+{{ end }}
+
+{{ .Content }}
+
+{{ partial "taxonomy_cloud.html" . }}
+
+{{ $pages := .Pages }}
+{{ if .IsHome }}{{ $pages = .Site.RegularPages }}{{ end }}
+
+{{ range $pages.GroupByDate "2006" }}
+  <h2>{{ .Key }}</h2>
+  <ul class="post-list">
+    {{ range .Pages }}
+    <li>
+      <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+      <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+    </li>
+    {{ end }}
+  </ul>
+{{ end }}
+</main>
+{{ end }}
