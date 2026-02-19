@@ -28,7 +28,7 @@ For local development:
 make
 ```
 
-ean`before`make build` to ensure the Pagefind orrectly and to remove stale
+ean`before`make build` to ensure the Pagefind correctly and to remove stale
 artifacts.
 
 ## Documentation
