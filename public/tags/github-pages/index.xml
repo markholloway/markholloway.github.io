@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Github-Pages on Mark Holloway</title>
+    <link>http://localhost:1313/tags/github-pages/</link>
+    <description>Recent content in Github-Pages on Mark Holloway</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>© Mark Holloway</copyright>
+    <lastBuildDate>Tue, 30 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/github-pages/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploying hidden dotfiles to GitHub Pages</title>
+      <link>http://localhost:1313/blog/2025/12/30/deploying-hidden-dotfiles-to-github-pages/</link>
+      <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2025/12/30/deploying-hidden-dotfiles-to-github-pages/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re using GitHub Pages with the official&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/actions/upload-pages-artifact&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;actions/upload-pages-artifact&lt;/code&gt;&lt;/a&gt;&#xA;action and need to serve files from a file/folder prefixed with a period (&lt;code&gt;.&lt;/code&gt;)&#xA;sign, like the &lt;code&gt;.well-known&lt;/code&gt; directory (e.g., for a custom Bluesky handle),&#xA;you&amp;rsquo;ll hit a problem: &lt;strong&gt;v4 of the action excludes all dotfiles by default&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

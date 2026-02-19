@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>V-Ray for Maya | Mark Holloway</title>
+    <meta name="description" content="Notes from a curiosity-driven engineer.">
+    <link rel="canonical" href="http://localhost:1313/blog/2012/02/16/v-ray-for-maya/">
+    
+    
+    <meta property="og:url" content="http://localhost:1313/blog/2012/02/16/v-ray-for-maya/">
+  <meta property="og:site_name" content="Mark Holloway">
+  <meta property="og:title" content="V-Ray for Maya">
+  <meta property="og:description" content="Running V-Ray for Maya in a production environment has its quirks. I have collected some bits and pieces off the Chaos Group forum and assembled it all here.
+Table of contents Arbitrary location installation Arbitrary location configuration Python launch script and MEL sourcing Launching the V-Ray render slave from the arbitrary location Arbitrary location installation Choose a server location for all your builds and create a folder for the specific build you are installing. I am going to refer to this as the [build folder].">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2012-02-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2012-02-16T00:00:00+00:00">
+    <meta property="article:tag" content="Vray">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Windows">
+    <meta property="article:tag" content="Macos">
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="V-Ray for Maya">
+  <meta name="twitter:description" content="Running V-Ray for Maya in a production environment has its quirks. I have collected some bits and pieces off the Chaos Group forum and assembled it all here.
+Table of contents Arbitrary location installation Arbitrary location configuration Python launch script and MEL sourcing Launching the V-Ray render slave from the arbitrary location Arbitrary location installation Choose a server location for all your builds and create a folder for the specific build you are installing. I am going to refer to this as the [build folder].">
+
+    
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "V-Ray for Maya",
+  "datePublished": "2012-02-16T00:00:00Z",
+  "dateModified": "2012-02-16T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/localhost:1313\/blog\/2012\/02\/16\/v-ray-for-maya\/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "map[]"
+  },
+  "description": "Running V-Ray for Maya in a production environment has its quirks. I have collected some bits and pieces off the Chaos Group forum and assembled it all here.\nTable of contents Arbitrary location installation Arbitrary location configuration Python launch script and MEL sourcing Launching the V-Ray render slave from the arbitrary location Arbitrary location installation Choose a server location for all your builds and create a folder for the specific build you are installing. I am going to refer to this as the [build folder].\n"
+}
+</script>
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    
+    
+    <link rel="preload" href="/fonts/BerkeleyMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/CommitMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/MapleMono-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/github-link.css" />
+    
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c9c97df3-bc05-4b29-8caa-fcf03a05710f"></script>
+
+  </head>
+
+  <body class="preload">
+    <script>
+      (function() {
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.body.classList.add(savedTheme);
+        } else {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark');
+          }
+        }
+        
+        
+        if ('fonts' in document) {
+          
+          Promise.race([
+            document.fonts.ready,
+            new Promise(resolve => setTimeout(resolve, 100)) 
+          ]).then(() => {
+            document.body.classList.remove('preload');
+          });
+        } else {
+          
+          setTimeout(() => {
+            document.body.classList.remove('preload');
+          }, 50);
+        }
+      })();
+    </script>
+
+    <nav style="display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
+      <ul class="menu" style="margin: 0; padding: 0; flex-shrink: 0;">
+        
+        
+        <li><a  href="/">Home</a></li>
+        
+        <li><a  href="/blog/">Blog</a></li>
+        
+        <li><a  href="/about/">About</a></li>
+        
+        <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1em; padding:5px; color:inherit;">◑</button></li>
+      </ul>
+      
+      
+      <div id="search" style="flex-grow: 1; min-width: 200px;"></div>
+    </nav>
+    
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ 
+              element: "#search", 
+              showSubResults: true,
+              showImages: false,
+              translations: {
+                placeholder: "Search...",
+                clear_search: "×"
+              }
+            });
+
+            
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('#search');
+                if (searchContainer && !searchContainer.contains(e.target)) {
+                    const clearButton = searchContainer.querySelector('.pagefind-ui__search-clear');
+                    if (clearButton) {
+                        clearButton.click();
+                    }
+                }
+            });
+
+            
+            const toggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            toggle.addEventListener('click', () => {
+              if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+              } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+              }
+            });
+        });
+    </script>
+
+
+<div class="article-meta">
+<h1><span class="title">V-Ray for Maya</span></h1>
+
+<div class="article-meta-info">
+  <span class="date">2012-02-16</span>
+  
+  <span class="article-tags">
+    
+    
+    
+    <a href="/tags/vray">#vray</a>
+    
+    
+    
+    <a href="/tags/python">#python</a>
+    
+    
+    
+    <a href="/tags/windows">#windows</a>
+    
+    
+    
+    <a href="/tags/macos">#macos</a>
+    
+    
+  </span>
+  
+</div>
+</div>
+
+
+
+<main data-pagefind-body>
+	
+	
+		
+		<aside class="table-of-contents">
+			<div class="toc-title">
+				<svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
+					fill="currentColor">
+					<path
+						d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z">
+					</path>
+				</svg>
+				Table of Contents
+			</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li><a href="#table-of-contents">Table of contents</a></li>
+    <li><a href="#arbitrary-location-installation">Arbitrary location installation</a></li>
+    <li><a href="#arbitrary-location-configuration">Arbitrary location configuration</a></li>
+    <li><a href="#python-launch-script">Python launch script</a></li>
+    <li><a href="#launching-the-v-ray-render-slave-from-the-arbitrary-location">Launching the V-Ray render slave from the arbitrary location</a></li>
+    <li><a href="#quirks">Quirks</a></li>
+  </ul>
+</nav>
+		</aside>
+		
+
+		<p>Running V-Ray for Maya in a production environment has its quirks. I have collected some bits and pieces off the 
+
+
+
+<a href="https://www.chaosgroup.com/forums/vbulletin/showthread.php?51035-maintaining-Vray-builds-with-workstations-and-the-render-frarm/" target="_blank" rel="noopener">Chaos Group forum</a> and assembled it all here.</p>
+<h2 id="table-of-contents">Table of contents</h2>
+<ol>
+<li>Arbitrary location installation</li>
+<li>Arbitrary location configuration</li>
+<li>Python launch script and MEL sourcing</li>
+<li>Launching the V-Ray render slave from the arbitrary location</li>
+</ol>
+<h2 id="arbitrary-location-installation">Arbitrary location installation</h2>
+<p>Choose a server location for all your builds and create a folder for the specific build you are installing. I am going to refer to this as the <code>[build folder]</code>.</p>
+<p>Go find these three MEL files from the local installation of Maya (as of writing this, I am using Maya 2012):</p>
+<ul>
+<li>createMayaSoftwareCommonGlobalsTab.mel</li>
+<li>shouldAppearInNodeCreateUI.mel</li>
+<li>unifiedRenderGlobalsWindow.mel</li>
+</ul>
+<p>&hellip;and copy them into <code>[build folder]/maya_root/scripts/others/</code></p>
+<p>Execute the V-Ray for Maya installer and when the target directory dialogue comes up, point the three paths to:</p>
+<ul>
+<li><code>[build folder]/maya_root</code></li>
+<li><code>[build folder]/maya_vray</code></li>
+<li><code>[build folder]/vray</code></li>
+</ul>
+<p>When the install has finished, compress the whole build folder into a ZIP or RAR archive. Now completely uninstall V-Ray for Maya. This can be done through the start menu (Windows) or in this particularly quirky way:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bat" data-lang="bat"><span class="line"><span class="cl"><span class="s2">&#34;C:\Program Files\Chaos Group\V-Ray\Maya 2012 for x64/uninstall/wininstaller.exe&#34;</span> -uninstall=<span class="s2">&#34;C:\Program Files\Chaos Group\V-Ray\Maya 2012 for x64/uninstall/install.log&#34;</span> -uninstallApp=<span class="s2">&#34;V-Ray for Maya 2012 for x64&#34;</span> -gui=0 -quiet=1</span></span></code></pre></div></div>
+<p>When the uninstall is complete, delete anything that is left inside the server’s build folder and extract the backed up ZIP or RAR file right into it, restoring its contents.</p>
+<p>There should be no trace left of V-Ray for Maya on your local machine, as this could cause conflicts when loading the V-Ray plug-in.</p>
+<h2 id="arbitrary-location-configuration">Arbitrary location configuration</h2>
+<p>In order to successfully load Maya up with the V-Ray build available as a Maya plug-in, we will have to address three things.</p>
+<p>First off, you will need to correctly set the following environment variables:</p>
+<ul>
+<li><code>MAYA_RENDER_DESC_PATH</code></li>
+<li><code>VRAY_FOR_MAYA2012_MAIN_x64</code></li>
+<li><code>VRAY_FOR_MAYA2012_PLUGINS_x64</code></li>
+<li><code>VRAY_AUTH_CLIENT_FILE_PATH</code></li>
+<li><code>PATH</code></li>
+<li><code>MAYA_PLUG_IN_PATH</code></li>
+<li><code>MAYA_SCRIPT_PATH</code></li>
+<li><code>XBMLANGPATH</code></li>
+<li><code>VRAY_PATH</code></li>
+<li><code>VRAY_TOOLS_MAYA2012_x64</code></li>
+</ul>
+<p>For Mac OS X, you will have to set up the <code>DYLD_LIBRARY_PATH</code> environment variable and for Linux you will have to set up the <code>LD_LIBRARY_PATH</code> variable. More information on where these paths should go can be seen in the official documentation. Exactly how we set them up will be revealed in the Python launch script (down below).</p>
+<p>The three MEL files, manually copied into the installation directory, was modified by the V-Ray installer, and in order to avoid nagging warning messages when opening up the Render Globals you will have to source them into Maya. Create a file called <code>source.mel</code> and place it inside the <code>[build folder]</code>, example below for Windows:</p>
+<pre><code>source &quot;X:/bin/vray/builds/maya2012_vray22001/maya_root/scripts/others/createMayaSoftwareCommonGlobalsTab.mel&quot;;
+source &quot;X:/bin/vray/builds/maya2012_vray22001/maya_root/scripts/others/shouldAppearInNodeCreateUI.mel&quot;;
+source &quot;X:/bin/vray/builds/maya2012_vray22001/maya_root/scripts/others/unifiedRenderGlobalsWindow.mel&quot;;
+</code></pre>
+<p>In order to make sure no licensing issues arise, place the license XML file <code>vrlclient.xml</code> on the server as well so that V-Ray will know how to find the floating licenses. The contents should look something like this (make sure to change the server IP address):</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;VRLClient&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;LicServer&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Host&gt;</span>10.0.0.1<span class="nt">&lt;/Host&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Port&gt;</span>30304<span class="nt">&lt;/Port&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Host1&gt;&lt;/Host1&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Port1&gt;</span>30304<span class="nt">&lt;/Port1&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Host2&gt;&lt;/Host2&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Port2&gt;</span>30304<span class="nt">&lt;/Port2&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">&lt;!Proxy&gt;</span><span class="err">&lt;</span>/!Proxy&gt;
+</span></span><span class="line"><span class="cl">    <span class="cp">&lt;!ProxyPort&gt;</span>0<span class="err">&lt;</span>/!ProxyPort&gt;
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;User&gt;&lt;/User&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Pass&gt;&lt;/Pass&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/LicServer&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/VRLClient&gt;</span></span></span></code></pre></div></div>
+<h2 id="python-launch-script">Python launch script</h2>
+<p>One way of dealing with all of the above would be to create a Python script which will launch Maya, having all parameters set. Just make sure Python is installed in your machine (or use the one version that comes bundled with Maya).</p>
+<p>An example below, <code>maya2012_vray22001.py</code>, which will work for Windows and Mac OS X. I would be happy to add Linux support if anyone out there would like to contribute with this code, as I do not use Linux myself.</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Settings</span>
+</span></span><span class="line"><span class="cl"><span class="n">windows</span> <span class="o">=</span> <span class="s1">&#39;X:&#39;</span> <span class="c1"># The mounted server share\&#39;s drive letter</span>
+</span></span><span class="line"><span class="cl"><span class="n">osx</span> <span class="o">=</span> <span class="s1">&#39;/Volumes/include&#39;</span> <span class="c1"># The server\&#39;s volume mount</span>
+</span></span><span class="line"><span class="cl"><span class="n">buildsLocation</span> <span class="o">=</span> <span class="s1">&#39;/bin/vray/builds/&#39;</span> <span class="c1"># The server path without drive letter or mounted volume/share.</span>
+</span></span><span class="line"><span class="cl"><span class="n">buildFolderName</span> <span class="o">=</span> <span class="s1">&#39;maya2012_vray22001&#39;</span> <span class="c1"># The name of the build folder, containing the maya_root, maya_vray, vray folders and the source.mel file.</span>
+</span></span><span class="line"><span class="cl"><span class="n">buildMayaVersion</span> <span class="o">=</span> <span class="s1">&#39;2012&#39;</span> <span class="c1"># The version of Maya which the V-Ray plug-in has been compiled for.</span>
+</span></span><span class="line"><span class="cl"><span class="n">licenseLocation</span> <span class="o">=</span> <span class="s1">&#39;/bin/vray/license/&#39;</span> <span class="c1"># The location of the XML license file</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Detect OS and determine drive letter (win) or mount (mac)</span>
+</span></span><span class="line"><span class="cl"><span class="n">volume</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;win32&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">volume</span> <span class="o">=</span> <span class="n">windows</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">volume</span> <span class="o">=</span> <span class="n">osx</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set (and reset) environment variables which may not have already been set...</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_SCRIPT_PATH&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_SCRIPT_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_PLUG_IN_PATH&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_PLUG_IN_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set environment variables</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;win32&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Setting Windows environment variables...&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_RENDER_DESC_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_root/bin/rendererDesc&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_FOR_MAYA&#39;</span> <span class="o">+</span> <span class="n">buildMayaVersion</span> <span class="o">+</span> <span class="s1">&#39;_MAIN_x64&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_FOR_MAYA&#39;</span> <span class="o">+</span> <span class="n">buildMayaVersion</span> <span class="o">+</span> <span class="s1">&#39;_PLUGINS_x64&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/vrayplugins&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_AUTH_CLIENT_FILE_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">licenseLocation</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_root/bin&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_PLUG_IN_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_PLUG_IN_PATH&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/plug-ins&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_SCRIPT_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_SCRIPT_PATH&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/scripts&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;XBMLANGPATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/icons/%B&#39;</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/icons/&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volPipeline</span> <span class="o">+</span> <span class="n">vrayBaseLocation</span> <span class="o">+</span> <span class="n">buildName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/bin&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_TOOLS_MAYA&#39;</span> <span class="o">+</span> <span class="n">buildMayaVersion</span> <span class="o">+</span> <span class="s1">&#39;_x64&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volPipeline</span> <span class="o">+</span> <span class="n">vrayBaseLocation</span> <span class="o">+</span> <span class="n">buildName</span> <span class="o">+</span> <span class="s1">&#39;/vray/bin&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Setting OS X environment variables...&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_RENDER_DESC_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_root/bin/rendererDesc&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_FOR_MAYA&#39;</span> <span class="o">+</span> <span class="n">buildMayaVersion</span> <span class="o">+</span> <span class="s1">&#39;_MAIN_x64&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_FOR_MAYA&#39;</span> <span class="o">+</span> <span class="n">buildMayaVersion</span> <span class="o">+</span> <span class="s1">&#39;_PLUGINS_x64&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/vrayplugins&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_AUTH_CLIENT_FILE_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="s1">&#39;/bin/vray/license&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_root/bin&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/bin&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/vray/bin&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_PLUG_IN_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_PLUG_IN_PATH&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/plug-ins&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_SCRIPT_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAYA_SCRIPT_PATH&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span><span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/scripts&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;XBMLANGPATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/icons/%B&#39;</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/icons/&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volPipeline</span> <span class="o">+</span> <span class="n">vrayBaseLocation</span> <span class="o">+</span> <span class="n">buildName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/bin&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VRAY_TOOLS_MAYA&#39;</span> <span class="o">+</span> <span class="n">buildMayaVersion</span> <span class="o">+</span> <span class="s1">&#39;_x64&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volPipeline</span> <span class="o">+</span> <span class="n">vrayBaseLocation</span> <span class="o">+</span> <span class="n">buildName</span> <span class="o">+</span> <span class="s1">&#39;/vray/bin&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DYLD_LIBRARY_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_root/MacOS/&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Source the three MEL files</span>
+</span></span><span class="line"><span class="cl"><span class="n">sourceStatement</span> <span class="o">=</span> <span class="s2">&#34;-script &#34;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s2">&#34;/source.mel&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set up OS-specific exec command</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;win32&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">command</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Program</span> <span class="n">Files</span><span class="o">/</span><span class="n">Autodesk</span><span class="o">/</span><span class="n">Maya</span><span class="s2">&#34; + buildMayaVersion + &#34;</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">maya</span><span class="o">.</span><span class="n">exe</span><span class="s2">&#34; &#34;</span> <span class="o">+</span> <span class="n">sourceStatement</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;/Applications/Autodesk/maya&#39;</span> <span class="o">+</span> <span class="n">buildMayaVersion</span> <span class="o">+</span> <span class="s1">&#39;/Maya.app/Contents/bin/maya &#39;</span> <span class="o">+</span> <span class="n">sourceStatement</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Launch Maya</span>
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>Be careful with the fact that you might already have some of the environment variables set on your machine, which may cause conflicts and make V-Ray unable to load.</p>
+<p>Also, you may want to add your own server paths to scripts or plug-ins directly into this launch script.</p>
+<h2 id="launching-the-v-ray-render-slave-from-the-arbitrary-location">Launching the V-Ray render slave from the arbitrary location</h2>
+<p>This Python script simply kills any already running processes of the V-Ray render slave and re-launches it. Still no Linux support here. I have called it <code>vray_slave_v22001.py</code>.</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Settings</span>
+</span></span><span class="line"><span class="cl"><span class="n">windows</span> <span class="o">=</span> <span class="s1">&#39;X:&#39;</span> <span class="c1"># The server share\&#39;s drive letter</span>
+</span></span><span class="line"><span class="cl"><span class="n">osx</span> <span class="o">=</span> <span class="s1">&#39;/Volumes/include&#39;</span> <span class="c1"># The server\&#39;s volume mount</span>
+</span></span><span class="line"><span class="cl"><span class="n">buildsLocation</span> <span class="o">=</span> <span class="s1">&#39;/bin/vray/builds/&#39;</span> <span class="c1"># The server path without drive letter or mounted volume/share.</span>
+</span></span><span class="line"><span class="cl"><span class="n">buildFolderName</span> <span class="o">=</span> <span class="s1">&#39;maya2012_vray22001&#39;</span> <span class="c1"># The name of the build folder, containing the maya_root, maya_vray, vray folders and the source.mel file.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Determine drive letter or mount and then kill any running instances of the vray slave</span>
+</span></span><span class="line"><span class="cl"><span class="n">volume</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;win32&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">volume</span> <span class="o">=</span> <span class="n">windows</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># Kill any already running instances of vray daemon</span>
+</span></span><span class="line"><span class="cl">	<span class="n">command</span> <span class="o">=</span> <span class="s2">&#34;TASKKILL /F /IM </span><span class="se">\&#34;</span><span class="s2">vray.exe</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">command</span> <span class="o">=</span> <span class="s2">&#34;TASKKILL /F /IM </span><span class="se">\&#34;</span><span class="s2">vrayspawner.exe</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">volume</span> <span class="o">=</span> <span class="n">osx</span>
+</span></span><span class="line"><span class="cl">	<span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">proc</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s2">&#34;ps -clx | grep &#39;vray.exe&#39; | awk &#39;{print $2}&#39; | head -1&#34;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">output</span><span class="o">=</span><span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">		<span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span> <span class="s1">&#39;kill -9 &#39;</span> <span class="o">+</span>  <span class="n">output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Killed already running V-Ray Slave process with ID &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">		<span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Failed to kill already running V-Ray Slave process with ID &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Launch slave</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;win32&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">command</span> <span class="o">=</span> <span class="s2">&#34;C:</span><span class="se">\\</span><span class="s2">Windows</span><span class="se">\\</span><span class="s2">System32</span><span class="se">\\</span><span class="s2">cmd.exe /C start &#34;</span> <span class="o">+</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\\</span><span class="s2">maya_vray</span><span class="se">\\</span><span class="s2">bin</span><span class="se">\\</span><span class="s2">vray.exe -server -portNumber=20207&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DYLD_LIBRARY_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/lib&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">command</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">+</span> <span class="n">buildsLocation</span> <span class="o">+</span> <span class="n">buildFolderName</span> <span class="o">+</span> <span class="s1">&#39;/maya_vray/bin/vray $* -portNumber=20207 -server&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span> <span class="n">command</span> <span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span></span></span></code></pre></div></div>
+<h2 id="quirks">Quirks</h2>
+<p>In case you move the build folder, a few files may need editing. Check the file paths inside of these files (please note this is on OS X):</p>
+<ul>
+<li><code>[build folder]/maya_vray/bin/vray</code></li>
+<li><code>[build folder]/maya_vray/bin/vrayslave</code></li>
+<li><code>[build folder]/maya_vray/bin/vrayconfig.xml</code></li>
+<li><code>[build folder]/vray/bin/initVRaySlaveDaemon</code></li>
+<li><code>[build folder]/vray/bin/registerVRaySlaveDaemon</code></li>
+<li><code>[build folder]/vray/bin/vrayslave</code></li>
+</ul>
+<p>Also, in case Maya crashes on startup in OS X, try adding an extra environment variable, <code>LC_ALL</code> and set it to &ldquo;C&rdquo;:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;LC_ALL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;C&#39;</span></span></span></code></pre></div></div>
+
+</main>
+
+
+<div id="giscus-container" class="giscus-comments">
+  <div class="load-comments-wrapper">
+    <button id="load-comments-btn" class="load-comments-btn">Load Comments</button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const container = document.getElementById('giscus-container');
+    const loadBtn = document.getElementById('load-comments-btn');
+
+    
+    function loadGiscus() {
+      if (!container) return;
+      
+      
+      container.innerHTML = ''; 
+
+      const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
+      
+      const giscusScript = document.createElement('script');
+      giscusScript.src = 'https://giscus.app/client.js';
+      giscusScript.setAttribute('data-repo', 'fredrikaverpil/fredrikaverpil.github.io');
+      giscusScript.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc=');
+      giscusScript.setAttribute('data-category', 'General');
+      giscusScript.setAttribute('data-category-id', 'DIC_kwDOB8-Z684CU9zc');
+      giscusScript.setAttribute('data-mapping', 'title');
+      giscusScript.setAttribute('data-strict', '0');
+      giscusScript.setAttribute('data-reactions-enabled', '1');
+      giscusScript.setAttribute('data-emit-metadata', '0');
+      giscusScript.setAttribute('data-input-position', 'bottom');
+      giscusScript.setAttribute('data-theme', theme);
+      giscusScript.setAttribute('data-lang', 'en');
+      giscusScript.setAttribute('crossorigin', 'anonymous');
+      giscusScript.async = true;
+
+      container.appendChild(giscusScript);
+    }
+
+    
+    if (loadBtn) {
+      loadBtn.addEventListener('click', loadGiscus);
+    }
+
+    
+    function setGiscusTheme(theme) {
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame && giscusFrame.contentWindow) {
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme } } },
+          'https://giscus.app'
+        );
+      }
+    }
+
+    
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        
+        setTimeout(() => {
+          const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+          setGiscusTheme(currentTheme);
+        }, 10); 
+      });
+    }
+
+    
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        if (!localStorage.getItem('theme')) { 
+          const newTheme = event.matches ? "dark" : "light";
+          setGiscusTheme(newTheme);
+        }
+      });
+    }
+  })();
+</script>
+
+
+
+<footer>
+	<div class="footer-content">
+		<span class="footer-icons">
+			
+			
+			<a href="https://github.com/fredrikaverpil" target="_blank" rel="noopener" title="GitHub">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+
+			</a>
+			
+			
+			<a href="https://fosstodon.org/@fredrikaverpil" target="_blank" rel="noopener" title="Mastodon">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg>
+
+			</a>
+			
+			
+			<a href="https://bsky.app/profile/fredrikaverpil.bsky.social" target="_blank" rel="noopener" title="Bluesky">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></svg>
+
+			</a>
+			
+			
+			<a href="https://linkedin.com/in/fredrik" target="_blank" rel="noopener" title="LinkedIn">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+
+			</a>
+			
+			
+			<a href="/blog/index.xml" target="_blank" rel="noopener" title="RSS">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"/></svg>
+
+			</a>
+			
+			
+			<a href="https://cloud.umami.is/share/tJcIgDO3dznRmeGX" target="_blank" rel="noopener" title="Umami">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845 0 0 0-.841.841v.858a13.31 13.31 0 0 0-.016.6c0 6.627 5.373 12 12 12 6.527 0 11.837-5.212 11.996-11.701 0-.025.004-.05.004-.075V9.452a.845.845 0 0 0-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692 0-8.645 3.192-9.805 7.521Zm18.444 0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069 0 7.512 2.697 8.639 6.399Z"/></svg>
+
+			</a>
+			
+		</span>
+		<span class="footer-text">
+			© Mark Holloway 2005-2026
+		</span>
+	</div>
+	<script src="/js/main.js"></script>
+
+</footer>
+</body>
+
+</html>
+

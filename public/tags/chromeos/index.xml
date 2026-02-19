@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chromeos on Mark Holloway</title>
+    <link>http://localhost:1313/tags/chromeos/</link>
+    <description>Recent content in Chromeos on Mark Holloway</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>© Mark Holloway</copyright>
+    <lastBuildDate>Wed, 07 Oct 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/chromeos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Identifying Chrome extensions on Chrome OS eating up too much disk space</title>
+      <link>http://localhost:1313/blog/2015/10/07/identifying-chrome-extensions-on-chrome-os-eating-up-too-much-disk-space/</link>
+      <pubDate>Wed, 07 Oct 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2015/10/07/identifying-chrome-extensions-on-chrome-os-eating-up-too-much-disk-space/</guid>
+      <description>&lt;p&gt;I just recently realized I had only 300 MB of free disk space on my Chromebook, when I should have about 8 GB of free disk space. After some investigation, I found that one of my extensions where not deleting its previous versions when it got updated. Here’s how you can detect and fix such an issue.&lt;/p&gt;&#xA;&lt;p&gt;Type &lt;strong&gt;chrome://system&lt;/strong&gt; into a Chrome tab, scroll down to “user_files” and click the “expand” button for it. This will generate a (quite long) list of files with file size. Then search for the following in in Chrome using &lt;strong&gt;alt+f&lt;/strong&gt;:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

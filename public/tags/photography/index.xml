@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Photography on Mark Holloway</title>
+    <link>http://localhost:1313/tags/photography/</link>
+    <description>Recent content in Photography on Mark Holloway</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>© Mark Holloway</copyright>
+    <lastBuildDate>Sun, 16 Jun 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/photography/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fujifilm X100S camera profiles and presets</title>
+      <link>http://localhost:1313/blog/2013/06/16/fujifilm-x100s-camera-profiles-and-presets/</link>
+      <pubDate>Sun, 16 Jun 2013 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2013/06/16/fujifilm-x100s-camera-profiles-and-presets/</guid>
+      <description>&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;&#xA;&lt;p&gt;Ever since I replaced my trusty old X100 (see my review &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;../2012/06/12/the-fujifilm-x100-a-year-in-retrospect/&#34;&gt;here&lt;/a&gt;) with its newer incarnation, the X100S (see ,my review &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;../2013/03/08/the-fujifilm-x100s-compared-to-the-x100/&#34;&gt;here&lt;/a&gt;), I have been struggling with color rendition in Lightroom, which is my weapon of choice when editing RAW files.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Update 8&lt;sup&gt;th&lt;/sup&gt; April, 2014:&lt;/strong&gt; Adobe today released Adobe Camera RAW 8.4 which includes huge improvements on color rendition in Lightroom 5.4 and Photoshop CC (version 14.2.1). This more or less renders my camera profiles obsolete. But do read on if you like…&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fujifilm X100S feedback</title>
+      <link>http://localhost:1313/blog/2013/05/29/fujifilm-x100s-feedback/</link>
+      <pubDate>Wed, 29 May 2013 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2013/05/29/fujifilm-x100s-feedback/</guid>
+      <description>&lt;p&gt;The information in this blog post was &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://twitter.com/fujiguys/status/339794906274988034&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;originally sent to @fujiguys&lt;/a&gt;, who in turn would forward it to Tokyo.&lt;/p&gt;&#xA;&lt;h2 id=&#34;excessive-skin-tone-smoothening-at-iso-6400&#34;&gt;Excessive skin tone smoothening at ISO 6400&lt;/h2&gt;&#xA;&lt;p&gt;Images shot at high ISO values, such as ISO 6400, exhibit excessive smoothening, especially visible in skin tones. As the RAF does not exhibit this at all it must be possible for the camera to develop a much less smoothened JPEG?&lt;/p&gt;&#xA;&lt;p&gt;If this entails showing more grain, I think that less smoothening and more grain is a much better trade-off.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Fujifilm X100S – compared to the X100</title>
+      <link>http://localhost:1313/blog/2013/03/08/the-fujifilm-x100s-compared-to-the-x100/</link>
+      <pubDate>Fri, 08 Mar 2013 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2013/03/08/the-fujifilm-x100s-compared-to-the-x100/</guid>
+      <description>&lt;p&gt;Having used the previous model, the X100, I will primarily focus on the&#xA;differences between these two models (that really makes a difference to me,&#xA;personally).&lt;/p&gt;&#xA;&lt;p&gt;I have linked random shots of mine from&#xA;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.flickr.com/photos/fredrik/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;flickr&lt;/a&gt; into this blog post along with&#xA;some RAW file samples. I am writing this blog post using firmware 1.0 on the&#xA;X100S.&lt;/p&gt;&#xA;&lt;h3 id=&#34;feature-comparison-rundown&#34;&gt;Feature comparison rundown&lt;/h3&gt;&#xA;&lt;p&gt;Fujifilm UK has posted somewhat of an official&#xA;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://plus.google.com/&amp;#43;fujifilmcameras/posts/a25FkWuXhhV&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;list of the 68 improvements&lt;/a&gt;&#xA;the X100S has over the X100 on Google+, but there seems to be some errors in it.&#xA;And of course DPReview has also compiled their changelog … but if you are&#xA;looking for the more hands-on experience related changes, read on…&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fujifilm Finepix X100 – LCD/EVF observations</title>
+      <link>http://localhost:1313/blog/2012/08/09/fujifilm-finepix-x100-lcd/evf-observations/</link>
+      <pubDate>Thu, 09 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2012/08/09/fujifilm-finepix-x100-lcd/evf-observations/</guid>
+      <description>&lt;p&gt;Some people have asked whether the “Preview Depth of Field” function is different from the regular LCD/EVF view or not (which it is), why the histogram is acting up (which it sometimes can do) and I’ve also seen questions regarding why exposure lock (AE-L) mapped to the AFL/AEL-button does not seem to be happening when pressing the AFL/AEL-button. Here’s an attempt to try and explain why this is so.&lt;/p&gt;&#xA;&lt;p&gt;Below, the two stages of what the LCD/EVF will show when shooting a picture, explained.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fujifilm Finepix X100 – RAW and film simulation</title>
+      <link>http://localhost:1313/blog/2012/08/04/fujifilm-finepix-x100-raw-and-film-simulation/</link>
+      <pubDate>Sat, 04 Aug 2012 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2012/08/04/fujifilm-finepix-x100-raw-and-film-simulation/</guid>
+      <description>&lt;p&gt;– Why film simulations are not disabled when shooting RAW?&lt;/p&gt;&#xA;&lt;p&gt;A RAW file is a photo that hasn’t been developed yet and simply consist of numerical values representing the amount of light that has been recorded by the sensor (in the case of the X100 this is 12-bit per pixel). It has to be somehow converted into RGB in order to be viewable on a computer screen (or the camera’s LCD/EVF) as an image that you can look at. This can be done through RAW converters or image viewers which know how to interpret the RAW file into an RGB image.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Fujifilm X100 – a year in retrospect</title>
+      <link>http://localhost:1313/blog/2012/06/12/the-fujifilm-x100-a-year-in-retrospect/</link>
+      <pubDate>Tue, 12 Jun 2012 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2012/06/12/the-fujifilm-x100-a-year-in-retrospect/</guid>
+      <description>&lt;p&gt;Simply put: the best camera I’ve ever owned.&lt;/p&gt;&#xA;&lt;p&gt;Back in 2001, I used to carry a Canon Digital IXUS/Elph everywhere I went. I took photos on my way to work, in the office and with friends in the weekends. Like a reflex, like bicycling, whenever I found myself with a photo opportunity I would fling the camera out of my pocket, position and shoot. For me, it was half the fun editing everything in Photoshop.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fujifilm X100 settings &amp; notes</title>
+      <link>http://localhost:1313/blog/2012/02/02/fujifilm-x100-settings-notes/</link>
+      <pubDate>Thu, 02 Feb 2012 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2012/02/02/fujifilm-x100-settings-notes/</guid>
+      <description>&lt;p&gt;Some facts about the camera which are easy to forget as well some notes to self.&lt;/p&gt;&#xA;&lt;h2 id=&#34;iso&#34;&gt;ISO&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The hardware is only capable of maximum ISO 1600. Any higher ISO value is pushed with software in camera.&lt;/li&gt;&#xA;&lt;li&gt;ISO value also serves as lowest ISO value allowed when Auto ISO is on.&lt;/li&gt;&#xA;&lt;li&gt;Auto-ISO can be set to a maximum ISO value between 400 - 3200.&lt;/li&gt;&#xA;&lt;li&gt;When shooting RAW (with Auto-ISO turned off), ISO can be set to a minimum of 200 and a maximum of 6400.&lt;/li&gt;&#xA;&lt;li&gt;When shooting in JPG mode (with Auto-ISO turned off), ISO can be set to a minimum of 100 and a maximum of 12800.&lt;/li&gt;&#xA;&lt;li&gt;When in Auto-ISO, the “Min shutter” value will not be respected if you hit the Max ISO value. The Min shutter value could therefore be regarded as a “soft limit” Min shutter value.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;dynamic-range-tone-mapping&#34;&gt;Dynamic range (tone mapping)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;DR100 is the default setting for the camera.&lt;/li&gt;&#xA;&lt;li&gt;DR200 (changes minimum ISO to 400) will stop down the RAW 1 stop.&lt;/li&gt;&#xA;&lt;li&gt;DR400 (changes minimum ISO to 800) will stop down the RAW 2 stops.&lt;/li&gt;&#xA;&lt;li&gt;RAW files with DR200 or DR400 will appear darker in post production as they are stopped down, and there is currently no way for e.g. Lightroom to interpret this feature in order to compensate (the way the JPG engine does).&lt;/li&gt;&#xA;&lt;li&gt;Dynamic range is really only good if you use the camera’s JPG engine. If you shoot RAW only, you should set this to DR100 and tweak exposure in post production.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;auto-focus&#34;&gt;Auto focus&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The X100 uses Contrast Detection Auto Focus (CD AF), which means you should never try to find focus at the edge between two objects of different distance from the camera. More details &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.x100forum.com/index.php?/topic/1713-focus-101/page__view__findpost__p__19694&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;by Arjay&lt;/a&gt; on this over at the X100 Forum.&lt;/li&gt;&#xA;&lt;li&gt;The X100 is not a true rangefinder camera, thus is not great at manual focus. For best AF performance, use AF-S with smallest AF window in Electrical View Finder (EVF).&lt;/li&gt;&#xA;&lt;li&gt;The X100 will have more difficulty locking AF onto horizontal lines than on vertical lines.&lt;/li&gt;&#xA;&lt;li&gt;The AFL/AEL button is by default set to Auto Exposure Lock (AE-L), by setting this to AF-L, auto focus can be locked instead.&lt;/li&gt;&#xA;&lt;li&gt;Optical View Finder (OVF) Power Save Mode set to “on” will reduce AF performance, according to the manual.&lt;/li&gt;&#xA;&lt;li&gt;AF-C is reportedly increasing chances of an AF lock in dim-lit situations.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;lens-characteristics&#34;&gt;Lens characteristics&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Prime f/2.0 23mm, equivalent to 35mm on a 35mm camera.&lt;/li&gt;&#xA;&lt;li&gt;The lens is at its sharpest at f/4-f/5.6 and is very, very soft at f/2. For high depth-of-field, f/11 is a good compromise but at f/16 effects of diffraction increases.&lt;/li&gt;&#xA;&lt;li&gt;Built in ND filter (equivalent f-stop reduction of 3).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;memory-card-speed-tests&#34;&gt;Memory card speed tests&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code&gt;Type of test&#x9;&#x9;&#x9;45MB/s&#x9;&#x9;95MB/s&#xA;------------------------------------------------------&#xA;1 RAW+F&#x9;&#x9;&#x9;&#x9;5.3s&#x9;&#x9;3.5s&#xA;5 RAW+F (continuous burst)&#x9;26.3s&#x9;&#x9;19.8s&#xA;1 JPG/F&#x9;&#x9;&#x9;&#x9;1.5s&#x9;&#x9;1.5s&#xA;5 JPG/F (continuous burst)&#x9;15.6s&#x9;&#x9;15.6s&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;It seems there is no reason for JPG-only shooters to upgrade their cards for faster speeds but some speed gains are seen when shooting RAW.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
