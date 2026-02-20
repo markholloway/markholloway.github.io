@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Personal Update on Mark Holloway</title>
-    <link>http://localhost:1313/tags/personal-update/</link>
-    <description>Recent content in Personal Update on Mark Holloway</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>© Mark Holloway</copyright>
-    <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/personal-update/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Starting a blog series</title>
-      <link>http://localhost:1313/blog/2025/02/21/starting-a-blog-series/</link>
-      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2025/02/21/starting-a-blog-series/</guid>
-      <description>&lt;p&gt;Thorsten Ball has a great blog series called &amp;ldquo;Joy and Curiosity&amp;rdquo; over at&#xA;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://registerspill.thorstenball.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Register Spill&lt;/a&gt; which celebrates the&#xA;interesting and joyful parts of the week that passed by. I initially heard about&#xA;this on the &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://cupogo.dev&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cup o&amp;rsquo; Go podcast&lt;/a&gt; and his ideas resonates&#xA;incredibly well on how I have come to view life as a software engineer.&lt;/p&gt;&#xA;&lt;p&gt;I really encourage you to listen in to that Cup o&amp;rsquo; Go&#xA;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://cupogo.dev/episodes/supply-chain-attacks-ghetto-logs-and-rust-ai-cold-takes-with-thorsten-ball&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;episode&lt;/a&gt;,&#xA;where Thorsten speaks his mind, not only on his very based and nuanced view on&#xA;AI or Rust vs Go, but also on generally sharing joy and positiveness throughout&#xA;this blog series of his.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Personal Update on Mark Holloway</title><link>https://markholloway.com/tags/personal-update/</link><description>Recent content in Personal Update on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/personal-update/index.xml" rel="self" type="application/rss+xml"/><item><title>Starting a blog series</title><link>https://markholloway.com/blog/2025/02/21/starting-a-blog-series/</link><pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2025/02/21/starting-a-blog-series/</guid><description>&lt;p&gt;Thorsten Ball has a great blog series called &amp;ldquo;Joy and Curiosity&amp;rdquo; over at
+
+
+
+
+&lt;a href="https://registerspill.thorstenball.com" target="_blank" rel="noopener"&gt;Register Spill&lt;/a&gt; which celebrates the
+interesting and joyful parts of the week that passed by. I initially heard about
+this on the 
+
+
+
+&lt;a href="https://cupogo.dev" target="_blank" rel="noopener"&gt;Cup o&amp;rsquo; Go podcast&lt;/a&gt; and his ideas resonates
+incredibly well on how I have come to view life as a software engineer.&lt;/p&gt;
+&lt;p&gt;I really encourage you to listen in to that Cup o&amp;rsquo; Go
+
+
+
+
+&lt;a href="https://cupogo.dev/episodes/supply-chain-attacks-ghetto-logs-and-rust-ai-cold-takes-with-thorsten-ball" target="_blank" rel="noopener"&gt;episode&lt;/a&gt;,
+where Thorsten speaks his mind, not only on his very based and nuanced view on
+AI or Rust vs Go, but also on generally sharing joy and positiveness throughout
+this blog series of his.&lt;/p&gt;</description></item></channel></rss>

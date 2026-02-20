@@ -1,132 +1,350 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Linux on Mark Holloway</title>
-    <link>http://localhost:1313/tags/linux/</link>
-    <description>Recent content in Linux on Mark Holloway</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>© Mark Holloway</copyright>
-    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Find missing libs with repoquery</title>
-      <link>http://localhost:1313/blog/2017/06/28/find-missing-libs-with-repoquery/</link>
-      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2017/06/28/find-missing-libs-with-repoquery/</guid>
-      <description>&lt;p&gt;Not sure how I didn&amp;rsquo;t learn about this until today. Anyways, if you end up with missing libs on CentOS/RedHat, use &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://yum.baseurl.org/wiki/RepoQuery&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;repoquery&lt;/a&gt; to find missing libs.&lt;/p&gt;&#xA;&lt;p&gt;For example, I had an issue today where docker required &lt;code&gt;libltdl.so.7&lt;/code&gt; but this wasn&amp;rsquo;t installed.&lt;/p&gt;&#xA;&lt;div class=&#34;code-block-wrapper&#34;&gt;&#xA;  &lt;button class=&#34;copy-code-button&#34; aria-label=&#34;Copy code to clipboard&#34;&gt;&#xA;    &lt;svg class=&#34;copy-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&#xA;      &lt;path d=&#34;M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2&#34;&gt;&lt;/path&gt;&#xA;      &lt;rect x=&#34;8&#34; y=&#34;2&#34; width=&#34;8&#34; height=&#34;4&#34; rx=&#34;1&#34; ry=&#34;1&#34;&gt;&lt;/rect&gt;&#xA;    &lt;/svg&gt;&#xA;    &lt;svg class=&#34;check-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; style=&#34;display: none;&#34;&gt;&#xA;      &lt;polyline points=&#34;20 6 9 17 4 12&#34;&gt;&lt;/polyline&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/button&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;repoquery -q -f */libltdl.so.*&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&#xA;&lt;p&gt;The above is quering (&lt;code&gt;-q&lt;/code&gt;) for files (&lt;code&gt;-f&lt;/code&gt;) matching the pattern (&lt;code&gt;*/libltdl.so*&lt;/code&gt;). The first star is important since the query is looking for matches against the full paths of the files within the RPMs stored on the various YUM repos your system is aware of.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Bash on Ubuntu on Windows</title>
-      <link>http://localhost:1313/blog/2016/11/21/bash-on-ubuntu-on-windows/</link>
-      <pubDate>Mon, 21 Nov 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2016/11/21/bash-on-ubuntu-on-windows/</guid>
-      <description>&lt;p&gt;This is a quick intro to – and some personal notes on working with – Bash in Windows 10 (Anniversary Update or Insider build requred). This will be updated on a sporadic basis.&lt;/p&gt;&#xA;&lt;h2 id=&#34;information-on-bash&#34;&gt;Information on Bash&lt;/h2&gt;&#xA;&lt;h3 id=&#34;what-is-bash-on-ubuntu-on-windows&#34;&gt;What is Bash on Ubuntu on Windows?&lt;/h3&gt;&#xA;&lt;p&gt;Bash on Ubuntu on Windows is part of the &amp;ldquo;Windows Subsystem for Linux&amp;rdquo; (WSL). Read more over at the &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://docs.microsoft.com/en-us/windows/wsl/about&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;WSL MSDN page&lt;/a&gt;. This page also covers installation guide, command reference, account permissions, interoperability, FAQ and release notes.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>My Sublime Text 3 setup</title>
-      <link>http://localhost:1313/blog/2016/05/20/my-sublime-text-3-setup/</link>
-      <pubDate>Fri, 20 May 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2016/05/20/my-sublime-text-3-setup/</guid>
-      <description>&lt;p&gt;This is my &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.sublimetext.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sublime Text 3&lt;/a&gt; setup, with ambitions to create a custom Python IDE.&lt;/p&gt;&#xA;&lt;p&gt;All of the below assumes you&amp;rsquo;ve already installed &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://packagecontrol.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Package Control&lt;/a&gt;, the package manager for Sublime Text.&lt;/p&gt;&#xA;&lt;h3 id=&#34;general-packages&#34;&gt;General packages&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.sublimelinter.com/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;SublimeLinter&lt;/code&gt;&lt;/a&gt; - Faster than in ST2&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/facelessuser/BracketHighlighter&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;BracketHighlighter&lt;/code&gt;&lt;/a&gt; - Bracket and tag highlighter&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.sublimerge.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;Sublimerge Pro&lt;/code&gt;&lt;/a&gt; - Great tool for checking diffs&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;python-ide-setup&#34;&gt;Python IDE setup&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/SublimeLinter/SublimeLinter-flake8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;SublimeLinter-flake8&lt;/code&gt;&lt;/a&gt; - Flake and PEP8 checking&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/srusskih/SublimeJEDI&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;Jedi - Python Autocompletion&lt;/code&gt;&lt;/a&gt; - Also known as SublimeJEDI&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/wuub/requirementstxt&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;requirementstxt&lt;/code&gt;&lt;/a&gt; - Syntax highlighting for requirements.txt files&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Please note, SublimeLinter-flake8 requires you to &lt;code&gt;pip install flake8&lt;/code&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Systemd services and resource limits</title>
-      <link>http://localhost:1313/blog/2016/04/27/systemd-services-and-resource-limits/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2016/04/27/systemd-services-and-resource-limits/</guid>
-      <description>&lt;p&gt;We made the move to CentOS 7 and I switched out all init.d scripts with&#xA;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;systemd services&lt;/a&gt;.&#xA;Yesterday I noticed we started getting errors on our render farm for huge&#xA;scenes which required loading of thousands of files:&lt;/p&gt;&#xA;&lt;blockquote class=&#34;callout markdown-alert &#34;&gt;&lt;div class=&#34;callout-content&#34;&gt;&lt;p&gt;V-Ray warning: Could not load mesh file &amp;hellip;&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;One hint that this wasn&amp;rsquo;t due to scene misconfiguration was that the initial&#xA;~1000 vrmeshes were loaded successfully, and after that no other vrmesh file&#xA;could be loaded.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Install psutil in CentOS 6</title>
-      <link>http://localhost:1313/blog/2016/03/11/install-psutil-in-centos-6/</link>
-      <pubDate>Fri, 11 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2016/03/11/install-psutil-in-centos-6/</guid>
-      <description>&lt;p&gt;Don&amp;rsquo;t use &lt;code&gt;yum install python-psutil&lt;/code&gt; as this will give you a super old&#xA;version. Instead use:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;yum install gcc python-devel&#xA;pip install psutil&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
-    </item>
-    <item>
-      <title>Install CentOS 7 remotely using Kickstart and GRUB</title>
-      <link>http://localhost:1313/blog/2015/12/30/install-centos-7-remotely-using-kickstart-and-grub/</link>
-      <pubDate>Wed, 30 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/12/30/install-centos-7-remotely-using-kickstart-and-grub/</guid>
-      <description>&lt;p&gt;This guide assumes the target host is already running CentOS (a derivate of&#xA;Red Hat Enterprise Linux) or at least running the GRUB boot loader and that you&#xA;have root access to this host.&lt;/p&gt;&#xA;&lt;h2 id=&#34;whats-this-all-about&#34;&gt;What&amp;rsquo;s this all about?&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;m going to install CentOS 7 onto a machine which I do not have physical access&#xA;to. In order to achieve this, I&amp;rsquo;m going to need a Kickstart file, some files&#xA;from the CentOS 7 installation and create a custom GRUB boot loader entry.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>CentOS 6 yum errors (and fixes)</title>
-      <link>http://localhost:1313/blog/2015/11/18/centos-6-yum-errors-and-fixes/</link>
-      <pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/11/18/centos-6-yum-errors-and-fixes/</guid>
-      <description>&lt;h3 id=&#34;issues&#34;&gt;Issues&lt;/h3&gt;&#xA;&lt;blockquote class=&#34;callout markdown-alert &#34;&gt;&lt;div class=&#34;callout-content&#34;&gt;&lt;p&gt;Error: Cannot retrieve metalink for repository: epel. Please verify its path and try again&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;or&lt;/p&gt;&#xA;&lt;blockquote class=&#34;callout markdown-alert &#34;&gt;&lt;div class=&#34;callout-content&#34;&gt;&lt;p&gt;Error: xz compression not available&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;/blockquote&gt;&lt;h3 id=&#34;fix&#34;&gt;Fix&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;yum remove epel-release&#xA;rm -rf /var/cache/yum/x86_64/6/epel&#xA;yum install epel-release&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
-    </item>
-    <item>
-      <title>Turning your renders up to 11</title>
-      <link>http://localhost:1313/blog/2015/10/16/turning-your-renders-up-to-11/</link>
-      <pubDate>Fri, 16 Oct 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/10/16/turning-your-renders-up-to-11/</guid>
-      <description>&lt;p&gt;An interview with me on our cloud rendering solutions is now published over&#xA;at &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.cgsociety.org/news/article/1379/turning-your-renders-up-to-11&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CGSociety&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;blockquote class=&#34;callout markdown-alert &#34;&gt;&lt;div class=&#34;callout-content&#34;&gt;&lt;p&gt;“We need to make sure that we’re working with the best technology, as some of our projects can be very render intensive,” he begins. “But our motto is to spend time focusing on the creative side of building beautiful images, and let the machines do the hard work.”&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;Check it out &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.cgsociety.org/news/article/1379/turning-your-renders-up-to-11&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Fixing Python&#39;s insecure platform warning</title>
-      <link>http://localhost:1313/blog/2015/09/15/fixing-pythons-insecure-platform-warning/</link>
-      <pubDate>Tue, 15 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/09/15/fixing-pythons-insecure-platform-warning/</guid>
-      <description>&lt;p&gt;Here’s how to fix that nagging InsecurePlatformWarning warning in Python.&lt;/p&gt;&#xA;&lt;h3 id=&#34;the-issue&#34;&gt;The issue&lt;/h3&gt;&#xA;&lt;blockquote class=&#34;callout markdown-alert &#34;&gt;&lt;div class=&#34;callout-content&#34;&gt;&lt;p&gt;InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;Assuming you have pip for python installed, read on&amp;hellip;&lt;/p&gt;&#xA;&lt;h3 id=&#34;ubuntu-1404-fix&#34;&gt;Ubuntu 14.04 fix&lt;/h3&gt;&#xA;&lt;div class=&#34;code-block-wrapper&#34;&gt;&#xA;  &lt;button class=&#34;copy-code-button&#34; aria-label=&#34;Copy code to clipboard&#34;&gt;&#xA;    &lt;svg class=&#34;copy-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&#xA;      &lt;path d=&#34;M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2&#34;&gt;&lt;/path&gt;&#xA;      &lt;rect x=&#34;8&#34; y=&#34;2&#34; width=&#34;8&#34; height=&#34;4&#34; rx=&#34;1&#34; ry=&#34;1&#34;&gt;&lt;/rect&gt;&#xA;    &lt;/svg&gt;&#xA;    &lt;svg class=&#34;check-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; style=&#34;display: none;&#34;&gt;&#xA;      &lt;polyline points=&#34;20 6 9 17 4 12&#34;&gt;&lt;/polyline&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/button&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install libffi-dev libssl-dev&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo pip install -U requests&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;security&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>Installing PySide into a virtualenv</title>
-      <link>http://localhost:1313/blog/2015/09/11/installing-pyside-into-a-virtualenv/</link>
-      <pubDate>Fri, 11 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/09/11/installing-pyside-into-a-virtualenv/</guid>
-      <description>&lt;p&gt;I’ve been struggling to install a portable/relocatable virtualenv with PySide 1.2.2 for Python 2.7. On Windows, this works out of the box but it’s more difficult on Linux and OS X, although I came up with &#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/PySide/PySide/issues/129#issuecomment-145138706&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;a patch for OS X&lt;/a&gt;. This guide will not go into detail on portability/relocatability and will merely touch upon how to get started with PySide in a virtualenv. It looks like PySide 1.2.3 will have substantial changes which will allow for easier portability/relocatability and I will make a post on that as soon as it is generally available.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Installing Maya 2016 on Ubuntu 14.04 (trusty)</title>
-      <link>http://localhost:1313/blog/2015/09/10/installing-maya-2016-on-ubuntu-14.04-trusty/</link>
-      <pubDate>Thu, 10 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/09/10/installing-maya-2016-on-ubuntu-14.04-trusty/</guid>
-      <description>&lt;p&gt;It took some trial and error to successfully install and license Maya 2016 in Ubuntu 14.04, and here’s how I did it.&lt;/p&gt;&#xA;&lt;p&gt;First off, let’s install some libraries. It’s possible that not all these libraries are needed as the list of libraries stem from installation instructions from an earlier version of Maya.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;sudo apt-get install csh tcsh libaudiofile-dev libglw1-mesa elfutils gamin libglw1-mesa-dev mesa-utils xfstt ttf-liberation ttf-mscorefonts-installer xfonts-100dpi xfonts-75dpi alien&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;Maya needs write access to a temp folder, which does not exist by default in Ubuntu 14.04. Let’s create it and make it writeable.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Getting quick access to new Google Cloud SDK features</title>
-      <link>http://localhost:1313/blog/2015/05/19/getting-quick-access-to-new-google-cloud-sdk-features/</link>
-      <pubDate>Tue, 19 May 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/05/19/getting-quick-access-to-new-google-cloud-sdk-features/</guid>
-      <description>&lt;p&gt;There is a two-week delay before gsutil gets updated with the latest and greatest. If you want to try the new stuff out, pip install the SDK!&lt;/p&gt;&#xA;&lt;div class=&#34;code-block-wrapper&#34;&gt;&#xA;  &lt;button class=&#34;copy-code-button&#34; aria-label=&#34;Copy code to clipboard&#34;&gt;&#xA;    &lt;svg class=&#34;copy-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&#xA;      &lt;path d=&#34;M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2&#34;&gt;&lt;/path&gt;&#xA;      &lt;rect x=&#34;8&#34; y=&#34;2&#34; width=&#34;8&#34; height=&#34;4&#34; rx=&#34;1&#34; ry=&#34;1&#34;&gt;&lt;/rect&gt;&#xA;    &lt;/svg&gt;&#xA;    &lt;svg class=&#34;check-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; style=&#34;display: none;&#34;&gt;&#xA;      &lt;polyline points=&#34;20 6 9 17 4 12&#34;&gt;&lt;/polyline&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/button&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo yum install gcc openssl-devel python-devel python-setuptools libffi-devel&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo yum install python-pip&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo pip install -U gsutil&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&#xA;&lt;p&gt;Then execute gsutil like this:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Kill process by search string</title>
-      <link>http://localhost:1313/blog/2015/05/06/kill-process-by-search-string/</link>
-      <pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/05/06/kill-process-by-search-string/</guid>
-      <description>&lt;p&gt;In Linux, you can kill all processes by name (or by username etc) using something like this:&lt;/p&gt;&#xA;&lt;div class=&#34;code-block-wrapper&#34;&gt;&#xA;  &lt;button class=&#34;copy-code-button&#34; aria-label=&#34;Copy code to clipboard&#34;&gt;&#xA;    &lt;svg class=&#34;copy-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&#xA;      &lt;path d=&#34;M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2&#34;&gt;&lt;/path&gt;&#xA;      &lt;rect x=&#34;8&#34; y=&#34;2&#34; width=&#34;8&#34; height=&#34;4&#34; rx=&#34;1&#34; ry=&#34;1&#34;&gt;&lt;/rect&gt;&#xA;    &lt;/svg&gt;&#xA;    &lt;svg class=&#34;check-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; style=&#34;display: none;&#34;&gt;&#xA;      &lt;polyline points=&#34;20 6 9 17 4 12&#34;&gt;&lt;/polyline&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/button&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;kill -9 $(ps aux | grep &amp;#39;some_process_name&amp;#39; | awk &amp;#39;{print $2}&amp;#39;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>3D rendering in the Google Cloud</title>
-      <link>http://localhost:1313/blog/2015/05/01/3d-rendering-in-the-google-cloud/</link>
-      <pubDate>Fri, 01 May 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/05/01/3d-rendering-in-the-google-cloud/</guid>
-      <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://cloudplatform.googleblog.com/2015/05/3D-imagery-rendering-in-the-cloud-with-Industriromantik-and-Compute-Engine.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Guest blogging&lt;/a&gt; for Google!&lt;/p&gt;&#xA;&lt;blockquote class=&#34;callout markdown-alert &#34;&gt;&lt;div class=&#34;callout-content&#34;&gt;&lt;p&gt;As a small design and visualization studio, we focus on creating beautiful 3D imagery – be it high-resolution product images or TV commercials. To successfully do this, we need to ensure we have access to enough rendering power, and at times, we find ourselves in a situation where our in-house render farm’s capacity isn’t cutting it. That’s where Google Compute Engine comes in.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;Read more over at the &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://cloudplatform.googleblog.com/2015/05/3D-imagery-rendering-in-the-cloud-with-Industriromantik-and-Compute-Engine.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Cloud Platform blog&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Find file or folder in Linux</title>
-      <link>http://localhost:1313/blog/2015/04/15/find-file-or-folder-in-linux/</link>
-      <pubDate>Wed, 15 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2015/04/15/find-file-or-folder-in-linux/</guid>
-      <description>&lt;p&gt;Ever needed to do a simple search for an application, a file or a folder in Linux and when &lt;code&gt;whereis&lt;/code&gt; doesn’t return anything useful?&lt;/p&gt;&#xA;&lt;div class=&#34;code-block-wrapper&#34;&gt;&#xA;  &lt;button class=&#34;copy-code-button&#34; aria-label=&#34;Copy code to clipboard&#34;&gt;&#xA;    &lt;svg class=&#34;copy-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&#xA;      &lt;path d=&#34;M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2&#34;&gt;&lt;/path&gt;&#xA;      &lt;rect x=&#34;8&#34; y=&#34;2&#34; width=&#34;8&#34; height=&#34;4&#34; rx=&#34;1&#34; ry=&#34;1&#34;&gt;&lt;/rect&gt;&#xA;    &lt;/svg&gt;&#xA;    &lt;svg class=&#34;check-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; style=&#34;display: none;&#34;&gt;&#xA;      &lt;polyline points=&#34;20 6 9 17 4 12&#34;&gt;&lt;/polyline&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/button&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo find / -name &lt;span class=&#34;s2&#34;&gt;&amp;#34;some_folder&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>What&#39;s hogging that folder?</title>
-      <link>http://localhost:1313/blog/2014/12/02/whats-hogging-that-folder/</link>
-      <pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2014/12/02/whats-hogging-that-folder/</guid>
-      <description>&lt;p&gt;Well, at least in Linux you might find out using this command:&lt;/p&gt;&#xA;&lt;div class=&#34;code-block-wrapper&#34;&gt;&#xA;  &lt;button class=&#34;copy-code-button&#34; aria-label=&#34;Copy code to clipboard&#34;&gt;&#xA;    &lt;svg class=&#34;copy-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&#xA;      &lt;path d=&#34;M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2&#34;&gt;&lt;/path&gt;&#xA;      &lt;rect x=&#34;8&#34; y=&#34;2&#34; width=&#34;8&#34; height=&#34;4&#34; rx=&#34;1&#34; ry=&#34;1&#34;&gt;&lt;/rect&gt;&#xA;    &lt;/svg&gt;&#xA;    &lt;svg class=&#34;check-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; style=&#34;display: none;&#34;&gt;&#xA;      &lt;polyline points=&#34;20 6 9 17 4 12&#34;&gt;&lt;/polyline&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/button&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lsof &amp;lt;folder name&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>Fabric on CentOS 6.6</title>
-      <link>http://localhost:1313/blog/2014/11/28/fabric-on-centos-6.6/</link>
-      <pubDate>Fri, 28 Nov 2014 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2014/11/28/fabric-on-centos-6.6/</guid>
-      <description>&lt;p&gt;When installing &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.fabfile.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fabric&lt;/a&gt; on CentOS 6.6 using &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://pypi.python.org/pypi/pip&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;pip&lt;/a&gt;, it seems &#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/fabric/fabric/issues/1105&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;a bug&lt;/a&gt; is being hit.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Mark Holloway</title><link>https://markholloway.com/tags/linux/</link><description>Recent content in Linux on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Find missing libs with repoquery</title><link>https://markholloway.com/blog/2017/06/28/find-missing-libs-with-repoquery/</link><pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2017/06/28/find-missing-libs-with-repoquery/</guid><description>&lt;p&gt;Not sure how I didn&amp;rsquo;t learn about this until today. Anyways, if you end up with missing libs on CentOS/RedHat, use 
+
+
+
+&lt;a href="https://yum.baseurl.org/wiki/RepoQuery" target="_blank" rel="noopener"&gt;repoquery&lt;/a&gt; to find missing libs.&lt;/p&gt;
+&lt;p&gt;For example, I had an issue today where docker required &lt;code&gt;libltdl.so.7&lt;/code&gt; but this wasn&amp;rsquo;t installed.&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;repoquery -q -f */libltdl.so.*&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The above is quering (&lt;code&gt;-q&lt;/code&gt;) for files (&lt;code&gt;-f&lt;/code&gt;) matching the pattern (&lt;code&gt;*/libltdl.so*&lt;/code&gt;). The first star is important since the query is looking for matches against the full paths of the files within the RPMs stored on the various YUM repos your system is aware of.&lt;/p&gt;</description></item><item><title>Bash on Ubuntu on Windows</title><link>https://markholloway.com/blog/2016/11/21/bash-on-ubuntu-on-windows/</link><pubDate>Mon, 21 Nov 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/11/21/bash-on-ubuntu-on-windows/</guid><description>&lt;p&gt;This is a quick intro to – and some personal notes on working with – Bash in Windows 10 (Anniversary Update or Insider build requred). This will be updated on a sporadic basis.&lt;/p&gt;
+&lt;h2 id="information-on-bash"&gt;Information on Bash&lt;/h2&gt;
+&lt;h3 id="what-is-bash-on-ubuntu-on-windows"&gt;What is Bash on Ubuntu on Windows?&lt;/h3&gt;
+&lt;p&gt;Bash on Ubuntu on Windows is part of the &amp;ldquo;Windows Subsystem for Linux&amp;rdquo; (WSL). Read more over at the 
+
+
+
+&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/about" target="_blank" rel="noopener"&gt;WSL MSDN page&lt;/a&gt;. This page also covers installation guide, command reference, account permissions, interoperability, FAQ and release notes.&lt;/p&gt;</description></item><item><title>My Sublime Text 3 setup</title><link>https://markholloway.com/blog/2016/05/20/my-sublime-text-3-setup/</link><pubDate>Fri, 20 May 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/05/20/my-sublime-text-3-setup/</guid><description>&lt;p&gt;This is my 
+
+
+
+&lt;a href="https://www.sublimetext.com" target="_blank" rel="noopener"&gt;Sublime Text 3&lt;/a&gt; setup, with ambitions to create a custom Python IDE.&lt;/p&gt;
+&lt;p&gt;All of the below assumes you&amp;rsquo;ve already installed 
+
+
+
+&lt;a href="https://packagecontrol.io" target="_blank" rel="noopener"&gt;Package Control&lt;/a&gt;, the package manager for Sublime Text.&lt;/p&gt;
+&lt;h3 id="general-packages"&gt;General packages&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+
+
+
+&lt;a href="https://www.sublimelinter.com/en/latest/" target="_blank" rel="noopener"&gt;&lt;code&gt;SublimeLinter&lt;/code&gt;&lt;/a&gt; - Faster than in ST2&lt;/li&gt;
+&lt;li&gt;
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/facelessuser/BracketHighlighter" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;BracketHighlighter&lt;/code&gt;&lt;/a&gt; - Bracket and tag highlighter&lt;/li&gt;
+&lt;li&gt;
+
+
+
+&lt;a href="https://www.sublimerge.com" target="_blank" rel="noopener"&gt;&lt;code&gt;Sublimerge Pro&lt;/code&gt;&lt;/a&gt; - Great tool for checking diffs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="python-ide-setup"&gt;Python IDE setup&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/SublimeLinter/SublimeLinter-flake8" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;SublimeLinter-flake8&lt;/code&gt;&lt;/a&gt; - Flake and PEP8 checking&lt;/li&gt;
+&lt;li&gt;
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/srusskih/SublimeJEDI" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;Jedi - Python Autocompletion&lt;/code&gt;&lt;/a&gt; - Also known as SublimeJEDI&lt;/li&gt;
+&lt;li&gt;
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/wuub/requirementstxt" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;requirementstxt&lt;/code&gt;&lt;/a&gt; - Syntax highlighting for requirements.txt files&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please note, SublimeLinter-flake8 requires you to &lt;code&gt;pip install flake8&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Systemd services and resource limits</title><link>https://markholloway.com/blog/2016/04/27/systemd-services-and-resource-limits/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/04/27/systemd-services-and-resource-limits/</guid><description>&lt;p&gt;We made the move to CentOS 7 and I switched out all init.d scripts with
+
+
+
+
+&lt;a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html" target="_blank" rel="noopener"&gt;systemd services&lt;/a&gt;.
+Yesterday I noticed we started getting errors on our render farm for huge
+scenes which required loading of thousands of files:&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;V-Ray warning: Could not load mesh file &amp;hellip;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;One hint that this wasn&amp;rsquo;t due to scene misconfiguration was that the initial
+~1000 vrmeshes were loaded successfully, and after that no other vrmesh file
+could be loaded.&lt;/p&gt;</description></item><item><title>Install psutil in CentOS 6</title><link>https://markholloway.com/blog/2016/03/11/install-psutil-in-centos-6/</link><pubDate>Fri, 11 Mar 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/03/11/install-psutil-in-centos-6/</guid><description>&lt;p&gt;Don&amp;rsquo;t use &lt;code&gt;yum install python-psutil&lt;/code&gt; as this will give you a super old
+version. Instead use:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install gcc python-devel
+pip install psutil
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Install CentOS 7 remotely using Kickstart and GRUB</title><link>https://markholloway.com/blog/2015/12/30/install-centos-7-remotely-using-kickstart-and-grub/</link><pubDate>Wed, 30 Dec 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/12/30/install-centos-7-remotely-using-kickstart-and-grub/</guid><description>&lt;p&gt;This guide assumes the target host is already running CentOS (a derivate of
+Red Hat Enterprise Linux) or at least running the GRUB boot loader and that you
+have root access to this host.&lt;/p&gt;
+&lt;h2 id="whats-this-all-about"&gt;What&amp;rsquo;s this all about?&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m going to install CentOS 7 onto a machine which I do not have physical access
+to. In order to achieve this, I&amp;rsquo;m going to need a Kickstart file, some files
+from the CentOS 7 installation and create a custom GRUB boot loader entry.&lt;/p&gt;</description></item><item><title>CentOS 6 yum errors (and fixes)</title><link>https://markholloway.com/blog/2015/11/18/centos-6-yum-errors-and-fixes/</link><pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/11/18/centos-6-yum-errors-and-fixes/</guid><description>&lt;h3 id="issues"&gt;Issues&lt;/h3&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;Error: Cannot retrieve metalink for repository: epel. Please verify its path and try again&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;or&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;Error: xz compression not available&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;h3 id="fix"&gt;Fix&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;yum remove epel-release
+rm -rf /var/cache/yum/x86_64/6/epel
+yum install epel-release
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Turning your renders up to 11</title><link>https://markholloway.com/blog/2015/10/16/turning-your-renders-up-to-11/</link><pubDate>Fri, 16 Oct 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/10/16/turning-your-renders-up-to-11/</guid><description>&lt;p&gt;An interview with me on our cloud rendering solutions is now published over
+at 
+
+
+
+&lt;a href="https://www.cgsociety.org/news/article/1379/turning-your-renders-up-to-11" target="_blank" rel="noopener"&gt;CGSociety&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;“We need to make sure that we’re working with the best technology, as some of our projects can be very render intensive,” he begins. “But our motto is to spend time focusing on the creative side of building beautiful images, and let the machines do the hard work.”&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;Check it out 
+
+
+
+&lt;a href="https://www.cgsociety.org/news/article/1379/turning-your-renders-up-to-11" target="_blank" rel="noopener"&gt;here&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Fixing Python's insecure platform warning</title><link>https://markholloway.com/blog/2015/09/15/fixing-pythons-insecure-platform-warning/</link><pubDate>Tue, 15 Sep 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/09/15/fixing-pythons-insecure-platform-warning/</guid><description>&lt;p&gt;Here’s how to fix that nagging InsecurePlatformWarning warning in Python.&lt;/p&gt;
+&lt;h3 id="the-issue"&gt;The issue&lt;/h3&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see 
+
+
+
+&lt;a href="https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning" target="_blank" rel="noopener"&gt;https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;Assuming you have pip for python installed, read on&amp;hellip;&lt;/p&gt;
+&lt;h3 id="ubuntu-1404-fix"&gt;Ubuntu 14.04 fix&lt;/h3&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt-get install libffi-dev libssl-dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo pip install -U requests&lt;span class="o"&gt;[&lt;/span&gt;security&lt;span class="o"&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description></item><item><title>Installing PySide into a virtualenv</title><link>https://markholloway.com/blog/2015/09/11/installing-pyside-into-a-virtualenv/</link><pubDate>Fri, 11 Sep 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/09/11/installing-pyside-into-a-virtualenv/</guid><description>&lt;p&gt;I’ve been struggling to install a portable/relocatable virtualenv with PySide 1.2.2 for Python 2.7. On Windows, this works out of the box but it’s more difficult on Linux and OS X, although I came up with 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/PySide/PySide/issues/129#issuecomment-145138706" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;a patch for OS X&lt;/a&gt;. This guide will not go into detail on portability/relocatability and will merely touch upon how to get started with PySide in a virtualenv. It looks like PySide 1.2.3 will have substantial changes which will allow for easier portability/relocatability and I will make a post on that as soon as it is generally available.&lt;/p&gt;</description></item><item><title>Installing Maya 2016 on Ubuntu 14.04 (trusty)</title><link>https://markholloway.com/blog/2015/09/10/installing-maya-2016-on-ubuntu-14.04-trusty/</link><pubDate>Thu, 10 Sep 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/09/10/installing-maya-2016-on-ubuntu-14.04-trusty/</guid><description>&lt;p&gt;It took some trial and error to successfully install and license Maya 2016 in Ubuntu 14.04, and here’s how I did it.&lt;/p&gt;
+&lt;p&gt;First off, let’s install some libraries. It’s possible that not all these libraries are needed as the list of libraries stem from installation instructions from an earlier version of Maya.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install csh tcsh libaudiofile-dev libglw1-mesa elfutils gamin libglw1-mesa-dev mesa-utils xfstt ttf-liberation ttf-mscorefonts-installer xfonts-100dpi xfonts-75dpi alien
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Maya needs write access to a temp folder, which does not exist by default in Ubuntu 14.04. Let’s create it and make it writeable.&lt;/p&gt;</description></item><item><title>Getting quick access to new Google Cloud SDK features</title><link>https://markholloway.com/blog/2015/05/19/getting-quick-access-to-new-google-cloud-sdk-features/</link><pubDate>Tue, 19 May 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/05/19/getting-quick-access-to-new-google-cloud-sdk-features/</guid><description>&lt;p&gt;There is a two-week delay before gsutil gets updated with the latest and greatest. If you want to try the new stuff out, pip install the SDK!&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo yum install gcc openssl-devel python-devel python-setuptools libffi-devel
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo yum install python-pip
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo pip install -U gsutil&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Then execute gsutil like this:&lt;/p&gt;</description></item><item><title>Kill process by search string</title><link>https://markholloway.com/blog/2015/05/06/kill-process-by-search-string/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/05/06/kill-process-by-search-string/</guid><description>&lt;p&gt;In Linux, you can kill all processes by name (or by username etc) using something like this:&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;kill -9 $(ps aux | grep &amp;#39;some_process_name&amp;#39; | awk &amp;#39;{print $2}&amp;#39;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description></item><item><title>3D rendering in the Google Cloud</title><link>https://markholloway.com/blog/2015/05/01/3d-rendering-in-the-google-cloud/</link><pubDate>Fri, 01 May 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/05/01/3d-rendering-in-the-google-cloud/</guid><description>&lt;p&gt;
+
+
+
+&lt;a href="https://cloudplatform.googleblog.com/2015/05/3D-imagery-rendering-in-the-cloud-with-Industriromantik-and-Compute-Engine.html" target="_blank" rel="noopener"&gt;Guest blogging&lt;/a&gt; for Google!&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;As a small design and visualization studio, we focus on creating beautiful 3D imagery – be it high-resolution product images or TV commercials. To successfully do this, we need to ensure we have access to enough rendering power, and at times, we find ourselves in a situation where our in-house render farm’s capacity isn’t cutting it. That’s where Google Compute Engine comes in.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;Read more over at the 
+
+
+
+&lt;a href="https://cloudplatform.googleblog.com/2015/05/3D-imagery-rendering-in-the-cloud-with-Industriromantik-and-Compute-Engine.html" target="_blank" rel="noopener"&gt;Google Cloud Platform blog&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Find file or folder in Linux</title><link>https://markholloway.com/blog/2015/04/15/find-file-or-folder-in-linux/</link><pubDate>Wed, 15 Apr 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/04/15/find-file-or-folder-in-linux/</guid><description>&lt;p&gt;Ever needed to do a simple search for an application, a file or a folder in Linux and when &lt;code&gt;whereis&lt;/code&gt; doesn’t return anything useful?&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo find / -name &lt;span class="s2"&gt;&amp;#34;some_folder&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description></item><item><title>What's hogging that folder?</title><link>https://markholloway.com/blog/2014/12/02/whats-hogging-that-folder/</link><pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2014/12/02/whats-hogging-that-folder/</guid><description>&lt;p&gt;Well, at least in Linux you might find out using this command:&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lsof &amp;lt;folder name&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description></item><item><title>Fabric on CentOS 6.6</title><link>https://markholloway.com/blog/2014/11/28/fabric-on-centos-6.6/</link><pubDate>Fri, 28 Nov 2014 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2014/11/28/fabric-on-centos-6.6/</guid><description>&lt;p&gt;When installing 
+
+
+
+&lt;a href="https://www.fabfile.org" target="_blank" rel="noopener"&gt;Fabric&lt;/a&gt; on CentOS 6.6 using 
+
+
+
+&lt;a href="https://pypi.python.org/pypi/pip" target="_blank" rel="noopener"&gt;pip&lt;/a&gt;, it seems 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/fabric/fabric/issues/1105" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;a bug&lt;/a&gt; is being hit.&lt;/p&gt;</description></item></channel></rss>

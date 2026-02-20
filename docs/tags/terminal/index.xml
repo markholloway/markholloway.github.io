@@ -1,27 +1,127 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Terminal on Mark Holloway</title>
-    <link>http://localhost:1313/tags/terminal/</link>
-    <description>Recent content in Terminal on Mark Holloway</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>© Mark Holloway</copyright>
-    <lastBuildDate>Wed, 04 Dec 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/terminal/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Ghostty on macOS</title>
-      <link>http://localhost:1313/blog/2024/12/04/ghostty-on-macos/</link>
-      <pubDate>Wed, 04 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2024/12/04/ghostty-on-macos/</guid>
-      <description>&lt;p&gt;I got private beta access (quite late), and&#xA;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://mitchellh.com/ghostty&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ghostty&lt;/a&gt; is probably going to be out in its&#xA;first public release any day now (update: it was released on 2024-12-26). Here&#xA;are my initial impressions, having used it for a couple of weeks on macOS.&lt;/p&gt;&#xA;&lt;blockquote class=&#34;callout markdown-alert callout-note markdown-alert-note&#34;&gt;&lt;div class=&#34;callout-title markdown-alert-title&#34;&gt;&#xA;    &lt;svg class=&#34;callout-icon&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34; fill=&#34;currentColor&#34;&gt;&lt;path d=&#34;M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xA;    Amendments 2025-01-02&#xA;  &lt;/div&gt;&lt;div class=&#34;callout-content&#34;&gt;&lt;p&gt;This post has been amended with the following details since it was&#xA;originally posted:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Session management in Wezterm (without tmux)</title>
-      <link>http://localhost:1313/blog/2024/10/20/session-management-in-wezterm-without-tmux/</link>
-      <pubDate>Sun, 20 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2024/10/20/session-management-in-wezterm-without-tmux/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve been using &#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/neovim/neovim&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Neovim&lt;/a&gt; as my daily&#xA;IDE/editor for a bit more than a year now. I&amp;rsquo;ve also been using&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/tmux/tmux&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;tmux&lt;/a&gt; to manage sessions, first using&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/joshmedeski/t-smart-tmux-session-manager&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;t-smart-tmux-session-manager&lt;/a&gt;&#xA;and later &#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/joshmedeski/sesh&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;sesh&lt;/a&gt;, which supersedes the&#xA;former project. What&amp;rsquo;s great about this is that it doesn&amp;rsquo;t matter which terminal&#xA;emulator you use, you can still fall back to this kind of session management.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Terminal on Mark Holloway</title><link>https://markholloway.com/tags/terminal/</link><description>Recent content in Terminal on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Wed, 04 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/terminal/index.xml" rel="self" type="application/rss+xml"/><item><title>Ghostty on macOS</title><link>https://markholloway.com/blog/2024/12/04/ghostty-on-macos/</link><pubDate>Wed, 04 Dec 2024 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2024/12/04/ghostty-on-macos/</guid><description>&lt;p&gt;I got private beta access (quite late), and
+
+
+
+
+&lt;a href="https://mitchellh.com/ghostty" target="_blank" rel="noopener"&gt;Ghostty&lt;/a&gt; is probably going to be out in its
+first public release any day now (update: it was released on 2024-12-26). Here
+are my initial impressions, having used it for a couple of weeks on macOS.&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert callout-note markdown-alert-note"&gt;&lt;div class="callout-title markdown-alert-title"&gt;
+ &lt;svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"&gt;&lt;path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"&gt;&lt;/path&gt;&lt;/svg&gt;
+ Amendments 2025-01-02
+ &lt;/div&gt;&lt;div class="callout-content"&gt;&lt;p&gt;This post has been amended with the following details since it was
+originally posted:&lt;/p&gt;</description></item><item><title>Session management in Wezterm (without tmux)</title><link>https://markholloway.com/blog/2024/10/20/session-management-in-wezterm-without-tmux/</link><pubDate>Sun, 20 Oct 2024 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2024/10/20/session-management-in-wezterm-without-tmux/</guid><description>&lt;p&gt;I&amp;rsquo;ve been using 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/neovim/neovim" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;Neovim&lt;/a&gt; as my daily
+IDE/editor for a bit more than a year now. I&amp;rsquo;ve also been using
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/tmux/tmux" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;tmux&lt;/a&gt; to manage sessions, first using
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/joshmedeski/t-smart-tmux-session-manager" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;t-smart-tmux-session-manager&lt;/a&gt;
+and later 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/joshmedeski/sesh" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;sesh&lt;/a&gt;, which supersedes the
+former project. What&amp;rsquo;s great about this is that it doesn&amp;rsquo;t matter which terminal
+emulator you use, you can still fall back to this kind of session management.&lt;/p&gt;</description></item></channel></rss>
