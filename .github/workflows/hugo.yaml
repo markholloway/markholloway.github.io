@@ -22,6 +22,6 @@ jobs:
         HUGO_VERSION: 0.68.3
         TARGET_REPO: markholloway/markholloway.github.io
         TOKEN: ${{ secrets.TOKEN }}
-        CNAME: markholloway.com
+        CNAME: markholloway.github.io
 Copy
 
