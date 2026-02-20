@@ -1,0 +1,6 @@
+menu:
+  Main:
+    - name: "Hugo Site"
+      url: "/"
+      weight: 1
+    
