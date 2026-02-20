@@ -1,4 +1,4 @@
-baseURL = 'https://markholloway.github.io/'
+baseURL = 'https://markholloway.com/'
 languageCode = 'en-us'
 title = 'Mark Holloway'
 author = 'Mark Holloway'
@@ -59,22 +59,16 @@ description = "My configuration files for Neovim, the terminal, etc."
 # Social links (displayed in footer/header depending on layout)
 [[params.social]]
 name = "GitHub"
-url = "https://github.com/fredrikaverpil"
-[[params.social]]
-name = "Mastodon"
-url = "https://fosstodon.org/@fredrikaverpil"
-[[params.social]]
-name = "Bluesky"
-url = "https://bsky.app/profile/fredrikaverpil.bsky.social"
+url = "https://github.com/markholloway"
 [[params.social]]
 name = "LinkedIn"
-url = "https://linkedin.com/in/fredrik"
+url = "https://linkedin.com/in/markholloway"
 [[params.social]]
 name = "RSS"
 url = "/blog/index.xml"
 [[params.social]]
 name = "Umami"
-url = "https://cloud.umami.is/share/tJcIgDO3dznRmeGX"
+url = "https://cloud.umami.is/share/x4yvhGEscsDh1in8"
 
 [menu]
 [[menu.main]]
