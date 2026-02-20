@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Golang on Mark Holloway</title><link>https://markholloway.com/tags/golang/</link><description>Recent content in Golang on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Sun, 28 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/golang/index.xml" rel="self" type="application/rss+xml"/><item><title>Go's secret weapon: the standard library interfaces</title><link>https://markholloway.com/blog/2025/12/28/gos-secret-weapon-the-standard-library-interfaces/</link><pubDate>Sun, 28 Dec 2025 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2025/12/28/gos-secret-weapon-the-standard-library-interfaces/</guid><description>&lt;p&gt;Go is peculiar in the sense that there&amp;rsquo;s a very tight social contract between
+the community and the 
+
+
+
+&lt;a href="https://pkg.go.dev/std" target="_blank" rel="noopener"&gt;standard library&lt;/a&gt;. Seemingly
+universally, the community agrees to use these specific, small interfaces, as
+glue between unrelated libraries. In fact, I think there&amp;rsquo;s even an expectation
+that implementations should, whenever possible, snap nicely together with
+standard library interfaces, like LEGO bricks.&lt;/p&gt;
+&lt;p&gt;I think that at least one enabler to this community culture stems from Go&amp;rsquo;s
+implicit interface design and the distinct level of composability that comes out
+of it. In languages with explicit implementation (like Java or C#), you have to
+plan to implement an interface. In Go, you can implement &lt;code&gt;io.Writer&lt;/code&gt; by accident
+just by having a &lt;code&gt;Write([]byte) (int, error)&lt;/code&gt; method.&lt;/p&gt;</description></item><item><title>The "new" function changes in Go 1.26</title><link>https://markholloway.com/blog/2025/12/26/the-new-function-changes-in-go-1.26/</link><pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2025/12/26/the-new-function-changes-in-go-1.26/</guid><description>&lt;p&gt;Here is how you can create a pointer to a boolean in
+
+
+
+
+&lt;a href="https://go.dev/doc/go1.26" target="_blank" rel="noopener"&gt;Go 1.26&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// New way in Go 1.26&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;b&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This is equivalent to the older, more verbose method:&lt;/p&gt;</description></item><item><title>Native per-project tools in Go 1.24</title><link>https://markholloway.com/blog/2024/12/02/native-per-project-tools-in-go-1.24/</link><pubDate>Mon, 02 Dec 2024 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2024/12/02/native-per-project-tools-in-go-1.24/</guid><description>&lt;p&gt;There are
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/golang/go/issues/48429#issuecomment-2499281711" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;some exciting news&lt;/a&gt;
+in the Go community as of recently on how to manage tools in Go projects. With
+the next release of Go (
+
+
+
+&lt;a href="https://tip.golang.org/doc/go1.24" target="_blank" rel="noopener"&gt;Go 1.24&lt;/a&gt;, expected
+to be released in February 2025), it seems we&amp;rsquo;ll finally have a way to natively
+define per-project tools! 🎉&lt;/p&gt;</description></item></channel></rss>

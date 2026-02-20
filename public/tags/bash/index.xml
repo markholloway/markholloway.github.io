@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bash on Mark Holloway</title><link>https://markholloway.com/tags/bash/</link><description>Recent content in Bash on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Sun, 18 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Load variables from .env file into current environment</title><link>https://markholloway.com/blog/2022/12/18/load-variables-from-.env-file-into-current-environment/</link><pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2022/12/18/load-variables-from-.env-file-into-current-environment/</guid><description>&lt;p&gt;Load an .env file into the environment prior to running something which requires the environment variables:&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert callout-note markdown-alert-note"&gt;&lt;div class="callout-title markdown-alert-title"&gt;
+ &lt;svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"&gt;&lt;path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"&gt;&lt;/path&gt;&lt;/svg&gt;
+ Contents of the &lt;code&gt;.env&lt;/code&gt; file
+ &lt;/div&gt;&lt;div class="callout-content"&gt;&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-env" data-lang="env"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;MY_SUPER_SECRET_TOKEN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;foo&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/blockquote&gt;&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;set&lt;/span&gt; -a
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;source&lt;/span&gt; .env
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;set&lt;/span&gt; +a&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;You can now use the variables from the &lt;code&gt;.env&lt;/code&gt; file in scripts:&lt;/p&gt;</description></item><item><title>Bash on Ubuntu on Windows</title><link>https://markholloway.com/blog/2016/11/21/bash-on-ubuntu-on-windows/</link><pubDate>Mon, 21 Nov 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/11/21/bash-on-ubuntu-on-windows/</guid><description>&lt;p&gt;This is a quick intro to – and some personal notes on working with – Bash in Windows 10 (Anniversary Update or Insider build requred). This will be updated on a sporadic basis.&lt;/p&gt;
+&lt;h2 id="information-on-bash"&gt;Information on Bash&lt;/h2&gt;
+&lt;h3 id="what-is-bash-on-ubuntu-on-windows"&gt;What is Bash on Ubuntu on Windows?&lt;/h3&gt;
+&lt;p&gt;Bash on Ubuntu on Windows is part of the &amp;ldquo;Windows Subsystem for Linux&amp;rdquo; (WSL). Read more over at the 
+
+
+
+&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/about" target="_blank" rel="noopener"&gt;WSL MSDN page&lt;/a&gt;. This page also covers installation guide, command reference, account permissions, interoperability, FAQ and release notes.&lt;/p&gt;</description></item><item><title>Turning your renders up to 11</title><link>https://markholloway.com/blog/2015/10/16/turning-your-renders-up-to-11/</link><pubDate>Fri, 16 Oct 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/10/16/turning-your-renders-up-to-11/</guid><description>&lt;p&gt;An interview with me on our cloud rendering solutions is now published over
+at 
+
+
+
+&lt;a href="https://www.cgsociety.org/news/article/1379/turning-your-renders-up-to-11" target="_blank" rel="noopener"&gt;CGSociety&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;“We need to make sure that we’re working with the best technology, as some of our projects can be very render intensive,” he begins. “But our motto is to spend time focusing on the creative side of building beautiful images, and let the machines do the hard work.”&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;Check it out 
+
+
+
+&lt;a href="https://www.cgsociety.org/news/article/1379/turning-your-renders-up-to-11" target="_blank" rel="noopener"&gt;here&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Installing PySide into a virtualenv</title><link>https://markholloway.com/blog/2015/09/11/installing-pyside-into-a-virtualenv/</link><pubDate>Fri, 11 Sep 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/09/11/installing-pyside-into-a-virtualenv/</guid><description>&lt;p&gt;I’ve been struggling to install a portable/relocatable virtualenv with PySide 1.2.2 for Python 2.7. On Windows, this works out of the box but it’s more difficult on Linux and OS X, although I came up with 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/PySide/PySide/issues/129#issuecomment-145138706" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;a patch for OS X&lt;/a&gt;. This guide will not go into detail on portability/relocatability and will merely touch upon how to get started with PySide in a virtualenv. It looks like PySide 1.2.3 will have substantial changes which will allow for easier portability/relocatability and I will make a post on that as soon as it is generally available.&lt;/p&gt;</description></item><item><title>Getting quick access to new Google Cloud SDK features</title><link>https://markholloway.com/blog/2015/05/19/getting-quick-access-to-new-google-cloud-sdk-features/</link><pubDate>Tue, 19 May 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/05/19/getting-quick-access-to-new-google-cloud-sdk-features/</guid><description>&lt;p&gt;There is a two-week delay before gsutil gets updated with the latest and greatest. If you want to try the new stuff out, pip install the SDK!&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo yum install gcc openssl-devel python-devel python-setuptools libffi-devel
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo yum install python-pip
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo pip install -U gsutil&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Then execute gsutil like this:&lt;/p&gt;</description></item><item><title>Kill process by search string</title><link>https://markholloway.com/blog/2015/05/06/kill-process-by-search-string/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/05/06/kill-process-by-search-string/</guid><description>&lt;p&gt;In Linux, you can kill all processes by name (or by username etc) using something like this:&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;kill -9 $(ps aux | grep &amp;#39;some_process_name&amp;#39; | awk &amp;#39;{print $2}&amp;#39;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description></item><item><title>3D rendering in the Google Cloud</title><link>https://markholloway.com/blog/2015/05/01/3d-rendering-in-the-google-cloud/</link><pubDate>Fri, 01 May 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/05/01/3d-rendering-in-the-google-cloud/</guid><description>&lt;p&gt;
+
+
+
+&lt;a href="https://cloudplatform.googleblog.com/2015/05/3D-imagery-rendering-in-the-cloud-with-Industriromantik-and-Compute-Engine.html" target="_blank" rel="noopener"&gt;Guest blogging&lt;/a&gt; for Google!&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;As a small design and visualization studio, we focus on creating beautiful 3D imagery – be it high-resolution product images or TV commercials. To successfully do this, we need to ensure we have access to enough rendering power, and at times, we find ourselves in a situation where our in-house render farm’s capacity isn’t cutting it. That’s where Google Compute Engine comes in.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;Read more over at the 
+
+
+
+&lt;a href="https://cloudplatform.googleblog.com/2015/05/3D-imagery-rendering-in-the-cloud-with-Industriromantik-and-Compute-Engine.html" target="_blank" rel="noopener"&gt;Google Cloud Platform blog&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Copying Maya to network share</title><link>https://markholloway.com/blog/2015/04/15/copying-maya-to-network-share/</link><pubDate>Wed, 15 Apr 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/04/15/copying-maya-to-network-share/</guid><description>&lt;p&gt;If you would like to run a thin client installation of Maya, which means you run it off a network share rather from a local installation, you need to make sure to copy symlinks on Linux.&lt;/p&gt;
+&lt;p&gt;If you just perform a simple copy, you’ll probably get something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error: unpacking of archive failed on file /my_mount/maya_installation/lib/libGLEW.so;544612b1: cpio: symlink failed - Operation not supported
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The solution is to copy the files which are symlinked:&lt;/p&gt;</description></item><item><title>Find file or folder in Linux</title><link>https://markholloway.com/blog/2015/04/15/find-file-or-folder-in-linux/</link><pubDate>Wed, 15 Apr 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/04/15/find-file-or-folder-in-linux/</guid><description>&lt;p&gt;Ever needed to do a simple search for an application, a file or a folder in Linux and when &lt;code&gt;whereis&lt;/code&gt; doesn’t return anything useful?&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo find / -name &lt;span class="s2"&gt;&amp;#34;some_folder&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description></item><item><title>Run gsutil from crontab</title><link>https://markholloway.com/blog/2014/12/15/run-gsutil-from-crontab/</link><pubDate>Mon, 15 Dec 2014 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2014/12/15/run-gsutil-from-crontab/</guid><description>&lt;p&gt;Setting up gsutil to sync files over to Google Cloud Storage (on CentOS 6) requires some environment variables to be set, which seems oddly undocumented at the moment. Turning to 
+
+
+
+&lt;a href="https://stackoverflow.com/questions/27439326/how-to-properly-run-gsutil-from-crontab/27480249" target="_blank" rel="noopener"&gt;Stackoverflow&lt;/a&gt; was the solution, and here’s a summary from that.&lt;/p&gt;
+&lt;p&gt;Also, the &lt;code&gt;-d&lt;/code&gt; flag is required to truly catch all errors/warnings, but on very large data volumes you may want to omit this flag as it generates quite a large log file. The &lt;code&gt;&amp;gt; gsutil.log 2&amp;gt;&amp;amp;1&lt;/code&gt; pipe is necessary to pipe both stdout and stderr to file. You can change this to &lt;code&gt;&amp;gt;&amp;gt; gsutil.log 2&amp;gt;&amp;amp;1&lt;/code&gt; if you wish to append to file rather than overwrite a previous sync log.&lt;/p&gt;</description></item><item><title>What's hogging that folder?</title><link>https://markholloway.com/blog/2014/12/02/whats-hogging-that-folder/</link><pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2014/12/02/whats-hogging-that-folder/</guid><description>&lt;p&gt;Well, at least in Linux you might find out using this command:&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lsof &amp;lt;folder name&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description></item><item><title>How to create large temp files quickly (for testing purposes)</title><link>https://markholloway.com/blog/2014/11/07/how-to-create-large-temp-files-quickly-for-testing-purposes/</link><pubDate>Fri, 07 Nov 2014 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2014/11/07/how-to-create-large-temp-files-quickly-for-testing-purposes/</guid><description>&lt;p&gt;Quick and dirty way to just create a 10GB temp file for testing e.g. network transfer speeds.&lt;/p&gt;
+&lt;h3 id="linux"&gt;Linux&lt;/h3&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;fallocate -l 10G temp_10GB_file&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id="windows"&gt;Windows&lt;/h3&gt;
+&lt;p&gt;The file size is defined in bytes. Use Google to do the conversion if you’re unsure.&lt;/p&gt;</description></item></channel></rss>

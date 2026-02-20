@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Qt.py on Mark Holloway</title><link>https://markholloway.com/tags/qt.py/</link><description>Recent content in Qt.py on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Tue, 29 Aug 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/qt.py/index.xml" rel="self" type="application/rss+xml"/><item><title>Qt.py on conda-forge</title><link>https://markholloway.com/blog/2017/08/29/qt.py-on-conda-forge/</link><pubDate>Tue, 29 Aug 2017 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2017/08/29/qt.py-on-conda-forge/</guid><description>&lt;p&gt;
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/mottosso/Qt.py" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;Qt.py&lt;/a&gt; is now available on conda-forge!&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Enable conda-forge&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;conda config --add channels conda-forge
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Create environment with Python 3.6, PySide2 and Qt.py&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;conda create --mkdir --prefix ~/condaenvs/myenv &lt;span class="nv"&gt;python&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;3.6 pyside2 qt.py
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Run Python&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~/condaenvs/myenv/bin/python --version
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Run pip&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~/condaenvs/myenv/bin/pip --version&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description></item><item><title>PySide2 easy install!</title><link>https://markholloway.com/blog/2017/08/28/pyside2-easy-install/</link><pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2017/08/28/pyside2-easy-install/</guid><description>&lt;p&gt;Yesterday, 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/jschueller" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;@jschueller&lt;/a&gt; added 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/conda-forge/pyside2-feedstock" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;pyside2-feedstock&lt;/code&gt;&lt;/a&gt; to 
+
+
+
+&lt;a href="https://conda-forge.org" target="_blank" rel="noopener"&gt;conda-forge&lt;/a&gt;. This means we can now &lt;em&gt;finally&lt;/em&gt; install PySide2 &lt;strong&gt;easily&lt;/strong&gt; in Python 2.7, 3.5 and 3.6 on Windows, Linux and macOS using conda.&lt;/p&gt;</description></item><item><title>An alternative to building PySide2 from source</title><link>https://markholloway.com/blog/2017/06/30/an-alternative-to-building-pyside2-from-source/</link><pubDate>Fri, 30 Jun 2017 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2017/06/30/an-alternative-to-building-pyside2-from-source/</guid><description>&lt;p&gt;I&amp;rsquo;ve received questions lately on the issues that people are having while attempting to build PySide2 on Windows, macOS and Linux. Instead of building PySide2, there&amp;rsquo;s actually a workaround which works just as well for some people&amp;hellip;&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert callout-note markdown-alert-note"&gt;&lt;div class="callout-title markdown-alert-title"&gt;
+ &lt;svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"&gt;&lt;path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"&gt;&lt;/path&gt;&lt;/svg&gt;
+ Update 2017-08-28
+ &lt;/div&gt;&lt;div class="callout-content"&gt;&lt;p&gt;PySide2 can now be installed with &lt;code&gt;conda&lt;/code&gt;:&lt;/p&gt;</description></item><item><title>Vendoring Qt.py</title><link>https://markholloway.com/blog/2017/05/04/vendoring-qt.py/</link><pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2017/05/04/vendoring-qt.py/</guid><description>&lt;p&gt;How do you know a user doesn&amp;rsquo;t have the wrong version of 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/mottosso/Qt.py" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;Qt.py&lt;/a&gt; when running your application?&lt;br&gt;
+– Simple, you bundle Qt.py with your application. Here&amp;rsquo;s a short write-up on how you could go about doing just that.&lt;/p&gt;</description></item><item><title>Dealing with Maya 2017 and PySide2</title><link>https://markholloway.com/blog/2016/07/25/dealing-with-maya-2017-and-pyside2/</link><pubDate>Mon, 25 Jul 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/07/25/dealing-with-maya-2017-and-pyside2/</guid><description>&lt;p&gt;
+
+
+
+&lt;a href="https://www.autodesk.com/products/maya/overview" target="_blank" rel="noopener"&gt;Maya 2017&lt;/a&gt; was released today and with it comes a big change; PySide (and PyQt4) no longer works with Maya.&lt;/p&gt;
+&lt;p&gt;This guide explains how to deal with that and make your Python and PySide/PyQt scripts compatible with Maya 2017 as well as older Maya versions.&lt;/p&gt;
+&lt;p&gt;This guide is also applicable to e.g. 
+
+
+
+&lt;a href="https://www.thefoundry.co.uk/products/nuke/" target="_blank" rel="noopener"&gt;Nuke&lt;/a&gt; or any other Python-enabled DCC app which uses Qt.&lt;/p&gt;
+&lt;h2 id="background-qt4-vs-qt5"&gt;Background (Qt4 vs Qt5)&lt;/h2&gt;
+&lt;p&gt;Starting with Maya 2011, Maya&amp;rsquo;s user interface is built using the 
+
+
+
+&lt;a href="https://www.qt.io" target="_blank" rel="noopener"&gt;Qt&lt;/a&gt; toolkit. Up until and including Maya 2016, Qt of version 4 (&amp;ldquo;Qt4&amp;rdquo;) which was 
+
+
+
+&lt;a href="https://en.wikipedia.org/wiki/List_of_Qt_releases#Qt_4" target="_blank" rel="noopener"&gt;released in 2005&lt;/a&gt; has been used. Today, roughly 11 years after the Qt4 release, and starting with Maya 2017, Qt was upgraded to version 5 (&amp;ldquo;Qt5&amp;rdquo;) to enable a host of enhancements to Maya. Unfortunately, this also breaks backwards compatibility to Qt4.&lt;/p&gt;</description></item><item><title>Developing with Qt.py</title><link>https://markholloway.com/blog/2016/07/25/developing-with-qt.py/</link><pubDate>Mon, 25 Jul 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/07/25/developing-with-qt.py/</guid><description>&lt;p&gt;This post aims to give an introduction to the
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/mottosso/Qt.py" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;Qt.py&lt;/a&gt; project and how to get set up with it
+for PySide/PyQt4 and PySide2/PyQt5 development.&lt;/p&gt;</description></item><item><title>Installing Qt.py (advanced methods)</title><link>https://markholloway.com/blog/2016/07/25/installing-qt.py-advanced-methods/</link><pubDate>Mon, 25 Jul 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/07/25/installing-qt.py-advanced-methods/</guid><description>&lt;p&gt;
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/mottosso/Qt.py" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;Qt.py&lt;/a&gt; can be installed in many ways, depending on your needs. This post aims to outline some common approaches:&lt;/p&gt;</description></item></channel></rss>

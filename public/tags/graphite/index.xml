@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Graphite on Mark Holloway</title><link>https://markholloway.com/tags/graphite/</link><description>Recent content in Graphite on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Sat, 17 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/graphite/index.xml" rel="self" type="application/rss+xml"/><item><title>Graphite notes</title><link>https://markholloway.com/blog/2022/12/17/graphite-notes/</link><pubDate>Sat, 17 Dec 2022 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2022/12/17/graphite-notes/</guid><description>&lt;h2 id="combos"&gt;Combos&lt;/h2&gt;
+&lt;h3 id="pull-down-default-branch-remove-merged-branches"&gt;Pull down default branch, remove merged branches&lt;/h3&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;gt repo sync -fr&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Add &lt;code&gt;gt ss&lt;/code&gt; to restack all current stacks onto the newly pulled down default branch:&lt;/p&gt;</description></item></channel></rss>

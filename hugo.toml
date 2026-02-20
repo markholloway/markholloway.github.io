@@ -62,7 +62,7 @@ name = "GitHub"
 url = "https://github.com/markholloway"
 [[params.social]]
 name = "LinkedIn"
-url = "https://linkedin.com/in/markholloway"
+url = "https://linkedin.com/in/mholloway"
 [[params.social]]
 name = "RSS"
 url = "/blog/index.xml"

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github-Actions on Mark Holloway</title><link>https://markholloway.com/tags/github-actions/</link><description>Recent content in Github-Actions on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Tue, 30 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/github-actions/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying hidden dotfiles to GitHub Pages</title><link>https://markholloway.com/blog/2025/12/30/deploying-hidden-dotfiles-to-github-pages/</link><pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2025/12/30/deploying-hidden-dotfiles-to-github-pages/</guid><description>&lt;p&gt;If you&amp;rsquo;re using GitHub Pages with the official
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/actions/upload-pages-artifact" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;code&gt;actions/upload-pages-artifact&lt;/code&gt;&lt;/a&gt;
+action and need to serve files from a file/folder prefixed with a period (&lt;code&gt;.&lt;/code&gt;)
+sign, like the &lt;code&gt;.well-known&lt;/code&gt; directory (e.g., for a custom Bluesky handle),
+you&amp;rsquo;ll hit a problem: &lt;strong&gt;v4 of the action excludes all dotfiles by default&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Using GitHub merge queue to ease the Dependabot churn</title><link>https://markholloway.com/blog/2023/03/29/using-github-merge-queue-to-ease-the-dependabot-churn/</link><pubDate>Wed, 29 Mar 2023 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2023/03/29/using-github-merge-queue-to-ease-the-dependabot-churn/</guid><description>&lt;p&gt;Good morning, project!&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ gh pr list
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#1626 chore(deps-dev): bump black from 23.1.0 t... dependabot/pip/black-23.3.0 about 7 hours ago&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#1625 chore(deps-dev): bump types-requests from... dependabot/pip/types-requests-2.28.11.17 about 7 hours ago&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#1624 chore(deps-dev): bump mkdocs-include-mark... dependabot/pip/mkdocs-include-markdown-p... about 7 hours ago&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#1623 chore(deps-dev): bump types-redis from 4.... dependabot/pip/types-redis-4.5.3.1 about 7 hours ago&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#1622 chore(deps-dev): bump pre-commit from 3.1... dependabot/pip/pre-commit-3.2.1 about 7 hours ago&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#1621 chore(deps-dev): bump types-deprecated fr... dependabot/pip/types-deprecated-1.2.9.2 about 7 hours ago&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#1620 chore(deps-dev): bump types-python-dateut... dependabot/pip/types-python-dateutil-2.8... about 7 hours ago&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#1619 chore(deps-dev): bump types-redis from 4.... dependabot/pip/types-redis-4.5.3.0 about 7 hours ago&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#1618 chore(deps-dev): bump moto from 4.1.4 to ... dependabot/pip/moto-4.1.6 about 7 hours ago&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;-Spits out coffee-&lt;/p&gt;</description></item><item><title>GitHub Actions notes</title><link>https://markholloway.com/blog/2022/12/17/github-actions-notes/</link><pubDate>Sat, 17 Dec 2022 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2022/12/17/github-actions-notes/</guid><description>&lt;h2 id="no-double-quotes"&gt;No double quotes&lt;/h2&gt;
+&lt;blockquote class="callout markdown-alert callout-warning markdown-alert-warning"&gt;&lt;div class="callout-title markdown-alert-title"&gt;
+ &lt;svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"&gt;&lt;path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+ Warning
+ &lt;/div&gt;&lt;div class="callout-content"&gt;&lt;p&gt;Never use double quotes inside &lt;code&gt;${{ ... }}&lt;/code&gt; as it is simply not supported.&lt;/p&gt;&lt;/div&gt;
+&lt;/blockquote&gt;&lt;h2 id="tertiary"&gt;Tertiary&lt;/h2&gt;
+&lt;p&gt;GHA has a really funky tertiary: &lt;code&gt;${{ x &amp;amp;&amp;amp; 'ifTrue' || 'ifFalse' }}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This only works if &lt;code&gt;&amp;lt;ifTrue&amp;gt;&lt;/code&gt; isn&amp;rsquo;t the empty string. If &lt;code&gt;&amp;lt;ifTrue&amp;gt; == ''&lt;/code&gt; then &lt;code&gt;''&lt;/code&gt; is considered as &lt;code&gt;false&lt;/code&gt;, which then evaluates the right hand side of the &lt;code&gt;||&lt;/code&gt;.&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on Mark Holloway</title><link>https://markholloway.com/tags/docker/</link><description>Recent content in Docker on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Sun, 18 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker notes</title><link>https://markholloway.com/blog/2022/12/18/docker-notes/</link><pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2022/12/18/docker-notes/</guid><description>&lt;h2 id="ssh-access"&gt;SSH access&lt;/h2&gt;
+&lt;p&gt;Make your SSH keys visible to the SSH agent:&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Linux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-add -K
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# macOS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-add --apple-use-keychain&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Verify your keys are visible to the SSH agent:&lt;/p&gt;</description></item><item><title>Open source licenses</title><link>https://markholloway.com/blog/2019/02/04/open-source-licenses/</link><pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2019/02/04/open-source-licenses/</guid><description>&lt;p&gt;In 
+
+
+
+&lt;a href="https://www.pythonpodcast.com/software-licenses-for-developers-episode-196/" target="_blank" rel="noopener"&gt;episode 196 of the (Python) Podcast.&lt;strong&gt;init&lt;/strong&gt;&lt;/a&gt; a very commonly discussed topic among open source programmers is covered, which I wanted to share here.&lt;/p&gt;
+&lt;p&gt;The big takeaway is that just because you put your code publicly visible online, it doesn&amp;rsquo;t mean that it&amp;rsquo;s &amp;ldquo;free&amp;rdquo; for anyone to use. At least not until you slap a license on top of it, and depending on what your goals are with putting the code publicly visible, you may want to choose the license carefully.&lt;/p&gt;</description></item><item><title>Control Docker containers from within container</title><link>https://markholloway.com/blog/2018/12/14/control-docker-containers-from-within-container/</link><pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2018/12/14/control-docker-containers-from-within-container/</guid><description>&lt;p&gt;This is a short note on how to make a container access and control another container on the same host. The trick is to have the &amp;ldquo;controller&amp;rdquo; container map the host&amp;rsquo;s &lt;code&gt;docker.sock&lt;/code&gt; into the container.&lt;/p&gt;
+&lt;p&gt;On the host, query the uid and gid of the user which is executing containers:&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ id fredrik
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;uid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1026&lt;span class="o"&gt;(&lt;/span&gt;fredrik&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;gid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100&lt;span class="o"&gt;(&lt;/span&gt;users&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;groups&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100&lt;span class="o"&gt;(&lt;/span&gt;users&lt;span class="o"&gt;)&lt;/span&gt;,10&lt;span class="o"&gt;(&lt;/span&gt;wheel&lt;span class="o"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;Dockerfile&lt;/code&gt;:&lt;/p&gt;</description></item><item><title>Switching between Docker and VirtualBox on Windows 10</title><link>https://markholloway.com/blog/2018/03/15/switching-between-docker-and-virtualbox-on-windows-10/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2018/03/15/switching-between-docker-and-virtualbox-on-windows-10/</guid><description>&lt;p&gt;As outlined 
+
+
+
+&lt;a href="https://stackoverflow.com/a/40261418/2448495" target="_blank" rel="noopener"&gt;here&lt;/a&gt;, Docker for Windows requires Hyper-V. This needs to be disabled before you can run VirtualBox.&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# Run from elevated prompt (admin privileges)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;bcdedit&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="n"&gt;hypervisorlaunchtype&lt;/span&gt; &lt;span class="n"&gt;off&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And to start using Docker for Windows again, re-enable Hyper-V:&lt;/p&gt;</description></item><item><title>Docker cleanup</title><link>https://markholloway.com/blog/2017/01/29/docker-cleanup/</link><pubDate>Sun, 29 Jan 2017 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2017/01/29/docker-cleanup/</guid><description>&lt;p&gt;Quick and easy way to remove all containers (and their volumes) as well as all images:&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Remove containers and their volumes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker stop &lt;span class="k"&gt;$(&lt;/span&gt;docker ps -a -q&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rm -v &lt;span class="k"&gt;$(&lt;/span&gt;docker ps -a -q&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Remove images&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rmi -f &lt;span class="k"&gt;$(&lt;/span&gt;docker images -q&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Remove unused images&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker system prune --all&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Combine filters, &lt;code&gt;'xargs&lt;/code&gt; etc:&lt;/p&gt;</description></item><item><title>Testing and sandboxing with Docker</title><link>https://markholloway.com/blog/2016/09/12/testing-and-sandboxing-with-docker/</link><pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/09/12/testing-and-sandboxing-with-docker/</guid><description>&lt;p&gt;A quick way to enter an interactive docker container:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run --rm --interactive --tty -v /localfolder:/containerfolder centos:7
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On Windows, use forward slashes for the directory mapping.&lt;/p&gt;
+&lt;p&gt;For a more complex setup, have a look at 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/fredrikaverpil/sandbox-docker" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;sandbox-docker&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Docker for Mac and GUI applications</title><link>https://markholloway.com/blog/2016/07/31/docker-for-mac-and-gui-applications/</link><pubDate>Sun, 31 Jul 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/07/31/docker-for-mac-and-gui-applications/</guid><description>&lt;p&gt;A quick guide on how to run containers requiring a GUI with Docker for Mac and XQuartz.&lt;/p&gt;
+&lt;p&gt;This guide is assuming the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OS X 10.11.5 (El Capitan)&lt;/li&gt;
+&lt;li&gt;Docker for Mac 1.12 stable&lt;/li&gt;
+&lt;li&gt;XQuartz 2.7.10 beta 2&lt;/li&gt;
+&lt;li&gt;Jessie Frazelle&amp;rsquo;s Firefox Dockerfile&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="prerequisites"&gt;Prerequisites&lt;/h2&gt;
+&lt;h4 id="xquartz"&gt;XQuartz&lt;/h4&gt;
+&lt;p&gt;You&amp;rsquo;ll need 
+
+
+
+&lt;a href="https://www.xquartz.org/" target="_blank" rel="noopener"&gt;XQuartz&lt;/a&gt;, and normally you would probably install it via 
+
+
+
+&lt;a href="https://brew.sh" target="_blank" rel="noopener"&gt;brew&lt;/a&gt; (but not this time):&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew cask install xquartz&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;XQuartz 2.7.9, which is the current one provided by brew, has 
+
+
+
+&lt;a href="https://bugs.freedesktop.org/show_bug.cgi?id=95379" target="_blank" rel="noopener"&gt;a bug&lt;/a&gt; which will prevent you from following this guide. So, head on over and download XQuartz 2.7.10 beta 2 from 
+
+
+
+&lt;a href="https://www.xquartz.org/releases/index.html" target="_blank" rel="noopener"&gt;here&lt;/a&gt;.&lt;/p&gt;</description></item></channel></rss>

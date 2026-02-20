@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vray on Mark Holloway</title><link>https://markholloway.com/tags/vray/</link><description>Recent content in Vray on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/vray/index.xml" rel="self" type="application/rss+xml"/><item><title>Systemd services and resource limits</title><link>https://markholloway.com/blog/2016/04/27/systemd-services-and-resource-limits/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2016/04/27/systemd-services-and-resource-limits/</guid><description>&lt;p&gt;We made the move to CentOS 7 and I switched out all init.d scripts with
+
+
+
+
+&lt;a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html" target="_blank" rel="noopener"&gt;systemd services&lt;/a&gt;.
+Yesterday I noticed we started getting errors on our render farm for huge
+scenes which required loading of thousands of files:&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;V-Ray warning: Could not load mesh file &amp;hellip;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;One hint that this wasn&amp;rsquo;t due to scene misconfiguration was that the initial
+~1000 vrmeshes were loaded successfully, and after that no other vrmesh file
+could be loaded.&lt;/p&gt;</description></item><item><title>Turning your renders up to 11</title><link>https://markholloway.com/blog/2015/10/16/turning-your-renders-up-to-11/</link><pubDate>Fri, 16 Oct 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/10/16/turning-your-renders-up-to-11/</guid><description>&lt;p&gt;An interview with me on our cloud rendering solutions is now published over
+at 
+
+
+
+&lt;a href="https://www.cgsociety.org/news/article/1379/turning-your-renders-up-to-11" target="_blank" rel="noopener"&gt;CGSociety&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;“We need to make sure that we’re working with the best technology, as some of our projects can be very render intensive,” he begins. “But our motto is to spend time focusing on the creative side of building beautiful images, and let the machines do the hard work.”&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;Check it out 
+
+
+
+&lt;a href="https://www.cgsociety.org/news/article/1379/turning-your-renders-up-to-11" target="_blank" rel="noopener"&gt;here&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>3D rendering in the Google Cloud</title><link>https://markholloway.com/blog/2015/05/01/3d-rendering-in-the-google-cloud/</link><pubDate>Fri, 01 May 2015 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2015/05/01/3d-rendering-in-the-google-cloud/</guid><description>&lt;p&gt;
+
+
+
+&lt;a href="https://cloudplatform.googleblog.com/2015/05/3D-imagery-rendering-in-the-cloud-with-Industriromantik-and-Compute-Engine.html" target="_blank" rel="noopener"&gt;Guest blogging&lt;/a&gt; for Google!&lt;/p&gt;
+&lt;blockquote class="callout markdown-alert "&gt;&lt;div class="callout-content"&gt;&lt;p&gt;As a small design and visualization studio, we focus on creating beautiful 3D imagery – be it high-resolution product images or TV commercials. To successfully do this, we need to ensure we have access to enough rendering power, and at times, we find ourselves in a situation where our in-house render farm’s capacity isn’t cutting it. That’s where Google Compute Engine comes in.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;&lt;p&gt;Read more over at the 
+
+
+
+&lt;a href="https://cloudplatform.googleblog.com/2015/05/3D-imagery-rendering-in-the-cloud-with-Industriromantik-and-Compute-Engine.html" target="_blank" rel="noopener"&gt;Google Cloud Platform blog&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Generating a spherical HDR image with V-Ray for Maya</title><link>https://markholloway.com/blog/2012/12/12/generating-a-spherical-hdr-image-with-v-ray-for-maya/</link><pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2012/12/12/generating-a-spherical-hdr-image-with-v-ray-for-maya/</guid><description>&lt;ol&gt;
+&lt;li&gt;Create a camera and place it where your objects resides which the HDR dome should affect.&lt;/li&gt;
+&lt;li&gt;Add the V-Ray attribute “Camera Settings” to the camera and scroll down to “Extra Attributes” in the Attribute Editor. Here, set Type to “Spherical”. Override the FOV and set it to 360 degrees.&lt;/li&gt;
+&lt;li&gt;In the render settings, set the output image format to .hdr, turn subpixel mapping off and do not clamp output.&lt;/li&gt;
+&lt;li&gt;Render with width/height ratio 2:1, e.g. 2048x1024 px.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="sample-scene"&gt;Sample scene&lt;/h2&gt;
+&lt;p&gt;Example Maya scene provided 
+
+
+
+&lt;a href="https://markholloway.com/blog/assets/vray/spherical_hdr_gen_maya.ma"&gt;here&lt;/a&gt; (save as); a simple cube environment, an area light and a camera.&lt;/p&gt;</description></item><item><title>Getting V-Ray to render Nuke-style Z-depth</title><link>https://markholloway.com/blog/2012/02/21/getting-v-ray-to-render-nuke-style-z-depth/</link><pubDate>Tue, 21 Feb 2012 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2012/02/21/getting-v-ray-to-render-nuke-style-z-depth/</guid><description>&lt;p&gt;If you have come this far you might be interested in a couple of small tips and tricks on how to get that 32-bit floating point depth channel to render out of V-Ray and into Nuke, similar to what you might be used to from Mental Ray and the IFF file format.&lt;/p&gt;
+&lt;h2 id="table-of-contents"&gt;Table of contents&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Creating a V-Ray Z-depth pass in Maya&lt;/li&gt;
+&lt;li&gt;Bringing the V-Ray Z-depth pass into Nuke&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="creating-a-v-ray-z-depth-pass-in-maya"&gt;Creating a V-Ray Z-depth pass in Maya&lt;/h2&gt;
+&lt;h3 id="render-settings"&gt;Render settings&lt;/h3&gt;
+&lt;p&gt;Open up the render settings, go to the &lt;code&gt;V-Ray&lt;/code&gt; tab and make sure that &lt;code&gt;Image format&lt;/code&gt; is set to &lt;code&gt;OpenEXR&lt;/code&gt; (multichannel) and that &lt;code&gt;OpenEXR data type&lt;/code&gt; is set to &lt;code&gt;32-bit float&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>V-Ray for Maya</title><link>https://markholloway.com/blog/2012/02/16/v-ray-for-maya/</link><pubDate>Thu, 16 Feb 2012 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2012/02/16/v-ray-for-maya/</guid><description>&lt;p&gt;Running V-Ray for Maya in a production environment has its quirks. I have collected some bits and pieces off the 
+
+
+
+&lt;a href="https://www.chaosgroup.com/forums/vbulletin/showthread.php?51035-maintaining-Vray-builds-with-workstations-and-the-render-frarm/" target="_blank" rel="noopener"&gt;Chaos Group forum&lt;/a&gt; and assembled it all here.&lt;/p&gt;
+&lt;h2 id="table-of-contents"&gt;Table of contents&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Arbitrary location installation&lt;/li&gt;
+&lt;li&gt;Arbitrary location configuration&lt;/li&gt;
+&lt;li&gt;Python launch script and MEL sourcing&lt;/li&gt;
+&lt;li&gt;Launching the V-Ray render slave from the arbitrary location&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="arbitrary-location-installation"&gt;Arbitrary location installation&lt;/h2&gt;
+&lt;p&gt;Choose a server location for all your builds and create a folder for the specific build you are installing. I am going to refer to this as the &lt;code&gt;[build folder]&lt;/code&gt;.&lt;/p&gt;</description></item></channel></rss>

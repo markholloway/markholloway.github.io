@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gaming on Mark Holloway</title><link>https://markholloway.com/tags/gaming/</link><description>Recent content in Gaming on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Sat, 28 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/gaming/index.xml" rel="self" type="application/rss+xml"/><item><title>Solving severe stuttering during Remote Play sessions</title><link>https://markholloway.com/blog/2024/12/28/solving-severe-stuttering-during-remote-play-sessions/</link><pubDate>Sat, 28 Dec 2024 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2024/12/28/solving-severe-stuttering-during-remote-play-sessions/</guid><description>&lt;h2 id="tv-network-pings"&gt;TV network pings&lt;/h2&gt;
+&lt;p&gt;There are situations where the TV loses a packet every 20-30 pings. On each
+packet loss, Remote Play hangs for a second.&lt;/p&gt;
+&lt;p&gt;Disconnecting the HDMI cable between the TV and the PS5 is a workaround for the
+problem. This prevents any potential interference between the TV&amp;rsquo;s HDMI-CEC
+control signals and the PS5&amp;rsquo;s network communication.&lt;/p&gt;
+&lt;p&gt;On Sony BRAVIA TVs, you can permanently fix this issue by enabling the &amp;ldquo;Simple
+IP Protocol&amp;rdquo; under network settings. The Simple IP Protocol reduces network
+complexity and overhead by using a more basic communication method, which helps
+minimize packet loss and network latency between the TV and the console. This
+does come at a cost, which is higher energy consumption.&lt;/p&gt;</description></item></channel></rss>
