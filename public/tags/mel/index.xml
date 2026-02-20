@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mel on Mark Holloway</title><link>https://markholloway.com/tags/mel/</link><description>Recent content in Mel on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Mon, 09 May 2005 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/mel/index.xml" rel="self" type="application/rss+xml"/><item><title>Maya particle shading script</title><link>https://markholloway.com/blog/2005/05/09/maya-particle-shading-script/</link><pubDate>Mon, 09 May 2005 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2005/05/09/maya-particle-shading-script/</guid><description>&lt;p&gt;A MEL script that hooks your particle system up with a camera automatically, resulting in a z-depth/focus depth/height/age/etc shader, that can be used to render images meant to serve as an aid during compositing. This way you can e.g. render out hardware particles’ depth channel with motion blur.&lt;/p&gt;
-&lt;blockquote class="callout markdown-alert callout-note markdown-alert-note"&gt;&lt;div class="callout-title markdown-alert-title"&gt;
- &lt;svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"&gt;&lt;path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"&gt;&lt;/path&gt;&lt;/svg&gt;
- Note
- &lt;/div&gt;&lt;div class="callout-content"&gt;&lt;p&gt;The script was written by 
-
-
-
-&lt;a href="https://www.bhenriksson.se" target="_blank" rel="noopener"&gt;Björn Henriksson&lt;/a&gt; and myself and has been tested on Maya version 5.0 and 6.5.&lt;/p&gt;</description></item></channel></rss>
