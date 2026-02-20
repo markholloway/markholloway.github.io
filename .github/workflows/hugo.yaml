@@ -105,5 +105,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-name: Build and Deploy
 
