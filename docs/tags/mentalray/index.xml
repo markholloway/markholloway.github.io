@@ -1,27 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Mentalray on Mark Holloway</title>
-    <link>http://localhost:1313/tags/mentalray/</link>
-    <description>Recent content in Mentalray on Mark Holloway</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>© Mark Holloway</copyright>
-    <lastBuildDate>Thu, 27 May 2010 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/mentalray/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Enabling Iray in Maya 2011</title>
-      <link>http://localhost:1313/blog/2010/05/27/enabling-iray-in-maya-2011/</link>
-      <pubDate>Thu, 27 May 2010 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2010/05/27/enabling-iray-in-maya-2011/</guid>
-      <description>&lt;p&gt;Mental images and/or Autodesk has intentionally not made Iray available in the latest release of Autodesk Maya; version 2011. But there is a workaround&amp;hellip;&lt;/p&gt;&#xA;&lt;p&gt;The initial version of &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.mentalimages.com/products/Iray.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Iray&lt;/a&gt; is bundled with mental ray 3.8 (stand alone and reality server) and takes advantage of the GPU when lighting, shading and rendering. According to a &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://forum.mentalimages.com/showthread.php?t=6503&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;mental forums thread&lt;/a&gt;, Iray was intentionally left out of mental ray bundled with Maya 2011 since it’s still under heavy development. It was only included in the stand alone and reality server flavours and provided “as is” without further support.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Enabling the mental ray production shaders</title>
-      <link>http://localhost:1313/blog/2010/05/19/enabling-the-mental-ray-production-shaders/</link>
-      <pubDate>Wed, 19 May 2010 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2010/05/19/enabling-the-mental-ray-production-shaders/</guid>
-      <description>&lt;p&gt;The production shader library contains a set of shaders aimed at production&#xA;users of mental ray. The library contains a diverse collection of shaders,&#xA;ranging from small utilities such as ray type switching and card opacity to&#xA;large complex shaders such as the fast 2d motion blur shader.&lt;/p&gt;&#xA;&lt;p&gt;In order to enable the mental ray production shader library, you can edit the&#xA;&lt;code&gt;mentalrayCustomNodeClass.mel&lt;/code&gt; or simply type the following into the script&#xA;editor:&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mentalray on Mark Holloway</title><link>https://markholloway.com/tags/mentalray/</link><description>Recent content in Mentalray on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Thu, 27 May 2010 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/mentalray/index.xml" rel="self" type="application/rss+xml"/><item><title>Enabling Iray in Maya 2011</title><link>https://markholloway.com/blog/2010/05/27/enabling-iray-in-maya-2011/</link><pubDate>Thu, 27 May 2010 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2010/05/27/enabling-iray-in-maya-2011/</guid><description>&lt;p&gt;Mental images and/or Autodesk has intentionally not made Iray available in the latest release of Autodesk Maya; version 2011. But there is a workaround&amp;hellip;&lt;/p&gt;
+&lt;p&gt;The initial version of 
+
+
+
+&lt;a href="https://www.mentalimages.com/products/Iray.html" target="_blank" rel="noopener"&gt;Iray&lt;/a&gt; is bundled with mental ray 3.8 (stand alone and reality server) and takes advantage of the GPU when lighting, shading and rendering. According to a 
+
+
+
+&lt;a href="https://forum.mentalimages.com/showthread.php?t=6503" target="_blank" rel="noopener"&gt;mental forums thread&lt;/a&gt;, Iray was intentionally left out of mental ray bundled with Maya 2011 since it’s still under heavy development. It was only included in the stand alone and reality server flavours and provided “as is” without further support.&lt;/p&gt;</description></item><item><title>Enabling the mental ray production shaders</title><link>https://markholloway.com/blog/2010/05/19/enabling-the-mental-ray-production-shaders/</link><pubDate>Wed, 19 May 2010 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2010/05/19/enabling-the-mental-ray-production-shaders/</guid><description>&lt;p&gt;The production shader library contains a set of shaders aimed at production
+users of mental ray. The library contains a diverse collection of shaders,
+ranging from small utilities such as ray type switching and card opacity to
+large complex shaders such as the fast 2d motion blur shader.&lt;/p&gt;
+&lt;p&gt;In order to enable the mental ray production shader library, you can edit the
+&lt;code&gt;mentalrayCustomNodeClass.mel&lt;/code&gt; or simply type the following into the script
+editor:&lt;/p&gt;</description></item></channel></rss>

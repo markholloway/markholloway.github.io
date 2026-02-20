@@ -1,511 +1,116 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
-    <title>Quick testing with Terraform without a backend | Mark Holloway</title>
-    <meta name="description" content="Notes from a curiosity-driven engineer.">
-    <link rel="canonical" href="http://localhost:1313/blog/2026/01/20/quick-testing-with-terraform-without-a-backend/">
-    
-    
-    <meta property="og:url" content="http://localhost:1313/blog/2026/01/20/quick-testing-with-terraform-without-a-backend/">
-  <meta property="og:site_name" content="Mark Holloway">
-  <meta property="og:title" content="Quick testing with Terraform without a backend">
-  <meta property="og:description" content="When working with complex Terraform expressions, such as string manipulation using regular expressions, it is often useful to test them in isolation without needing to connect to a remote backend or authenticate with a cloud provider.
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Quick testing with Terraform without a backend | Mark Holloway</title><meta name=description content="Notes from a curiosity-driven engineer."><link rel=canonical href=https://markholloway.com/blog/2026/01/20/quick-testing-with-terraform-without-a-backend/><meta property="og:url" content="https://markholloway.com/blog/2026/01/20/quick-testing-with-terraform-without-a-backend/"><meta property="og:site_name" content="Mark Holloway"><meta property="og:title" content="Quick testing with Terraform without a backend"><meta property="og:description" content='When working with complex Terraform expressions, such as string manipulation using regular expressions, it is often useful to test them in isolation without needing to connect to a remote backend or authenticate with a cloud provider.
 Isolated testing using a plan To test an expression, you can create a temporary configuration file, for example /tmp/tf-test/main.tf, with your variables and outputs:
-variable &#34;test_inputs&#34; { default = [&#34;CompanyEvent&#34;, &#34;HTTPSEvent&#34;, &#34;URLParser&#34;, &#34;APIKeyEvent&#34;, &#34;ShipmentEvent&#34;] } # This pattern might not produce the desired snake_case output output &#34;current_pattern&#34; { value = { for input in var.test_inputs : input =&gt; lower(join(&#34;_&#34;, regexall(&#34;[A-Z][a-z]*&#34;, input))) } } # This pattern uses a lookahead-like approach to match Go&#39;s convention output &#34;fixed_pattern&#34; { value = { for input in var.test_inputs : input =&gt; lower(replace(input, &#34;/([a-z])([A-Z])/&#34;, &#34;$${1}_$${2}&#34;)) } } You can then initialize Terraform (or OpenTofu while explicitly skipping the backend configuration. This allows you to run a plan and inspect the results immediately.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2026-01-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-01-20T00:00:00+00:00">
-    <meta property="article:tag" content="Terraform">
-
-    
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Quick testing with Terraform without a backend">
-  <meta name="twitter:description" content="When working with complex Terraform expressions, such as string manipulation using regular expressions, it is often useful to test them in isolation without needing to connect to a remote backend or authenticate with a cloud provider.
+variable "test_inputs" { default = ["CompanyEvent", "HTTPSEvent", "URLParser", "APIKeyEvent", "ShipmentEvent"] } # This pattern might not produce the desired snake_case output output "current_pattern" { value = { for input in var.test_inputs : input => lower(join("_", regexall("[A-Z][a-z]*", input))) } } # This pattern uses a lookahead-like approach to match Go&#39;s convention output "fixed_pattern" { value = { for input in var.test_inputs : input => lower(replace(input, "/([a-z])([A-Z])/", "$${1}_$${2}")) } } You can then initialize Terraform (or OpenTofu while explicitly skipping the backend configuration. This allows you to run a plan and inspect the results immediately.'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2026-01-20T00:00:00+00:00"><meta property="article:modified_time" content="2026-01-20T00:00:00+00:00"><meta property="article:tag" content="Terraform"><meta name=twitter:card content="summary"><meta name=twitter:title content="Quick testing with Terraform without a backend"><meta name=twitter:description content='When working with complex Terraform expressions, such as string manipulation using regular expressions, it is often useful to test them in isolation without needing to connect to a remote backend or authenticate with a cloud provider.
 Isolated testing using a plan To test an expression, you can create a temporary configuration file, for example /tmp/tf-test/main.tf, with your variables and outputs:
-variable &#34;test_inputs&#34; { default = [&#34;CompanyEvent&#34;, &#34;HTTPSEvent&#34;, &#34;URLParser&#34;, &#34;APIKeyEvent&#34;, &#34;ShipmentEvent&#34;] } # This pattern might not produce the desired snake_case output output &#34;current_pattern&#34; { value = { for input in var.test_inputs : input =&gt; lower(join(&#34;_&#34;, regexall(&#34;[A-Z][a-z]*&#34;, input))) } } # This pattern uses a lookahead-like approach to match Go&#39;s convention output &#34;fixed_pattern&#34; { value = { for input in var.test_inputs : input =&gt; lower(replace(input, &#34;/([a-z])([A-Z])/&#34;, &#34;$${1}_$${2}&#34;)) } } You can then initialize Terraform (or OpenTofu while explicitly skipping the backend configuration. This allows you to run a plan and inspect the results immediately.">
-
-    
-    
-    
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Quick testing with Terraform without a backend",
-  "datePublished": "2026-01-20T00:00:00Z",
-  "dateModified": "2026-01-20T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/blog\/2026\/01\/20\/quick-testing-with-terraform-without-a-backend\/"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "map[]"
-  },
-  "description": "When working with complex Terraform expressions, such as string manipulation using regular expressions, it is often useful to test them in isolation without needing to connect to a remote backend or authenticate with a cloud provider.\nIsolated testing using a plan To test an expression, you can create a temporary configuration file, for example \/tmp\/tf-test\/main.tf, with your variables and outputs:\nvariable \u0026#34;test_inputs\u0026#34; { default = [\u0026#34;CompanyEvent\u0026#34;, \u0026#34;HTTPSEvent\u0026#34;, \u0026#34;URLParser\u0026#34;, \u0026#34;APIKeyEvent\u0026#34;, \u0026#34;ShipmentEvent\u0026#34;] } # This pattern might not produce the desired snake_case output output \u0026#34;current_pattern\u0026#34; { value = { for input in var.test_inputs : input =\u0026gt; lower(join(\u0026#34;_\u0026#34;, regexall(\u0026#34;[A-Z][a-z]*\u0026#34;, input))) } } # This pattern uses a lookahead-like approach to match Go\u0026#39;s convention output \u0026#34;fixed_pattern\u0026#34; { value = { for input in var.test_inputs : input =\u0026gt; lower(replace(input, \u0026#34;\/([a-z])([A-Z])\/\u0026#34;, \u0026#34;$${1}_$${2}\u0026#34;)) } } You can then initialize Terraform (or OpenTofu while explicitly skipping the backend configuration. This allows you to run a plan and inspect the results immediately.\n"
-}
-</script>
-
-
-
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    
-    
-    <link rel="preload" href="/fonts/BerkeleyMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/CommitMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/MapleMono-Italic.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/github-link.css" />
-    
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="c9c97df3-bc05-4b29-8caa-fcf03a05710f"></script>
-
-  </head>
-
-  <body class="preload">
-    <script>
-      (function() {
-        
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-          document.body.classList.add(savedTheme);
-        } else {
-          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.body.classList.add('dark');
-          }
-        }
-        
-        
-        if ('fonts' in document) {
-          
-          Promise.race([
-            document.fonts.ready,
-            new Promise(resolve => setTimeout(resolve, 100)) 
-          ]).then(() => {
-            document.body.classList.remove('preload');
-          });
-        } else {
-          
-          setTimeout(() => {
-            document.body.classList.remove('preload');
-          }, 50);
-        }
-      })();
-    </script>
-
-    <nav style="display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
-      <ul class="menu" style="margin: 0; padding: 0; flex-shrink: 0;">
-        
-        
-        <li><a  href="/">Home</a></li>
-        
-        <li><a  href="/blog/">Blog</a></li>
-        
-        <li><a  href="/about/">About</a></li>
-        
-        <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1em; padding:5px; color:inherit;">◑</button></li>
-      </ul>
-      
-      
-      <div id="search" style="flex-grow: 1; min-width: 200px;"></div>
-    </nav>
-    
-    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-    <script src="/pagefind/pagefind-ui.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-            new PagefindUI({ 
-              element: "#search", 
-              showSubResults: true,
-              showImages: false,
-              translations: {
-                placeholder: "Search...",
-                clear_search: "×"
-              }
-            });
-
-            
-            document.addEventListener('click', (e) => {
-                const searchContainer = document.querySelector('#search');
-                if (searchContainer && !searchContainer.contains(e.target)) {
-                    const clearButton = searchContainer.querySelector('.pagefind-ui__search-clear');
-                    if (clearButton) {
-                        clearButton.click();
-                    }
-                }
-            });
-
-            
-            const toggle = document.getElementById('theme-toggle');
-            const body = document.body;
-
-            toggle.addEventListener('click', () => {
-              if (body.classList.contains('dark')) {
-                body.classList.remove('dark');
-                body.classList.add('light');
-                localStorage.setItem('theme', 'light');
-              } else {
-                body.classList.remove('light');
-                body.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-              }
-            });
-        });
-    </script>
-
-
-<div class="article-meta">
-<h1><span class="title">Quick testing with Terraform without a backend</span></h1>
-
-<div class="article-meta-info">
-  <span class="date">2026-01-20</span>
-  
-  <span class="article-tags">
-    
-    
-    
-    <a href="/tags/terraform">#terraform</a>
-    
-    
-  </span>
-  
-</div>
-</div>
-
-
-
-<main data-pagefind-body>
-	
-	
-		
-		<aside class="table-of-contents">
-			<div class="toc-title">
-				<svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
-					fill="currentColor">
-					<path
-						d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z">
-					</path>
-				</svg>
-				Table of Contents
-			</div>
-			<nav id="TableOfContents">
-  <ul>
-    <li><a href="#isolated-testing-using-a-plan">Isolated testing using a plan</a>
-      <ul>
-        <li><a href="#why-use--backendfalse">Why use <code>-backend=false</code>?</a></li>
-      </ul>
-    </li>
-    <li><a href="#quick-testing-with-terraform-console">Quick testing with Terraform Console</a></li>
-  </ul>
-</nav>
-		</aside>
-		
-
-		<p>When working with complex Terraform expressions, such as string manipulation
+variable "test_inputs" { default = ["CompanyEvent", "HTTPSEvent", "URLParser", "APIKeyEvent", "ShipmentEvent"] } # This pattern might not produce the desired snake_case output output "current_pattern" { value = { for input in var.test_inputs : input => lower(join("_", regexall("[A-Z][a-z]*", input))) } } # This pattern uses a lookahead-like approach to match Go&#39;s convention output "fixed_pattern" { value = { for input in var.test_inputs : input => lower(replace(input, "/([a-z])([A-Z])/", "$${1}_$${2}")) } } You can then initialize Terraform (or OpenTofu while explicitly skipping the backend configuration. This allows you to run a plan and inspect the results immediately.'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Quick testing with Terraform without a backend","datePublished":"2026-01-20T00:00:00Z","dateModified":"2026-01-20T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/markholloway.com\/blog\/2026\/01\/20\/quick-testing-with-terraform-without-a-backend\/"},"author":{"@type":"Person","name":"map[]"},"description":"When working with complex Terraform expressions, such as string manipulation using regular expressions, it is often useful to test them in isolation without needing to connect to a remote backend or authenticate with a cloud provider.\nIsolated testing using a plan To test an expression, you can create a temporary configuration file, for example \/tmp\/tf-test\/main.tf, with your variables and outputs:\nvariable \u0026#34;test_inputs\u0026#34; { default = [\u0026#34;CompanyEvent\u0026#34;, \u0026#34;HTTPSEvent\u0026#34;, \u0026#34;URLParser\u0026#34;, \u0026#34;APIKeyEvent\u0026#34;, \u0026#34;ShipmentEvent\u0026#34;] } # This pattern might not produce the desired snake_case output output \u0026#34;current_pattern\u0026#34; { value = { for input in var.test_inputs : input =\u0026gt; lower(join(\u0026#34;_\u0026#34;, regexall(\u0026#34;[A-Z][a-z]*\u0026#34;, input))) } } # This pattern uses a lookahead-like approach to match Go\u0026#39;s convention output \u0026#34;fixed_pattern\u0026#34; { value = { for input in var.test_inputs : input =\u0026gt; lower(replace(input, \u0026#34;\/([a-z])([A-Z])\/\u0026#34;, \u0026#34;$${1}_$${2}\u0026#34;)) } } You can then initialize Terraform (or OpenTofu while explicitly skipping the backend configuration. This allows you to run a plan and inspect the results immediately.\n"}</script><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=preload href=/fonts/BerkeleyMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/CommitMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/MapleMono-Italic.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/github-link.css><script defer src=https://cloud.umami.is/script.js data-website-id=29980893-435d-4d73-962b-e2b6e505fb7e></script></head><body class=preload><script>(function(){const e=localStorage.getItem("theme");e?document.body.classList.add(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark"),"fonts"in document?Promise.race([document.fonts.ready,new Promise(e=>setTimeout(e,100))]).then(()=>{document.body.classList.remove("preload")}):setTimeout(()=>{document.body.classList.remove("preload")},50)})()</script><nav style=display:flex;align-items:center;gap:1em;flex-wrap:wrap><ul class=menu style=margin:0;padding:0;flex-shrink:0><li><a href=/>Home</a></li><li><a href=/blog/>Blog</a></li><li><a href=/about/>About</a></li><li><button id=theme-toggle style="background:0 0;border:none;cursor:pointer;font-size:1em;padding:5px;color:inherit">◑</button></li></ul><div id=search style=flex-grow:1;min-width:200px></div></nav><link href=/pagefind/pagefind-ui.css rel=stylesheet><script src=/pagefind/pagefind-ui.js></script><script>window.addEventListener("DOMContentLoaded",e=>{new PagefindUI({element:"#search",showSubResults:!0,showImages:!1,translations:{placeholder:"Search...",clear_search:"×"}}),document.addEventListener("click",e=>{const t=document.querySelector("#search");if(t&&!t.contains(e.target)){const e=t.querySelector(".pagefind-ui__search-clear");e&&e.click()}});const n=document.getElementById("theme-toggle"),t=document.body;n.addEventListener("click",()=>{t.classList.contains("dark")?(t.classList.remove("dark"),t.classList.add("light"),localStorage.setItem("theme","light")):(t.classList.remove("light"),t.classList.add("dark"),localStorage.setItem("theme","dark"))})})</script><div class=article-meta><h1><span class=title>Quick testing with Terraform without a backend</span></h1><div class=article-meta-info><span class=date>2026-01-20</span>
+<span class=article-tags><a href=/tags/terraform>#terraform</a></span></div></div><main data-pagefind-body><aside class=table-of-contents><div class=toc-title><svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z"/></svg>
+Table of Contents</div><nav id=TableOfContents><ul><li><a href=#isolated-testing-using-a-plan>Isolated testing using a plan</a><ul><li><a href=#why-use--backendfalse>Why use <code>-backend=false</code>?</a></li></ul></li><li><a href=#quick-testing-with-terraform-console>Quick testing with Terraform Console</a></li></ul></nav></aside><p>When working with complex Terraform expressions, such as string manipulation
 using regular expressions, it is often useful to <strong>test them in isolation</strong>
 without needing to connect to a remote backend or authenticate with a cloud
-provider.</p>
-<h2 id="isolated-testing-using-a-plan">Isolated testing using a plan</h2>
-<p>To test an expression, you can create a temporary configuration file, for
-example <code>/tmp/tf-test/main.tf</code>, with your variables and outputs:</p>
-<div class="code-block-wrapper">
-  <button class="copy-code-button" aria-label="Copy code to clipboard">
-    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-    </svg>
-    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;test_inputs&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">default</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;CompanyEvent&#34;</span><span class="p">,</span> <span class="s2">&#34;HTTPSEvent&#34;</span><span class="p">,</span> <span class="s2">&#34;URLParser&#34;</span><span class="p">,</span> <span class="s2">&#34;APIKeyEvent&#34;</span><span class="p">,</span> <span class="s2">&#34;ShipmentEvent&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="c1">
-</span></span></span><span class="line"><span class="cl"><span class="c1">
-</span></span></span><span class="line"><span class="cl"><span class="c1"># This pattern might not produce the desired snake_case output
-</span></span></span><span class="line"><span class="cl"><span class="kr">output</span> <span class="s2">&#34;current_pattern&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">value</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">input</span> <span class="k">in</span> <span class="nb">var</span><span class="p">.</span><span class="nx">test_inputs</span> <span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">input</span> <span class="p">=&gt;</span> <span class="nb">lower</span><span class="p">(</span><span class="nb">join</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">,</span> <span class="nb">regexall</span><span class="p">(</span><span class="s2">&#34;[A-Z][a-z]*&#34;</span><span class="p">,</span> <span class="nx">input</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="c1">
-</span></span></span><span class="line"><span class="cl"><span class="c1">
-</span></span></span><span class="line"><span class="cl"><span class="c1"># This pattern uses a lookahead-like approach to match Go&#39;s convention
-</span></span></span><span class="line"><span class="cl"><span class="kr">output</span> <span class="s2">&#34;fixed_pattern&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">value</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">input</span> <span class="k">in</span> <span class="nb">var</span><span class="p">.</span><span class="nx">test_inputs</span> <span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">input</span> <span class="p">=&gt;</span> <span class="nb">lower</span><span class="p">(</span><span class="nb">replace</span><span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="s2">&#34;/([a-z])([A-Z])/&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="err">$</span><span class="si">${</span><span class="m">1</span><span class="si">}</span><span class="s2">_</span><span class="err">$</span><span class="si">${</span><span class="m">2</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
-<p>You can then initialize 
-
-
-
-<a href="https://developer.hashicorp.com/terraform" target="_blank" rel="noopener">Terraform</a>
-(or 
-
-
-
-<a href="https://opentofu.org/" target="_blank" rel="noopener">OpenTofu</a> while explicitly skipping the backend
+provider.</p><h2 id=isolated-testing-using-a-plan>Isolated testing using a plan</h2><p>To test an expression, you can create a temporary configuration file, for
+example <code>/tmp/tf-test/main.tf</code>, with your variables and outputs:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
+<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-terraform data-lang=terraform><span class=line><span class=cl><span class=kr>variable</span> <span class=s2>&#34;test_inputs&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>default</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;CompanyEvent&#34;</span><span class=p>,</span> <span class=s2>&#34;HTTPSEvent&#34;</span><span class=p>,</span> <span class=s2>&#34;URLParser&#34;</span><span class=p>,</span> <span class=s2>&#34;APIKeyEvent&#34;</span><span class=p>,</span> <span class=s2>&#34;ShipmentEvent&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1># This pattern might not produce the desired snake_case output
+</span></span></span><span class=line><span class=cl><span class=kr>output</span> <span class=s2>&#34;current_pattern&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>value</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>input</span> <span class=k>in</span> <span class=nb>var</span><span class=p>.</span><span class=nx>test_inputs</span> <span class=o>:</span>
+</span></span><span class=line><span class=cl>    <span class=nx>input</span> <span class=p>=&gt;</span> <span class=nb>lower</span><span class=p>(</span><span class=nb>join</span><span class=p>(</span><span class=s2>&#34;_&#34;</span><span class=p>,</span> <span class=nb>regexall</span><span class=p>(</span><span class=s2>&#34;[A-Z][a-z]*&#34;</span><span class=p>,</span> <span class=nx>input</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1># This pattern uses a lookahead-like approach to match Go&#39;s convention
+</span></span></span><span class=line><span class=cl><span class=kr>output</span> <span class=s2>&#34;fixed_pattern&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>value</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>input</span> <span class=k>in</span> <span class=nb>var</span><span class=p>.</span><span class=nx>test_inputs</span> <span class=o>:</span>
+</span></span><span class=line><span class=cl>    <span class=nx>input</span> <span class=p>=&gt;</span> <span class=nb>lower</span><span class=p>(</span><span class=nb>replace</span><span class=p>(</span><span class=nx>input</span><span class=p>,</span> <span class=s2>&#34;/([a-z])([A-Z])/&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=err>$</span><span class=si>${</span><span class=m>1</span><span class=si>}</span><span class=s2>_</span><span class=err>$</span><span class=si>${</span><span class=m>2</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></div></div><p>You can then initialize
+<a href=https://developer.hashicorp.com/terraform target=_blank rel=noopener>Terraform</a>
+(or
+<a href=https://opentofu.org/ target=_blank rel=noopener>OpenTofu</a> while explicitly skipping the backend
 configuration. This allows you to run a plan and inspect the results
-immediately.</p>
-<blockquote class="callout markdown-alert callout-note markdown-alert-note"><div class="callout-title markdown-alert-title">
-    <svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path></svg>
-    Tested version
-  </div><div class="callout-content"><p>The examples below were verified using <strong>OpenTofu v1.11.3</strong>.</p></div>
-</blockquote><div class="code-block-wrapper">
-  <button class="copy-code-button" aria-label="Copy code to clipboard">
-    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-    </svg>
-    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform init -backend<span class="o">=</span><span class="nb">false</span>
-</span></span><span class="line"><span class="cl">terraform plan -out<span class="o">=</span>tfplan</span></span></code></pre></div></div>
-<p>Results:</p>
-<div class="code-block-wrapper">
-  <button class="copy-code-button" aria-label="Copy code to clipboard">
-    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-    </svg>
-    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ terraform plan -out<span class="o">=</span>tfplan
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Changes to Outputs:
-</span></span><span class="line"><span class="cl">  + <span class="nv">current_pattern</span> <span class="o">=</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">APIKeyEvent</span>   <span class="o">=</span> <span class="s2">&#34;a_p_i_key_event&#34;</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">CompanyEvent</span>  <span class="o">=</span> <span class="s2">&#34;company_event&#34;</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">HTTPSEvent</span>    <span class="o">=</span> <span class="s2">&#34;h_t_t_p_s_event&#34;</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">ShipmentEvent</span> <span class="o">=</span> <span class="s2">&#34;shipment_event&#34;</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">URLParser</span>     <span class="o">=</span> <span class="s2">&#34;u_r_l_parser&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">  + <span class="nv">fixed_pattern</span>   <span class="o">=</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">APIKeyEvent</span>   <span class="o">=</span> <span class="s2">&#34;apikey_event&#34;</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">CompanyEvent</span>  <span class="o">=</span> <span class="s2">&#34;company_event&#34;</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">HTTPSEvent</span>    <span class="o">=</span> <span class="s2">&#34;httpsevent&#34;</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">ShipmentEvent</span> <span class="o">=</span> <span class="s2">&#34;shipment_event&#34;</span>
-</span></span><span class="line"><span class="cl">      + <span class="nv">URLParser</span>     <span class="o">=</span> <span class="s2">&#34;urlparser&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span></span></span></code></pre></div></div>
-<p>You can also inspect the whole plan with something like:</p>
-<div class="code-block-wrapper">
-  <button class="copy-code-button" aria-label="Copy code to clipboard">
-    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-    </svg>
-    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ terraform show -json tfplan <span class="p">|</span> jq <span class="s1">&#39;.planned_values.outputs&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;current_pattern&#34;</span>: <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;sensitive&#34;</span>: false,
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;type&#34;</span>: <span class="o">[</span>
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;object&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;APIKeyEvent&#34;</span>: <span class="s2">&#34;string&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;CompanyEvent&#34;</span>: <span class="s2">&#34;string&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;HTTPSEvent&#34;</span>: <span class="s2">&#34;string&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ShipmentEvent&#34;</span>: <span class="s2">&#34;string&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;URLParser&#34;</span>: <span class="s2">&#34;string&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">]</span>,
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;value&#34;</span>: <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;APIKeyEvent&#34;</span>: <span class="s2">&#34;a_p_i_key_event&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;CompanyEvent&#34;</span>: <span class="s2">&#34;company_event&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;HTTPSEvent&#34;</span>: <span class="s2">&#34;h_t_t_p_s_event&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;ShipmentEvent&#34;</span>: <span class="s2">&#34;shipment_event&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;URLParser&#34;</span>: <span class="s2">&#34;u_r_l_parser&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">  <span class="o">}</span>,
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;fixed_pattern&#34;</span>: <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;sensitive&#34;</span>: false,
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;type&#34;</span>: <span class="o">[</span>
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;object&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;APIKeyEvent&#34;</span>: <span class="s2">&#34;string&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;CompanyEvent&#34;</span>: <span class="s2">&#34;string&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;HTTPSEvent&#34;</span>: <span class="s2">&#34;string&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ShipmentEvent&#34;</span>: <span class="s2">&#34;string&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;URLParser&#34;</span>: <span class="s2">&#34;string&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">]</span>,
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;value&#34;</span>: <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;APIKeyEvent&#34;</span>: <span class="s2">&#34;apikey_event&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;CompanyEvent&#34;</span>: <span class="s2">&#34;company_event&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;HTTPSEvent&#34;</span>: <span class="s2">&#34;httpsevent&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;ShipmentEvent&#34;</span>: <span class="s2">&#34;shipment_event&#34;</span>,
-</span></span><span class="line"><span class="cl">      <span class="s2">&#34;URLParser&#34;</span>: <span class="s2">&#34;urlparser&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></div></div>
-<h3 id="why-use--backendfalse">Why use <code>-backend=false</code>?</h3>
-<p>The <code>-backend=false</code> flag tells Terraform to skip backend initialization. This
-provides several benefits for local testing:</p>
-<ol>
-<li><strong>No remote state storage:</strong> You don&rsquo;t need to configure S3, GCS, or
-Terraform Cloud.</li>
-<li><strong>No authentication:</strong> You don&rsquo;t need to have cloud credentials configured
-or active.</li>
-<li><strong>Speed:</strong> It skips backend validation and state retrieval, making the
-feedback loop much faster.</li>
-</ol>
-<h2 id="quick-testing-with-terraform-console">Quick testing with Terraform Console</h2>
-<p>For even faster iteration on one-off expressions, you can use
+immediately.</p><blockquote class="callout markdown-alert callout-note markdown-alert-note"><div class="callout-title markdown-alert-title"><svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42.0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
+Tested version</div><div class=callout-content><p>The examples below were verified using <strong>OpenTofu v1.11.3</strong>.</p></div></blockquote><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
+<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>terraform init -backend<span class=o>=</span><span class=nb>false</span>
+</span></span><span class=line><span class=cl>terraform plan -out<span class=o>=</span>tfplan</span></span></code></pre></div></div><p>Results:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
+<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ terraform plan -out<span class=o>=</span>tfplan
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Changes to Outputs:
+</span></span><span class=line><span class=cl>  + <span class=nv>current_pattern</span> <span class=o>=</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>APIKeyEvent</span>   <span class=o>=</span> <span class=s2>&#34;a_p_i_key_event&#34;</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>CompanyEvent</span>  <span class=o>=</span> <span class=s2>&#34;company_event&#34;</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>HTTPSEvent</span>    <span class=o>=</span> <span class=s2>&#34;h_t_t_p_s_event&#34;</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>ShipmentEvent</span> <span class=o>=</span> <span class=s2>&#34;shipment_event&#34;</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>URLParser</span>     <span class=o>=</span> <span class=s2>&#34;u_r_l_parser&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>  + <span class=nv>fixed_pattern</span>   <span class=o>=</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>APIKeyEvent</span>   <span class=o>=</span> <span class=s2>&#34;apikey_event&#34;</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>CompanyEvent</span>  <span class=o>=</span> <span class=s2>&#34;company_event&#34;</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>HTTPSEvent</span>    <span class=o>=</span> <span class=s2>&#34;httpsevent&#34;</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>ShipmentEvent</span> <span class=o>=</span> <span class=s2>&#34;shipment_event&#34;</span>
+</span></span><span class=line><span class=cl>      + <span class=nv>URLParser</span>     <span class=o>=</span> <span class=s2>&#34;urlparser&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span></span></span></code></pre></div></div><p>You can also inspect the whole plan with something like:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
+<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ terraform show -json tfplan <span class=p>|</span> jq <span class=s1>&#39;.planned_values.outputs&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;current_pattern&#34;</span>: <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;sensitive&#34;</span>: false,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;type&#34;</span>: <span class=o>[</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;object&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;APIKeyEvent&#34;</span>: <span class=s2>&#34;string&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;CompanyEvent&#34;</span>: <span class=s2>&#34;string&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;HTTPSEvent&#34;</span>: <span class=s2>&#34;string&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;ShipmentEvent&#34;</span>: <span class=s2>&#34;string&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;URLParser&#34;</span>: <span class=s2>&#34;string&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>]</span>,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;value&#34;</span>: <span class=o>{</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;APIKeyEvent&#34;</span>: <span class=s2>&#34;a_p_i_key_event&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;CompanyEvent&#34;</span>: <span class=s2>&#34;company_event&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;HTTPSEvent&#34;</span>: <span class=s2>&#34;h_t_t_p_s_event&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;ShipmentEvent&#34;</span>: <span class=s2>&#34;shipment_event&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;URLParser&#34;</span>: <span class=s2>&#34;u_r_l_parser&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>,
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;fixed_pattern&#34;</span>: <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;sensitive&#34;</span>: false,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;type&#34;</span>: <span class=o>[</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;object&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;APIKeyEvent&#34;</span>: <span class=s2>&#34;string&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;CompanyEvent&#34;</span>: <span class=s2>&#34;string&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;HTTPSEvent&#34;</span>: <span class=s2>&#34;string&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;ShipmentEvent&#34;</span>: <span class=s2>&#34;string&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;URLParser&#34;</span>: <span class=s2>&#34;string&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>]</span>,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;value&#34;</span>: <span class=o>{</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;APIKeyEvent&#34;</span>: <span class=s2>&#34;apikey_event&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;CompanyEvent&#34;</span>: <span class=s2>&#34;company_event&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;HTTPSEvent&#34;</span>: <span class=s2>&#34;httpsevent&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;ShipmentEvent&#34;</span>: <span class=s2>&#34;shipment_event&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;URLParser&#34;</span>: <span class=s2>&#34;urlparser&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span></span></span></code></pre></div></div><h3 id=why-use--backendfalse>Why use <code>-backend=false</code>?</h3><p>The <code>-backend=false</code> flag tells Terraform to skip backend initialization. This
+provides several benefits for local testing:</p><ol><li><strong>No remote state storage:</strong> You don&rsquo;t need to configure S3, GCS, or
+Terraform Cloud.</li><li><strong>No authentication:</strong> You don&rsquo;t need to have cloud credentials configured
+or active.</li><li><strong>Speed:</strong> It skips backend validation and state retrieval, making the
+feedback loop much faster.</li></ol><h2 id=quick-testing-with-terraform-console>Quick testing with Terraform Console</h2><p>For even faster iteration on one-off expressions, you can use
 <code>terraform console</code>. This does not require <code>terraform init</code> for evaluating basic
-expressions:</p>
-<div class="code-block-wrapper">
-  <button class="copy-code-button" aria-label="Copy code to clipboard">
-    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-    </svg>
-    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform console <span class="o">&lt;&lt;&lt;</span> <span class="s1">&#39;lower(replace(&#34;CompanyEvent&#34;, &#34;/([a-z])([A-Z])/&#34;, &#34;$${1}_$${2}&#34;))&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Output: &#34;company_event&#34;</span></span></span></code></pre></div></div>
-
-</main>
-
-
-<div id="giscus-container" class="giscus-comments">
-  <div class="load-comments-wrapper">
-    <button id="load-comments-btn" class="load-comments-btn">Load Comments</button>
-  </div>
-</div>
-
-<script>
-  (function() {
-    const container = document.getElementById('giscus-container');
-    const loadBtn = document.getElementById('load-comments-btn');
-
-    
-    function loadGiscus() {
-      if (!container) return;
-      
-      
-      container.innerHTML = ''; 
-
-      const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
-      
-      const giscusScript = document.createElement('script');
-      giscusScript.src = 'https://giscus.app/client.js';
-      giscusScript.setAttribute('data-repo', 'markholloway/markholloway.github.io');
-      giscusScript.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc=');
-      giscusScript.setAttribute('data-category', 'General');
-      giscusScript.setAttribute('data-category-id', 'DIC_kwDOB8-Z684CU9zc');
-      giscusScript.setAttribute('data-mapping', 'title');
-      giscusScript.setAttribute('data-strict', '0');
-      giscusScript.setAttribute('data-reactions-enabled', '1');
-      giscusScript.setAttribute('data-emit-metadata', '0');
-      giscusScript.setAttribute('data-input-position', 'bottom');
-      giscusScript.setAttribute('data-theme', theme);
-      giscusScript.setAttribute('data-lang', 'en');
-      giscusScript.setAttribute('crossorigin', 'anonymous');
-      giscusScript.async = true;
-
-      container.appendChild(giscusScript);
-    }
-
-    
-    if (loadBtn) {
-      loadBtn.addEventListener('click', loadGiscus);
-    }
-
-    
-    function setGiscusTheme(theme) {
-      const giscusFrame = document.querySelector('iframe.giscus-frame');
-      if (giscusFrame && giscusFrame.contentWindow) {
-        giscusFrame.contentWindow.postMessage(
-          { giscus: { setConfig: { theme } } },
-          'https://giscus.app'
-        );
-      }
-    }
-
-    
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        
-        setTimeout(() => {
-          const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
-          setGiscusTheme(currentTheme);
-        }, 10); 
-      });
-    }
-
-    
-    if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-        if (!localStorage.getItem('theme')) { 
-          const newTheme = event.matches ? "dark" : "light";
-          setGiscusTheme(newTheme);
-        }
-      });
-    }
-  })();
-</script>
-
-
-
-<footer>
-	<div class="footer-content">
-		<span class="footer-icons">
-			
-			
-			<a href="https://github.com/markholloway" target="_blank" rel="noopener" title="GitHub">
-				
-
-<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-
-			</a>
-			
-			
-			<a href="https://linkedin.com/in/mholloway" target="_blank" rel="noopener" title="LinkedIn">
-				
-
-<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-
-			</a>
-			
-			
-			<a href="/blog/index.xml" target="_blank" rel="noopener" title="RSS">
-				
-
-<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"/></svg>
-
-			</a>
-			
-			
-			<a href="https://cloud.umami.is/share/x4yvhGEscsDh1in8" target="_blank" rel="noopener" title="Umami">
-				
-
-<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845 0 0 0-.841.841v.858a13.31 13.31 0 0 0-.016.6c0 6.627 5.373 12 12 12 6.527 0 11.837-5.212 11.996-11.701 0-.025.004-.05.004-.075V9.452a.845.845 0 0 0-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692 0-8.645 3.192-9.805 7.521Zm18.444 0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069 0 7.512 2.697 8.639 6.399Z"/></svg>
-
-			</a>
-			
-		</span>
-		<span class="footer-text">
-			© Mark Holloway 2005-2026
-		</span>
-	</div>
-	<script src="/js/main.js"></script>
-
-</footer>
-</body>
-
-</html>
-
+expressions:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
+<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>terraform console <span class=o>&lt;&lt;&lt;</span> <span class=s1>&#39;lower(replace(&#34;CompanyEvent&#34;, &#34;/([a-z])([A-Z])/&#34;, &#34;$${1}_$${2}&#34;))&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># Output: &#34;company_event&#34;</span></span></span></code></pre></div></div></main><script>(function(){const e=document.getElementById("giscus-container"),t=document.getElementById("load-comments-btn");function o(){if(!e)return;e.innerHTML="";const n=document.body.classList.contains("dark")?"dark":"light",t=document.createElement("script");t.src="https://giscus.app/client.js",t.setAttribute("data-repo","markholloway/markholloway.github.io"),t.setAttribute("data-repo-id","MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc="),t.setAttribute("data-category","General"),t.setAttribute("data-category-id","DIC_kwDOB8-Z684CU9zc"),t.setAttribute("data-mapping","title"),t.setAttribute("data-strict","0"),t.setAttribute("data-reactions-enabled","1"),t.setAttribute("data-emit-metadata","0"),t.setAttribute("data-input-position","bottom"),t.setAttribute("data-theme",n),t.setAttribute("data-lang","en"),t.setAttribute("crossorigin","anonymous"),t.async=!0,e.appendChild(t)}t&&t.addEventListener("click",o);function n(e){const t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}const s=document.getElementById("theme-toggle");s&&s.addEventListener("click",()=>{setTimeout(()=>{const e=document.body.classList.contains("dark")?"dark":"light";n(e)},10)}),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",e=>{if(!localStorage.getItem("theme")){const t=e.matches?"dark":"light";n(t)}})})()</script><footer><div class=footer-content><span class=footer-icons><a href=https://github.com/markholloway target=_blank rel=noopener title=GitHub><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63.0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577.0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93.0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176.0.0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22.0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22.0 1.606-.015 2.896-.015 3.286.0.315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+</a><a href=https://linkedin.com/in/mholloway target=_blank rel=noopener title=LinkedIn><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853.0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601.0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144.0-2.063-.926-2.063-2.065.0-1.138.92-2.063 2.063-2.063 1.14.0 2.064.925 2.064 2.063.0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225.0H1.771C.792.0.0.774.0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2.0 22.222.0h.003z"/></svg>
+</a><a href=/blog/index.xml target=_blank rel=noopener title=RSS><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8.0 4.8V0c13.165.0 24 10.835 24 24h-4.801zM3.291 17.415c1.814.0 3.293 1.479 3.293 3.295.0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526.0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727.0 15.909 7.184 15.909 15.91z"/></svg>
+</a><a href=https://cloud.umami.is/share/x4yvhGEscsDh1in8 target=_blank rel=noopener title=Umami><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845.0 00-.841.841v.858a13.31 13.31.0 00-.016.6c0 6.627 5.373 12 12 12 6.527.0 11.837-5.212 11.996-11.701.0-.025.004-.05.004-.075V9.452a.845.845.0 00-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692.0-8.645 3.192-9.805 7.521zm18.444.0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069.0 7.512 2.697 8.639 6.399z"/></svg>
+</a></span><span class=footer-text>© Mark Holloway 2005-2026</span></div><script src=/js/main.js></script></footer></body></html>

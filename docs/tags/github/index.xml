@@ -1,27 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Github on Mark Holloway</title>
-    <link>http://localhost:1313/tags/github/</link>
-    <description>Recent content in Github on Mark Holloway</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>© Mark Holloway</copyright>
-    <lastBuildDate>Sat, 24 Aug 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/github/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>GitHub Pages and Google</title>
-      <link>http://localhost:1313/blog/2024/08/24/github-pages-and-google/</link>
-      <pubDate>Sat, 24 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2024/08/24/github-pages-and-google/</guid>
-      <description>&lt;p&gt;Turns out that if you publish a blog (like I do) on&#xA;&#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://pages.github.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub pages&lt;/a&gt;, and you want the site to be indexed&#xA;by Google, it&amp;rsquo;s not so easy.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m not sure entirely what the root cause is, but you have to manually add your&#xA;site in the &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://search.google.com/search-console&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Search Console&lt;/a&gt;&#xA;and then manually add each URL individually for indexing.&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;  &#xA;&#xA;  &#xA;    &#xA;    &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;  &#xA;    &#xA;  &#xA;&#xA;  &#xA;  &#xA;&#xA;  &lt;a href=&#34;https://github.com/orgs/community/discussions/50379&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;github-link&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; class=&#34;feather feather-github&#34;&gt;&lt;path d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;&lt;/path&gt;&lt;/svg&gt;This discussion&lt;/a&gt; outlines&#xA;the problem perfectly.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Export repo data from GitHub organization</title>
-      <link>http://localhost:1313/blog/2023/09/01/export-repo-data-from-github-organization/</link>
-      <pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/2023/09/01/export-repo-data-from-github-organization/</guid>
-      <description>&lt;p&gt;This is a quickie, using the &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://cli.github.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub CLI&lt;/a&gt; and optionally some Python.&lt;/p&gt;&#xA;&lt;p&gt;Replace &lt;code&gt;YOUR_ORG&lt;/code&gt; with your organization and export all your organization&amp;rsquo;s repo data to &lt;code&gt;repos.json&lt;/code&gt;:&lt;/p&gt;&#xA;&lt;div class=&#34;code-block-wrapper&#34;&gt;&#xA;  &lt;button class=&#34;copy-code-button&#34; aria-label=&#34;Copy code to clipboard&#34;&gt;&#xA;    &lt;svg class=&#34;copy-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&#xA;      &lt;path d=&#34;M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2&#34;&gt;&lt;/path&gt;&#xA;      &lt;rect x=&#34;8&#34; y=&#34;2&#34; width=&#34;8&#34; height=&#34;4&#34; rx=&#34;1&#34; ry=&#34;1&#34;&gt;&lt;/rect&gt;&#xA;    &lt;/svg&gt;&#xA;    &lt;svg class=&#34;check-icon&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; style=&#34;display: none;&#34;&gt;&#xA;      &lt;polyline points=&#34;20 6 9 17 4 12&#34;&gt;&lt;/polyline&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/button&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gh api &lt;span class=&#34;se&#34;&gt;\&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Accept: application/vnd.github+json&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;X-GitHub-Api-Version: 2022-11-28&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        /orgs/YOUR_ORG/repos &lt;span class=&#34;se&#34;&gt;\&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        --paginate &amp;gt; repos.json&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&#xA;&lt;details&gt;&#xA;&lt;summary&gt;Expand to see what data is exported&lt;/summary&gt;&#xA;&lt;p&gt;At the time of writing this post, this is the kind of data which will be exported from the organization&amp;rsquo;s repo(s):&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github on Mark Holloway</title><link>https://markholloway.com/tags/github/</link><description>Recent content in Github on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Sat, 24 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>GitHub Pages and Google</title><link>https://markholloway.com/blog/2024/08/24/github-pages-and-google/</link><pubDate>Sat, 24 Aug 2024 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2024/08/24/github-pages-and-google/</guid><description>&lt;p&gt;Turns out that if you publish a blog (like I do) on
+
+
+
+
+&lt;a href="https://pages.github.com/" target="_blank" rel="noopener"&gt;GitHub pages&lt;/a&gt;, and you want the site to be indexed
+by Google, it&amp;rsquo;s not so easy.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not sure entirely what the root cause is, but you have to manually add your
+site in the 
+
+
+
+&lt;a href="https://search.google.com/search-console" target="_blank" rel="noopener"&gt;Google Search Console&lt;/a&gt;
+and then manually add each URL individually for indexing.
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ &lt;a href="https://github.com/orgs/community/discussions/50379" target="_blank" rel="noopener" class="github-link"&gt;&lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"&gt;&lt;path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"&gt;&lt;/path&gt;&lt;/svg&gt;This discussion&lt;/a&gt; outlines
+the problem perfectly.&lt;/p&gt;</description></item><item><title>Export repo data from GitHub organization</title><link>https://markholloway.com/blog/2023/09/01/export-repo-data-from-github-organization/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2023/09/01/export-repo-data-from-github-organization/</guid><description>&lt;p&gt;This is a quickie, using the 
+
+
+
+&lt;a href="https://cli.github.com/" target="_blank" rel="noopener"&gt;GitHub CLI&lt;/a&gt; and optionally some Python.&lt;/p&gt;
+&lt;p&gt;Replace &lt;code&gt;YOUR_ORG&lt;/code&gt; with your organization and export all your organization&amp;rsquo;s repo data to &lt;code&gt;repos.json&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="code-block-wrapper"&gt;
+ &lt;button class="copy-code-button" aria-label="Copy code to clipboard"&gt;
+ &lt;svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+ &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+ &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+ &lt;/svg&gt;
+ &lt;svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"&gt;
+ &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+ &lt;/svg&gt;
+ &lt;/button&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;gh api &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Accept: application/vnd.github+json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;X-GitHub-Api-Version: 2022-11-28&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; /orgs/YOUR_ORG/repos &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --paginate &amp;gt; repos.json&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;details&gt;
+&lt;summary&gt;Expand to see what data is exported&lt;/summary&gt;
+&lt;p&gt;At the time of writing this post, this is the kind of data which will be exported from the organization&amp;rsquo;s repo(s):&lt;/p&gt;</description></item></channel></rss>

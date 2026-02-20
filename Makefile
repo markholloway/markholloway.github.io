@@ -12,9 +12,25 @@ build:
 	go tool hugo --minify --environment production
 	# legacy mkdocs-created RSS feed
 	cp public/blog/index.xml public/feed_rss_created.xml
-	bunx pagefind --site public
+	bunx pagefind --site public /or/ bunx pagefind --site docs
 
 clean:
 	rm -rf public resources
 
 ci: test build
+
+# **Local Development:**
+# bash
+# make  # Clean + build + serve (recommended)
+# Or: make serve (serve only, without clean/build)
+
+# **Production Build:**
+# bash
+# make build  # Hugo build + Pagefind indexing
+
+# **Manual Commands:**
+# - Hugo: `go tool hugo server -D` (dev) or
+# go tool hugo --minify --environment production` (prod)
+# Search: `bunx pagefind --site public` (after Hugo build)
+# Clean: `make clean` (removes `public/` and `resources/`)
+

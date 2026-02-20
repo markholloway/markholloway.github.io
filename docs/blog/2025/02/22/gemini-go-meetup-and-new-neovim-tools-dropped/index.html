@@ -1,753 +1,257 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
-    <title>Gemini, Go Meetup and new Neovim tools dropped | Mark Holloway</title>
-    <meta name="description" content="Notes from a curiosity-driven engineer.">
-    <link rel="canonical" href="http://localhost:1313/blog/2025/02/22/gemini-go-meetup-and-new-neovim-tools-dropped/">
-    
-    
-    <meta property="og:url" content="http://localhost:1313/blog/2025/02/22/gemini-go-meetup-and-new-neovim-tools-dropped/">
-  <meta property="og:site_name" content="Mark Holloway">
-  <meta property="og:title" content="Gemini, Go Meetup and new Neovim tools dropped">
-  <meta property="og:description" content="I’m fortunate to work at a company which allows the use of AI, and in this case Google Gemini Advanced. It’s really, really fast but I still feel Claude (Sonnet 3.5) is a lot more accurate and has better overall taste. But it’s still extremely helpful to have “AI chat” at your disposal. A colleague of mine took a third-party API spec and asked Gemini to write the Go types for it for him. Awesome! This week was the most sunny in Gothenburg since, I don’t even know when. Toying with the idea to start commuting to work by bike. It was so fun and uplifting to be speaking at the latest Go Meetup here in Gothenburg. Let’s keep this momentum up! gitingest - essentially replace the github.com in repository URLs with gitingest.com and download the whole repo as one structured text file that you can upload to AI chat of your choice. If the text file becomes to large for Claude Sonnet 3.5 (my favorite pair-programming LLM), try Gemini, which has support for a larger context window. lazydocker - I Use lazygit extensively and I recently saw there’s also this project with a very similar UI that you can use to manage your containers. I have been using Podman’s GUI dashboard as it gives a great overview of containers, images, volumes etc, but I appreciate not having to leave the terminal. And with lazydocker, you get even better overview IMHO. pr.nvim - I was missing the capability to quickly get to the pull request associated with the line under the cursor. So I wrote this tool! godoc.nvim - I wrote a small tool for reading Go documentation from within Neovim. snacks.nvim’s image - Folke is at it again, and as part of his endevour to serve us the buffet that is snacks.nvim, you can now enable the “image” feature, which will show images in Neovim. I use it to show images from markdown files primarily. It’s absolutely awesome. Note that it requires a terminal with support for the kitty graphics protocol. I had to also make sure to have ImageMagick installed. git-remove-branches - a shell script I wrote to finally get control of all stale local (and remote) branches. Put it on $PATH and run! Example output of git-remove-branches Here I’m running git-remove-branches for the first time in a git repo:">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-02-22T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-02-22T00:00:00+00:00">
-
-    
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Gemini, Go Meetup and new Neovim tools dropped">
-  <meta name="twitter:description" content="I’m fortunate to work at a company which allows the use of AI, and in this case Google Gemini Advanced. It’s really, really fast but I still feel Claude (Sonnet 3.5) is a lot more accurate and has better overall taste. But it’s still extremely helpful to have “AI chat” at your disposal. A colleague of mine took a third-party API spec and asked Gemini to write the Go types for it for him. Awesome! This week was the most sunny in Gothenburg since, I don’t even know when. Toying with the idea to start commuting to work by bike. It was so fun and uplifting to be speaking at the latest Go Meetup here in Gothenburg. Let’s keep this momentum up! gitingest - essentially replace the github.com in repository URLs with gitingest.com and download the whole repo as one structured text file that you can upload to AI chat of your choice. If the text file becomes to large for Claude Sonnet 3.5 (my favorite pair-programming LLM), try Gemini, which has support for a larger context window. lazydocker - I Use lazygit extensively and I recently saw there’s also this project with a very similar UI that you can use to manage your containers. I have been using Podman’s GUI dashboard as it gives a great overview of containers, images, volumes etc, but I appreciate not having to leave the terminal. And with lazydocker, you get even better overview IMHO. pr.nvim - I was missing the capability to quickly get to the pull request associated with the line under the cursor. So I wrote this tool! godoc.nvim - I wrote a small tool for reading Go documentation from within Neovim. snacks.nvim’s image - Folke is at it again, and as part of his endevour to serve us the buffet that is snacks.nvim, you can now enable the “image” feature, which will show images in Neovim. I use it to show images from markdown files primarily. It’s absolutely awesome. Note that it requires a terminal with support for the kitty graphics protocol. I had to also make sure to have ImageMagick installed. git-remove-branches - a shell script I wrote to finally get control of all stale local (and remote) branches. Put it on $PATH and run! Example output of git-remove-branches Here I’m running git-remove-branches for the first time in a git repo:">
-
-    
-    
-    
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Gemini, Go Meetup and new Neovim tools dropped",
-  "datePublished": "2025-02-22T00:00:00Z",
-  "dateModified": "2025-02-22T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/blog\/2025\/02\/22\/gemini-go-meetup-and-new-neovim-tools-dropped\/"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "map[]"
-  },
-  "description": " I\u0026rsquo;m fortunate to work at a company which allows the use of AI, and in this case Google Gemini Advanced. It\u0026rsquo;s really, really fast but I still feel Claude (Sonnet 3.5) is a lot more accurate and has better overall taste. But it\u0026rsquo;s still extremely helpful to have \u0026ldquo;AI chat\u0026rdquo; at your disposal. A colleague of mine took a third-party API spec and asked Gemini to write the Go types for it for him. Awesome! This week was the most sunny in Gothenburg since, I don\u0026rsquo;t even know when. Toying with the idea to start commuting to work by bike. It was so fun and uplifting to be speaking at the latest Go Meetup here in Gothenburg. Let\u0026rsquo;s keep this momentum up! gitingest - essentially replace the github.com in repository URLs with gitingest.com and download the whole repo as one structured text file that you can upload to AI chat of your choice. If the text file becomes to large for Claude Sonnet 3.5 (my favorite pair-programming LLM), try Gemini, which has support for a larger context window. lazydocker - I Use lazygit extensively and I recently saw there\u0026rsquo;s also this project with a very similar UI that you can use to manage your containers. I have been using Podman\u0026rsquo;s GUI dashboard as it gives a great overview of containers, images, volumes etc, but I appreciate not having to leave the terminal. And with lazydocker, you get even better overview IMHO. pr.nvim - I was missing the capability to quickly get to the pull request associated with the line under the cursor. So I wrote this tool! godoc.nvim - I wrote a small tool for reading Go documentation from within Neovim. snacks.nvim\u0026rsquo;s image - Folke is at it again, and as part of his endevour to serve us the buffet that is snacks.nvim, you can now enable the \u0026ldquo;image\u0026rdquo; feature, which will show images in Neovim. I use it to show images from markdown files primarily. It\u0026rsquo;s absolutely awesome. Note that it requires a terminal with support for the kitty graphics protocol. I had to also make sure to have ImageMagick installed. git-remove-branches - a shell script I wrote to finally get control of all stale local (and remote) branches. Put it on $PATH and run! Example output of git-remove-branches Here I\u0026rsquo;m running git-remove-branches for the first time in a git repo:\n"
-}
-</script>
-
-
-
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    
-    
-    <link rel="preload" href="/fonts/BerkeleyMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/CommitMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/MapleMono-Italic.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/github-link.css" />
-    
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="c9c97df3-bc05-4b29-8caa-fcf03a05710f"></script>
-
-  </head>
-
-  <body class="preload">
-    <script>
-      (function() {
-        
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-          document.body.classList.add(savedTheme);
-        } else {
-          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.body.classList.add('dark');
-          }
-        }
-        
-        
-        if ('fonts' in document) {
-          
-          Promise.race([
-            document.fonts.ready,
-            new Promise(resolve => setTimeout(resolve, 100)) 
-          ]).then(() => {
-            document.body.classList.remove('preload');
-          });
-        } else {
-          
-          setTimeout(() => {
-            document.body.classList.remove('preload');
-          }, 50);
-        }
-      })();
-    </script>
-
-    <nav style="display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
-      <ul class="menu" style="margin: 0; padding: 0; flex-shrink: 0;">
-        
-        
-        <li><a  href="/">Home</a></li>
-        
-        <li><a  href="/blog/">Blog</a></li>
-        
-        <li><a  href="/about/">About</a></li>
-        
-        <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1em; padding:5px; color:inherit;">◑</button></li>
-      </ul>
-      
-      
-      <div id="search" style="flex-grow: 1; min-width: 200px;"></div>
-    </nav>
-    
-    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-    <script src="/pagefind/pagefind-ui.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-            new PagefindUI({ 
-              element: "#search", 
-              showSubResults: true,
-              showImages: false,
-              translations: {
-                placeholder: "Search...",
-                clear_search: "×"
-              }
-            });
-
-            
-            document.addEventListener('click', (e) => {
-                const searchContainer = document.querySelector('#search');
-                if (searchContainer && !searchContainer.contains(e.target)) {
-                    const clearButton = searchContainer.querySelector('.pagefind-ui__search-clear');
-                    if (clearButton) {
-                        clearButton.click();
-                    }
-                }
-            });
-
-            
-            const toggle = document.getElementById('theme-toggle');
-            const body = document.body;
-
-            toggle.addEventListener('click', () => {
-              if (body.classList.contains('dark')) {
-                body.classList.remove('dark');
-                body.classList.add('light');
-                localStorage.setItem('theme', 'light');
-              } else {
-                body.classList.remove('light');
-                body.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-              }
-            });
-        });
-    </script>
-
-
-<div class="article-meta">
-<h1><span class="title">Gemini, Go Meetup and new Neovim tools dropped</span></h1>
-
-<div class="article-meta-info">
-  <span class="date">2025-02-22</span>
-  
-  <span class="article-tags">
-    
-    
-    <a href="/categories/joy-and-curiosity">#Joy and Curiosity</a>
-    
-    
-    
-  </span>
-  
-</div>
-</div>
-
-
-
-<main data-pagefind-body>
-	
-	
-		
-
-		<ul>
-<li>I&rsquo;m fortunate to work at 
-
-
-
-<a href="https://einride.tech" target="_blank" rel="noopener">a company</a> which allows the
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Gemini, Go Meetup and new Neovim tools dropped | Mark Holloway</title><meta name=description content="Notes from a curiosity-driven engineer."><link rel=canonical href=https://markholloway.com/blog/2025/02/22/gemini-go-meetup-and-new-neovim-tools-dropped/><meta property="og:url" content="https://markholloway.com/blog/2025/02/22/gemini-go-meetup-and-new-neovim-tools-dropped/"><meta property="og:site_name" content="Mark Holloway"><meta property="og:title" content="Gemini, Go Meetup and new Neovim tools dropped"><meta property="og:description" content="I’m fortunate to work at a company which allows the use of AI, and in this case Google Gemini Advanced. It’s really, really fast but I still feel Claude (Sonnet 3.5) is a lot more accurate and has better overall taste. But it’s still extremely helpful to have “AI chat” at your disposal. A colleague of mine took a third-party API spec and asked Gemini to write the Go types for it for him. Awesome! This week was the most sunny in Gothenburg since, I don’t even know when. Toying with the idea to start commuting to work by bike. It was so fun and uplifting to be speaking at the latest Go Meetup here in Gothenburg. Let’s keep this momentum up! gitingest - essentially replace the github.com in repository URLs with gitingest.com and download the whole repo as one structured text file that you can upload to AI chat of your choice. If the text file becomes to large for Claude Sonnet 3.5 (my favorite pair-programming LLM), try Gemini, which has support for a larger context window. lazydocker - I Use lazygit extensively and I recently saw there’s also this project with a very similar UI that you can use to manage your containers. I have been using Podman’s GUI dashboard as it gives a great overview of containers, images, volumes etc, but I appreciate not having to leave the terminal. And with lazydocker, you get even better overview IMHO. pr.nvim - I was missing the capability to quickly get to the pull request associated with the line under the cursor. So I wrote this tool! godoc.nvim - I wrote a small tool for reading Go documentation from within Neovim. snacks.nvim’s image - Folke is at it again, and as part of his endevour to serve us the buffet that is snacks.nvim, you can now enable the “image” feature, which will show images in Neovim. I use it to show images from markdown files primarily. It’s absolutely awesome. Note that it requires a terminal with support for the kitty graphics protocol. I had to also make sure to have ImageMagick installed. git-remove-branches - a shell script I wrote to finally get control of all stale local (and remote) branches. Put it on $PATH and run! Example output of git-remove-branches Here I’m running git-remove-branches for the first time in a git repo:"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2025-02-22T00:00:00+00:00"><meta property="article:modified_time" content="2025-02-22T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Gemini, Go Meetup and new Neovim tools dropped"><meta name=twitter:description content="I’m fortunate to work at a company which allows the use of AI, and in this case Google Gemini Advanced. It’s really, really fast but I still feel Claude (Sonnet 3.5) is a lot more accurate and has better overall taste. But it’s still extremely helpful to have “AI chat” at your disposal. A colleague of mine took a third-party API spec and asked Gemini to write the Go types for it for him. Awesome! This week was the most sunny in Gothenburg since, I don’t even know when. Toying with the idea to start commuting to work by bike. It was so fun and uplifting to be speaking at the latest Go Meetup here in Gothenburg. Let’s keep this momentum up! gitingest - essentially replace the github.com in repository URLs with gitingest.com and download the whole repo as one structured text file that you can upload to AI chat of your choice. If the text file becomes to large for Claude Sonnet 3.5 (my favorite pair-programming LLM), try Gemini, which has support for a larger context window. lazydocker - I Use lazygit extensively and I recently saw there’s also this project with a very similar UI that you can use to manage your containers. I have been using Podman’s GUI dashboard as it gives a great overview of containers, images, volumes etc, but I appreciate not having to leave the terminal. And with lazydocker, you get even better overview IMHO. pr.nvim - I was missing the capability to quickly get to the pull request associated with the line under the cursor. So I wrote this tool! godoc.nvim - I wrote a small tool for reading Go documentation from within Neovim. snacks.nvim’s image - Folke is at it again, and as part of his endevour to serve us the buffet that is snacks.nvim, you can now enable the “image” feature, which will show images in Neovim. I use it to show images from markdown files primarily. It’s absolutely awesome. Note that it requires a terminal with support for the kitty graphics protocol. I had to also make sure to have ImageMagick installed. git-remove-branches - a shell script I wrote to finally get control of all stale local (and remote) branches. Put it on $PATH and run! Example output of git-remove-branches Here I’m running git-remove-branches for the first time in a git repo:"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Gemini, Go Meetup and new Neovim tools dropped","datePublished":"2025-02-22T00:00:00Z","dateModified":"2025-02-22T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/markholloway.com\/blog\/2025\/02\/22\/gemini-go-meetup-and-new-neovim-tools-dropped\/"},"author":{"@type":"Person","name":"map[]"},"description":" I\u0026rsquo;m fortunate to work at a company which allows the use of AI, and in this case Google Gemini Advanced. It\u0026rsquo;s really, really fast but I still feel Claude (Sonnet 3.5) is a lot more accurate and has better overall taste. But it\u0026rsquo;s still extremely helpful to have \u0026ldquo;AI chat\u0026rdquo; at your disposal. A colleague of mine took a third-party API spec and asked Gemini to write the Go types for it for him. Awesome! This week was the most sunny in Gothenburg since, I don\u0026rsquo;t even know when. Toying with the idea to start commuting to work by bike. It was so fun and uplifting to be speaking at the latest Go Meetup here in Gothenburg. Let\u0026rsquo;s keep this momentum up! gitingest - essentially replace the github.com in repository URLs with gitingest.com and download the whole repo as one structured text file that you can upload to AI chat of your choice. If the text file becomes to large for Claude Sonnet 3.5 (my favorite pair-programming LLM), try Gemini, which has support for a larger context window. lazydocker - I Use lazygit extensively and I recently saw there\u0026rsquo;s also this project with a very similar UI that you can use to manage your containers. I have been using Podman\u0026rsquo;s GUI dashboard as it gives a great overview of containers, images, volumes etc, but I appreciate not having to leave the terminal. And with lazydocker, you get even better overview IMHO. pr.nvim - I was missing the capability to quickly get to the pull request associated with the line under the cursor. So I wrote this tool! godoc.nvim - I wrote a small tool for reading Go documentation from within Neovim. snacks.nvim\u0026rsquo;s image - Folke is at it again, and as part of his endevour to serve us the buffet that is snacks.nvim, you can now enable the \u0026ldquo;image\u0026rdquo; feature, which will show images in Neovim. I use it to show images from markdown files primarily. It\u0026rsquo;s absolutely awesome. Note that it requires a terminal with support for the kitty graphics protocol. I had to also make sure to have ImageMagick installed. git-remove-branches - a shell script I wrote to finally get control of all stale local (and remote) branches. Put it on $PATH and run! Example output of git-remove-branches Here I\u0026rsquo;m running git-remove-branches for the first time in a git repo:\n"}</script><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=preload href=/fonts/BerkeleyMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/CommitMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/MapleMono-Italic.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/github-link.css><script defer src=https://cloud.umami.is/script.js data-website-id=29980893-435d-4d73-962b-e2b6e505fb7e></script></head><body class=preload><script>(function(){const e=localStorage.getItem("theme");e?document.body.classList.add(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark"),"fonts"in document?Promise.race([document.fonts.ready,new Promise(e=>setTimeout(e,100))]).then(()=>{document.body.classList.remove("preload")}):setTimeout(()=>{document.body.classList.remove("preload")},50)})()</script><nav style=display:flex;align-items:center;gap:1em;flex-wrap:wrap><ul class=menu style=margin:0;padding:0;flex-shrink:0><li><a href=/>Home</a></li><li><a href=/blog/>Blog</a></li><li><a href=/about/>About</a></li><li><button id=theme-toggle style="background:0 0;border:none;cursor:pointer;font-size:1em;padding:5px;color:inherit">◑</button></li></ul><div id=search style=flex-grow:1;min-width:200px></div></nav><link href=/pagefind/pagefind-ui.css rel=stylesheet><script src=/pagefind/pagefind-ui.js></script><script>window.addEventListener("DOMContentLoaded",e=>{new PagefindUI({element:"#search",showSubResults:!0,showImages:!1,translations:{placeholder:"Search...",clear_search:"×"}}),document.addEventListener("click",e=>{const t=document.querySelector("#search");if(t&&!t.contains(e.target)){const e=t.querySelector(".pagefind-ui__search-clear");e&&e.click()}});const n=document.getElementById("theme-toggle"),t=document.body;n.addEventListener("click",()=>{t.classList.contains("dark")?(t.classList.remove("dark"),t.classList.add("light"),localStorage.setItem("theme","light")):(t.classList.remove("light"),t.classList.add("dark"),localStorage.setItem("theme","dark"))})})</script><div class=article-meta><h1><span class=title>Gemini, Go Meetup and new Neovim tools dropped</span></h1><div class=article-meta-info><span class=date>2025-02-22</span>
+<span class=article-tags><a href=/categories/joy-and-curiosity>#Joy and Curiosity</a></span></div></div><main data-pagefind-body><ul><li>I&rsquo;m fortunate to work at
+<a href=https://einride.tech target=_blank rel=noopener>a company</a> which allows the
 use of AI, and in this case Google Gemini Advanced. It&rsquo;s really, really fast
 but I still feel Claude (Sonnet 3.5) is a lot more accurate and has better
 overall taste. But it&rsquo;s still extremely helpful to have &ldquo;AI chat&rdquo; at your
 disposal. A colleague of mine took a third-party API spec and asked Gemini to
-write the Go types for it for him. Awesome!</li>
-<li>This week was the most sunny in Gothenburg since, I don&rsquo;t even know when.
-Toying with the idea to start commuting to work by bike.</li>
-<li>It was so fun and uplifting to be speaking at the latest
-
-
-
-
-<a href="https://www.meetup.com/sweden-go-west/events/305475640/" target="_blank" rel="noopener">Go Meetup</a> here in
-Gothenburg. Let&rsquo;s keep this momentum up!</li>
-</ul>
-<hr>
-<ul>
-<li>
-
-
-
-<a href="https://gitingest.com" target="_blank" rel="noopener">gitingest</a> - essentially replace the <code>github.com</code> in
+write the Go types for it for him. Awesome!</li><li>This week was the most sunny in Gothenburg since, I don&rsquo;t even know when.
+Toying with the idea to start commuting to work by bike.</li><li>It was so fun and uplifting to be speaking at the latest
+<a href=https://www.meetup.com/sweden-go-west/events/305475640/ target=_blank rel=noopener>Go Meetup</a> here in
+Gothenburg. Let&rsquo;s keep this momentum up!</li></ul><hr><ul><li><a href=https://gitingest.com target=_blank rel=noopener>gitingest</a> - essentially replace the <code>github.com</code> in
 repository URLs with <code>gitingest.com</code> and download the whole repo as one
 structured text file that you can upload to AI chat of your choice. If the
-text file becomes to large for 
-
-
-
-<a href="https://claude.ai" target="_blank" rel="noopener">Claude</a> Sonnet 3.5 (my
-favorite pair-programming LLM), try 
-
-
-
-<a href="https://gemini.google.com/" target="_blank" rel="noopener">Gemini</a>,
-which has support for a larger context window.</li>
-<li>
-
-
-
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-    
-    
-  
-
-  
-  
-  
-    
-  
-
-  
-  
-
-  <a href="https://github.com/jesseduffield/lazydocker" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><code>lazydocker</code></a> - I Use <code>lazygit</code>
+text file becomes to large for
+<a href=https://claude.ai target=_blank rel=noopener>Claude</a> Sonnet 3.5 (my
+favorite pair-programming LLM), try
+<a href=https://gemini.google.com/ target=_blank rel=noopener>Gemini</a>,
+which has support for a larger context window.</li><li><a href=https://github.com/jesseduffield/lazydocker target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><code>lazydocker</code></a> - I Use <code>lazygit</code>
 extensively and I recently saw there&rsquo;s also this project with a very similar
 UI that you can use to manage your containers. I have been using Podman&rsquo;s GUI
 dashboard as it gives a great overview of containers, images, volumes etc, but
 I appreciate not having to leave the terminal. And with lazydocker, you get
-even better overview IMHO.</li>
-<li>
-
-
-
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-    
-    
-  
-
-  
-  
-  
-    
-  
-
-  
-  
-
-  <a href="https://github.com/fredrikaverpil/pr.nvim" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>pr.nvim</a> - I was missing the
+even better overview IMHO.</li><li><a href=https://github.com/fredrikaverpil/pr.nvim target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>pr.nvim</a> - I was missing the
 capability to quickly get to the pull request associated with the line under
-the cursor. So I wrote this tool!</li>
-<li>
-
-
-
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-    
-    
-  
-
-  
-  
-  
-    
-  
-
-  
-  
-
-  <a href="https://github.com/fredrikaverpil/godoc.nvim" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>godoc.nvim</a> - I wrote a small
-tool for reading Go documentation from within Neovim.</li>
-<li>
-
-
-
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-    
-    
-  
-
-  
-  
-  
-    
-  
-
-  
-  
-
-  <a href="https://github.com/folke/snacks.nvim/blob/main/docs/image.md" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>snacks.nvim&rsquo;s image</a> -
+the cursor. So I wrote this tool!</li><li><a href=https://github.com/fredrikaverpil/godoc.nvim target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>godoc.nvim</a> - I wrote a small
+tool for reading Go documentation from within Neovim.</li><li><a href=https://github.com/folke/snacks.nvim/blob/main/docs/image.md target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>snacks.nvim&rsquo;s image</a> -
 Folke is at it again, and as part of his endevour to serve us the buffet that
 is <code>snacks.nvim</code>, you can now enable the &ldquo;image&rdquo; feature, which will show
 images in Neovim. I use it to show images from markdown files primarily. It&rsquo;s
 absolutely awesome. Note that it requires a terminal with support for the
 kitty graphics protocol. I had to also make sure to have ImageMagick
-installed.</li>
-<li>
-
-
-
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-    
-    
-  
-
-  
-  
-  
-    
-  
-
-  
-  
-
-  <a href="https://github.com/fredrikaverpil/dotfiles/blob/main/shell/bin/git-remove-branches" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><code>git-remove-branches</code></a> -
+installed.</li><li><a href=https://github.com/fredrikaverpil/dotfiles/blob/main/shell/bin/git-remove-branches target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg><code>git-remove-branches</code></a> -
 a shell script I wrote to finally get control of all stale local (and remote)
-branches. Put it on <code>$PATH</code> and run!</li>
-</ul>
-<details>
-<summary>Example output of git-remove-branches</summary>
-<p>Here I&rsquo;m running <code>git-remove-branches</code> for the first time in a git repo:</p>
-<div class="code-block-wrapper">
-  <button class="copy-code-button" aria-label="Copy code to clipboard">
-    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-    </svg>
-    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">❯ git-remove-branches
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Branch Status Summary:
-</span></span><span class="line"><span class="cl">🟢 Safe to delete   🔴 Needs review   ⚠️  Stale   🌐 Remote exists   ✅ Merged
-</span></span><span class="line"><span class="cl">───────────────────────────────────────────────────────────
-</span></span><span class="line"><span class="cl">🔴    🌐    bench
-</span></span><span class="line"><span class="cl">🔴          bump-go
-</span></span><span class="line"><span class="cl">🔴 ⚠️       cgo
-</span></span><span class="line"><span class="cl">🔴          custom-log
-</span></span><span class="line"><span class="cl">🔴 ⚠️       debug_files
-</span></span><span class="line"><span class="cl">🔴          delve-output
-</span></span><span class="line"><span class="cl">🔴    🌐    docker
-</span></span><span class="line"><span class="cl">🔴          docs-dap
-</span></span><span class="line"><span class="cl">🔴          docs-fix
-</span></span><span class="line"><span class="cl">🔴          docs-fix-testify
-</span></span><span class="line"><span class="cl">🔴          docusaurus
-</span></span><span class="line"><span class="cl">🔴    🌐    fail-build-go1.24
-</span></span><span class="line"><span class="cl">🔴          fix-golist-windows
-</span></span><span class="line"><span class="cl">🔴          fix-links
-</span></span><span class="line"><span class="cl">🟢       ✅ fix-typo
-</span></span><span class="line"><span class="cl">🔴          folderstructure
-</span></span><span class="line"><span class="cl">🔴          format-testify-lookup-queries
-</span></span><span class="line"><span class="cl">🟢       ✅ gobump
-</span></span><span class="line"><span class="cl">🟢       ✅ gotestsum
-</span></span><span class="line"><span class="cl">🔴          ignore-windows
-</span></span><span class="line"><span class="cl">🔴          loop-uv
-</span></span><span class="line"><span class="cl">🔴 ⚠️       manual-release
-</span></span><span class="line"><span class="cl">🔴          missing-output
-</span></span><span class="line"><span class="cl">🔴          other-process
-</span></span><span class="line"><span class="cl">🔴    🌐    perf/async-golist
-</span></span><span class="line"><span class="cl">🔴          perf/cwd
-</span></span><span class="line"><span class="cl">🔴          perf/decode
-</span></span><span class="line"><span class="cl">🔴          perf/golist-cmd
-</span></span><span class="line"><span class="cl">🔴          perf/golist-cwd
-</span></span><span class="line"><span class="cl">🔴          release-please--branches--main
-</span></span><span class="line"><span class="cl">🔴 ⚠️ 🌐    runners-refactor
-</span></span><span class="line"><span class="cl">🔴          sanitization
-</span></span><span class="line"><span class="cl">🔴          t-run
-</span></span><span class="line"><span class="cl">🔴 ⚠️       table-test-without-struct-fields
-</span></span><span class="line"><span class="cl">🔴    🌐    testify-operand
-</span></span><span class="line"><span class="cl">🔴          testify-regexp
-</span></span><span class="line"><span class="cl">🔴          windows
-</span></span><span class="line"><span class="cl">🔴          xtestgofiles
-</span></span><span class="line"><span class="cl">🔴    🌐    zig
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">🟢 Safe to delete:
-</span></span><span class="line"><span class="cl">- fix-typo
-</span></span><span class="line"><span class="cl">- gobump
-</span></span><span class="line"><span class="cl">- gotestsum
-</span></span><span class="line"><span class="cl">Delete these <span class="nb">local</span> and remote branches? <span class="o">(</span>y/N<span class="o">)</span> y
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Remote branch origin/fix-typo does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch fix-typo
-</span></span><span class="line"><span class="cl">Deleted branch fix-typo <span class="o">(</span>was 2c106ca<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/gobump does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch gobump
-</span></span><span class="line"><span class="cl">Deleted branch gobump <span class="o">(</span>was e76726a<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/gotestsum does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch gotestsum
-</span></span><span class="line"><span class="cl">Deleted branch gotestsum <span class="o">(</span>was 57cece8<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">🔴 Unmerged branches:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">📝 Branches with active PRs <span class="o">(</span>skipping<span class="o">)</span>:
-</span></span><span class="line"><span class="cl">- bench
-</span></span><span class="line"><span class="cl">- docker
-</span></span><span class="line"><span class="cl">- fail-build-go1.24
-</span></span><span class="line"><span class="cl">- testify-operand
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">❌ Unmerged branches without active PRs:
-</span></span><span class="line"><span class="cl">- bump-go
-</span></span><span class="line"><span class="cl">- cgo
-</span></span><span class="line"><span class="cl">- custom-log
-</span></span><span class="line"><span class="cl">- debug_files
-</span></span><span class="line"><span class="cl">- delve-output
-</span></span><span class="line"><span class="cl">- docs-dap
-</span></span><span class="line"><span class="cl">- docs-fix
-</span></span><span class="line"><span class="cl">- docs-fix-testify
-</span></span><span class="line"><span class="cl">- docusaurus
-</span></span><span class="line"><span class="cl">- fix-golist-windows
-</span></span><span class="line"><span class="cl">- fix-links
-</span></span><span class="line"><span class="cl">- folderstructure
-</span></span><span class="line"><span class="cl">- format-testify-lookup-queries
-</span></span><span class="line"><span class="cl">- ignore-windows
-</span></span><span class="line"><span class="cl">- loop-uv
-</span></span><span class="line"><span class="cl">- manual-release
-</span></span><span class="line"><span class="cl">- missing-output
-</span></span><span class="line"><span class="cl">- other-process
-</span></span><span class="line"><span class="cl">- perf/async-golist
-</span></span><span class="line"><span class="cl">- perf/cwd
-</span></span><span class="line"><span class="cl">- perf/decode
-</span></span><span class="line"><span class="cl">- perf/golist-cmd
-</span></span><span class="line"><span class="cl">- perf/golist-cwd
-</span></span><span class="line"><span class="cl">- release-please--branches--main
-</span></span><span class="line"><span class="cl">- runners-refactor
-</span></span><span class="line"><span class="cl">- sanitization
-</span></span><span class="line"><span class="cl">- t-run
-</span></span><span class="line"><span class="cl">- table-test-without-struct-fields
-</span></span><span class="line"><span class="cl">- testify-regexp
-</span></span><span class="line"><span class="cl">- windows
-</span></span><span class="line"><span class="cl">- xtestgofiles
-</span></span><span class="line"><span class="cl">- zig
-</span></span><span class="line"><span class="cl">Force delete these unmerged <span class="nb">local</span> and remote branches? <span class="o">(</span>y/N<span class="o">)</span> y
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Remote branch origin/bump-go does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch bump-go
-</span></span><span class="line"><span class="cl">Deleted branch bump-go <span class="o">(</span>was 80adb51<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/cgo does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch cgo
-</span></span><span class="line"><span class="cl">Deleted branch cgo <span class="o">(</span>was 67a2676<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/custom-log does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch custom-log
-</span></span><span class="line"><span class="cl">Deleted branch custom-log <span class="o">(</span>was 9466ecd<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/debug_files does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch debug_files
-</span></span><span class="line"><span class="cl">Deleted branch debug_files <span class="o">(</span>was 8b96f54<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/delve-output does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch delve-output
-</span></span><span class="line"><span class="cl">Deleted branch delve-output <span class="o">(</span>was f6f057b<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/docs-dap does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch docs-dap
-</span></span><span class="line"><span class="cl">Deleted branch docs-dap <span class="o">(</span>was d23fe7d<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/docs-fix does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch docs-fix
-</span></span><span class="line"><span class="cl">Deleted branch docs-fix <span class="o">(</span>was d7939cf<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/docs-fix-testify does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch docs-fix-testify
-</span></span><span class="line"><span class="cl">Deleted branch docs-fix-testify <span class="o">(</span>was 669c596<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/docusaurus does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch docusaurus
-</span></span><span class="line"><span class="cl">Deleted branch docusaurus <span class="o">(</span>was acacf75<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/fix-golist-windows does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch fix-golist-windows
-</span></span><span class="line"><span class="cl">Deleted branch fix-golist-windows <span class="o">(</span>was 1ca3458<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/fix-links does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch fix-links
-</span></span><span class="line"><span class="cl">Deleted branch fix-links <span class="o">(</span>was 1067312<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/folderstructure does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch folderstructure
-</span></span><span class="line"><span class="cl">Deleted branch folderstructure <span class="o">(</span>was ad61b6e<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/format-testify-lookup-queries does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch format-testify-lookup-queries
-</span></span><span class="line"><span class="cl">Deleted branch format-testify-lookup-queries <span class="o">(</span>was 5ab7f85<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/ignore-windows does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch ignore-windows
-</span></span><span class="line"><span class="cl">Deleted branch ignore-windows <span class="o">(</span>was c408da1<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/loop-uv does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch loop-uv
-</span></span><span class="line"><span class="cl">Deleted branch loop-uv <span class="o">(</span>was 11d5b6c<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/manual-release does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch manual-release
-</span></span><span class="line"><span class="cl">Deleted branch manual-release <span class="o">(</span>was 45f0c8a<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/missing-output does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch missing-output
-</span></span><span class="line"><span class="cl">Deleted branch missing-output <span class="o">(</span>was 000ff3d<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/other-process does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch other-process
-</span></span><span class="line"><span class="cl">Deleted branch other-process <span class="o">(</span>was 6f403b3<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Deleting remote branch origin/perf/async-golist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch perf/async-golist
-</span></span><span class="line"><span class="cl">Deleted branch perf/async-golist <span class="o">(</span>was 7d50d12<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/perf/cwd does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch perf/cwd
-</span></span><span class="line"><span class="cl">Deleted branch perf/cwd <span class="o">(</span>was 56bfcb4<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/perf/decode does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch perf/decode
-</span></span><span class="line"><span class="cl">Deleted branch perf/decode <span class="o">(</span>was 9c18f08<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/perf/golist-cmd does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch perf/golist-cmd
-</span></span><span class="line"><span class="cl">Deleted branch perf/golist-cmd <span class="o">(</span>was 1255852<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/perf/golist-cwd does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch perf/golist-cwd
-</span></span><span class="line"><span class="cl">Deleted branch perf/golist-cwd <span class="o">(</span>was 7fca7e9<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/release-please--branches--main does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch release-please--branches--main
-</span></span><span class="line"><span class="cl">Deleted branch release-please--branches--main <span class="o">(</span>was b2dcbd1<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Deleting remote branch origin/runners-refactor
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch runners-refactor
-</span></span><span class="line"><span class="cl">Deleted branch runners-refactor <span class="o">(</span>was 832f76c<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/sanitization does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch sanitization
-</span></span><span class="line"><span class="cl">Deleted branch sanitization <span class="o">(</span>was 1b0f16b<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/t-run does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch t-run
-</span></span><span class="line"><span class="cl">Deleted branch t-run <span class="o">(</span>was 7238662<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/table-test-without-struct-fields does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch table-test-without-struct-fields
-</span></span><span class="line"><span class="cl">Deleted branch table-test-without-struct-fields <span class="o">(</span>was 3f21f6a<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/testify-regexp does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch testify-regexp
-</span></span><span class="line"><span class="cl">Deleted branch testify-regexp <span class="o">(</span>was 3ec3a7d<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/windows does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch windows
-</span></span><span class="line"><span class="cl">Deleted branch windows <span class="o">(</span>was 7083caf<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Remote branch origin/xtestgofiles does not exist
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch xtestgofiles
-</span></span><span class="line"><span class="cl">Deleted branch xtestgofiles <span class="o">(</span>was 06c586f<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">Deleting remote branch origin/zig
-</span></span><span class="line"><span class="cl">Deleting <span class="nb">local</span> branch zig
-</span></span><span class="line"><span class="cl">Deleted branch zig <span class="o">(</span>was 7b8734d<span class="o">)</span>.</span></span></code></pre></div></div>
-<p>And let&rsquo;s run it once more:</p>
-<div class="code-block-wrapper">
-  <button class="copy-code-button" aria-label="Copy code to clipboard">
-    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-    </svg>
-    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">❯ git-remove-branches
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Branch Status Summary:
-</span></span><span class="line"><span class="cl">🟢 Safe to delete   🔴 Needs review   ⚠️  Stale   🌐 Remote exists   ✅ Merged
-</span></span><span class="line"><span class="cl">───────────────────────────────────────────────────────────
-</span></span><span class="line"><span class="cl">🔴    🌐    bench
-</span></span><span class="line"><span class="cl">🔴    🌐    docker
-</span></span><span class="line"><span class="cl">🔴    🌐    fail-build-go1.24
-</span></span><span class="line"><span class="cl">🔴    🌐    testify-operand
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">🔴 Unmerged branches:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">📝 Branches with active PRs <span class="o">(</span>skipping<span class="o">)</span>:
-</span></span><span class="line"><span class="cl">- bench
-</span></span><span class="line"><span class="cl">- docker
-</span></span><span class="line"><span class="cl">- fail-build-go1.24
-</span></span><span class="line"><span class="cl">- testify-operand</span></span></code></pre></div></div>
-</details>
-
-</main>
-
-
-<div id="giscus-container" class="giscus-comments">
-  <div class="load-comments-wrapper">
-    <button id="load-comments-btn" class="load-comments-btn">Load Comments</button>
-  </div>
-</div>
-
-<script>
-  (function() {
-    const container = document.getElementById('giscus-container');
-    const loadBtn = document.getElementById('load-comments-btn');
-
-    
-    function loadGiscus() {
-      if (!container) return;
-      
-      
-      container.innerHTML = ''; 
-
-      const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
-      
-      const giscusScript = document.createElement('script');
-      giscusScript.src = 'https://giscus.app/client.js';
-      giscusScript.setAttribute('data-repo', 'markholloway/markholloway.github.io');
-      giscusScript.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc=');
-      giscusScript.setAttribute('data-category', 'General');
-      giscusScript.setAttribute('data-category-id', 'DIC_kwDOB8-Z684CU9zc');
-      giscusScript.setAttribute('data-mapping', 'title');
-      giscusScript.setAttribute('data-strict', '0');
-      giscusScript.setAttribute('data-reactions-enabled', '1');
-      giscusScript.setAttribute('data-emit-metadata', '0');
-      giscusScript.setAttribute('data-input-position', 'bottom');
-      giscusScript.setAttribute('data-theme', theme);
-      giscusScript.setAttribute('data-lang', 'en');
-      giscusScript.setAttribute('crossorigin', 'anonymous');
-      giscusScript.async = true;
-
-      container.appendChild(giscusScript);
-    }
-
-    
-    if (loadBtn) {
-      loadBtn.addEventListener('click', loadGiscus);
-    }
-
-    
-    function setGiscusTheme(theme) {
-      const giscusFrame = document.querySelector('iframe.giscus-frame');
-      if (giscusFrame && giscusFrame.contentWindow) {
-        giscusFrame.contentWindow.postMessage(
-          { giscus: { setConfig: { theme } } },
-          'https://giscus.app'
-        );
-      }
-    }
-
-    
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        
-        setTimeout(() => {
-          const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
-          setGiscusTheme(currentTheme);
-        }, 10); 
-      });
-    }
-
-    
-    if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-        if (!localStorage.getItem('theme')) { 
-          const newTheme = event.matches ? "dark" : "light";
-          setGiscusTheme(newTheme);
-        }
-      });
-    }
-  })();
-</script>
-
-
-
-<footer>
-	<div class="footer-content">
-		<span class="footer-icons">
-			
-			
-			<a href="https://github.com/markholloway" target="_blank" rel="noopener" title="GitHub">
-				
-
-<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-
-			</a>
-			
-			
-			<a href="https://linkedin.com/in/mholloway" target="_blank" rel="noopener" title="LinkedIn">
-				
-
-<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-
-			</a>
-			
-			
-			<a href="/blog/index.xml" target="_blank" rel="noopener" title="RSS">
-				
-
-<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"/></svg>
-
-			</a>
-			
-			
-			<a href="https://cloud.umami.is/share/x4yvhGEscsDh1in8" target="_blank" rel="noopener" title="Umami">
-				
-
-<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845 0 0 0-.841.841v.858a13.31 13.31 0 0 0-.016.6c0 6.627 5.373 12 12 12 6.527 0 11.837-5.212 11.996-11.701 0-.025.004-.05.004-.075V9.452a.845.845 0 0 0-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692 0-8.645 3.192-9.805 7.521Zm18.444 0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069 0 7.512 2.697 8.639 6.399Z"/></svg>
-
-			</a>
-			
-		</span>
-		<span class="footer-text">
-			© Mark Holloway 2005-2026
-		</span>
-	</div>
-	<script src="/js/main.js"></script>
-
-</footer>
-</body>
-
-</html>
-
+branches. Put it on <code>$PATH</code> and run!</li></ul><details><summary>Example output of git-remove-branches</summary><p>Here I&rsquo;m running <code>git-remove-branches</code> for the first time in a git repo:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
+<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>❯ git-remove-branches
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Branch Status Summary:
+</span></span><span class=line><span class=cl>🟢 Safe to delete   🔴 Needs review   ⚠️  Stale   🌐 Remote exists   ✅ Merged
+</span></span><span class=line><span class=cl>───────────────────────────────────────────────────────────
+</span></span><span class=line><span class=cl>🔴    🌐    bench
+</span></span><span class=line><span class=cl>🔴          bump-go
+</span></span><span class=line><span class=cl>🔴 ⚠️       cgo
+</span></span><span class=line><span class=cl>🔴          custom-log
+</span></span><span class=line><span class=cl>🔴 ⚠️       debug_files
+</span></span><span class=line><span class=cl>🔴          delve-output
+</span></span><span class=line><span class=cl>🔴    🌐    docker
+</span></span><span class=line><span class=cl>🔴          docs-dap
+</span></span><span class=line><span class=cl>🔴          docs-fix
+</span></span><span class=line><span class=cl>🔴          docs-fix-testify
+</span></span><span class=line><span class=cl>🔴          docusaurus
+</span></span><span class=line><span class=cl>🔴    🌐    fail-build-go1.24
+</span></span><span class=line><span class=cl>🔴          fix-golist-windows
+</span></span><span class=line><span class=cl>🔴          fix-links
+</span></span><span class=line><span class=cl>🟢       ✅ fix-typo
+</span></span><span class=line><span class=cl>🔴          folderstructure
+</span></span><span class=line><span class=cl>🔴          format-testify-lookup-queries
+</span></span><span class=line><span class=cl>🟢       ✅ gobump
+</span></span><span class=line><span class=cl>🟢       ✅ gotestsum
+</span></span><span class=line><span class=cl>🔴          ignore-windows
+</span></span><span class=line><span class=cl>🔴          loop-uv
+</span></span><span class=line><span class=cl>🔴 ⚠️       manual-release
+</span></span><span class=line><span class=cl>🔴          missing-output
+</span></span><span class=line><span class=cl>🔴          other-process
+</span></span><span class=line><span class=cl>🔴    🌐    perf/async-golist
+</span></span><span class=line><span class=cl>🔴          perf/cwd
+</span></span><span class=line><span class=cl>🔴          perf/decode
+</span></span><span class=line><span class=cl>🔴          perf/golist-cmd
+</span></span><span class=line><span class=cl>🔴          perf/golist-cwd
+</span></span><span class=line><span class=cl>🔴          release-please--branches--main
+</span></span><span class=line><span class=cl>🔴 ⚠️ 🌐    runners-refactor
+</span></span><span class=line><span class=cl>🔴          sanitization
+</span></span><span class=line><span class=cl>🔴          t-run
+</span></span><span class=line><span class=cl>🔴 ⚠️       table-test-without-struct-fields
+</span></span><span class=line><span class=cl>🔴    🌐    testify-operand
+</span></span><span class=line><span class=cl>🔴          testify-regexp
+</span></span><span class=line><span class=cl>🔴          windows
+</span></span><span class=line><span class=cl>🔴          xtestgofiles
+</span></span><span class=line><span class=cl>🔴    🌐    zig
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>🟢 Safe to delete:
+</span></span><span class=line><span class=cl>- fix-typo
+</span></span><span class=line><span class=cl>- gobump
+</span></span><span class=line><span class=cl>- gotestsum
+</span></span><span class=line><span class=cl>Delete these <span class=nb>local</span> and remote branches? <span class=o>(</span>y/N<span class=o>)</span> y
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Remote branch origin/fix-typo does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch fix-typo
+</span></span><span class=line><span class=cl>Deleted branch fix-typo <span class=o>(</span>was 2c106ca<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/gobump does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch gobump
+</span></span><span class=line><span class=cl>Deleted branch gobump <span class=o>(</span>was e76726a<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/gotestsum does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch gotestsum
+</span></span><span class=line><span class=cl>Deleted branch gotestsum <span class=o>(</span>was 57cece8<span class=o>)</span>.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>🔴 Unmerged branches:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>📝 Branches with active PRs <span class=o>(</span>skipping<span class=o>)</span>:
+</span></span><span class=line><span class=cl>- bench
+</span></span><span class=line><span class=cl>- docker
+</span></span><span class=line><span class=cl>- fail-build-go1.24
+</span></span><span class=line><span class=cl>- testify-operand
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>❌ Unmerged branches without active PRs:
+</span></span><span class=line><span class=cl>- bump-go
+</span></span><span class=line><span class=cl>- cgo
+</span></span><span class=line><span class=cl>- custom-log
+</span></span><span class=line><span class=cl>- debug_files
+</span></span><span class=line><span class=cl>- delve-output
+</span></span><span class=line><span class=cl>- docs-dap
+</span></span><span class=line><span class=cl>- docs-fix
+</span></span><span class=line><span class=cl>- docs-fix-testify
+</span></span><span class=line><span class=cl>- docusaurus
+</span></span><span class=line><span class=cl>- fix-golist-windows
+</span></span><span class=line><span class=cl>- fix-links
+</span></span><span class=line><span class=cl>- folderstructure
+</span></span><span class=line><span class=cl>- format-testify-lookup-queries
+</span></span><span class=line><span class=cl>- ignore-windows
+</span></span><span class=line><span class=cl>- loop-uv
+</span></span><span class=line><span class=cl>- manual-release
+</span></span><span class=line><span class=cl>- missing-output
+</span></span><span class=line><span class=cl>- other-process
+</span></span><span class=line><span class=cl>- perf/async-golist
+</span></span><span class=line><span class=cl>- perf/cwd
+</span></span><span class=line><span class=cl>- perf/decode
+</span></span><span class=line><span class=cl>- perf/golist-cmd
+</span></span><span class=line><span class=cl>- perf/golist-cwd
+</span></span><span class=line><span class=cl>- release-please--branches--main
+</span></span><span class=line><span class=cl>- runners-refactor
+</span></span><span class=line><span class=cl>- sanitization
+</span></span><span class=line><span class=cl>- t-run
+</span></span><span class=line><span class=cl>- table-test-without-struct-fields
+</span></span><span class=line><span class=cl>- testify-regexp
+</span></span><span class=line><span class=cl>- windows
+</span></span><span class=line><span class=cl>- xtestgofiles
+</span></span><span class=line><span class=cl>- zig
+</span></span><span class=line><span class=cl>Force delete these unmerged <span class=nb>local</span> and remote branches? <span class=o>(</span>y/N<span class=o>)</span> y
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Remote branch origin/bump-go does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch bump-go
+</span></span><span class=line><span class=cl>Deleted branch bump-go <span class=o>(</span>was 80adb51<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/cgo does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch cgo
+</span></span><span class=line><span class=cl>Deleted branch cgo <span class=o>(</span>was 67a2676<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/custom-log does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch custom-log
+</span></span><span class=line><span class=cl>Deleted branch custom-log <span class=o>(</span>was 9466ecd<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/debug_files does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch debug_files
+</span></span><span class=line><span class=cl>Deleted branch debug_files <span class=o>(</span>was 8b96f54<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/delve-output does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch delve-output
+</span></span><span class=line><span class=cl>Deleted branch delve-output <span class=o>(</span>was f6f057b<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/docs-dap does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch docs-dap
+</span></span><span class=line><span class=cl>Deleted branch docs-dap <span class=o>(</span>was d23fe7d<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/docs-fix does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch docs-fix
+</span></span><span class=line><span class=cl>Deleted branch docs-fix <span class=o>(</span>was d7939cf<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/docs-fix-testify does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch docs-fix-testify
+</span></span><span class=line><span class=cl>Deleted branch docs-fix-testify <span class=o>(</span>was 669c596<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/docusaurus does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch docusaurus
+</span></span><span class=line><span class=cl>Deleted branch docusaurus <span class=o>(</span>was acacf75<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/fix-golist-windows does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch fix-golist-windows
+</span></span><span class=line><span class=cl>Deleted branch fix-golist-windows <span class=o>(</span>was 1ca3458<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/fix-links does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch fix-links
+</span></span><span class=line><span class=cl>Deleted branch fix-links <span class=o>(</span>was 1067312<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/folderstructure does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch folderstructure
+</span></span><span class=line><span class=cl>Deleted branch folderstructure <span class=o>(</span>was ad61b6e<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/format-testify-lookup-queries does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch format-testify-lookup-queries
+</span></span><span class=line><span class=cl>Deleted branch format-testify-lookup-queries <span class=o>(</span>was 5ab7f85<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/ignore-windows does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch ignore-windows
+</span></span><span class=line><span class=cl>Deleted branch ignore-windows <span class=o>(</span>was c408da1<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/loop-uv does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch loop-uv
+</span></span><span class=line><span class=cl>Deleted branch loop-uv <span class=o>(</span>was 11d5b6c<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/manual-release does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch manual-release
+</span></span><span class=line><span class=cl>Deleted branch manual-release <span class=o>(</span>was 45f0c8a<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/missing-output does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch missing-output
+</span></span><span class=line><span class=cl>Deleted branch missing-output <span class=o>(</span>was 000ff3d<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/other-process does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch other-process
+</span></span><span class=line><span class=cl>Deleted branch other-process <span class=o>(</span>was 6f403b3<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Deleting remote branch origin/perf/async-golist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch perf/async-golist
+</span></span><span class=line><span class=cl>Deleted branch perf/async-golist <span class=o>(</span>was 7d50d12<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/perf/cwd does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch perf/cwd
+</span></span><span class=line><span class=cl>Deleted branch perf/cwd <span class=o>(</span>was 56bfcb4<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/perf/decode does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch perf/decode
+</span></span><span class=line><span class=cl>Deleted branch perf/decode <span class=o>(</span>was 9c18f08<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/perf/golist-cmd does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch perf/golist-cmd
+</span></span><span class=line><span class=cl>Deleted branch perf/golist-cmd <span class=o>(</span>was 1255852<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/perf/golist-cwd does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch perf/golist-cwd
+</span></span><span class=line><span class=cl>Deleted branch perf/golist-cwd <span class=o>(</span>was 7fca7e9<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/release-please--branches--main does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch release-please--branches--main
+</span></span><span class=line><span class=cl>Deleted branch release-please--branches--main <span class=o>(</span>was b2dcbd1<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Deleting remote branch origin/runners-refactor
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch runners-refactor
+</span></span><span class=line><span class=cl>Deleted branch runners-refactor <span class=o>(</span>was 832f76c<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/sanitization does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch sanitization
+</span></span><span class=line><span class=cl>Deleted branch sanitization <span class=o>(</span>was 1b0f16b<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/t-run does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch t-run
+</span></span><span class=line><span class=cl>Deleted branch t-run <span class=o>(</span>was 7238662<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/table-test-without-struct-fields does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch table-test-without-struct-fields
+</span></span><span class=line><span class=cl>Deleted branch table-test-without-struct-fields <span class=o>(</span>was 3f21f6a<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/testify-regexp does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch testify-regexp
+</span></span><span class=line><span class=cl>Deleted branch testify-regexp <span class=o>(</span>was 3ec3a7d<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/windows does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch windows
+</span></span><span class=line><span class=cl>Deleted branch windows <span class=o>(</span>was 7083caf<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Remote branch origin/xtestgofiles does not exist
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch xtestgofiles
+</span></span><span class=line><span class=cl>Deleted branch xtestgofiles <span class=o>(</span>was 06c586f<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Deleting remote branch origin/zig
+</span></span><span class=line><span class=cl>Deleting <span class=nb>local</span> branch zig
+</span></span><span class=line><span class=cl>Deleted branch zig <span class=o>(</span>was 7b8734d<span class=o>)</span>.</span></span></code></pre></div></div><p>And let&rsquo;s run it once more:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
+<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>❯ git-remove-branches
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Branch Status Summary:
+</span></span><span class=line><span class=cl>🟢 Safe to delete   🔴 Needs review   ⚠️  Stale   🌐 Remote exists   ✅ Merged
+</span></span><span class=line><span class=cl>───────────────────────────────────────────────────────────
+</span></span><span class=line><span class=cl>🔴    🌐    bench
+</span></span><span class=line><span class=cl>🔴    🌐    docker
+</span></span><span class=line><span class=cl>🔴    🌐    fail-build-go1.24
+</span></span><span class=line><span class=cl>🔴    🌐    testify-operand
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>🔴 Unmerged branches:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>📝 Branches with active PRs <span class=o>(</span>skipping<span class=o>)</span>:
+</span></span><span class=line><span class=cl>- bench
+</span></span><span class=line><span class=cl>- docker
+</span></span><span class=line><span class=cl>- fail-build-go1.24
+</span></span><span class=line><span class=cl>- testify-operand</span></span></code></pre></div></div></details></main><script>(function(){const e=document.getElementById("giscus-container"),t=document.getElementById("load-comments-btn");function o(){if(!e)return;e.innerHTML="";const n=document.body.classList.contains("dark")?"dark":"light",t=document.createElement("script");t.src="https://giscus.app/client.js",t.setAttribute("data-repo","markholloway/markholloway.github.io"),t.setAttribute("data-repo-id","MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc="),t.setAttribute("data-category","General"),t.setAttribute("data-category-id","DIC_kwDOB8-Z684CU9zc"),t.setAttribute("data-mapping","title"),t.setAttribute("data-strict","0"),t.setAttribute("data-reactions-enabled","1"),t.setAttribute("data-emit-metadata","0"),t.setAttribute("data-input-position","bottom"),t.setAttribute("data-theme",n),t.setAttribute("data-lang","en"),t.setAttribute("crossorigin","anonymous"),t.async=!0,e.appendChild(t)}t&&t.addEventListener("click",o);function n(e){const t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}const s=document.getElementById("theme-toggle");s&&s.addEventListener("click",()=>{setTimeout(()=>{const e=document.body.classList.contains("dark")?"dark":"light";n(e)},10)}),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",e=>{if(!localStorage.getItem("theme")){const t=e.matches?"dark":"light";n(t)}})})()</script><footer><div class=footer-content><span class=footer-icons><a href=https://github.com/markholloway target=_blank rel=noopener title=GitHub><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63.0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577.0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93.0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176.0.0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22.0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22.0 1.606-.015 2.896-.015 3.286.0.315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+</a><a href=https://linkedin.com/in/mholloway target=_blank rel=noopener title=LinkedIn><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853.0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601.0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144.0-2.063-.926-2.063-2.065.0-1.138.92-2.063 2.063-2.063 1.14.0 2.064.925 2.064 2.063.0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225.0H1.771C.792.0.0.774.0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2.0 22.222.0h.003z"/></svg>
+</a><a href=/blog/index.xml target=_blank rel=noopener title=RSS><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8.0 4.8V0c13.165.0 24 10.835 24 24h-4.801zM3.291 17.415c1.814.0 3.293 1.479 3.293 3.295.0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526.0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727.0 15.909 7.184 15.909 15.91z"/></svg>
+</a><a href=https://cloud.umami.is/share/x4yvhGEscsDh1in8 target=_blank rel=noopener title=Umami><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845.0 00-.841.841v.858a13.31 13.31.0 00-.016.6c0 6.627 5.373 12 12 12 6.527.0 11.837-5.212 11.996-11.701.0-.025.004-.05.004-.075V9.452a.845.845.0 00-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692.0-8.645 3.192-9.805 7.521zm18.444.0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069.0 7.512 2.697 8.639 6.399z"/></svg>
+</a></span><span class=footer-text>© Mark Holloway 2005-2026</span></div><script src=/js/main.js></script></footer></body></html>

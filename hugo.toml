@@ -5,6 +5,8 @@ author = 'Mark Holloway'
 copyright = '© Mark Holloway'
 enableRobotsTXT = true
 
+publishDir = "docs"
+
 [pagination]
 pagerSize = 10
 
