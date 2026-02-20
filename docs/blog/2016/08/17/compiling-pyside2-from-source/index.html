@@ -1,193 +1,1039 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Compiling PySide2 from source | Mark Holloway</title><meta name=description content="Notes from a curiosity-driven engineer."><link rel=canonical href=https://markholloway.com/blog/2016/08/17/compiling-pyside2-from-source/><meta property="og:url" content="https://markholloway.com/blog/2016/08/17/compiling-pyside2-from-source/"><meta property="og:site_name" content="Mark Holloway"><meta property="og:title" content="Compiling PySide2 from source"><meta property="og:description" content="Here’s how to compile PySide2 on Linux, Mac OS X and Windows.
-Note Before reading on, this blog post is now very outdated. You may want to skip this alltogether and go directly to my pre-built standalone Python wheels and the most up to date build recipes there:"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2016-08-17T00:00:00+00:00"><meta property="article:modified_time" content="2016-08-17T00:00:00+00:00"><meta property="article:tag" content="Pyside"><meta property="article:tag" content="Python"><meta name=twitter:card content="summary"><meta name=twitter:title content="Compiling PySide2 from source"><meta name=twitter:description content="Here’s how to compile PySide2 on Linux, Mac OS X and Windows.
-Note Before reading on, this blog post is now very outdated. You may want to skip this alltogether and go directly to my pre-built standalone Python wheels and the most up to date build recipes there:"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Compiling PySide2 from source","datePublished":"2016-08-17T00:00:00Z","dateModified":"2016-08-17T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/markholloway.com\/blog\/2016\/08\/17\/compiling-pyside2-from-source\/"},"author":{"@type":"Person","name":"map[]"},"description":"Here\u0026rsquo;s how to compile PySide2 on Linux, Mac OS X and Windows.\nNote Before reading on, this blog post is now very outdated. You may want to skip this alltogether and go directly to my pre-built standalone Python wheels and the most up to date build recipes there:\n"}</script><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=preload href=/fonts/BerkeleyMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/CommitMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/MapleMono-Italic.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/github-link.css><script defer src=https://cloud.umami.is/script.js data-website-id=29980893-435d-4d73-962b-e2b6e505fb7e></script></head><body class=preload><script>(function(){const e=localStorage.getItem("theme");e?document.body.classList.add(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark"),"fonts"in document?Promise.race([document.fonts.ready,new Promise(e=>setTimeout(e,100))]).then(()=>{document.body.classList.remove("preload")}):setTimeout(()=>{document.body.classList.remove("preload")},50)})()</script><nav style=display:flex;align-items:center;gap:1em;flex-wrap:wrap><ul class=menu style=margin:0;padding:0;flex-shrink:0><li><a href=/>Home</a></li><li><a href=/blog/>Blog</a></li><li><a href=/about/>About</a></li><li><button id=theme-toggle style="background:0 0;border:none;cursor:pointer;font-size:1em;padding:5px;color:inherit">◑</button></li></ul><div id=search style=flex-grow:1;min-width:200px></div></nav><link href=/pagefind/pagefind-ui.css rel=stylesheet><script src=/pagefind/pagefind-ui.js></script><script>window.addEventListener("DOMContentLoaded",e=>{new PagefindUI({element:"#search",showSubResults:!0,showImages:!1,translations:{placeholder:"Search...",clear_search:"×"}}),document.addEventListener("click",e=>{const t=document.querySelector("#search");if(t&&!t.contains(e.target)){const e=t.querySelector(".pagefind-ui__search-clear");e&&e.click()}});const n=document.getElementById("theme-toggle"),t=document.body;n.addEventListener("click",()=>{t.classList.contains("dark")?(t.classList.remove("dark"),t.classList.add("light"),localStorage.setItem("theme","light")):(t.classList.remove("light"),t.classList.add("dark"),localStorage.setItem("theme","dark"))})})</script><div class=article-meta><h1><span class=title>Compiling PySide2 from source</span></h1><div class=article-meta-info><span class=date>2016-08-17</span>
-<span class=article-tags><a href=/tags/pyside>#pyside</a>
-<a href=/tags/python>#python</a></span></div></div><div class=featured-image><img src=/blog/assets/pyside2/pyside2_compile.png alt="Compiling PySide2 from source"></div><main data-pagefind-body><aside class=table-of-contents><div class=toc-title><svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z"/></svg>
-Table of Contents</div><nav id=TableOfContents><ul><li><a href=#prerequisites>Prerequisites</a><ul><li><a href=#os-x>OS X</a></li><li><a href=#ubuntu-1404-linux>Ubuntu 14.04 Linux</a></li><li><a href=#ubuntu-1604-linux>Ubuntu 16.04 Linux</a></li><li><a href=#centos-7-linux>CentOS 7 Linux</a></li><li><a href=#windows-10>Windows 10</a></li></ul></li><li><a href=#clone-the-repository>Clone the repository</a></li><li><a href=#build-the-pyside2-wheel>Build the PySide2 wheel</a><ul><li><a href=#notes-on-linux>Notes on Linux</a></li><li><a href=#os-x-1>OS X</a></li><li><a href=#ubuntu-1604-linux-1>Ubuntu 16.04 Linux</a></li><li><a href=#centos-7-linux-1>CentOS 7 Linux</a></li><li><a href=#windows-10-1>Windows 10</a></li></ul></li><li><a href=#install-the-wheel>Install the wheel</a></li><li><a href=#notes-on-pre-compiled-wheels>Notes on pre-compiled wheels</a></li><li><a href=#docker-built-wheels-via-travis-ci>Docker-built wheels via Travis-CI</a></li><li><a href=#closing-comments>Closing comments</a></li></ul></nav></aside><p>Here&rsquo;s how to compile PySide2 on Linux, Mac OS X and Windows.</p><blockquote class="callout markdown-alert callout-note markdown-alert-note"><div class="callout-title markdown-alert-title"><svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42.0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
-Note</div><div class=callout-content><p>Before reading on, this blog post is now <em>very</em> outdated. You may want to skip
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Compiling PySide2 from source | Mark Holloway</title>
+    <meta name="description" content="Notes from a curiosity-driven engineer.">
+    <link rel="canonical" href="http://localhost:1313/blog/2016/08/17/compiling-pyside2-from-source/">
+    
+    
+    <meta property="og:url" content="http://localhost:1313/blog/2016/08/17/compiling-pyside2-from-source/">
+  <meta property="og:site_name" content="Mark Holloway">
+  <meta property="og:title" content="Compiling PySide2 from source">
+  <meta property="og:description" content="Here’s how to compile PySide2 on Linux, Mac OS X and Windows.
+Note Before reading on, this blog post is now very outdated. You may want to skip this alltogether and go directly to my pre-built standalone Python wheels and the most up to date build recipes there:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2016-08-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2016-08-17T00:00:00+00:00">
+    <meta property="article:tag" content="Pyside">
+    <meta property="article:tag" content="Python">
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Compiling PySide2 from source">
+  <meta name="twitter:description" content="Here’s how to compile PySide2 on Linux, Mac OS X and Windows.
+Note Before reading on, this blog post is now very outdated. You may want to skip this alltogether and go directly to my pre-built standalone Python wheels and the most up to date build recipes there:">
+
+    
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Compiling PySide2 from source",
+  "datePublished": "2016-08-17T00:00:00Z",
+  "dateModified": "2016-08-17T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/localhost:1313\/blog\/2016\/08\/17\/compiling-pyside2-from-source\/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "map[]"
+  },
+  "description": "Here\u0026rsquo;s how to compile PySide2 on Linux, Mac OS X and Windows.\nNote Before reading on, this blog post is now very outdated. You may want to skip this alltogether and go directly to my pre-built standalone Python wheels and the most up to date build recipes there:\n"
+}
+</script>
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    
+    
+    <link rel="preload" href="/fonts/BerkeleyMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/CommitMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/MapleMono-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/github-link.css" />
+    
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="29980893-435d-4d73-962b-e2b6e505fb7e"></script>
+
+  </head>
+
+  <body class="preload">
+    <script>
+      (function() {
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.body.classList.add(savedTheme);
+        } else {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark');
+          }
+        }
+        
+        
+        if ('fonts' in document) {
+          
+          Promise.race([
+            document.fonts.ready,
+            new Promise(resolve => setTimeout(resolve, 100)) 
+          ]).then(() => {
+            document.body.classList.remove('preload');
+          });
+        } else {
+          
+          setTimeout(() => {
+            document.body.classList.remove('preload');
+          }, 50);
+        }
+      })();
+    </script>
+
+    <nav style="display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
+      <ul class="menu" style="margin: 0; padding: 0; flex-shrink: 0;">
+        
+        
+        <li><a  href="/">Home</a></li>
+        
+        <li><a  href="/blog/">Blog</a></li>
+        
+        <li><a  href="/about/">About</a></li>
+        
+        <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1em; padding:5px; color:inherit;">◑</button></li>
+      </ul>
+      
+      
+      <div id="search" style="flex-grow: 1; min-width: 200px;"></div>
+    </nav>
+    
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ 
+              element: "#search", 
+              showSubResults: true,
+              showImages: false,
+              translations: {
+                placeholder: "Search...",
+                clear_search: "×"
+              }
+            });
+
+            
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('#search');
+                if (searchContainer && !searchContainer.contains(e.target)) {
+                    const clearButton = searchContainer.querySelector('.pagefind-ui__search-clear');
+                    if (clearButton) {
+                        clearButton.click();
+                    }
+                }
+            });
+
+            
+            const toggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            toggle.addEventListener('click', () => {
+              if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+              } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+              }
+            });
+        });
+    </script>
+
+
+<div class="article-meta">
+<h1><span class="title">Compiling PySide2 from source</span></h1>
+
+<div class="article-meta-info">
+  <span class="date">2016-08-17</span>
+  
+  <span class="article-tags">
+    
+    
+    
+    <a href="/tags/pyside">#pyside</a>
+    
+    
+    
+    <a href="/tags/python">#python</a>
+    
+    
+  </span>
+  
+</div>
+</div>
+
+
+<div class="featured-image">
+	<img src="/blog/assets/pyside2/pyside2_compile.png" alt="Compiling PySide2 from source">
+</div>
+
+
+<main data-pagefind-body>
+	
+	
+		
+		<aside class="table-of-contents">
+			<div class="toc-title">
+				<svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
+					fill="currentColor">
+					<path
+						d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z">
+					</path>
+				</svg>
+				Table of Contents
+			</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li><a href="#os-x">OS X</a></li>
+        <li><a href="#ubuntu-1404-linux">Ubuntu 14.04 Linux</a></li>
+        <li><a href="#ubuntu-1604-linux">Ubuntu 16.04 Linux</a></li>
+        <li><a href="#centos-7-linux">CentOS 7 Linux</a></li>
+        <li><a href="#windows-10">Windows 10</a></li>
+      </ul>
+    </li>
+    <li><a href="#clone-the-repository">Clone the repository</a></li>
+    <li><a href="#build-the-pyside2-wheel">Build the PySide2 wheel</a>
+      <ul>
+        <li><a href="#notes-on-linux">Notes on Linux</a></li>
+        <li><a href="#os-x-1">OS X</a></li>
+        <li><a href="#ubuntu-1604-linux-1">Ubuntu 16.04 Linux</a></li>
+        <li><a href="#centos-7-linux-1">CentOS 7 Linux</a></li>
+        <li><a href="#windows-10-1">Windows 10</a></li>
+      </ul>
+    </li>
+    <li><a href="#install-the-wheel">Install the wheel</a></li>
+    <li><a href="#notes-on-pre-compiled-wheels">Notes on pre-compiled wheels</a></li>
+    <li><a href="#docker-built-wheels-via-travis-ci">Docker-built wheels via Travis-CI</a></li>
+    <li><a href="#closing-comments">Closing comments</a></li>
+  </ul>
+</nav>
+		</aside>
+		
+
+		<p>Here&rsquo;s how to compile PySide2 on Linux, Mac OS X and Windows.</p>
+<blockquote class="callout markdown-alert callout-note markdown-alert-note"><div class="callout-title markdown-alert-title">
+    <svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path></svg>
+    Note
+  </div><div class="callout-content"><p>Before reading on, this blog post is now <em>very</em> outdated. You may want to skip
 this alltogether and go directly to my pre-built standalone Python wheels and
-the most up to date build recipes there:</p><ul><li><a href=https://github.com/fredrikaverpil/pyside2-linux target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>fredrikaverpil/pyside2-linux</a></li><li><a href=https://github.com/fredrikaverpil/pyside2-macos target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>fredrikaverpil/pyside2-macos</a></li><li><a href=https://github.com/fredrikaverpil/pyside2-windows target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>fredrikaverpil/pyside2-windows</a></li></ul><p>Also, official standalone wheels have been
-<a href=https://lists.qt-project.org/pipermail/pyside/2018-March/002537.html target=_blank rel=noopener>released</a>.
-PySide2 can now be installed from pypi.org: <code>pip install PySide2</code>!</p></div></blockquote><h2 id=prerequisites>Prerequisites</h2><p>PySide2 (or possibly Qt5?) requires Cmake >=3.0 to work. You can check your
-version with <code>cmake --version</code>.</p><h3 id=os-x>OS X</h3><p>You&rsquo;ll need the Xcode commandline tools:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>xcode-select --install
-</span></span><span class=line><span class=cl>sudo xcodebuild -license</span></span></code></pre></div></div><p>Then the following packages, easily installed via
-<a href=https://brew.sh target=_blank rel=noopener>brew</a>:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>brew install qt5 cmake libxslt libxml2</span></span></code></pre></div></div><p>This installed Qt 5.6.1-1 and cmake 3.5.2 on my system.</p><h3 id=ubuntu-1404-linux>Ubuntu 14.04 Linux</h3><p>Currently, I&rsquo;m having issues with not being able to install
+the most up to date build recipes there:</p>
+<ul>
+<li>
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+
+  <a href="https://github.com/fredrikaverpil/pyside2-linux" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>fredrikaverpil/pyside2-linux</a></li>
+<li>
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+
+  <a href="https://github.com/fredrikaverpil/pyside2-macos" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>fredrikaverpil/pyside2-macos</a></li>
+<li>
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+
+  <a href="https://github.com/fredrikaverpil/pyside2-windows" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>fredrikaverpil/pyside2-windows</a></li>
+</ul>
+<p>Also, official standalone wheels have been
+
+
+
+
+<a href="https://lists.qt-project.org/pipermail/pyside/2018-March/002537.html" target="_blank" rel="noopener">released</a>.
+PySide2 can now be installed from pypi.org: <code>pip install PySide2</code>!</p></div>
+</blockquote><h2 id="prerequisites">Prerequisites</h2>
+<p>PySide2 (or possibly Qt5?) requires Cmake &gt;=3.0 to work. You can check your
+version with <code>cmake --version</code>.</p>
+<h3 id="os-x">OS X</h3>
+<p>You&rsquo;ll need the Xcode commandline tools:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">xcode-select --install
+</span></span><span class="line"><span class="cl">sudo xcodebuild -license</span></span></code></pre></div></div>
+<p>Then the following packages, easily installed via 
+
+
+
+<a href="https://brew.sh" target="_blank" rel="noopener">brew</a>:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install qt5 cmake libxslt libxml2</span></span></code></pre></div></div>
+<p>This installed Qt 5.6.1-1 and cmake 3.5.2 on my system.</p>
+<h3 id="ubuntu-1404-linux">Ubuntu 14.04 Linux</h3>
+<p>Currently, I&rsquo;m having issues with not being able to install
 <code>libqt5quickwidgets5</code> via apt-get, and because of that I recommend resorting to
-the following:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>apt-get install python-pyside2  <span class=c1># for Python 2.7.x</span>
-</span></span><span class=line><span class=cl>apt-get install python3-pyside2  <span class=c1># for Python 3.5.x</span></span></span></code></pre></div></div><h3 id=ubuntu-1604-linux>Ubuntu 16.04 Linux</h3><p>Please note, not all Qt5 modules are being used when building the wheel, see
+the following:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install python-pyside2  <span class="c1"># for Python 2.7.x</span>
+</span></span><span class="line"><span class="cl">apt-get install python3-pyside2  <span class="c1"># for Python 3.5.x</span></span></span></code></pre></div></div>
+<h3 id="ubuntu-1604-linux">Ubuntu 16.04 Linux</h3>
+<p>Please note, not all Qt5 modules are being used when building the wheel, see
 this issue report:
-<a href=https://bugreports.qt.io/browse/PYSIDE-343 target=_blank rel=noopener>https://bugreports.qt.io/browse/PYSIDE-343</a></p><p>In case you wish to build PySide2 in a Docker container, you can start by doing
-something like this:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Map the current folder to the container&#39;s /pyside, so you can</span>
-</span></span><span class=line><span class=cl><span class=c1># transfer built wheels onto your main machine</span>
-</span></span><span class=line><span class=cl>docker run -ti -v <span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span>:/pyside ubuntu:16.04 bash</span></span></code></pre></div></div><p>You may then want to perform an <code>apt-get update</code>, especially if you&rsquo;re in a
-Docker container.</p><p>Make sure you&rsquo;ve got pip (and its wheel package):</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>apt-get install python-pip  <span class=c1># or python3-pip (for Python 3.x)</span></span></span></code></pre></div></div><p>Then proceed with installing some dependencies:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>apt-get install build-essential git cmake libxml2 libxslt1.1 libxml2-dev libxslt1-dev python-dev qt5-default qtbase5-dev</span></span></code></pre></div></div><p>This installed Qt 5.5.1 and cmake 3.5.1 on my system. If you really wish to use
+
+
+
+
+<a href="https://bugreports.qt.io/browse/PYSIDE-343" target="_blank" rel="noopener">https://bugreports.qt.io/browse/PYSIDE-343</a></p>
+<p>In case you wish to build PySide2 in a Docker container, you can start by doing
+something like this:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Map the current folder to the container&#39;s /pyside, so you can</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># transfer built wheels onto your main machine</span>
+</span></span><span class="line"><span class="cl">docker run -ti -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/pyside ubuntu:16.04 bash</span></span></code></pre></div></div>
+<p>You may then want to perform an <code>apt-get update</code>, especially if you&rsquo;re in a
+Docker container.</p>
+<p>Make sure you&rsquo;ve got pip (and its wheel package):</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install python-pip  <span class="c1"># or python3-pip (for Python 3.x)</span></span></span></code></pre></div></div>
+<p>Then proceed with installing some dependencies:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install build-essential git cmake libxml2 libxslt1.1 libxml2-dev libxslt1-dev python-dev qt5-default qtbase5-dev</span></span></code></pre></div></div>
+<p>This installed Qt 5.5.1 and cmake 3.5.1 on my system. If you really wish to use
 Qt 5.6.1, you currently need to build Qt from source instead of installing it
 via apt-get. This, however, is for another blog post as it is <em>extremely</em> time
 consuming. You can verify which version of Qt you have by executing
-<code>qmake --version</code>.</p><p>Additionally, you&rsquo;ll need to install Qt5&rsquo;s libraries:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>apt-get install qttools5-dev-tools libqt5clucene5 libqt5concurrent5 libqt5core5a libqt5dbus5 libqt5designer5 libqt5designercomponents5 libqt5feedback5 libqt5gui5 libqt5help5 libqt5multimedia5 libqt5network5 libqt5opengl5 libqt5opengl5-dev libqt5organizer5 libqt5positioning5 libqt5printsupport5 libqt5qml5 libqt5quick5 libqt5quickwidgets5 libqt5script5 libqt5scripttools5 libqt5sql5 libqt5sql5-sqlite libqt5svg5 libqt5test5 libqt5webkit5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 libqt5xmlpatterns5-dev</span></span></code></pre></div></div><h3 id=centos-7-linux>CentOS 7 Linux</h3><p>Please note: the guide for CentOS 7 Linux is incomplete and will generate an
+<code>qmake --version</code>.</p>
+<p>Additionally, you&rsquo;ll need to install Qt5&rsquo;s libraries:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install qttools5-dev-tools libqt5clucene5 libqt5concurrent5 libqt5core5a libqt5dbus5 libqt5designer5 libqt5designercomponents5 libqt5feedback5 libqt5gui5 libqt5help5 libqt5multimedia5 libqt5network5 libqt5opengl5 libqt5opengl5-dev libqt5organizer5 libqt5positioning5 libqt5printsupport5 libqt5qml5 libqt5quick5 libqt5quickwidgets5 libqt5script5 libqt5scripttools5 libqt5sql5 libqt5sql5-sqlite libqt5svg5 libqt5test5 libqt5webkit5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 libqt5xmlpatterns5-dev</span></span></code></pre></div></div>
+<h3 id="centos-7-linux">CentOS 7 Linux</h3>
+<p>Please note: the guide for CentOS 7 Linux is incomplete and will generate an
 error mid-build. I&rsquo;ll update this section as soon as I come up with a solution
-to this problem.</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install epel-release
-</span></span><span class=line><span class=cl>yum groupinstall <span class=s2>&#34;Development Tools&#34;</span>
-</span></span><span class=line><span class=cl>yum install qt5-qtbase-devel</span></span></code></pre></div></div><p>This installed Qt 5.6.1 on my system:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>/usr/lib64/qt5/bin/qmake-qt5 --version
-</span></span><span class=line><span class=cl>QMake version 3.0
-</span></span><span class=line><span class=cl>Using Qt version 5.6.1 in /usr/lib64</span></span></code></pre></div></div><p>Now we&rsquo;ll also need additional Qt5 dependencies. This command below will
+to this problem.</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install epel-release
+</span></span><span class="line"><span class="cl">yum groupinstall <span class="s2">&#34;Development Tools&#34;</span>
+</span></span><span class="line"><span class="cl">yum install qt5-qtbase-devel</span></span></code></pre></div></div>
+<p>This installed Qt 5.6.1 on my system:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/usr/lib64/qt5/bin/qmake-qt5 --version
+</span></span><span class="line"><span class="cl">QMake version 3.0
+</span></span><span class="line"><span class="cl">Using Qt version 5.6.1 in /usr/lib64</span></span></code></pre></div></div>
+<p>Now we&rsquo;ll also need additional Qt5 dependencies. This command below will
 probably install a lot of packages which you actually won&rsquo;t need (note the
 asterisk in the command below). If you figure out exactly which packages are
-needed, please leave a comment on that!</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install qt5-* libxslt libxml2 libxml2-devel libxslt-devel</span></span></code></pre></div></div><p>Next, we&rsquo;ll install Cmake 3.0 (yum only provides 2.x at this time). Please note
-this will build the Cmake executable in the same directory as the source.</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install cmake3</span></span></code></pre></div></div><p>Install Python 2.x or 3.5:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install python-libs python-pip python-devel
-</span></span><span class=line><span class=cl>pip install wheel</span></span></code></pre></div></div><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install python35u python35u-libs python35u-devel python35u-pip
-</span></span><span class=line><span class=cl>pip3.5 install wheel</span></span></code></pre></div></div><h3 id=windows-10>Windows 10</h3><p>Unfortunately, I don&rsquo;t know how to compile PySide2 using Qt 5.6.1 for Python
+needed, please leave a comment on that!</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install qt5-* libxslt libxml2 libxml2-devel libxslt-devel</span></span></code></pre></div></div>
+<p>Next, we&rsquo;ll install Cmake 3.0 (yum only provides 2.x at this time). Please note
+this will build the Cmake executable in the same directory as the source.</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install cmake3</span></span></code></pre></div></div>
+<p>Install Python 2.x or 3.5:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install python-libs python-pip python-devel
+</span></span><span class="line"><span class="cl">pip install wheel</span></span></code></pre></div></div>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install python35u python35u-libs python35u-devel python35u-pip
+</span></span><span class="line"><span class="cl">pip3.5 install wheel</span></span></code></pre></div></div>
+<h3 id="windows-10">Windows 10</h3>
+<p>Unfortunately, I don&rsquo;t know how to compile PySide2 using Qt 5.6.1 for Python
 2.7.x in Windows. The reason is that the
-<a href=https://python.org target=_blank rel=noopener>official Python 2.7 build</a> is compiled using the now
+
+
+
+
+<a href="https://python.org" target="_blank" rel="noopener">official Python 2.7 build</a> is compiled using the now
 ancient Microsoft C++ Visual Studio 2008 (v9.0). This means Qt itself must also
 be compiled using this version of MSVC in order to avoid severe issues (read
-more
-<a href=https://siomsystems.com/mixing-visual-studio-versions/ target=_blank rel=noopener>here</a>).
+more 
+
+
+
+<a href="https://siomsystems.com/mixing-visual-studio-versions/" target="_blank" rel="noopener">here</a>).
 Unfortunately, there&rsquo;s no such readily available version of Qt 5.6.1. What it
 all boils down to is you want to have used the same MSVC version for Python, Qt
-and PySide2.</p><p>To work around this, you can
-<a href=https://p-nand-q.com/python/building-python-27-with-visual_studio.html target=_blank rel=noopener>compile Python yourself</a>,
+and PySide2.</p>
+<p>To work around this, you can
+
+
+
+
+<a href="https://p-nand-q.com/python/building-python-27-with-visual_studio.html" target="_blank" rel="noopener">compile Python yourself</a>,
 matching the MSVC used to compile Qt. This is what Autodesk is doing by the way,
 in order to support PySide2 in Maya 2017 without mixing different MSVC versions.
 Or you could attempt to compile Qt using MSVC 2008. In either case, this will
 give you a headache when you realize any Python package (which is not purely
 written in Python) must also be compiled using whatever version of MSVC you have
 opted for. And perhaps because of this, you&rsquo;ll now start to wonder what packages
-you&rsquo;re currently importing when in Maya&mldr;</p><p>Another solution worth investigating, which seems better to me (but I may be
-mistaken here), is to compile PySide2 using
-<a href=https://www.mingw.org target=_blank rel=noopener>mingw32</a>
-and/or
-<a href=https://mingwpy.github.io/ target=_blank rel=noopener>mingwpy</a> rather than MSVC. I very much
-appreciate suggestions in the comments further down below on this.</p><p>But so, at least for now, this guide is for Python 3.5.x only.</p><p>You&rsquo;ll need OpenSSL, Cmake, Microsoft Visual C++ Studio 2015 and, of course,
-Qt5.</p><p>I think the nicest approach would be to install these softwares via
-<a href=https://chocolatey.org target=_blank rel=noopener>Chocolatey</a> but I haven&rsquo;t managed to get that to work
-flawlessly, so I&rsquo;m doing this manually instead.</p><p>Download and install the 64-bit versions of:</p><ul><li><a href=https://sourceforge.net/projects/openssl target=_blank rel=noopener>OpenSSL</a></li><li><a href=https://cmake.org/download target=_blank rel=noopener>Cmake</a></li><li><a href=https://www.visualstudio.com target=_blank rel=noopener>Microsoft Visual C++ Studio 2015</a> - Note:
+you&rsquo;re currently importing when in Maya&hellip;</p>
+<p>Another solution worth investigating, which seems better to me (but I may be
+mistaken here), is to compile PySide2 using 
+
+
+
+<a href="https://www.mingw.org" target="_blank" rel="noopener">mingw32</a>
+and/or 
+
+
+
+<a href="https://mingwpy.github.io/" target="_blank" rel="noopener">mingwpy</a> rather than MSVC. I very much
+appreciate suggestions in the comments further down below on this.</p>
+<p>But so, at least for now, this guide is for Python 3.5.x only.</p>
+<p>You&rsquo;ll need OpenSSL, Cmake, Microsoft Visual C++ Studio 2015 and, of course,
+Qt5.</p>
+<p>I think the nicest approach would be to install these softwares via
+
+
+
+
+<a href="https://chocolatey.org" target="_blank" rel="noopener">Chocolatey</a> but I haven&rsquo;t managed to get that to work
+flawlessly, so I&rsquo;m doing this manually instead.</p>
+<p>Download and install the 64-bit versions of:</p>
+<ul>
+<li>
+
+
+
+<a href="https://sourceforge.net/projects/openssl" target="_blank" rel="noopener">OpenSSL</a></li>
+<li>
+
+
+
+<a href="https://cmake.org/download" target="_blank" rel="noopener">Cmake</a></li>
+<li>
+
+
+
+<a href="https://www.visualstudio.com" target="_blank" rel="noopener">Microsoft Visual C++ Studio 2015</a> - Note:
 during the install, you must check the programming language option for C++, or
 the <code>cl</code> command won&rsquo;t be available. This can also be performed if you run the
 installer again after having already installed MSVC2015 (choose to &ldquo;Modify&rdquo;
-your installation).</li><li>Qt 5.6.1-1 from the
-<a href=https://download.qt.io/archive/qt/ target=_blank rel=noopener>Qt archives</a>, I&rsquo;m
+your installation).</li>
+<li>Qt 5.6.1-1 from the 
+
+
+
+<a href="https://download.qt.io/archive/qt/" target="_blank" rel="noopener">Qt archives</a>, I&rsquo;m
 using
-<a href=https://download.qt.io/archive/qt/5.6/5.6.1-1/qt-opensource-windows-x86-msvc2015_64-5.6.1-1.exe target=_blank rel=noopener>qt-opensource-windows-x86-msvc2015_64-5.6.1-1.exe</a>.</li></ul><p>You might also need the Windows SDK (I&rsquo;m not sure since I had it installed
+
+
+
+
+<a href="https://download.qt.io/archive/qt/5.6/5.6.1-1/qt-opensource-windows-x86-msvc2015_64-5.6.1-1.exe" target="_blank" rel="noopener">qt-opensource-windows-x86-msvc2015_64-5.6.1-1.exe</a>.</li>
+</ul>
+<p>You might also need the Windows SDK (I&rsquo;m not sure since I had it installed
 already when writing this). You can download it for Windows 10 from
-<a href=https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk target=_blank rel=noopener>here</a>.
+
+
+
+
+<a href="https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk" target="_blank" rel="noopener">here</a>.
 I have a feeling this is installed by MSVC2015, but I&rsquo;m not sure. If you know
-what the deal is here, please let me know in the comments further down below!</p><h2 id=clone-the-repository>Clone the repository</h2><p>The old repository is located in Github. I&rsquo;m not sure why they still keep it
+what the deal is here, please let me know in the comments further down below!</p>
+<h2 id="clone-the-repository">Clone the repository</h2>
+<p>The old repository is located in Github. I&rsquo;m not sure why they still keep it
 there as it is no longer maintained. The active repositories are hosted by the
 Qt Company and resides
-<a href="https://codereview.qt-project.org/#/admin/projects/?filter=pyside" target=_blank rel=noopener>here</a>.</p><p>Clone the <code>pyside-setup</code> repository and have it also pull down its gitmodules:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Edited on 2017-07-20; added branch specific to Qt 5.6</span>
-</span></span><span class=line><span class=cl>git clone --recursive --branch 5.6 https://code.qt.io/pyside/pyside-setup.git</span></span></code></pre></div></div><p>Autodesk has also provided the version of PySide2 they used in Maya 2017 on
+
+
+
+
+<a href="https://codereview.qt-project.org/#/admin/projects/?filter=pyside" target="_blank" rel="noopener">here</a>.</p>
+<p>Clone the <code>pyside-setup</code> repository and have it also pull down its gitmodules:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Edited on 2017-07-20; added branch specific to Qt 5.6</span>
+</span></span><span class="line"><span class="cl">git clone --recursive --branch 5.6 https://code.qt.io/pyside/pyside-setup.git</span></span></code></pre></div></div>
+<p>Autodesk has also provided the version of PySide2 they used in Maya 2017 on
 their
-<a href=https://www.autodesk.com/company/legal-notices-trademarks/open-source-distribution target=_blank rel=noopener>open source distributions page</a>.
+
+
+
+
+<a href="https://www.autodesk.com/company/legal-notices-trademarks/open-source-distribution" target="_blank" rel="noopener">open source distributions page</a>.
 If you prefer that, you can download the PySide2.zip file from there and use
-that instead.</p><h2 id=build-the-pyside2-wheel>Build the PySide2 wheel</h2><p>The exact paths given in the arguments may not be identical on your system so
-verify those prior to compiling.</p><h3 id=notes-on-linux>Notes on Linux</h3><p>Please note, in setup.py, the <code>--standalone</code> argument is mentioned, but I don&rsquo;t
-see this working when including that in the build command:</p><blockquote class="callout markdown-alert"><div class=callout-content><p>On Linux you can use option &ndash;standalone, to embed Qt libraries to PySide2
-distribution</p></div></blockquote><p>Also please note, I&rsquo;m not using the <code>--openssl</code> argument since I actually wasn&rsquo;t
+that instead.</p>
+<h2 id="build-the-pyside2-wheel">Build the PySide2 wheel</h2>
+<p>The exact paths given in the arguments may not be identical on your system so
+verify those prior to compiling.</p>
+<h3 id="notes-on-linux">Notes on Linux</h3>
+<p>Please note, in setup.py, the <code>--standalone</code> argument is mentioned, but I don&rsquo;t
+see this working when including that in the build command:</p>
+<blockquote class="callout markdown-alert "><div class="callout-content"><p>On Linux you can use option &ndash;standalone, to embed Qt libraries to PySide2
+distribution</p>
+</div>
+</blockquote><p>Also please note, I&rsquo;m not using the <code>--openssl</code> argument since I actually wasn&rsquo;t
 able to figure out where the OpenSSL bin directory resides in Ubuntu/CentOS. At
 least, searching using <code>find / -name openssl</code> didn&rsquo;t reveal this and the wheel
 works anyways. If you know where this resides or how to make it available, I&rsquo;d
 be grateful if you would like to share this with me in the comments further down
-below.</p><h3 id=os-x-1>OS X</h3><p>This command worked fine for me using Python 2.7.11 and Python 3.5.1. Remember
+below.</p>
+<h3 id="os-x-1">OS X</h3>
+<p>This command worked fine for me using Python 2.7.11 and Python 3.5.1. Remember
 to have pip installed with the <code>wheel</code> package or you&rsquo;ll get an error about
-<code>bdist_wheel</code>.</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>python setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin</span></span></code></pre></div></div><h3 id=ubuntu-1604-linux-1>Ubuntu 16.04 Linux</h3><p>This command worked fine for me using Python 2.7.12 and Python 3.5.2. Remember
+<code>bdist_wheel</code>.</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin</span></span></code></pre></div></div>
+<h3 id="ubuntu-1604-linux-1">Ubuntu 16.04 Linux</h3>
+<p>This command worked fine for me using Python 2.7.12 and Python 3.5.2. Remember
 to have pip installed with the <code>wheel</code> package or you&rsquo;ll get an error about
-<code>bdist_wheel</code>.</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>python setup.py bdist_wheel --ignore-git --qmake=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake --cmake=/usr/bin/cmake</span></span></code></pre></div></div><h3 id=centos-7-linux-1>CentOS 7 Linux</h3><p>Due to
-<a href=https://bugreports.qt.io/browse/PYSIDE-342 target=_blank rel=noopener>this issue</a>, you need to
+<code>bdist_wheel</code>.</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python setup.py bdist_wheel --ignore-git --qmake=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake --cmake=/usr/bin/cmake</span></span></code></pre></div></div>
+<h3 id="centos-7-linux-1">CentOS 7 Linux</h3>
+<p>Due to 
+
+
+
+<a href="https://bugreports.qt.io/browse/PYSIDE-342" target="_blank" rel="noopener">this issue</a>, you need to
 manually add the following to
 <code>/pyside-setup/sources/pyside2/pyslidelib/CMakeLists.txt</code>, after the first line
-(which says <code>project(libpyside)</code>):</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>#HACK: CMake with broken Qt5Qml_PRIVATE_INCLUDE_DIRS, Qt5Quick_PRIVATE_INCLUDE_DIRS
-</span></span><span class=line><span class=cl>  if(${Qt5Qml_FOUND})
-</span></span><span class=line><span class=cl>    if(NOT &#34;${Qt5Qml_PRIVATE_INCLUDE_DIRS}&#34; MATCHES &#34;/QtQml/&#34;)
-</span></span><span class=line><span class=cl>      string(REPLACE &#34;/QtCore&#34; &#34;/QtQml&#34; replaceme &#34;${Qt5Core_PRIVATE_INCLUDE_DIRS}&#34;)
-</span></span><span class=line><span class=cl>      list(APPEND Qt5Qml_PRIVATE_INCLUDE_DIRS ${replaceme})
-</span></span><span class=line><span class=cl>      list(REMOVE_DUPLICATES Qt5Qml_PRIVATE_INCLUDE_DIRS)
-</span></span><span class=line><span class=cl>    endif()
-</span></span><span class=line><span class=cl>  endif()
-</span></span><span class=line><span class=cl>  if(${Qt5Quick_FOUND})
-</span></span><span class=line><span class=cl>    if(NOT &#34;${Qt5Quick_PRIVATE_INCLUDE_DIRS}&#34; MATCHES &#34;/QtQuick/&#34;)
-</span></span><span class=line><span class=cl>      string(REPLACE &#34;/QtCore&#34; &#34;/QtQuick&#34; replaceme &#34;${Qt5Core_PRIVATE_INCLUDE_DIRS}&#34;)
-</span></span><span class=line><span class=cl>      list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${Qt5Qml_PRIVATE_INCLUDE_DIRS})
-</span></span><span class=line><span class=cl>      list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${replaceme})
-</span></span><span class=line><span class=cl>      list(REMOVE_DUPLICATES Qt5Quick_PRIVATE_INCLUDE_DIRS)
-</span></span><span class=line><span class=cl>    endif()
-</span></span><span class=line><span class=cl>  endif()</span></span></code></pre></div></div><p>Then you can build the PySide2 wheel:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>python setup.py bdist_wheel --ignore-git --qmake=/usr/lib64/qt5/bin/qmake-qt5 --cmake=/usr/bin/cmake3</span></span></code></pre></div></div><p>If you wish to use Python 3.5, execute <code>python3.5</code> instead of <code>python</code>.</p><h3 id=windows-10-1>Windows 10</h3><p>Open the prompt called &ldquo;VS2015 x64 Native Tools Command Prompt&rdquo; and run the
-build command.</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>python setup.py bdist_wheel --ignore-git --qmake=c:\Qt\Qt5.6.1\5.6\msvc2015\bin\qmake.exe --openssl=&#34;C:\openssl-1.0.2d-fips-2.0.10\bin&#34; --cmake=&#34;C:\Program Files\CMake\bin\cmake.exe&#34;</span></span></code></pre></div></div><h2 id=install-the-wheel>Install the wheel</h2><p>A wheel was hopefully built in the dist folder. So just <code>cd dist</code> and
-<code>pip install</code> away!</p><h2 id=notes-on-pre-compiled-wheels>Notes on pre-compiled wheels</h2><p>Unfortunately, and like with PySide, these wheels are not &ldquo;portable&rdquo; and won&rsquo;t
+(which says <code>project(libpyside)</code>):</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#HACK: CMake with broken Qt5Qml_PRIVATE_INCLUDE_DIRS, Qt5Quick_PRIVATE_INCLUDE_DIRS
+</span></span><span class="line"><span class="cl">  if(${Qt5Qml_FOUND})
+</span></span><span class="line"><span class="cl">    if(NOT &#34;${Qt5Qml_PRIVATE_INCLUDE_DIRS}&#34; MATCHES &#34;/QtQml/&#34;)
+</span></span><span class="line"><span class="cl">      string(REPLACE &#34;/QtCore&#34; &#34;/QtQml&#34; replaceme &#34;${Qt5Core_PRIVATE_INCLUDE_DIRS}&#34;)
+</span></span><span class="line"><span class="cl">      list(APPEND Qt5Qml_PRIVATE_INCLUDE_DIRS ${replaceme})
+</span></span><span class="line"><span class="cl">      list(REMOVE_DUPLICATES Qt5Qml_PRIVATE_INCLUDE_DIRS)
+</span></span><span class="line"><span class="cl">    endif()
+</span></span><span class="line"><span class="cl">  endif()
+</span></span><span class="line"><span class="cl">  if(${Qt5Quick_FOUND})
+</span></span><span class="line"><span class="cl">    if(NOT &#34;${Qt5Quick_PRIVATE_INCLUDE_DIRS}&#34; MATCHES &#34;/QtQuick/&#34;)
+</span></span><span class="line"><span class="cl">      string(REPLACE &#34;/QtCore&#34; &#34;/QtQuick&#34; replaceme &#34;${Qt5Core_PRIVATE_INCLUDE_DIRS}&#34;)
+</span></span><span class="line"><span class="cl">      list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${Qt5Qml_PRIVATE_INCLUDE_DIRS})
+</span></span><span class="line"><span class="cl">      list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${replaceme})
+</span></span><span class="line"><span class="cl">      list(REMOVE_DUPLICATES Qt5Quick_PRIVATE_INCLUDE_DIRS)
+</span></span><span class="line"><span class="cl">    endif()
+</span></span><span class="line"><span class="cl">  endif()</span></span></code></pre></div></div>
+<p>Then you can build the PySide2 wheel:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python setup.py bdist_wheel --ignore-git --qmake=/usr/lib64/qt5/bin/qmake-qt5 --cmake=/usr/bin/cmake3</span></span></code></pre></div></div>
+<p>If you wish to use Python 3.5, execute <code>python3.5</code> instead of <code>python</code>.</p>
+<h3 id="windows-10-1">Windows 10</h3>
+<p>Open the prompt called &ldquo;VS2015 x64 Native Tools Command Prompt&rdquo; and run the
+build command.</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python setup.py bdist_wheel --ignore-git --qmake=c:\Qt\Qt5.6.1\5.6\msvc2015\bin\qmake.exe --openssl=&#34;C:\openssl-1.0.2d-fips-2.0.10\bin&#34; --cmake=&#34;C:\Program Files\CMake\bin\cmake.exe&#34;</span></span></code></pre></div></div>
+<h2 id="install-the-wheel">Install the wheel</h2>
+<p>A wheel was hopefully built in the dist folder. So just <code>cd dist</code> and
+<code>pip install</code> away!</p>
+<h2 id="notes-on-pre-compiled-wheels">Notes on pre-compiled wheels</h2>
+<p>Unfortunately, and like with PySide, these wheels are not &ldquo;portable&rdquo; and won&rsquo;t
 install on systems which doesn&rsquo;t already have the specific Qt5 version installed
 used during compilation. This, I believe, is because PySide2 links dynamically
 (instead of statically) against the Qt5 installation. Hopefully, this is
 something The Qt Company will address via official PySide2 wheels, as Riverbank
 Software is now providing a fully portable PyQt5 wheel for Python 3 which is
 absolutely awesome. In case you think we could produce such wheels ourselves,
-I&rsquo;d appreciate if you&rsquo;d leave a comment on this further down below!</p><p>Personally, this makes me want to develop for PyQt5 wherever I can since this is
+I&rsquo;d appreciate if you&rsquo;d leave a comment on this further down below!</p>
+<p>Personally, this makes me want to develop for PyQt5 wherever I can since this is
 all it takes to get going if you&rsquo;re using Python 3: <code>pip install PyQt5</code>. If you
 also feel this way, have a look at the
-<a href=https://github.com/mottosso/Qt.py target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>Qt.py</a> project which will enable you to
-write code which will work in both PySide2 and PyQt5 (and PySide/PyQt4).</p><h2 id=docker-built-wheels-via-travis-ci>Docker-built wheels via Travis-CI</h2><p>I&rsquo;ve set up a repository where I test the wheel building with Docker:
-<a href=https://github.com/fredrikaverpil/pyside2-wheels target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>fredrikaverpil/pyside2-wheels</a></p><h2 id=closing-comments>Closing comments</h2><p>As of writing this, I understand that PySide2 is not seen as having been made
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+
+  <a href="https://github.com/mottosso/Qt.py" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Qt.py</a> project which will enable you to
+write code which will work in both PySide2 and PyQt5 (and PySide/PyQt4).</p>
+<h2 id="docker-built-wheels-via-travis-ci">Docker-built wheels via Travis-CI</h2>
+<p>I&rsquo;ve set up a repository where I test the wheel building with Docker:
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+  
+
+  
+  
+  
+
+  
+  
+
+  <a href="https://github.com/fredrikaverpil/pyside2-wheels" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>fredrikaverpil/pyside2-wheels</a></p>
+<h2 id="closing-comments">Closing comments</h2>
+<p>As of writing this, I understand that PySide2 is not seen as having been made
 generally available just yet, and could perhaps be seen as being in an alpha
 stage. They did announce that Python 2 support was dropped
-<a href=https://github.com/PySide/pyside2/wiki target=_blank rel=noopener class=github-link><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>here</a> (although not officially, I was
-told):</p><blockquote class="callout markdown-alert"><div class=callout-content><p>Why there is no PySide2 for Python 2? Because Python 2 extensions like PySide
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+
+  <a href="https://github.com/PySide/pyside2/wiki" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>here</a> (although not officially, I was
+told):</p>
+<blockquote class="callout markdown-alert "><div class="callout-content"><p>Why there is no PySide2 for Python 2? Because Python 2 extensions like PySide
 need to be compiled with ancient version of MS Visual C++ 9 and that means
 that all linked libs including Qt need to be compiled with this version. But
 Qt5, the library that PySide2 wraps, dropped support for MS VC++ 9, and code
 is unlikely to compile for it anymore. The only solution to fix this, is to
 help with development and funding of
-<a href=https://mingwpy.github.io/ target=_blank rel=noopener>https://mingwpy.github.io/</a></p></div></blockquote><p>This is yet another aging sign of Python 2.x. Personally, I&rsquo;m developing with
+
+
+
+
+<a href="https://mingwpy.github.io/" target="_blank" rel="noopener">https://mingwpy.github.io/</a></p>
+</div>
+</blockquote><p>This is yet another aging sign of Python 2.x. Personally, I&rsquo;m developing with
 Python 3.5 as the interpreter of choice in my IDE and I make sure my code is
 backwards compatible with Python 2.7, which is actually very easy for the most
-part. I think that the
-<a href=https://www.vfxplatform.com target=_blank rel=noopener>VFX Reference Platform</a>
+part. I think that the 
+
+
+
+<a href="https://www.vfxplatform.com" target="_blank" rel="noopener">VFX Reference Platform</a>
 should plan ahead (starting now) for a move onto Python 3.5 as there is great
 reluctancy in the industry towards this move. It&rsquo;ll involve a lot of code
 porting, yes, but with enough headsup time this shouldn&rsquo;t be blocking such a
 move. It&rsquo;s a developer&rsquo;s world, this is how it works. You can&rsquo;t hold on to old
-code forever.</p><p>Since the old PySide Github repository is basically abandoned, I&rsquo;d suggest you
+code forever.</p>
+<p>Since the old PySide Github repository is basically abandoned, I&rsquo;d suggest you
 create a user account with The Qt Company and start checking out the repository
-over at Qt, where apparently the real action is:</p><ul><li><a href=https://wiki.qt.io/PySide2 target=_blank rel=noopener>PySide2 wiki</a></li><li><a href="https://codereview.qt-project.org/#/admin/projects/?filter=pyside" target=_blank rel=noopener>PySide2 repositories</a></li><li><a href=https://bugreports.qt.io/browse/PYSIDE/ target=_blank rel=noopener>Bug tracker (issues)</a></li><li><a href=https://forum.qt.io/category/15/language-bindings target=_blank rel=noopener>Qt language bindings forum</a></li><li><a href=https://gitter.im/PySide/pyside2 target=_blank rel=noopener>PySide/PySide2 Gitter channel</a> or
+over at Qt, where apparently the real action is:</p>
+<ul>
+<li>
+
+
+
+<a href="https://wiki.qt.io/PySide2" target="_blank" rel="noopener">PySide2 wiki</a></li>
+<li>
+
+
+
+<a href="https://codereview.qt-project.org/#/admin/projects/?filter=pyside" target="_blank" rel="noopener">PySide2 repositories</a></li>
+<li>
+
+
+
+<a href="https://bugreports.qt.io/browse/PYSIDE/" target="_blank" rel="noopener">Bug tracker (issues)</a></li>
+<li>
+
+
+
+<a href="https://forum.qt.io/category/15/language-bindings" target="_blank" rel="noopener">Qt language bindings forum</a></li>
+<li>
+
+
+
+<a href="https://gitter.im/PySide/pyside2" target="_blank" rel="noopener">PySide/PySide2 Gitter channel</a> or
 #qt-pyside on irc.freenode.net (replaces the former #pyside channel, after
-PySide moved into Qt)</li></ul></main><script>(function(){const e=document.getElementById("giscus-container"),t=document.getElementById("load-comments-btn");function o(){if(!e)return;e.innerHTML="";const n=document.body.classList.contains("dark")?"dark":"light",t=document.createElement("script");t.src="https://giscus.app/client.js",t.setAttribute("data-repo","markholloway/markholloway.github.io"),t.setAttribute("data-repo-id","MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc="),t.setAttribute("data-category","General"),t.setAttribute("data-category-id","DIC_kwDOB8-Z684CU9zc"),t.setAttribute("data-mapping","title"),t.setAttribute("data-strict","0"),t.setAttribute("data-reactions-enabled","1"),t.setAttribute("data-emit-metadata","0"),t.setAttribute("data-input-position","bottom"),t.setAttribute("data-theme",n),t.setAttribute("data-lang","en"),t.setAttribute("crossorigin","anonymous"),t.async=!0,e.appendChild(t)}t&&t.addEventListener("click",o);function n(e){const t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}const s=document.getElementById("theme-toggle");s&&s.addEventListener("click",()=>{setTimeout(()=>{const e=document.body.classList.contains("dark")?"dark":"light";n(e)},10)}),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",e=>{if(!localStorage.getItem("theme")){const t=e.matches?"dark":"light";n(t)}})})()</script><footer><div class=footer-content><span class=footer-icons><a href=https://github.com/markholloway target=_blank rel=noopener title=GitHub><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63.0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577.0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93.0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176.0.0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22.0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22.0 1.606-.015 2.896-.015 3.286.0.315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-</a><a href=https://linkedin.com/in/mholloway target=_blank rel=noopener title=LinkedIn><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853.0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601.0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144.0-2.063-.926-2.063-2.065.0-1.138.92-2.063 2.063-2.063 1.14.0 2.064.925 2.064 2.063.0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225.0H1.771C.792.0.0.774.0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2.0 22.222.0h.003z"/></svg>
-</a><a href=/blog/index.xml target=_blank rel=noopener title=RSS><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8.0 4.8V0c13.165.0 24 10.835 24 24h-4.801zM3.291 17.415c1.814.0 3.293 1.479 3.293 3.295.0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526.0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727.0 15.909 7.184 15.909 15.91z"/></svg>
-</a><a href=https://cloud.umami.is/share/x4yvhGEscsDh1in8 target=_blank rel=noopener title=Umami><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845.0 00-.841.841v.858a13.31 13.31.0 00-.016.6c0 6.627 5.373 12 12 12 6.527.0 11.837-5.212 11.996-11.701.0-.025.004-.05.004-.075V9.452a.845.845.0 00-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692.0-8.645 3.192-9.805 7.521zm18.444.0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069.0 7.512 2.697 8.639 6.399z"/></svg>
-</a></span><span class=footer-text>© Mark Holloway 2005-2026</span></div><script src=/js/main.js></script></footer></body></html>
+PySide moved into Qt)</li>
+</ul>
+
+</main>
+
+
+
+
+
+<script>
+  (function() {
+    const container = document.getElementById('giscus-container');
+    const loadBtn = document.getElementById('load-comments-btn');
+
+    
+    function loadGiscus() {
+      if (!container) return;
+      
+      
+      container.innerHTML = ''; 
+
+      const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
+      
+      const giscusScript = document.createElement('script');
+      giscusScript.src = 'https://giscus.app/client.js';
+      giscusScript.setAttribute('data-repo', 'markholloway/markholloway.com');
+      giscusScript.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc=');
+      giscusScript.setAttribute('data-category', 'General');
+      giscusScript.setAttribute('data-category-id', 'DIC_kwDOB8-Z684CU9zc');
+      giscusScript.setAttribute('data-mapping', 'title');
+      giscusScript.setAttribute('data-strict', '0');
+      giscusScript.setAttribute('data-reactions-enabled', '1');
+      giscusScript.setAttribute('data-emit-metadata', '0');
+      giscusScript.setAttribute('data-input-position', 'bottom');
+      giscusScript.setAttribute('data-theme', theme);
+      giscusScript.setAttribute('data-lang', 'en');
+      giscusScript.setAttribute('crossorigin', 'anonymous');
+      giscusScript.async = true;
+
+      container.appendChild(giscusScript);
+    }
+
+    
+    if (loadBtn) {
+      loadBtn.addEventListener('click', loadGiscus);
+    }
+
+    
+    function setGiscusTheme(theme) {
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame && giscusFrame.contentWindow) {
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme } } },
+          'https://giscus.app'
+        );
+      }
+    }
+
+    
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        
+        setTimeout(() => {
+          const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+          setGiscusTheme(currentTheme);
+        }, 10); 
+      });
+    }
+
+    
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        if (!localStorage.getItem('theme')) { 
+          const newTheme = event.matches ? "dark" : "light";
+          setGiscusTheme(newTheme);
+        }
+      });
+    }
+  })();
+</script>
+
+
+
+<footer>
+	<div class="footer-content">
+		<span class="footer-icons">
+			
+			
+			<a href="https://github.com/markholloway" target="_blank" rel="noopener" title="GitHub">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+
+			</a>
+			
+			
+			<a href="https://linkedin.com/in/mholloway" target="_blank" rel="noopener" title="LinkedIn">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+
+			</a>
+			
+			
+			<a href="/blog/index.xml" target="_blank" rel="noopener" title="RSS">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"/></svg>
+
+			</a>
+			
+			
+			<a href="https://cloud.umami.is/share/x4yvhGEscsDh1in8" target="_blank" rel="noopener" title="Umami">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845 0 0 0-.841.841v.858a13.31 13.31 0 0 0-.016.6c0 6.627 5.373 12 12 12 6.527 0 11.837-5.212 11.996-11.701 0-.025.004-.05.004-.075V9.452a.845.845 0 0 0-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692 0-8.645 3.192-9.805 7.521Zm18.444 0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069 0 7.512 2.697 8.639 6.399Z"/></svg>
+
+			</a>
+			
+		</span>
+		<span class="footer-text">
+			© Mark Holloway 2005-2026
+		</span>
+	</div>
+	<script src="/js/main.js"></script>
+
+</footer>
+</body>
+
+</html>
+

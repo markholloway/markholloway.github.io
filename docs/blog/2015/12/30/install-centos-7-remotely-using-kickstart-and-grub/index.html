@@ -1,114 +1,638 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Install CentOS 7 remotely using Kickstart and GRUB | Mark Holloway</title><meta name=description content="Notes from a curiosity-driven engineer."><link rel=canonical href=https://markholloway.com/blog/2015/12/30/install-centos-7-remotely-using-kickstart-and-grub/><meta property="og:url" content="https://markholloway.com/blog/2015/12/30/install-centos-7-remotely-using-kickstart-and-grub/"><meta property="og:site_name" content="Mark Holloway"><meta property="og:title" content="Install CentOS 7 remotely using Kickstart and GRUB"><meta property="og:description" content="This guide assumes the target host is already running CentOS (a derivate of Red Hat Enterprise Linux) or at least running the GRUB boot loader and that you have root access to this host.
-What’s this all about? I’m going to install CentOS 7 onto a machine which I do not have physical access to. In order to achieve this, I’m going to need a Kickstart file, some files from the CentOS 7 installation and create a custom GRUB boot loader entry."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2015-12-30T00:00:00+00:00"><meta property="article:modified_time" content="2015-12-30T00:00:00+00:00"><meta property="article:tag" content="Linux"><meta name=twitter:card content="summary"><meta name=twitter:title content="Install CentOS 7 remotely using Kickstart and GRUB"><meta name=twitter:description content="This guide assumes the target host is already running CentOS (a derivate of Red Hat Enterprise Linux) or at least running the GRUB boot loader and that you have root access to this host.
-What’s this all about? I’m going to install CentOS 7 onto a machine which I do not have physical access to. In order to achieve this, I’m going to need a Kickstart file, some files from the CentOS 7 installation and create a custom GRUB boot loader entry."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Install CentOS 7 remotely using Kickstart and GRUB","datePublished":"2015-12-30T00:00:00Z","dateModified":"2015-12-30T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/markholloway.com\/blog\/2015\/12\/30\/install-centos-7-remotely-using-kickstart-and-grub\/"},"author":{"@type":"Person","name":"map[]"},"description":"This guide assumes the target host is already running CentOS (a derivate of Red Hat Enterprise Linux) or at least running the GRUB boot loader and that you have root access to this host.\nWhat\u0026rsquo;s this all about? I\u0026rsquo;m going to install CentOS 7 onto a machine which I do not have physical access to. In order to achieve this, I\u0026rsquo;m going to need a Kickstart file, some files from the CentOS 7 installation and create a custom GRUB boot loader entry.\n"}</script><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=preload href=/fonts/BerkeleyMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/CommitMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/MapleMono-Italic.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/github-link.css><script defer src=https://cloud.umami.is/script.js data-website-id=29980893-435d-4d73-962b-e2b6e505fb7e></script></head><body class=preload><script>(function(){const e=localStorage.getItem("theme");e?document.body.classList.add(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark"),"fonts"in document?Promise.race([document.fonts.ready,new Promise(e=>setTimeout(e,100))]).then(()=>{document.body.classList.remove("preload")}):setTimeout(()=>{document.body.classList.remove("preload")},50)})()</script><nav style=display:flex;align-items:center;gap:1em;flex-wrap:wrap><ul class=menu style=margin:0;padding:0;flex-shrink:0><li><a href=/>Home</a></li><li><a href=/blog/>Blog</a></li><li><a href=/about/>About</a></li><li><button id=theme-toggle style="background:0 0;border:none;cursor:pointer;font-size:1em;padding:5px;color:inherit">◑</button></li></ul><div id=search style=flex-grow:1;min-width:200px></div></nav><link href=/pagefind/pagefind-ui.css rel=stylesheet><script src=/pagefind/pagefind-ui.js></script><script>window.addEventListener("DOMContentLoaded",e=>{new PagefindUI({element:"#search",showSubResults:!0,showImages:!1,translations:{placeholder:"Search...",clear_search:"×"}}),document.addEventListener("click",e=>{const t=document.querySelector("#search");if(t&&!t.contains(e.target)){const e=t.querySelector(".pagefind-ui__search-clear");e&&e.click()}});const n=document.getElementById("theme-toggle"),t=document.body;n.addEventListener("click",()=>{t.classList.contains("dark")?(t.classList.remove("dark"),t.classList.add("light"),localStorage.setItem("theme","light")):(t.classList.remove("light"),t.classList.add("dark"),localStorage.setItem("theme","dark"))})})</script><div class=article-meta><h1><span class=title>Install CentOS 7 remotely using Kickstart and GRUB</span></h1><div class=article-meta-info><span class=date>2015-12-30</span>
-<span class=article-tags><a href=/tags/linux>#linux</a></span></div></div><main data-pagefind-body><aside class=table-of-contents><div class=toc-title><svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z"/></svg>
-Table of Contents</div><nav id=TableOfContents><ul><li><a href=#whats-this-all-about>What&rsquo;s this all about?</a></li><li><a href=#the-kickstart-file>The Kickstart file</a></li><li><a href=#verify-the-kickstart-file>Verify the Kickstart file</a></li><li><a href=#make-the-kickstart-file-available-on-a-web-server>Make the Kickstart file available on a web server</a></li><li><a href=#download-vmlinuz-and-initrdimg>Download vmlinuz and initrd.img</a></li><li><a href=#add-custom-boot-entry-in-centos-6x-or-grub-1x>Add custom boot entry in CentOS 6.x (or GRUB 1.x)</a></li><li><a href=#add-custom-boot-entry-in-centos-7x-or-grub-2x>Add custom boot entry in CentOS 7.x (or GRUB 2.x)</a></li><li><a href=#reboot-your-system-to-install-centos-7>Reboot your system to install CentOS 7</a></li><li><a href=#additional-notes>Additional notes</a></li></ul></nav></aside><p>This guide assumes the target host is already running CentOS (a derivate of
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Install CentOS 7 remotely using Kickstart and GRUB | Mark Holloway</title>
+    <meta name="description" content="Notes from a curiosity-driven engineer.">
+    <link rel="canonical" href="http://localhost:1313/blog/2015/12/30/install-centos-7-remotely-using-kickstart-and-grub/">
+    
+    
+    <meta property="og:url" content="http://localhost:1313/blog/2015/12/30/install-centos-7-remotely-using-kickstart-and-grub/">
+  <meta property="og:site_name" content="Mark Holloway">
+  <meta property="og:title" content="Install CentOS 7 remotely using Kickstart and GRUB">
+  <meta property="og:description" content="This guide assumes the target host is already running CentOS (a derivate of Red Hat Enterprise Linux) or at least running the GRUB boot loader and that you have root access to this host.
+What’s this all about? I’m going to install CentOS 7 onto a machine which I do not have physical access to. In order to achieve this, I’m going to need a Kickstart file, some files from the CentOS 7 installation and create a custom GRUB boot loader entry.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2015-12-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2015-12-30T00:00:00+00:00">
+    <meta property="article:tag" content="Linux">
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Install CentOS 7 remotely using Kickstart and GRUB">
+  <meta name="twitter:description" content="This guide assumes the target host is already running CentOS (a derivate of Red Hat Enterprise Linux) or at least running the GRUB boot loader and that you have root access to this host.
+What’s this all about? I’m going to install CentOS 7 onto a machine which I do not have physical access to. In order to achieve this, I’m going to need a Kickstart file, some files from the CentOS 7 installation and create a custom GRUB boot loader entry.">
+
+    
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Install CentOS 7 remotely using Kickstart and GRUB",
+  "datePublished": "2015-12-30T00:00:00Z",
+  "dateModified": "2015-12-30T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/localhost:1313\/blog\/2015\/12\/30\/install-centos-7-remotely-using-kickstart-and-grub\/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "map[]"
+  },
+  "description": "This guide assumes the target host is already running CentOS (a derivate of Red Hat Enterprise Linux) or at least running the GRUB boot loader and that you have root access to this host.\nWhat\u0026rsquo;s this all about? I\u0026rsquo;m going to install CentOS 7 onto a machine which I do not have physical access to. In order to achieve this, I\u0026rsquo;m going to need a Kickstart file, some files from the CentOS 7 installation and create a custom GRUB boot loader entry.\n"
+}
+</script>
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    
+    
+    <link rel="preload" href="/fonts/BerkeleyMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/CommitMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/MapleMono-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/github-link.css" />
+    
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="29980893-435d-4d73-962b-e2b6e505fb7e"></script>
+
+  </head>
+
+  <body class="preload">
+    <script>
+      (function() {
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.body.classList.add(savedTheme);
+        } else {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark');
+          }
+        }
+        
+        
+        if ('fonts' in document) {
+          
+          Promise.race([
+            document.fonts.ready,
+            new Promise(resolve => setTimeout(resolve, 100)) 
+          ]).then(() => {
+            document.body.classList.remove('preload');
+          });
+        } else {
+          
+          setTimeout(() => {
+            document.body.classList.remove('preload');
+          }, 50);
+        }
+      })();
+    </script>
+
+    <nav style="display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
+      <ul class="menu" style="margin: 0; padding: 0; flex-shrink: 0;">
+        
+        
+        <li><a  href="/">Home</a></li>
+        
+        <li><a  href="/blog/">Blog</a></li>
+        
+        <li><a  href="/about/">About</a></li>
+        
+        <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1em; padding:5px; color:inherit;">◑</button></li>
+      </ul>
+      
+      
+      <div id="search" style="flex-grow: 1; min-width: 200px;"></div>
+    </nav>
+    
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ 
+              element: "#search", 
+              showSubResults: true,
+              showImages: false,
+              translations: {
+                placeholder: "Search...",
+                clear_search: "×"
+              }
+            });
+
+            
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('#search');
+                if (searchContainer && !searchContainer.contains(e.target)) {
+                    const clearButton = searchContainer.querySelector('.pagefind-ui__search-clear');
+                    if (clearButton) {
+                        clearButton.click();
+                    }
+                }
+            });
+
+            
+            const toggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            toggle.addEventListener('click', () => {
+              if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+              } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+              }
+            });
+        });
+    </script>
+
+
+<div class="article-meta">
+<h1><span class="title">Install CentOS 7 remotely using Kickstart and GRUB</span></h1>
+
+<div class="article-meta-info">
+  <span class="date">2015-12-30</span>
+  
+  <span class="article-tags">
+    
+    
+    
+    <a href="/tags/linux">#linux</a>
+    
+    
+  </span>
+  
+</div>
+</div>
+
+
+
+<main data-pagefind-body>
+	
+	
+		
+		<aside class="table-of-contents">
+			<div class="toc-title">
+				<svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
+					fill="currentColor">
+					<path
+						d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z">
+					</path>
+				</svg>
+				Table of Contents
+			</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li><a href="#whats-this-all-about">What&rsquo;s this all about?</a></li>
+    <li><a href="#the-kickstart-file">The Kickstart file</a></li>
+    <li><a href="#verify-the-kickstart-file">Verify the Kickstart file</a></li>
+    <li><a href="#make-the-kickstart-file-available-on-a-web-server">Make the Kickstart file available on a web server</a></li>
+    <li><a href="#download-vmlinuz-and-initrdimg">Download vmlinuz and initrd.img</a></li>
+    <li><a href="#add-custom-boot-entry-in-centos-6x-or-grub-1x">Add custom boot entry in CentOS 6.x (or GRUB 1.x)</a></li>
+    <li><a href="#add-custom-boot-entry-in-centos-7x-or-grub-2x">Add custom boot entry in CentOS 7.x (or GRUB 2.x)</a></li>
+    <li><a href="#reboot-your-system-to-install-centos-7">Reboot your system to install CentOS 7</a></li>
+    <li><a href="#additional-notes">Additional notes</a></li>
+  </ul>
+</nav>
+		</aside>
+		
+
+		<p>This guide assumes the target host is already running CentOS (a derivate of
 Red Hat Enterprise Linux) or at least running the GRUB boot loader and that you
-have root access to this host.</p><h2 id=whats-this-all-about>What&rsquo;s this all about?</h2><p>I&rsquo;m going to install CentOS 7 onto a machine which I do not have physical access
+have root access to this host.</p>
+<h2 id="whats-this-all-about">What&rsquo;s this all about?</h2>
+<p>I&rsquo;m going to install CentOS 7 onto a machine which I do not have physical access
 to. In order to achieve this, I&rsquo;m going to need a Kickstart file, some files
-from the CentOS 7 installation and create a custom GRUB boot loader entry.</p><h2 id=the-kickstart-file>The Kickstart file</h2><p>A Kickstart file will automate the whole installation process. The
-<a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-kickstart-installations.html target=_blank rel=noopener>RedHat 7 Enterprise documentation</a> does a good job explaining:</p><blockquote class="callout markdown-alert"><div class=callout-content><p>Red Hat Enterprise Linux 7 offers a way to partially or fully automate the installation process using a Kickstart file. Kickstart files contain answers to all questions normally asked by the installation program, such as what time zone do you want the system to use, how should the drives be partitioned or which packages should be installed. Providing a prepared Kickstart file at the beginning of the installation therefore allows you to perform the entire installation (or parts of it) automatically, without need for any intervention from the user. This is especially useful when deploying Red Hat Enterprise Linux on a large number of systems at once.</p></div></blockquote><p>A Kickstart file is generated in <code>/root</code> after a successful
+from the CentOS 7 installation and create a custom GRUB boot loader entry.</p>
+<h2 id="the-kickstart-file">The Kickstart file</h2>
+<p>A Kickstart file will automate the whole installation process. The 
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-kickstart-installations.html" target="_blank" rel="noopener">RedHat 7 Enterprise documentation</a> does a good job explaining:</p>
+<blockquote class="callout markdown-alert "><div class="callout-content"><p>Red Hat Enterprise Linux 7 offers a way to partially or fully automate the installation process using a Kickstart file. Kickstart files contain answers to all questions normally asked by the installation program, such as what time zone do you want the system to use, how should the drives be partitioned or which packages should be installed. Providing a prepared Kickstart file at the beginning of the installation therefore allows you to perform the entire installation (or parts of it) automatically, without need for any intervention from the user. This is especially useful when deploying Red Hat Enterprise Linux on a large number of systems at once.</p>
+</div>
+</blockquote><p>A Kickstart file is generated in <code>/root</code> after a successful
 installation of CentOS. You can use this as a start to create your custom
-Kickstart file.</p><p>As an example,
-<a href=/blog/assets/kickstart/anaconda-ks.cfg>here&rsquo;s</a>
+Kickstart file.</p>
+<p>As an example, 
+
+
+
+<a href="/blog/assets/kickstart/anaconda-ks.cfg">here&rsquo;s</a>
 a Kickstart file which was created automatically when
 installing CentOS 7. However, we&rsquo;ll need to make some changes to it so that it
-will work when remotely installing CentOS 7 via SSH.</p><p>First, we&rsquo;ll have to change the installation media from &ldquo;cdrom&rdquo; to &ldquo;url&rdquo;. I&rsquo;m
-using one of the
-<a href=https://www.centos.org/download/mirrors/ target=_blank rel=noopener>mirrors</a> available:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Use CDROM installation media</span>
-</span></span><span class=line><span class=cl><span class=c1>#cdrom</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Use network installation</span>
-</span></span><span class=line><span class=cl>url --url<span class=o>=</span><span class=s2>&#34;https://mirror.zetup.net/CentOS/7/os/x86_64/&#34;</span></span></span></code></pre></div></div><p>We&rsquo;ll also have to tell the installation to clear out any previous partitions
-on &ldquo;sda&rdquo; (the primary disk):</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Partition clearing information</span>
-</span></span><span class=line><span class=cl><span class=c1>#clearpart --none --initlabel</span>
-</span></span><span class=line><span class=cl>clearpart --all --drives<span class=o>=</span>sda</span></span></code></pre></div></div><p>Since we want the machine to automatically reboot after completed installation,
-we&rsquo;ll have to tell it to do that:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Reboot after installation</span>
-</span></span><span class=line><span class=cl>reboot</span></span></code></pre></div></div><p>It&rsquo;s possible that we won&rsquo;t know how to access the machine remotely after the
+will work when remotely installing CentOS 7 via SSH.</p>
+<p>First, we&rsquo;ll have to change the installation media from &ldquo;cdrom&rdquo; to &ldquo;url&rdquo;. I&rsquo;m
+using one of the 
+
+
+
+<a href="https://www.centos.org/download/mirrors/" target="_blank" rel="noopener">mirrors</a> available:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Use CDROM installation media</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#cdrom</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Use network installation</span>
+</span></span><span class="line"><span class="cl">url --url<span class="o">=</span><span class="s2">&#34;https://mirror.zetup.net/CentOS/7/os/x86_64/&#34;</span></span></span></code></pre></div></div>
+<p>We&rsquo;ll also have to tell the installation to clear out any previous partitions
+on &ldquo;sda&rdquo; (the primary disk):</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Partition clearing information</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#clearpart --none --initlabel</span>
+</span></span><span class="line"><span class="cl">clearpart --all --drives<span class="o">=</span>sda</span></span></code></pre></div></div>
+<p>Since we want the machine to automatically reboot after completed installation,
+we&rsquo;ll have to tell it to do that:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Reboot after installation</span>
+</span></span><span class="line"><span class="cl">reboot</span></span></code></pre></div></div>
+<p>It&rsquo;s possible that we won&rsquo;t know how to access the machine remotely after the
 installation finished if we don&rsquo;t specify e.g. a static IP address. Here&rsquo;s how
-we could do that:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Network information</span>
-</span></span><span class=line><span class=cl><span class=c1>#network  --bootproto=dhcp --device=eth0 --ipv6=auto --activate</span>
-</span></span><span class=line><span class=cl>network  --bootproto<span class=o>=</span>static --device<span class=o>=</span>eth0 --gateway<span class=o>=</span>10.0.0.1 --ip<span class=o>=</span>10.0.0.100 --nameserver<span class=o>=</span>8.8.8.8 --netmask<span class=o>=</span>255.255.255.0 --ipv6<span class=o>=</span>auto --activate
-</span></span><span class=line><span class=cl>network  --hostname<span class=o>=</span>mymachine</span></span></code></pre></div></div><p>Please review all options in the Kickstart file. There are additional options
-which I will not cover here:</p><ul><li><a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-commands target=_blank rel=noopener>Kickstart options</a> - A list of all commands and options</li><li><a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-preinstall target=_blank rel=noopener>%pre</a> - Pre-installation scripts</li><li><a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-postinstall target=_blank rel=noopener>%post</a> - Post-installation scripts</li><li><a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-addon target=_blank rel=noopener>%addon</a> - Add-ons for Anaconda which expand the functionality of the installer</li><li><a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-packages target=_blank rel=noopener>%packages</a> - Software packages to install</li></ul><p>I recommend taking a minute or two to read through the
-<a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-howto.html target=_blank rel=noopener>Kickstart How-To</a>.</p><h2 id=verify-the-kickstart-file>Verify the Kickstart file</h2><p>You can make sure your Kickstart file is valid by using &ldquo;ksvalidator&rdquo;:</p><p>Install ksvalidator:</p><pre><code>yum install pykickstart
-</code></pre><p>Run ksvalidator on your Kickstart file:</p><pre><code>ksvalidator /path/to/anaconda-ks.cfg
-</code></pre><p>Please note: ksvalidator will not attempt to validate the <code>%pre</code>, <code>%post</code> and <code>%packages</code> sections of the Kickstart file.</p><h2 id=make-the-kickstart-file-available-on-a-web-server>Make the Kickstart file available on a web server</h2><p>During the installation phase, Anaconda will attempt to read the Kickstart file
-from somewhere. I&rsquo;m serving it using
-<a href=../2015-12-28-python-web-server/>a basic web server</a>.</p><h2 id=download-vmlinuz-and-initrdimg>Download vmlinuz and initrd.img</h2><p>Download vmlinuz and initrd.img from the desired CentOS version you wish to install
-and place them in <code>/boot</code>. For example:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -o /boot/vmlinuz https://mirror.zetup.net/CentOS/7/os/x86_64/isolinux/vmlinuz
-</span></span><span class=line><span class=cl>curl -o /boot/initrd.img https://mirror.zetup.net/CentOS/7/os/x86_64/isolinux/initrd.img</span></span></code></pre></div></div><h2 id=add-custom-boot-entry-in-centos-6x-or-grub-1x>Add custom boot entry in CentOS 6.x (or
-<a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/ch-grub.html target=_blank rel=noopener>GRUB 1.x</a>)</h2><p>If you are installing CentOS 7 remotely on a CentOS 6 system, read on&mldr;</p><p>Add a custom entry into <code>/boot/grub/grub.conf</code>:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>title Install CentOS <span class=m>7</span>
-</span></span><span class=line><span class=cl>kernel /vmlinuz <span class=nv>ks</span><span class=o>=</span>https://some-web-server.com/anaconda-ks.cfg
-</span></span><span class=line><span class=cl>initrd /initrd.img</span></span></code></pre></div></div><p>If you make sure that this entry is the first entry in the configuration file,
+we could do that:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Network information</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#network  --bootproto=dhcp --device=eth0 --ipv6=auto --activate</span>
+</span></span><span class="line"><span class="cl">network  --bootproto<span class="o">=</span>static --device<span class="o">=</span>eth0 --gateway<span class="o">=</span>10.0.0.1 --ip<span class="o">=</span>10.0.0.100 --nameserver<span class="o">=</span>8.8.8.8 --netmask<span class="o">=</span>255.255.255.0 --ipv6<span class="o">=</span>auto --activate
+</span></span><span class="line"><span class="cl">network  --hostname<span class="o">=</span>mymachine</span></span></code></pre></div></div>
+<p>Please review all options in the Kickstart file. There are additional options
+which I will not cover here:</p>
+<ul>
+<li>
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-commands" target="_blank" rel="noopener">Kickstart options</a> - A list of all commands and options</li>
+<li>
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-preinstall" target="_blank" rel="noopener">%pre</a> - Pre-installation scripts</li>
+<li>
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-postinstall" target="_blank" rel="noopener">%post</a> - Post-installation scripts</li>
+<li>
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-addon" target="_blank" rel="noopener">%addon</a> - Add-ons for Anaconda which expand the functionality of the installer</li>
+<li>
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-syntax.html#sect-kickstart-packages" target="_blank" rel="noopener">%packages</a> - Software packages to install</li>
+</ul>
+<p>I recommend taking a minute or two to read through the 
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-kickstart-howto.html" target="_blank" rel="noopener">Kickstart How-To</a>.</p>
+<h2 id="verify-the-kickstart-file">Verify the Kickstart file</h2>
+<p>You can make sure your Kickstart file is valid by using &ldquo;ksvalidator&rdquo;:</p>
+<p>Install ksvalidator:</p>
+<pre><code>yum install pykickstart
+</code></pre>
+<p>Run ksvalidator on your Kickstart file:</p>
+<pre><code>ksvalidator /path/to/anaconda-ks.cfg
+</code></pre>
+<p>Please note: ksvalidator will not attempt to validate the <code>%pre</code>, <code>%post</code> and <code>%packages</code> sections of the Kickstart file.</p>
+<h2 id="make-the-kickstart-file-available-on-a-web-server">Make the Kickstart file available on a web server</h2>
+<p>During the installation phase, Anaconda will attempt to read the Kickstart file
+from somewhere. I&rsquo;m serving it using 
+
+
+
+<a href="../2015-12-28-python-web-server/">a basic web server</a>.</p>
+<h2 id="download-vmlinuz-and-initrdimg">Download vmlinuz and initrd.img</h2>
+<p>Download vmlinuz and initrd.img from the desired CentOS version you wish to install
+and place them in <code>/boot</code>. For example:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -o /boot/vmlinuz https://mirror.zetup.net/CentOS/7/os/x86_64/isolinux/vmlinuz
+</span></span><span class="line"><span class="cl">curl -o /boot/initrd.img https://mirror.zetup.net/CentOS/7/os/x86_64/isolinux/initrd.img</span></span></code></pre></div></div>
+<h2 id="add-custom-boot-entry-in-centos-6x-or-grub-1x">Add custom boot entry in CentOS 6.x (or 
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/ch-grub.html" target="_blank" rel="noopener">GRUB 1.x</a>)</h2>
+<p>If you are installing CentOS 7 remotely on a CentOS 6 system, read on&hellip;</p>
+<p>Add a custom entry into <code>/boot/grub/grub.conf</code>:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">title Install CentOS <span class="m">7</span>
+</span></span><span class="line"><span class="cl">kernel /vmlinuz <span class="nv">ks</span><span class="o">=</span>https://some-web-server.com/anaconda-ks.cfg
+</span></span><span class="line"><span class="cl">initrd /initrd.img</span></span></code></pre></div></div>
+<p>If you make sure that this entry is the first entry in the configuration file,
 you will not have to bother defining this to become the default entry. But if
 you decide to <strong>not</strong> place this entry first, you will have to tell grub which
-entry this is by changing this line, also in <code>/boot/grub/grub.conf</code>:</p><pre><code>default 0
-</code></pre><p>Also, you should replace the URL in the custom boot entry to reflect the
-location of where your Kickstart file is at.</p><p>You may wish to add
-<a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/ap-admin-options.html target=_blank rel=noopener>options</a> to the end of the <code>kernel</code> line of the boot stanza in the
+entry this is by changing this line, also in <code>/boot/grub/grub.conf</code>:</p>
+<pre><code>default 0
+</code></pre>
+<p>Also, you should replace the URL in the custom boot entry to reflect the
+location of where your Kickstart file is at.</p>
+<p>You may wish to add 
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/ap-admin-options.html" target="_blank" rel="noopener">options</a> to the end of the <code>kernel</code> line of the boot stanza in the
 custom boot entry. For example, if you wish to monitor the installation via VNC,
 you&rsquo;ll have to add VNC options as well as network options with static IP
-address.</p><h2 id=add-custom-boot-entry-in-centos-7x-or-grub-2x>Add custom boot entry in CentOS 7.x (or
-<a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/ch-Working_with_the_GRUB_2_Boot_Loader.html target=_blank rel=noopener>GRUB 2.x</a>)</h2><p>If you are installing CentOS 7 remotely on a CentOS 7 system, read on&mldr;</p><p>Add a custom menu entry into <code>/etc/grub.d/40_custom</code>, which is where custom
-boot entries are defined when you use GRUB2:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>menuentry <span class=s2>&#34;Install CentOS 7&#34;</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>    <span class=nb>set</span> <span class=nv>root</span><span class=o>=(</span>hd0,1<span class=o>)</span>
-</span></span><span class=line><span class=cl>    linux /vmlinuz <span class=nv>ks</span><span class=o>=</span>https://some-web-server.com/anaconda-ks.cfg
-</span></span><span class=line><span class=cl>    initrd /initrd.img
-</span></span><span class=line><span class=cl><span class=o>}</span></span></span></code></pre></div></div><p>You should replace the URL in the custom boot entry to reflect the
-location of where your Kickstart file is at.</p><p>Add any additional
-<a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-anaconda-boot-options.html target=_blank rel=noopener>boot options</a> at the end of the <code>linux</code> line of the boot stanza
+address.</p>
+<h2 id="add-custom-boot-entry-in-centos-7x-or-grub-2x">Add custom boot entry in CentOS 7.x (or 
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/ch-Working_with_the_GRUB_2_Boot_Loader.html" target="_blank" rel="noopener">GRUB 2.x</a>)</h2>
+<p>If you are installing CentOS 7 remotely on a CentOS 7 system, read on&hellip;</p>
+<p>Add a custom menu entry into <code>/etc/grub.d/40_custom</code>, which is where custom
+boot entries are defined when you use GRUB2:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">menuentry <span class="s2">&#34;Install CentOS 7&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">set</span> <span class="nv">root</span><span class="o">=(</span>hd0,1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    linux /vmlinuz <span class="nv">ks</span><span class="o">=</span>https://some-web-server.com/anaconda-ks.cfg
+</span></span><span class="line"><span class="cl">    initrd /initrd.img
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></div></div>
+<p>You should replace the URL in the custom boot entry to reflect the
+location of where your Kickstart file is at.</p>
+<p>Add any additional 
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-anaconda-boot-options.html" target="_blank" rel="noopener">boot options</a> at the end of the <code>linux</code> line of the boot stanza
 in the custom boot entry.
 For example, if you wish to monitor the installation via VNC,
 you&rsquo;ll have to add VNC options as well as network options with static IP
-address.</p><p>Make the custom entry the default choice in <code>/etc/default/grub</code>:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>GRUB_DEFAULT</span><span class=o>=</span><span class=s2>&#34;Install CentOS 7&#34;</span></span></span></code></pre></div></div><p>Then run the following to make your changes go into effect:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>grub2-mkconfig --output<span class=o>=</span>/boot/grub2/grub.cfg</span></span></code></pre></div></div><h2 id=reboot-your-system-to-install-centos-7>Reboot your system to install CentOS 7</h2><p>Go grab a cup of coffee and reboot your system:</p><pre><code>reboot
-</code></pre><h2 id=additional-notes>Additional notes</h2><p>Personally, I find it very useful to run Pre-installation Python scripts using
+address.</p>
+<p>Make the custom entry the default choice in <code>/etc/default/grub</code>:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s2">&#34;Install CentOS 7&#34;</span></span></span></code></pre></div></div>
+<p>Then run the following to make your changes go into effect:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">grub2-mkconfig --output<span class="o">=</span>/boot/grub2/grub.cfg</span></span></code></pre></div></div>
+<h2 id="reboot-your-system-to-install-centos-7">Reboot your system to install CentOS 7</h2>
+<p>Go grab a cup of coffee and reboot your system:</p>
+<pre><code>reboot
+</code></pre>
+<h2 id="additional-notes">Additional notes</h2>
+<p>Personally, I find it very useful to run Pre-installation Python scripts using
 <code>%pre --interpreter=/usr/bin/python</code> and I highly recommend reading more on
 that in the documentation. Currently, I use this to match the machine&rsquo;s
 MAC address against a JSON/dictionary, which will determine which hostname and
 static IP address the machine should use, as I&rsquo;m managing a large number of
-computational nodes, running CentOS, on our local network.</p><p>If CentOS (or GRUB) is not present on the machine you wish to install
+computational nodes, running CentOS, on our local network.</p>
+<p>If CentOS (or GRUB) is not present on the machine you wish to install
 CentOS 7 onto, you can boot via the CentOS 7 DVD or USB-stick. In the menu that
 appears, you can hit &ldquo;tab&rdquo; and enter custom commands, such as
 <code>vmlinuz initrd=initrd.img ks=https://some-web-server.com/anaconda-ks.cfg</code> to
 specify the Kickstart file. This will cause the installation to complete
 automatically without requiring any input from you. For a complete tutorial on
-this check
-<a href=https://marclop.svbtle.com/creating-an-automated-centos-7-install-via-kickstart-file target=_blank rel=noopener>this</a> out.</p><p>If a package requires access to a specific repository, you can specify this in
-the Kickstart file:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>repo --name<span class=o>=</span><span class=s2>&#34;EPEL&#34;</span> --baseurl<span class=o>=</span>https://dl.fedoraproject.org/pub/epel/7/x86_64/</span></span></code></pre></div></div><p>If you need to know the location of the Kickstart file, from within the
+this check 
+
+
+
+<a href="https://marclop.svbtle.com/creating-an-automated-centos-7-install-via-kickstart-file" target="_blank" rel="noopener">this</a> out.</p>
+<p>If a package requires access to a specific repository, you can specify this in
+the Kickstart file:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">repo --name<span class="o">=</span><span class="s2">&#34;EPEL&#34;</span> --baseurl<span class="o">=</span>https://dl.fedoraproject.org/pub/epel/7/x86_64/</span></span></code></pre></div></div>
+<p>If you need to know the location of the Kickstart file, from within the
 Kickstart file (perhaps you wish to access another file relative to its
-location) &mldr; you can read <code>/proc/cmdline</code> and parse it. Here&rsquo;s an example:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>%pre --interpreter<span class=o>=</span>/usr/bin/python
-</span></span><span class=line><span class=cl><span class=nv>cmdline</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
-</span></span><span class=line><span class=cl>with open<span class=o>(</span><span class=s1>&#39;/proc/cmdline&#39;</span>, <span class=s1>&#39;r&#39;</span><span class=o>)</span> as myfile:
-</span></span><span class=line><span class=cl>  <span class=nv>cmdline</span> <span class=o>=</span> myfile.read<span class=o>()</span>
-</span></span><span class=line><span class=cl><span class=nv>pieces</span> <span class=o>=</span> cmdline.split<span class=o>(</span><span class=s1>&#39; &#39;</span><span class=o>)</span>
-</span></span><span class=line><span class=cl><span class=k>for</span> piece in pieces:
-</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=s1>&#39;ks=&#39;</span> in piece:
-</span></span><span class=line><span class=cl>    <span class=nv>KS_LOCATION</span> <span class=o>=</span> piece<span class=o>[</span> piece.rfind<span class=o>(</span><span class=s1>&#39;ks=&#39;</span><span class=o>)</span>+3 : piece.rfind<span class=o>(</span><span class=s1>&#39;/&#39;</span><span class=o>)</span> <span class=o>]</span>
-</span></span><span class=line><span class=cl>%end</span></span></code></pre></div></div></main><script>(function(){const e=document.getElementById("giscus-container"),t=document.getElementById("load-comments-btn");function o(){if(!e)return;e.innerHTML="";const n=document.body.classList.contains("dark")?"dark":"light",t=document.createElement("script");t.src="https://giscus.app/client.js",t.setAttribute("data-repo","markholloway/markholloway.github.io"),t.setAttribute("data-repo-id","MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc="),t.setAttribute("data-category","General"),t.setAttribute("data-category-id","DIC_kwDOB8-Z684CU9zc"),t.setAttribute("data-mapping","title"),t.setAttribute("data-strict","0"),t.setAttribute("data-reactions-enabled","1"),t.setAttribute("data-emit-metadata","0"),t.setAttribute("data-input-position","bottom"),t.setAttribute("data-theme",n),t.setAttribute("data-lang","en"),t.setAttribute("crossorigin","anonymous"),t.async=!0,e.appendChild(t)}t&&t.addEventListener("click",o);function n(e){const t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}const s=document.getElementById("theme-toggle");s&&s.addEventListener("click",()=>{setTimeout(()=>{const e=document.body.classList.contains("dark")?"dark":"light";n(e)},10)}),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",e=>{if(!localStorage.getItem("theme")){const t=e.matches?"dark":"light";n(t)}})})()</script><footer><div class=footer-content><span class=footer-icons><a href=https://github.com/markholloway target=_blank rel=noopener title=GitHub><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63.0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577.0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93.0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176.0.0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22.0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22.0 1.606-.015 2.896-.015 3.286.0.315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-</a><a href=https://linkedin.com/in/mholloway target=_blank rel=noopener title=LinkedIn><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853.0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601.0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144.0-2.063-.926-2.063-2.065.0-1.138.92-2.063 2.063-2.063 1.14.0 2.064.925 2.064 2.063.0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225.0H1.771C.792.0.0.774.0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2.0 22.222.0h.003z"/></svg>
-</a><a href=/blog/index.xml target=_blank rel=noopener title=RSS><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8.0 4.8V0c13.165.0 24 10.835 24 24h-4.801zM3.291 17.415c1.814.0 3.293 1.479 3.293 3.295.0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526.0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727.0 15.909 7.184 15.909 15.91z"/></svg>
-</a><a href=https://cloud.umami.is/share/x4yvhGEscsDh1in8 target=_blank rel=noopener title=Umami><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845.0 00-.841.841v.858a13.31 13.31.0 00-.016.6c0 6.627 5.373 12 12 12 6.527.0 11.837-5.212 11.996-11.701.0-.025.004-.05.004-.075V9.452a.845.845.0 00-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692.0-8.645 3.192-9.805 7.521zm18.444.0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069.0 7.512 2.697 8.639 6.399z"/></svg>
-</a></span><span class=footer-text>© Mark Holloway 2005-2026</span></div><script src=/js/main.js></script></footer></body></html>
+location) &hellip; you can read <code>/proc/cmdline</code> and parse it. Here&rsquo;s an example:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">%pre --interpreter<span class="o">=</span>/usr/bin/python
+</span></span><span class="line"><span class="cl"><span class="nv">cmdline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">with open<span class="o">(</span><span class="s1">&#39;/proc/cmdline&#39;</span>, <span class="s1">&#39;r&#39;</span><span class="o">)</span> as myfile:
+</span></span><span class="line"><span class="cl">  <span class="nv">cmdline</span> <span class="o">=</span> myfile.read<span class="o">()</span>
+</span></span><span class="line"><span class="cl"><span class="nv">pieces</span> <span class="o">=</span> cmdline.split<span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> piece in pieces:
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="s1">&#39;ks=&#39;</span> in piece:
+</span></span><span class="line"><span class="cl">    <span class="nv">KS_LOCATION</span> <span class="o">=</span> piece<span class="o">[</span> piece.rfind<span class="o">(</span><span class="s1">&#39;ks=&#39;</span><span class="o">)</span>+3 : piece.rfind<span class="o">(</span><span class="s1">&#39;/&#39;</span><span class="o">)</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">%end</span></span></code></pre></div></div>
+
+</main>
+
+
+
+
+
+<script>
+  (function() {
+    const container = document.getElementById('giscus-container');
+    const loadBtn = document.getElementById('load-comments-btn');
+
+    
+    function loadGiscus() {
+      if (!container) return;
+      
+      
+      container.innerHTML = ''; 
+
+      const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
+      
+      const giscusScript = document.createElement('script');
+      giscusScript.src = 'https://giscus.app/client.js';
+      giscusScript.setAttribute('data-repo', 'markholloway/markholloway.com');
+      giscusScript.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc=');
+      giscusScript.setAttribute('data-category', 'General');
+      giscusScript.setAttribute('data-category-id', 'DIC_kwDOB8-Z684CU9zc');
+      giscusScript.setAttribute('data-mapping', 'title');
+      giscusScript.setAttribute('data-strict', '0');
+      giscusScript.setAttribute('data-reactions-enabled', '1');
+      giscusScript.setAttribute('data-emit-metadata', '0');
+      giscusScript.setAttribute('data-input-position', 'bottom');
+      giscusScript.setAttribute('data-theme', theme);
+      giscusScript.setAttribute('data-lang', 'en');
+      giscusScript.setAttribute('crossorigin', 'anonymous');
+      giscusScript.async = true;
+
+      container.appendChild(giscusScript);
+    }
+
+    
+    if (loadBtn) {
+      loadBtn.addEventListener('click', loadGiscus);
+    }
+
+    
+    function setGiscusTheme(theme) {
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame && giscusFrame.contentWindow) {
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme } } },
+          'https://giscus.app'
+        );
+      }
+    }
+
+    
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        
+        setTimeout(() => {
+          const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+          setGiscusTheme(currentTheme);
+        }, 10); 
+      });
+    }
+
+    
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        if (!localStorage.getItem('theme')) { 
+          const newTheme = event.matches ? "dark" : "light";
+          setGiscusTheme(newTheme);
+        }
+      });
+    }
+  })();
+</script>
+
+
+
+<footer>
+	<div class="footer-content">
+		<span class="footer-icons">
+			
+			
+			<a href="https://github.com/markholloway" target="_blank" rel="noopener" title="GitHub">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+
+			</a>
+			
+			
+			<a href="https://linkedin.com/in/mholloway" target="_blank" rel="noopener" title="LinkedIn">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+
+			</a>
+			
+			
+			<a href="/blog/index.xml" target="_blank" rel="noopener" title="RSS">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"/></svg>
+
+			</a>
+			
+			
+			<a href="https://cloud.umami.is/share/x4yvhGEscsDh1in8" target="_blank" rel="noopener" title="Umami">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845 0 0 0-.841.841v.858a13.31 13.31 0 0 0-.016.6c0 6.627 5.373 12 12 12 6.527 0 11.837-5.212 11.996-11.701 0-.025.004-.05.004-.075V9.452a.845.845 0 0 0-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692 0-8.645 3.192-9.805 7.521Zm18.444 0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069 0 7.512 2.697 8.639 6.399Z"/></svg>
+
+			</a>
+			
+		</span>
+		<span class="footer-text">
+			© Mark Holloway 2005-2026
+		</span>
+	</div>
+	<script src="/js/main.js"></script>
+
+</footer>
+</body>
+
+</html>
+

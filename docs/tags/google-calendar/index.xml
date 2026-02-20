@@ -1,8 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Google-Calendar on Mark Holloway</title><link>https://markholloway.com/tags/google-calendar/</link><description>Recent content in Google-Calendar on Mark Holloway</description><generator>Hugo</generator><language>en-us</language><copyright>© Mark Holloway</copyright><lastBuildDate>Sun, 02 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://markholloway.com/tags/google-calendar/index.xml" rel="self" type="application/rss+xml"/><item><title>Google Calendar notes</title><link>https://markholloway.com/blog/2023/04/02/google-calendar-notes/</link><pubDate>Sun, 02 Apr 2023 00:00:00 +0000</pubDate><guid>https://markholloway.com/blog/2023/04/02/google-calendar-notes/</guid><description>&lt;h2 id="mobile-sync-with-apple-calendar"&gt;Mobile sync with Apple Calendar&lt;/h2&gt;
-&lt;p&gt;Most of the time when adding a new calendar to Google Calendar, and you don&amp;rsquo;t see it showing up on your Apple calendar (iOS/iPadOS/macOS), the reason might be that the calendar is not selected for &amp;ldquo;syncing&amp;rdquo;. Visit 
-
-
-
-&lt;a href="https://calendar.google.com/calendar/syncselect" target="_blank" rel="noopener"&gt;this&lt;/a&gt; arcane page to fix it.&lt;/p&gt;
-&lt;h2 id="webcal-urls-doesnt-sync-events"&gt;Webcal URLs doesn&amp;rsquo;t sync events&lt;/h2&gt;
-&lt;p&gt;If you want to subscribe to a calendar which URL starts with &lt;code&gt;webcal://&lt;/code&gt; and you notice it won&amp;rsquo;t sync, try replacing &lt;code&gt;webcal://&lt;/code&gt; with &lt;code&gt;https://&lt;/code&gt;.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Google-Calendar on Mark Holloway</title>
+    <link>http://localhost:1313/tags/google-calendar/</link>
+    <description>Recent content in Google-Calendar on Mark Holloway</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>© Mark Holloway</copyright>
+    <lastBuildDate>Sun, 02 Apr 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/google-calendar/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google Calendar notes</title>
+      <link>http://localhost:1313/blog/2023/04/02/google-calendar-notes/</link>
+      <pubDate>Sun, 02 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2023/04/02/google-calendar-notes/</guid>
+      <description>&lt;h2 id=&#34;mobile-sync-with-apple-calendar&#34;&gt;Mobile sync with Apple Calendar&lt;/h2&gt;&#xA;&lt;p&gt;Most of the time when adding a new calendar to Google Calendar, and you don&amp;rsquo;t see it showing up on your Apple calendar (iOS/iPadOS/macOS), the reason might be that the calendar is not selected for &amp;ldquo;syncing&amp;rdquo;. Visit &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://calendar.google.com/calendar/syncselect&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this&lt;/a&gt; arcane page to fix it.&lt;/p&gt;&#xA;&lt;h2 id=&#34;webcal-urls-doesnt-sync-events&#34;&gt;Webcal URLs doesn&amp;rsquo;t sync events&lt;/h2&gt;&#xA;&lt;p&gt;If you want to subscribe to a calendar which URL starts with &lt;code&gt;webcal://&lt;/code&gt; and you notice it won&amp;rsquo;t sync, try replacing &lt;code&gt;webcal://&lt;/code&gt; with &lt;code&gt;https://&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

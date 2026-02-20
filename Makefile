@@ -11,11 +11,16 @@ test:
 build:
 	go tool hugo --minify --environment production
 	# legacy mkdocs-created RSS feed
-	cp public/blog/index.xml public/feed_rss_created.xml
-	bunx pagefind --site public /or/ bunx pagefind --site docs
+#	**Comment out reference to public and replace with docs for github compatability**
+#	cp public/blog/index.xml public/feed_rss_created.xml
+#	bunx pagefind --site public /or/ bunx pagefind --site docs
+	cp docs/blog/index.xml docs/feed_rss_created.xml
+	bunx pagefind --site docs
 
 clean:
-	rm -rf public resources
+#	**Comment out public and replaces with docs for github compatability**
+#	rm -rf public resources
+	rm -rf docs resources
 
 ci: test build
 

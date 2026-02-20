@@ -1,83 +1,476 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Systemd services and resource limits | Mark Holloway</title><meta name=description content="Notes from a curiosity-driven engineer."><link rel=canonical href=https://markholloway.com/blog/2016/04/27/systemd-services-and-resource-limits/><meta property="og:url" content="https://markholloway.com/blog/2016/04/27/systemd-services-and-resource-limits/"><meta property="og:site_name" content="Mark Holloway"><meta property="og:title" content="Systemd services and resource limits"><meta property="og:description" content="We made the move to CentOS 7 and I switched out all init.d scripts with systemd services. Yesterday I noticed we started getting errors on our render farm for huge scenes which required loading of thousands of files:
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Systemd services and resource limits | Mark Holloway</title>
+    <meta name="description" content="Notes from a curiosity-driven engineer.">
+    <link rel="canonical" href="http://localhost:1313/blog/2016/04/27/systemd-services-and-resource-limits/">
+    
+    
+    <meta property="og:url" content="http://localhost:1313/blog/2016/04/27/systemd-services-and-resource-limits/">
+  <meta property="og:site_name" content="Mark Holloway">
+  <meta property="og:title" content="Systemd services and resource limits">
+  <meta property="og:description" content="We made the move to CentOS 7 and I switched out all init.d scripts with systemd services. Yesterday I noticed we started getting errors on our render farm for huge scenes which required loading of thousands of files:
 V-Ray warning: Could not load mesh file …
-One hint that this wasn’t due to scene misconfiguration was that the initial ~1000 vrmeshes were loaded successfully, and after that no other vrmesh file could be loaded."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2016-04-27T00:00:00+00:00"><meta property="article:modified_time" content="2016-04-27T00:00:00+00:00"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Vray"><meta name=twitter:card content="summary"><meta name=twitter:title content="Systemd services and resource limits"><meta name=twitter:description content="We made the move to CentOS 7 and I switched out all init.d scripts with systemd services. Yesterday I noticed we started getting errors on our render farm for huge scenes which required loading of thousands of files:
+One hint that this wasn’t due to scene misconfiguration was that the initial ~1000 vrmeshes were loaded successfully, and after that no other vrmesh file could be loaded.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2016-04-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2016-04-27T00:00:00+00:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Vray">
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Systemd services and resource limits">
+  <meta name="twitter:description" content="We made the move to CentOS 7 and I switched out all init.d scripts with systemd services. Yesterday I noticed we started getting errors on our render farm for huge scenes which required loading of thousands of files:
 V-Ray warning: Could not load mesh file …
-One hint that this wasn’t due to scene misconfiguration was that the initial ~1000 vrmeshes were loaded successfully, and after that no other vrmesh file could be loaded."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Systemd services and resource limits","datePublished":"2016-04-27T00:00:00Z","dateModified":"2016-04-27T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/markholloway.com\/blog\/2016\/04\/27\/systemd-services-and-resource-limits\/"},"author":{"@type":"Person","name":"map[]"},"description":"We made the move to CentOS 7 and I switched out all init.d scripts with systemd services. Yesterday I noticed we started getting errors on our render farm for huge scenes which required loading of thousands of files:\nV-Ray warning: Could not load mesh file \u0026hellip;\nOne hint that this wasn\u0026rsquo;t due to scene misconfiguration was that the initial ~1000 vrmeshes were loaded successfully, and after that no other vrmesh file could be loaded.\n"}</script><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=preload href=/fonts/BerkeleyMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/CommitMono-Variable.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/MapleMono-Italic.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/github-link.css><script defer src=https://cloud.umami.is/script.js data-website-id=29980893-435d-4d73-962b-e2b6e505fb7e></script></head><body class=preload><script>(function(){const e=localStorage.getItem("theme");e?document.body.classList.add(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark"),"fonts"in document?Promise.race([document.fonts.ready,new Promise(e=>setTimeout(e,100))]).then(()=>{document.body.classList.remove("preload")}):setTimeout(()=>{document.body.classList.remove("preload")},50)})()</script><nav style=display:flex;align-items:center;gap:1em;flex-wrap:wrap><ul class=menu style=margin:0;padding:0;flex-shrink:0><li><a href=/>Home</a></li><li><a href=/blog/>Blog</a></li><li><a href=/about/>About</a></li><li><button id=theme-toggle style="background:0 0;border:none;cursor:pointer;font-size:1em;padding:5px;color:inherit">◑</button></li></ul><div id=search style=flex-grow:1;min-width:200px></div></nav><link href=/pagefind/pagefind-ui.css rel=stylesheet><script src=/pagefind/pagefind-ui.js></script><script>window.addEventListener("DOMContentLoaded",e=>{new PagefindUI({element:"#search",showSubResults:!0,showImages:!1,translations:{placeholder:"Search...",clear_search:"×"}}),document.addEventListener("click",e=>{const t=document.querySelector("#search");if(t&&!t.contains(e.target)){const e=t.querySelector(".pagefind-ui__search-clear");e&&e.click()}});const n=document.getElementById("theme-toggle"),t=document.body;n.addEventListener("click",()=>{t.classList.contains("dark")?(t.classList.remove("dark"),t.classList.add("light"),localStorage.setItem("theme","light")):(t.classList.remove("light"),t.classList.add("dark"),localStorage.setItem("theme","dark"))})})</script><div class=article-meta><h1><span class=title>Systemd services and resource limits</span></h1><div class=article-meta-info><span class=date>2016-04-27</span>
-<span class=article-tags><a href=/tags/linux>#linux</a>
-<a href=/tags/vray>#vray</a></span></div></div><main data-pagefind-body><aside class=table-of-contents><div class=toc-title><svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z"/></svg>
-Table of Contents</div><nav id=TableOfContents><ul><li><ul><li><a href=#systemd-not-inheriting-system-wide-limits>Systemd not inheriting system-wide limits?</a></li><li><a href=#keeping-track-of-resource-limits-using-python>Keeping track of resource limits using Python</a></li></ul></li></ul></nav></aside><p>We made the move to CentOS 7 and I switched out all init.d scripts with
-<a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html target=_blank rel=noopener>systemd services</a>.
+One hint that this wasn’t due to scene misconfiguration was that the initial ~1000 vrmeshes were loaded successfully, and after that no other vrmesh file could be loaded.">
+
+    
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Systemd services and resource limits",
+  "datePublished": "2016-04-27T00:00:00Z",
+  "dateModified": "2016-04-27T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/localhost:1313\/blog\/2016\/04\/27\/systemd-services-and-resource-limits\/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "map[]"
+  },
+  "description": "We made the move to CentOS 7 and I switched out all init.d scripts with systemd services. Yesterday I noticed we started getting errors on our render farm for huge scenes which required loading of thousands of files:\nV-Ray warning: Could not load mesh file \u0026hellip;\nOne hint that this wasn\u0026rsquo;t due to scene misconfiguration was that the initial ~1000 vrmeshes were loaded successfully, and after that no other vrmesh file could be loaded.\n"
+}
+</script>
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    
+    
+    <link rel="preload" href="/fonts/BerkeleyMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/CommitMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/MapleMono-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/github-link.css" />
+    
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="29980893-435d-4d73-962b-e2b6e505fb7e"></script>
+
+  </head>
+
+  <body class="preload">
+    <script>
+      (function() {
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.body.classList.add(savedTheme);
+        } else {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark');
+          }
+        }
+        
+        
+        if ('fonts' in document) {
+          
+          Promise.race([
+            document.fonts.ready,
+            new Promise(resolve => setTimeout(resolve, 100)) 
+          ]).then(() => {
+            document.body.classList.remove('preload');
+          });
+        } else {
+          
+          setTimeout(() => {
+            document.body.classList.remove('preload');
+          }, 50);
+        }
+      })();
+    </script>
+
+    <nav style="display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
+      <ul class="menu" style="margin: 0; padding: 0; flex-shrink: 0;">
+        
+        
+        <li><a  href="/">Home</a></li>
+        
+        <li><a  href="/blog/">Blog</a></li>
+        
+        <li><a  href="/about/">About</a></li>
+        
+        <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1em; padding:5px; color:inherit;">◑</button></li>
+      </ul>
+      
+      
+      <div id="search" style="flex-grow: 1; min-width: 200px;"></div>
+    </nav>
+    
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ 
+              element: "#search", 
+              showSubResults: true,
+              showImages: false,
+              translations: {
+                placeholder: "Search...",
+                clear_search: "×"
+              }
+            });
+
+            
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('#search');
+                if (searchContainer && !searchContainer.contains(e.target)) {
+                    const clearButton = searchContainer.querySelector('.pagefind-ui__search-clear');
+                    if (clearButton) {
+                        clearButton.click();
+                    }
+                }
+            });
+
+            
+            const toggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            toggle.addEventListener('click', () => {
+              if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+              } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+              }
+            });
+        });
+    </script>
+
+
+<div class="article-meta">
+<h1><span class="title">Systemd services and resource limits</span></h1>
+
+<div class="article-meta-info">
+  <span class="date">2016-04-27</span>
+  
+  <span class="article-tags">
+    
+    
+    
+    <a href="/tags/linux">#linux</a>
+    
+    
+    
+    <a href="/tags/vray">#vray</a>
+    
+    
+  </span>
+  
+</div>
+</div>
+
+
+
+<main data-pagefind-body>
+	
+	
+		
+		<aside class="table-of-contents">
+			<div class="toc-title">
+				<svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
+					fill="currentColor">
+					<path
+						d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z">
+					</path>
+				</svg>
+				Table of Contents
+			</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#systemd-not-inheriting-system-wide-limits">Systemd not inheriting system-wide limits?</a></li>
+        <li><a href="#keeping-track-of-resource-limits-using-python">Keeping track of resource limits using Python</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		
+
+		<p>We made the move to CentOS 7 and I switched out all init.d scripts with
+
+
+
+
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html" target="_blank" rel="noopener">systemd services</a>.
 Yesterday I noticed we started getting errors on our render farm for huge
-scenes which required loading of thousands of files:</p><blockquote class="callout markdown-alert"><div class=callout-content><p>V-Ray warning: Could not load mesh file &mldr;</p></div></blockquote><p>One hint that this wasn&rsquo;t due to scene misconfiguration was that the initial
+scenes which required loading of thousands of files:</p>
+<blockquote class="callout markdown-alert "><div class="callout-content"><p>V-Ray warning: Could not load mesh file &hellip;</p>
+</div>
+</blockquote><p>One hint that this wasn&rsquo;t due to scene misconfiguration was that the initial
 ~1000 vrmeshes were loaded successfully, and after that no other vrmesh file
-could be loaded.</p><h3 id=systemd-not-inheriting-system-wide-limits>Systemd not inheriting system-wide limits?</h3><p>So, after some investigation together with the helpful Chaosgroup developer
+could be loaded.</p>
+<h3 id="systemd-not-inheriting-system-wide-limits">Systemd not inheriting system-wide limits?</h3>
+<p>So, after some investigation together with the helpful Chaosgroup developer
 <code>t.petrov</code> over at the
-<a href=https://forums.chaosgroup.com/showthread.php?87709-Cannot-load-vrmesh-file-1001th-vrmesh target=_blank rel=noopener>Chaosgroup forums</a>,
+
+
+
+
+<a href="https://forums.chaosgroup.com/showthread.php?87709-Cannot-load-vrmesh-file-1001th-vrmesh" target="_blank" rel="noopener">Chaosgroup forums</a>,
 I deducted that the issue was that the system-wide resource limit settings
-weren&rsquo;t respected for some reason:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># /etc/security/limits.conf</span>
-</span></span><span class=line><span class=cl>*         hard    nofile      <span class=m>500000</span>
-</span></span><span class=line><span class=cl>*         soft    nofile      <span class=m>500000</span>
-</span></span><span class=line><span class=cl>*         hard    nproc       <span class=m>500000</span>
-</span></span><span class=line><span class=cl>*         soft    nproc       <span class=m>500000</span></span></span></code></pre></div></div><p>When running <code>ulimit -a</code>, I could confirm that the limits were active:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>core</span> <span class=n>file</span> <span class=n>size</span>          <span class=p>(</span><span class=n>blocks</span><span class=p>,</span> <span class=o>-</span><span class=n>c</span><span class=p>)</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl><span class=n>data</span> <span class=n>seg</span> <span class=n>size</span>           <span class=p>(</span><span class=n>kbytes</span><span class=p>,</span> <span class=o>-</span><span class=n>d</span><span class=p>)</span> <span class=n>unlimited</span>
-</span></span><span class=line><span class=cl><span class=n>scheduling</span> <span class=n>priority</span>             <span class=p>(</span><span class=o>-</span><span class=n>e</span><span class=p>)</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl><span class=n>file</span> <span class=n>size</span>               <span class=p>(</span><span class=n>blocks</span><span class=p>,</span> <span class=o>-</span><span class=n>f</span><span class=p>)</span> <span class=n>unlimited</span>
-</span></span><span class=line><span class=cl><span class=n>pending</span> <span class=n>signals</span>                 <span class=p>(</span><span class=o>-</span><span class=n>i</span><span class=p>)</span> <span class=mi>256849</span>
-</span></span><span class=line><span class=cl><span class=nb>max</span> <span class=n>locked</span> <span class=n>memory</span>       <span class=p>(</span><span class=n>kbytes</span><span class=p>,</span> <span class=o>-</span><span class=n>l</span><span class=p>)</span> <span class=mi>64</span>
-</span></span><span class=line><span class=cl><span class=nb>max</span> <span class=n>memory</span> <span class=n>size</span>         <span class=p>(</span><span class=n>kbytes</span><span class=p>,</span> <span class=o>-</span><span class=n>m</span><span class=p>)</span> <span class=n>unlimited</span>
-</span></span><span class=line><span class=cl><span class=n>open</span> <span class=n>files</span>                      <span class=p>(</span><span class=o>-</span><span class=n>n</span><span class=p>)</span> <span class=mi>500000</span>    <span class=o>&lt;----</span> <span class=n>yep</span><span class=o>!</span>
-</span></span><span class=line><span class=cl><span class=n>pipe</span> <span class=n>size</span>            <span class=p>(</span><span class=mi>512</span> <span class=n>bytes</span><span class=p>,</span> <span class=o>-</span><span class=n>p</span><span class=p>)</span> <span class=mi>8</span>
-</span></span><span class=line><span class=cl><span class=n>POSIX</span> <span class=n>message</span> <span class=n>queues</span>     <span class=p>(</span><span class=n>bytes</span><span class=p>,</span> <span class=o>-</span><span class=n>q</span><span class=p>)</span> <span class=mi>819200</span>
-</span></span><span class=line><span class=cl><span class=n>real</span><span class=o>-</span><span class=n>time</span> <span class=n>priority</span>              <span class=p>(</span><span class=o>-</span><span class=n>r</span><span class=p>)</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl><span class=n>stack</span> <span class=n>size</span>              <span class=p>(</span><span class=n>kbytes</span><span class=p>,</span> <span class=o>-</span><span class=n>s</span><span class=p>)</span> <span class=mi>8192</span>
-</span></span><span class=line><span class=cl><span class=n>cpu</span> <span class=n>time</span>               <span class=p>(</span><span class=n>seconds</span><span class=p>,</span> <span class=o>-</span><span class=n>t</span><span class=p>)</span> <span class=n>unlimited</span>
-</span></span><span class=line><span class=cl><span class=nb>max</span> <span class=n>user</span> <span class=n>processes</span>              <span class=p>(</span><span class=o>-</span><span class=n>u</span><span class=p>)</span> <span class=mi>500000</span>    <span class=o>&lt;----</span> <span class=n>yep</span><span class=o>!</span>
-</span></span><span class=line><span class=cl><span class=n>virtual</span> <span class=n>memory</span>          <span class=p>(</span><span class=n>kbytes</span><span class=p>,</span> <span class=o>-</span><span class=n>v</span><span class=p>)</span> <span class=n>unlimited</span>
-</span></span><span class=line><span class=cl><span class=n>file</span> <span class=n>locks</span>                      <span class=p>(</span><span class=o>-</span><span class=n>x</span><span class=p>)</span> <span class=n>unlimited</span></span></span></code></pre></div></div><p>But when running the same command as a task being carried out in
-<a href=https://renderman.pixar.com/view/pixars-tractor target=_blank rel=noopener>Pixar&rsquo;s Tractor</a>, our render
+weren&rsquo;t respected for some reason:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># /etc/security/limits.conf</span>
+</span></span><span class="line"><span class="cl">*         hard    nofile      <span class="m">500000</span>
+</span></span><span class="line"><span class="cl">*         soft    nofile      <span class="m">500000</span>
+</span></span><span class="line"><span class="cl">*         hard    nproc       <span class="m">500000</span>
+</span></span><span class="line"><span class="cl">*         soft    nproc       <span class="m">500000</span></span></span></code></pre></div></div>
+<p>When running <code>ulimit -a</code>, I could confirm that the limits were active:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">core</span> <span class="n">file</span> <span class="n">size</span>          <span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="p">)</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="n">seg</span> <span class="n">size</span>           <span class="p">(</span><span class="n">kbytes</span><span class="p">,</span> <span class="o">-</span><span class="n">d</span><span class="p">)</span> <span class="n">unlimited</span>
+</span></span><span class="line"><span class="cl"><span class="n">scheduling</span> <span class="n">priority</span>             <span class="p">(</span><span class="o">-</span><span class="n">e</span><span class="p">)</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="n">size</span>               <span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="o">-</span><span class="n">f</span><span class="p">)</span> <span class="n">unlimited</span>
+</span></span><span class="line"><span class="cl"><span class="n">pending</span> <span class="n">signals</span>                 <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="mi">256849</span>
+</span></span><span class="line"><span class="cl"><span class="nb">max</span> <span class="n">locked</span> <span class="n">memory</span>       <span class="p">(</span><span class="n">kbytes</span><span class="p">,</span> <span class="o">-</span><span class="n">l</span><span class="p">)</span> <span class="mi">64</span>
+</span></span><span class="line"><span class="cl"><span class="nb">max</span> <span class="n">memory</span> <span class="n">size</span>         <span class="p">(</span><span class="n">kbytes</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span><span class="p">)</span> <span class="n">unlimited</span>
+</span></span><span class="line"><span class="cl"><span class="n">open</span> <span class="n">files</span>                      <span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">)</span> <span class="mi">500000</span>    <span class="o">&lt;----</span> <span class="n">yep</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">pipe</span> <span class="n">size</span>            <span class="p">(</span><span class="mi">512</span> <span class="n">bytes</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span><span class="p">)</span> <span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">POSIX</span> <span class="n">message</span> <span class="n">queues</span>     <span class="p">(</span><span class="n">bytes</span><span class="p">,</span> <span class="o">-</span><span class="n">q</span><span class="p">)</span> <span class="mi">819200</span>
+</span></span><span class="line"><span class="cl"><span class="n">real</span><span class="o">-</span><span class="n">time</span> <span class="n">priority</span>              <span class="p">(</span><span class="o">-</span><span class="n">r</span><span class="p">)</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">stack</span> <span class="n">size</span>              <span class="p">(</span><span class="n">kbytes</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span><span class="p">)</span> <span class="mi">8192</span>
+</span></span><span class="line"><span class="cl"><span class="n">cpu</span> <span class="n">time</span>               <span class="p">(</span><span class="n">seconds</span><span class="p">,</span> <span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="n">unlimited</span>
+</span></span><span class="line"><span class="cl"><span class="nb">max</span> <span class="n">user</span> <span class="n">processes</span>              <span class="p">(</span><span class="o">-</span><span class="n">u</span><span class="p">)</span> <span class="mi">500000</span>    <span class="o">&lt;----</span> <span class="n">yep</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">virtual</span> <span class="n">memory</span>          <span class="p">(</span><span class="n">kbytes</span><span class="p">,</span> <span class="o">-</span><span class="n">v</span><span class="p">)</span> <span class="n">unlimited</span>
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="n">locks</span>                      <span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="n">unlimited</span></span></span></code></pre></div></div>
+<p>But when running the same command as a task being carried out in
+
+
+
+
+<a href="https://renderman.pixar.com/view/pixars-tractor" target="_blank" rel="noopener">Pixar&rsquo;s Tractor</a>, our render
 farm queuing manager, I noticed that the <code>nofile</code> and <code>nproc</code> limits were not
 respected and were sitting at their default values (<code>1024</code> and <code>60857</code>
-respectively).</p><p>Previously, when using an init.d script to run the Tractor blade client on
+respectively).</p>
+<p>Previously, when using an init.d script to run the Tractor blade client on
 render farm blades, the limits were respected. But now, when I had switched
 that out in favor for a systemd script, I realized you have to specify these
-limits in the systemd service itself.</p><p>Here&rsquo;s an example systemd script, that I use for running the Tractor blade
+limits in the systemd service itself.</p>
+<p>Here&rsquo;s an example systemd script, that I use for running the Tractor blade
 service with user <code>farmer</code>, which relies on that the network is up and that
 autofs is running so that it can successfully log to a mounted server
-share - and which now also sets the <code>nofile</code> and <code>nproc</code> limits:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=p>[</span><span class=n>Unit</span><span class=p>]</span>
-</span></span><span class=line><span class=cl><span class=n>Description</span><span class=o>=</span><span class=n>Tractor</span> <span class=n>Blade</span> <span class=n>Service</span>
-</span></span><span class=line><span class=cl><span class=n>Wants</span><span class=o>=</span><span class=n>network</span><span class=o>.</span><span class=n>target</span> <span class=n>network</span><span class=o>-</span><span class=n>online</span><span class=o>.</span><span class=n>target</span> <span class=n>autofs</span><span class=o>.</span><span class=n>service</span>
-</span></span><span class=line><span class=cl><span class=n>After</span><span class=o>=</span><span class=n>network</span><span class=o>.</span><span class=n>target</span> <span class=n>network</span><span class=o>-</span><span class=n>online</span><span class=o>.</span><span class=n>target</span> <span class=n>autofs</span><span class=o>.</span><span class=n>service</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>Service</span><span class=p>]</span>
-</span></span><span class=line><span class=cl><span class=n>Type</span><span class=o>=</span><span class=n>simple</span>
-</span></span><span class=line><span class=cl><span class=n>User</span><span class=o>=</span><span class=n>farmer</span>
-</span></span><span class=line><span class=cl><span class=n>ExecStart</span><span class=o>=/</span><span class=n>opt</span><span class=o>/</span><span class=n>pixar</span><span class=o>/</span><span class=n>Tractor</span><span class=o>-</span><span class=mf>2.2</span><span class=o>/</span><span class=n>bin</span><span class=o>/</span><span class=n>tractor</span><span class=o>-</span><span class=n>blade</span> <span class=o>--</span><span class=n>no</span><span class=o>-</span><span class=n>sigint</span> <span class=o>--</span><span class=n>debug</span> <span class=o>--</span><span class=nb>log</span> <span class=o>/</span><span class=n>logserver</span><span class=o>/</span><span class=n>tractor</span><span class=o>/%</span><span class=n>H</span><span class=o>.</span><span class=n>log</span> <span class=o>--</span><span class=n>supersede</span> <span class=o>--</span><span class=n>pidfile</span><span class=o>=/</span><span class=k>var</span><span class=o>/</span><span class=n>run</span><span class=o>/</span><span class=n>tractor</span><span class=o>-</span><span class=n>blade</span><span class=o>.</span><span class=n>pid</span>
-</span></span><span class=line><span class=cl><span class=n>LimitNOFILE</span><span class=o>=</span><span class=mi>500000</span>
-</span></span><span class=line><span class=cl><span class=n>LimitNPROC</span><span class=o>=</span><span class=mi>500000</span>
-</span></span><span class=line><span class=cl><span class=n>PIDFile</span><span class=o>=/</span><span class=k>var</span><span class=o>/</span><span class=n>run</span><span class=o>/</span><span class=n>tractor</span><span class=o>-</span><span class=n>blade</span><span class=o>.</span><span class=n>pid</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>Install</span><span class=p>]</span>
-</span></span><span class=line><span class=cl><span class=n>WantedBy</span><span class=o>=</span><span class=n>multi</span><span class=o>-</span><span class=n>user</span><span class=o>.</span><span class=n>target</span></span></span></code></pre></div></div><p>With <code>LimitNPROC</code> and <code>LimitNOFILE</code> specifed, all required files (several
-thousands) were successfully loaded and the render completed as expected.</p><h3 id=keeping-track-of-resource-limits-using-python>Keeping track of resource limits using Python</h3><p>Just a quick example:</p><div class=code-block-wrapper><button class=copy-code-button aria-label="Copy code to clipboard">
-<svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-<svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></button><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>platform</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>if</span> <span class=s1>&#39;linux&#39;</span> <span class=ow>in</span> <span class=n>platform</span><span class=o>.</span><span class=n>system</span><span class=p>()</span><span class=o>.</span><span class=n>lower</span><span class=p>():</span>
-</span></span><span class=line><span class=cl>    <span class=kn>import</span> <span class=nn>resource</span>  <span class=c1># Linux only</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=n>limit_nofile</span> <span class=o>=</span> <span class=n>resource</span><span class=o>.</span><span class=n>getrlimit</span><span class=p>(</span><span class=n>resource</span><span class=o>.</span><span class=n>RLIMIT_NOFILE</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>limit_nproc</span> <span class=o>=</span> <span class=n>resource</span><span class=o>.</span><span class=n>getrlimit</span><span class=p>(</span><span class=n>resource</span><span class=o>.</span><span class=n>RLIMIT_NPROC</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=nb>print</span> <span class=s1>&#39;Max number of opened files allowed:&#39;</span><span class=p>,</span> <span class=n>limit_nofile</span>
-</span></span><span class=line><span class=cl>    <span class=nb>print</span> <span class=s1>&#39;Max number of processes allowed&#39;</span><span class=p>,</span> <span class=n>limit_nproc</span></span></span></code></pre></div></div><p>Read more on the <code>resource</code> module
-<a href=https://docs.python.org/2/library/resource.html target=_blank rel=noopener>https://docs.python.org/2/library/resource.html</a>.</p></main><script>(function(){const e=document.getElementById("giscus-container"),t=document.getElementById("load-comments-btn");function o(){if(!e)return;e.innerHTML="";const n=document.body.classList.contains("dark")?"dark":"light",t=document.createElement("script");t.src="https://giscus.app/client.js",t.setAttribute("data-repo","markholloway/markholloway.github.io"),t.setAttribute("data-repo-id","MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc="),t.setAttribute("data-category","General"),t.setAttribute("data-category-id","DIC_kwDOB8-Z684CU9zc"),t.setAttribute("data-mapping","title"),t.setAttribute("data-strict","0"),t.setAttribute("data-reactions-enabled","1"),t.setAttribute("data-emit-metadata","0"),t.setAttribute("data-input-position","bottom"),t.setAttribute("data-theme",n),t.setAttribute("data-lang","en"),t.setAttribute("crossorigin","anonymous"),t.async=!0,e.appendChild(t)}t&&t.addEventListener("click",o);function n(e){const t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}const s=document.getElementById("theme-toggle");s&&s.addEventListener("click",()=>{setTimeout(()=>{const e=document.body.classList.contains("dark")?"dark":"light";n(e)},10)}),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",e=>{if(!localStorage.getItem("theme")){const t=e.matches?"dark":"light";n(t)}})})()</script><footer><div class=footer-content><span class=footer-icons><a href=https://github.com/markholloway target=_blank rel=noopener title=GitHub><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63.0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577.0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93.0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176.0.0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22.0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22.0 1.606-.015 2.896-.015 3.286.0.315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-</a><a href=https://linkedin.com/in/mholloway target=_blank rel=noopener title=LinkedIn><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853.0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601.0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144.0-2.063-.926-2.063-2.065.0-1.138.92-2.063 2.063-2.063 1.14.0 2.064.925 2.064 2.063.0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225.0H1.771C.792.0.0.774.0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2.0 22.222.0h.003z"/></svg>
-</a><a href=/blog/index.xml target=_blank rel=noopener title=RSS><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8.0 4.8V0c13.165.0 24 10.835 24 24h-4.801zM3.291 17.415c1.814.0 3.293 1.479 3.293 3.295.0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526.0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727.0 15.909 7.184 15.909 15.91z"/></svg>
-</a><a href=https://cloud.umami.is/share/x4yvhGEscsDh1in8 target=_blank rel=noopener title=Umami><svg role="img" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845.0 00-.841.841v.858a13.31 13.31.0 00-.016.6c0 6.627 5.373 12 12 12 6.527.0 11.837-5.212 11.996-11.701.0-.025.004-.05.004-.075V9.452a.845.845.0 00-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692.0-8.645 3.192-9.805 7.521zm18.444.0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069.0 7.512 2.697 8.639 6.399z"/></svg>
-</a></span><span class=footer-text>© Mark Holloway 2005-2026</span></div><script src=/js/main.js></script></footer></body></html>
+share - and which now also sets the <code>nofile</code> and <code>nproc</code> limits:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">[</span><span class="n">Unit</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Description</span><span class="o">=</span><span class="n">Tractor</span> <span class="n">Blade</span> <span class="n">Service</span>
+</span></span><span class="line"><span class="cl"><span class="n">Wants</span><span class="o">=</span><span class="n">network</span><span class="o">.</span><span class="n">target</span> <span class="n">network</span><span class="o">-</span><span class="n">online</span><span class="o">.</span><span class="n">target</span> <span class="n">autofs</span><span class="o">.</span><span class="n">service</span>
+</span></span><span class="line"><span class="cl"><span class="n">After</span><span class="o">=</span><span class="n">network</span><span class="o">.</span><span class="n">target</span> <span class="n">network</span><span class="o">-</span><span class="n">online</span><span class="o">.</span><span class="n">target</span> <span class="n">autofs</span><span class="o">.</span><span class="n">service</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">Service</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Type</span><span class="o">=</span><span class="n">simple</span>
+</span></span><span class="line"><span class="cl"><span class="n">User</span><span class="o">=</span><span class="n">farmer</span>
+</span></span><span class="line"><span class="cl"><span class="n">ExecStart</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">pixar</span><span class="o">/</span><span class="n">Tractor</span><span class="o">-</span><span class="mf">2.2</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">tractor</span><span class="o">-</span><span class="n">blade</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">sigint</span> <span class="o">--</span><span class="n">debug</span> <span class="o">--</span><span class="nb">log</span> <span class="o">/</span><span class="n">logserver</span><span class="o">/</span><span class="n">tractor</span><span class="o">/%</span><span class="n">H</span><span class="o">.</span><span class="n">log</span> <span class="o">--</span><span class="n">supersede</span> <span class="o">--</span><span class="n">pidfile</span><span class="o">=/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">tractor</span><span class="o">-</span><span class="n">blade</span><span class="o">.</span><span class="n">pid</span>
+</span></span><span class="line"><span class="cl"><span class="n">LimitNOFILE</span><span class="o">=</span><span class="mi">500000</span>
+</span></span><span class="line"><span class="cl"><span class="n">LimitNPROC</span><span class="o">=</span><span class="mi">500000</span>
+</span></span><span class="line"><span class="cl"><span class="n">PIDFile</span><span class="o">=/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">tractor</span><span class="o">-</span><span class="n">blade</span><span class="o">.</span><span class="n">pid</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">Install</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span></span></span></code></pre></div></div>
+<p>With <code>LimitNPROC</code> and <code>LimitNOFILE</code> specifed, all required files (several
+thousands) were successfully loaded and the render completed as expected.</p>
+<h3 id="keeping-track-of-resource-limits-using-python">Keeping track of resource limits using Python</h3>
+<p>Just a quick example:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">platform</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="s1">&#39;linux&#39;</span> <span class="ow">in</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">import</span> <span class="nn">resource</span>  <span class="c1"># Linux only</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">limit_nofile</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">RLIMIT_NOFILE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">limit_nproc</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">RLIMIT_NPROC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span> <span class="s1">&#39;Max number of opened files allowed:&#39;</span><span class="p">,</span> <span class="n">limit_nofile</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span> <span class="s1">&#39;Max number of processes allowed&#39;</span><span class="p">,</span> <span class="n">limit_nproc</span></span></span></code></pre></div></div>
+<p>Read more on the <code>resource</code> module 
+
+
+
+<a href="https://docs.python.org/2/library/resource.html" target="_blank" rel="noopener">https://docs.python.org/2/library/resource.html</a>.</p>
+
+</main>
+
+
+
+
+
+<script>
+  (function() {
+    const container = document.getElementById('giscus-container');
+    const loadBtn = document.getElementById('load-comments-btn');
+
+    
+    function loadGiscus() {
+      if (!container) return;
+      
+      
+      container.innerHTML = ''; 
+
+      const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
+      
+      const giscusScript = document.createElement('script');
+      giscusScript.src = 'https://giscus.app/client.js';
+      giscusScript.setAttribute('data-repo', 'markholloway/markholloway.com');
+      giscusScript.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc=');
+      giscusScript.setAttribute('data-category', 'General');
+      giscusScript.setAttribute('data-category-id', 'DIC_kwDOB8-Z684CU9zc');
+      giscusScript.setAttribute('data-mapping', 'title');
+      giscusScript.setAttribute('data-strict', '0');
+      giscusScript.setAttribute('data-reactions-enabled', '1');
+      giscusScript.setAttribute('data-emit-metadata', '0');
+      giscusScript.setAttribute('data-input-position', 'bottom');
+      giscusScript.setAttribute('data-theme', theme);
+      giscusScript.setAttribute('data-lang', 'en');
+      giscusScript.setAttribute('crossorigin', 'anonymous');
+      giscusScript.async = true;
+
+      container.appendChild(giscusScript);
+    }
+
+    
+    if (loadBtn) {
+      loadBtn.addEventListener('click', loadGiscus);
+    }
+
+    
+    function setGiscusTheme(theme) {
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame && giscusFrame.contentWindow) {
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme } } },
+          'https://giscus.app'
+        );
+      }
+    }
+
+    
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        
+        setTimeout(() => {
+          const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+          setGiscusTheme(currentTheme);
+        }, 10); 
+      });
+    }
+
+    
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        if (!localStorage.getItem('theme')) { 
+          const newTheme = event.matches ? "dark" : "light";
+          setGiscusTheme(newTheme);
+        }
+      });
+    }
+  })();
+</script>
+
+
+
+<footer>
+	<div class="footer-content">
+		<span class="footer-icons">
+			
+			
+			<a href="https://github.com/markholloway" target="_blank" rel="noopener" title="GitHub">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+
+			</a>
+			
+			
+			<a href="https://linkedin.com/in/mholloway" target="_blank" rel="noopener" title="LinkedIn">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+
+			</a>
+			
+			
+			<a href="/blog/index.xml" target="_blank" rel="noopener" title="RSS">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"/></svg>
+
+			</a>
+			
+			
+			<a href="https://cloud.umami.is/share/x4yvhGEscsDh1in8" target="_blank" rel="noopener" title="Umami">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845 0 0 0-.841.841v.858a13.31 13.31 0 0 0-.016.6c0 6.627 5.373 12 12 12 6.527 0 11.837-5.212 11.996-11.701 0-.025.004-.05.004-.075V9.452a.845.845 0 0 0-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692 0-8.645 3.192-9.805 7.521Zm18.444 0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069 0 7.512 2.697 8.639 6.399Z"/></svg>
+
+			</a>
+			
+		</span>
+		<span class="footer-text">
+			© Mark Holloway 2005-2026
+		</span>
+	</div>
+	<script src="/js/main.js"></script>
+
+</footer>
+</body>
+
+</html>
+
