@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Building Windows Terminal | Mark Holloway</title>
+    <meta name="description" content="Notes from a curiosity-driven engineer.">
+    <link rel="canonical" href="http://localhost:1313/blog/2019/05/12/building-windows-terminal/">
+    
+    
+    <meta property="og:url" content="http://localhost:1313/blog/2019/05/12/building-windows-terminal/">
+  <meta property="og:site_name" content="Mark Holloway">
+  <meta property="og:title" content="Building Windows Terminal">
+  <meta property="og:description" content="The new Windows Terminal (codenamed “Cascadia”) was revealed at this year’s Microsoft Build conference and quickly received a lot of attention, as it addresses the decades-old terminal experience in Windows.
+This is me jotting down notes on how to get up and running with the new Terminal before it gets officially released in the Windows store, using Visual Studio 2019. This is all possible thanks to the fact that Microsoft is open sourcing the new Terminal!">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2019-05-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2019-05-12T00:00:00+00:00">
+    <meta property="article:tag" content="Windows">
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Building Windows Terminal">
+  <meta name="twitter:description" content="The new Windows Terminal (codenamed “Cascadia”) was revealed at this year’s Microsoft Build conference and quickly received a lot of attention, as it addresses the decades-old terminal experience in Windows.
+This is me jotting down notes on how to get up and running with the new Terminal before it gets officially released in the Windows store, using Visual Studio 2019. This is all possible thanks to the fact that Microsoft is open sourcing the new Terminal!">
+
+    
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Building Windows Terminal",
+  "datePublished": "2019-05-12T00:00:00Z",
+  "dateModified": "2019-05-12T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/localhost:1313\/blog\/2019\/05\/12\/building-windows-terminal\/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "map[]"
+  },
+  "description": "The new Windows Terminal (codenamed \u0026ldquo;Cascadia\u0026rdquo;) was revealed at this year\u0026rsquo;s Microsoft Build conference and quickly received a lot of attention, as it addresses the decades-old terminal experience in Windows.\nThis is me jotting down notes on how to get up and running with the new Terminal before it gets officially released in the Windows store, using Visual Studio 2019. This is all possible thanks to the fact that Microsoft is open sourcing the new Terminal!\n"
+}
+</script>
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    
+    
+    <link rel="preload" href="/fonts/BerkeleyMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/CommitMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/MapleMono-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/github-link.css" />
+    
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c9c97df3-bc05-4b29-8caa-fcf03a05710f"></script>
+
+  </head>
+
+  <body class="preload">
+    <script>
+      (function() {
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.body.classList.add(savedTheme);
+        } else {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark');
+          }
+        }
+        
+        
+        if ('fonts' in document) {
+          
+          Promise.race([
+            document.fonts.ready,
+            new Promise(resolve => setTimeout(resolve, 100)) 
+          ]).then(() => {
+            document.body.classList.remove('preload');
+          });
+        } else {
+          
+          setTimeout(() => {
+            document.body.classList.remove('preload');
+          }, 50);
+        }
+      })();
+    </script>
+
+    <nav style="display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
+      <ul class="menu" style="margin: 0; padding: 0; flex-shrink: 0;">
+        
+        
+        <li><a  href="/">Home</a></li>
+        
+        <li><a  href="/blog/">Blog</a></li>
+        
+        <li><a  href="/about/">About</a></li>
+        
+        <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1em; padding:5px; color:inherit;">◑</button></li>
+      </ul>
+      
+      
+      <div id="search" style="flex-grow: 1; min-width: 200px;"></div>
+    </nav>
+    
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ 
+              element: "#search", 
+              showSubResults: true,
+              showImages: false,
+              translations: {
+                placeholder: "Search...",
+                clear_search: "×"
+              }
+            });
+
+            
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('#search');
+                if (searchContainer && !searchContainer.contains(e.target)) {
+                    const clearButton = searchContainer.querySelector('.pagefind-ui__search-clear');
+                    if (clearButton) {
+                        clearButton.click();
+                    }
+                }
+            });
+
+            
+            const toggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            toggle.addEventListener('click', () => {
+              if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+              } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+              }
+            });
+        });
+    </script>
+
+
+<div class="article-meta">
+<h1><span class="title">Building Windows Terminal</span></h1>
+
+<div class="article-meta-info">
+  <span class="date">2019-05-12</span>
+  
+  <span class="article-tags">
+    
+    
+    
+    <a href="/tags/windows">#windows</a>
+    
+    
+  </span>
+  
+</div>
+</div>
+
+
+<div class="featured-image">
+	<img src="/blog/assets/terminal/terminal.png" alt="Building Windows Terminal">
+</div>
+
+
+<main data-pagefind-body>
+	
+	
+		
+		<aside class="table-of-contents">
+			<div class="toc-title">
+				<svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
+					fill="currentColor">
+					<path
+						d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z">
+					</path>
+				</svg>
+				Table of Contents
+			</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#requirements">Requirements</a></li>
+        <li><a href="#installation-steps">Installation steps</a></li>
+        <li><a href="#get-the-source-code">Get the source code</a></li>
+        <li><a href="#build-and-deploy-the-terminal-from-vs2019">Build and deploy the terminal from VS2019</a></li>
+        <li><a href="#build-on-command-line">Build on command line</a></li>
+        <li><a href="#configure-terminal">Configure Terminal</a></li>
+        <li><a href="#additional-info">Additional info</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		
+
+		<p>The new Windows Terminal (codenamed &ldquo;Cascadia&rdquo;) was 
+
+
+
+<a href="https://www.youtube.com/watch?v=8gw0rXPMMPE" target="_blank" rel="noopener">revealed</a> at this year&rsquo;s 
+
+
+
+<a href="https://www.microsoft.com/en-us/build" target="_blank" rel="noopener">Microsoft Build conference</a> and quickly received a lot of attention, as it addresses the decades-old terminal experience in Windows.</p>
+<p>This is me jotting down notes on how to get up and running with the new Terminal before it gets officially released in the Windows store, using Visual Studio 2019. This is all possible thanks to the fact that Microsoft is 
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+
+  <a href="https://github.com/microsoft/Terminal" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>open sourcing the new Terminal</a>!</p>
+<blockquote class="callout markdown-alert callout-note markdown-alert-note"><div class="callout-title markdown-alert-title">
+    <svg class="callout-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path></svg>
+    Update 2019-06-22
+  </div><div class="callout-content"><p>The new Windows Terminal (pre-release) can now be 
+
+
+
+<a href="https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701" target="_blank" rel="noopener">downloaded from the Windows Store</a> and will be updated automatically as it reaches v1.0 and beyond. Read more about the release 
+
+
+
+<a href="https://devblogs.microsoft.com/commandline/windows-terminal-microsoft-store-preview-release/" target="_blank" rel="noopener">here</a>. If you build the terminal yourself, this will run side-by-side the Store-installed version.</p></div>
+</blockquote><h3 id="requirements">Requirements</h3>
+<p>You will need Windows 10, version &ldquo;1903&rdquo;. Get this by joining and enabling the Insiders Program. Set the &ldquo;Release Preview&rdquo; option and reboot. Then check for updates until you see the &ldquo;1903&rdquo; version downloading and installing.</p>
+<p>You will also have to enable &ldquo;Developer mode&rdquo; in Windows.</p>
+<h3 id="installation-steps">Installation steps</h3>
+<p>Install 
+
+
+
+<a href="https://chocolatey.org/" target="_blank" rel="noopener">Chocolatey</a> using the instructions on their website. Then open a new and <em>elevated</em> Powershell console (e.g. right-click Powershell and choose &ldquo;Run as administrator&rdquo;).</p>
+<p>Let&rsquo;s install git, unless you already have it:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">choco</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">git</span></span></span></code></pre></div></div>
+<p>Then install Visual Studio 2019 Community Edition, unless you already have Visual Studio 2019 installed:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">choco</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">-v</span> <span class="n">visualstudio2019community</span></span></span></code></pre></div></div>
+<p>A number of workloads and components are required to build. Get them by using the Visual Studio Installer GUI or via this (administrative Powershell) command:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">&amp;</span> <span class="s2">&#34;C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installershell.exe&#34;</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modify</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-installPath</span> <span class="s2">&#34;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community&#34;</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-passive</span> <span class="p">-</span><span class="n">-norestart</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-add</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">VisualStudio</span><span class="p">.</span><span class="py">Workload</span><span class="p">.</span><span class="py">NativeDesktop</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-add</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">VisualStudio</span><span class="p">.</span><span class="py">Workload</span><span class="p">.</span><span class="py">Universal</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-add</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">VisualStudio</span><span class="p">.</span><span class="py">Component</span><span class="p">.</span><span class="py">Windows10SDK</span><span class="p">.</span><span class="py">18362</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-add</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">VisualStudio</span><span class="p">.</span><span class="py">ComponentGroup</span><span class="p">.</span><span class="py">UWP</span><span class="p">.</span><span class="py">Support</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-add</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">Component</span><span class="p">.</span><span class="py">VC</span><span class="p">.</span><span class="py">Runtime</span><span class="p">.</span><span class="py">OSSupport</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-add</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">VisualStudio</span><span class="p">.</span><span class="py">Component</span><span class="p">.</span><span class="py">VC</span><span class="p">.</span><span class="py">v141</span><span class="p">.</span><span class="py">x86</span><span class="p">.</span><span class="py">x64</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-add</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">VisualStudio</span><span class="p">.</span><span class="py">ComponentGroup</span><span class="p">.</span><span class="py">UWP</span><span class="p">.</span><span class="py">VC</span><span class="p">.</span><span class="py">v141</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-add</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">VisualStudio</span><span class="p">.</span><span class="py">Component</span><span class="p">.</span><span class="py">VC</span><span class="p">.</span><span class="py">v141</span><span class="p">.</span><span class="py">ATL</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="n">-add</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">VisualStudio</span><span class="p">.</span><span class="py">Component</span><span class="p">.</span><span class="py">VC</span><span class="p">.</span><span class="py">v141</span><span class="p">.</span><span class="n">MFC</span></span></span></code></pre></div></div>
+<p>NOTE: If you already have VS2019 installed, you may have to double-check the paths used above.</p>
+<p>In case the build requirements change in the future, 
+
+
+
+<a href="https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2019" target="_blank" rel="noopener">here is a list of the workload/component IDs</a> and 
+
+
+
+<a href="https://docs.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2019" target="_blank" rel="noopener">here are the installer arguments</a>.</p>
+<h3 id="get-the-source-code">Get the source code</h3>
+<p>In a directory of your choice:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone --recurse-submodules https://github.com/microsoft/Terminal.git</span></span></code></pre></div></div>
+<h3 id="build-and-deploy-the-terminal-from-vs2019">Build and deploy the terminal from VS2019</h3>
+<p>So, we can build, deploy and run the terminal from within Visual Studio (since VS2019 adds its own developer certificate).</p>
+<p>Launch VS2019 and open the <code>OpenConsole.sln</code> solution inside the cloned git &ldquo;Terminal&rdquo; folder. If you are prompted by Windows, enable &ldquo;Developer mode&rdquo;.</p>
+<p>You will be prompted to upgrade the environment. In this dialog, choose to use Windows 10 SDK 10.0.18362.0, do <em>not</em> upgrade the Platform Toolset to v142 (meaning; keep using v141) and click &ldquo;OK&rdquo;, leaving all the remaining boxes ticked.</p>
+<p><img src="/blog/assets/terminal/retarget.png" alt=""></p>
+<p>When the solution has been fully loaded, choose the following configuration dropdown menu values &ldquo;Release&rdquo;, &ldquo;x64&rdquo;, &ldquo;CascadiaPackage&rdquo; and click the &ldquo;Local Machine&rdquo; button. This will build, deploy and launch the terminal.</p>
+<p><img src="/blog/assets/terminal/configuration.png" alt=""></p>
+<p>You will now find the &ldquo;Windows Terminal (Dev Build)&rdquo; in the Windows Start menu and you don&rsquo;t have to launch this from within VS2019 again.</p>
+<p><img src="/blog/assets/terminal/start-menu.png" alt=""></p>
+<h3 id="build-on-command-line">Build on command line</h3>
+<p><strong>Note:</strong> Without a certificate, you won&rsquo;t be able to install the built .msix package.</p>
+<p>Configure and build:</p>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">cd </span><span class="n">Terminal</span>
+</span></span><span class="line"><span class="cl"><span class="n">dep</span><span class="p">\</span><span class="n">nuget</span><span class="p">\</span><span class="n">nuget</span><span class="p">.</span><span class="py">exe</span> <span class="n">restore</span> <span class="n">OpenConsole</span><span class="p">.</span><span class="py">sln</span>
+</span></span><span class="line"><span class="cl"><span class="n">tools</span><span class="p">\</span><span class="n">razzle</span><span class="p">.</span><span class="py">cmd</span>
+</span></span><span class="line"><span class="cl"><span class="n">tools</span><span class="p">\</span><span class="n">bcz</span><span class="p">.</span><span class="py">cmd</span> <span class="n">rel</span></span></span></code></pre></div></div>
+<p>Fun fact: Apparently, &ldquo;razzle&rdquo; and &ldquo;bcz&rdquo; are terms from within Microsoft, where &ldquo;razzle&rdquo; refers to a script which sets up your environment and &ldquo;bcz&rdquo; builds the project (with a clean prior to build).</p>
+<p>For more details on these commands, see the 
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+
+  <a href="https://github.com/microsoft/Terminal/blob/master/tools/README.md" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>tools/README.md</a> file.</p>
+<p>This will produce <code>CascadiaPackage_0.0.1.0_x64.msix</code> inside of <code>src\cascadia\CascadiaPackage\AppPackages\ ...</code>.</p>
+<p><img src="/blog/assets/terminal/msix-location.png" alt=""></p>
+<p>However, you cannot install it, as it does not contain a valid certificate.</p>
+<h3 id="configure-terminal">Configure Terminal</h3>
+<p>Once Terminal is running, hit <code>ctrl+t</code> to create a new tab. The menu icon will appear and you can enter the &ldquo;Settings&rdquo;, which will launch a <code>profiles.json</code> file.</p>
+<p>Here is how you can add WSL to the menu:</p>
+<ol>
+<li>Create a new session in <code>profiles</code>, with content copied from <code>profiles/cmd</code></li>
+<li>Give it a new guid</li>
+<li>Give it a new name, such as &ldquo;WSL&rdquo;</li>
+<li>Specify its commandline to <code>wsl.exe</code></li>
+</ol>
+<div class="code-block-wrapper">
+  <button class="copy-code-button" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </button><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;guid&#34;</span><span class="p">:</span> <span class="s2">&#34;{09dc5eef-6840-4050-ae69-21e55e6a2e62}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;WSL&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;colorscheme&#34;</span><span class="p">:</span> <span class="s2">&#34;Campbell&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;historySize&#34;</span><span class="p">:</span> <span class="mi">9001</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;snapOnInput&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;cursorColor&#34;</span><span class="p">:</span> <span class="s2">&#34;#FFFFFF&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;cursorShape&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;commandline&#34;</span><span class="p">:</span> <span class="s2">&#34;wsl.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;fontFace&#34;</span><span class="p">:</span> <span class="s2">&#34;Consolas&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;fontSize&#34;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;acrylicOpacity&#34;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;useAcrylic&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;closeOnExit&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;padding&#34;</span><span class="p">:</span> <span class="s2">&#34;0, 0, 0, 0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<h3 id="additional-info">Additional info</h3>
+<ul>
+<li>
+
+
+
+<a href="https://devblogs.microsoft.com/commandline/windows-terminal-build-2019-faq/" target="_blank" rel="noopener">Windows Terminal build 2019 FAQ</a></li>
+<li>
+
+
+
+<a href="https://www.youtube.com/watch?v=8gw0rXPMMPE" target="_blank" rel="noopener">Windows Terminal reveal video</a></li>
+<li>
+
+
+
+<a href="https://www.youtube.com/watch?v=KMudkRcwjCw" target="_blank" rel="noopener">Windows Terminal: Building a better commandline experience&hellip;</a></li>
+<li>
+
+
+
+<a href="https://www.youtube.com/watch?v=veqs2WVou9M" target="_blank" rel="noopener">What&rsquo;s new with the Windows command line</a></li>
+<li>
+
+
+
+<a href="https://www.hanselman.com/blog/assets/ANewConsoleForWindowsItsTheOpenSourceWindowsTerminal.aspx" target="_blank" rel="noopener">A new Console for Windows - It&rsquo;s the open source Windows Terminal</a></li>
+<li>
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+
+  <a href="https://github.com/microsoft/Terminal" target="_blank" rel="noopener" class="github-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>GitHub repository</a></li>
+<li>
+
+
+
+<a href="https://twitter.com/richturn_ms/status/1126515079518703616" target="_blank" rel="noopener">Extensions for Terminal</a></li>
+<li>
+
+
+
+<a href="https://twitter.com/PengwinLinux/status/1126929652382093318" target="_blank" rel="noopener">Reveal video easter egg</a></li>
+</ul>
+
+</main>
+
+
+<div id="giscus-container" class="giscus-comments">
+  <div class="load-comments-wrapper">
+    <button id="load-comments-btn" class="load-comments-btn">Load Comments</button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const container = document.getElementById('giscus-container');
+    const loadBtn = document.getElementById('load-comments-btn');
+
+    
+    function loadGiscus() {
+      if (!container) return;
+      
+      
+      container.innerHTML = ''; 
+
+      const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
+      
+      const giscusScript = document.createElement('script');
+      giscusScript.src = 'https://giscus.app/client.js';
+      giscusScript.setAttribute('data-repo', 'fredrikaverpil/fredrikaverpil.github.io');
+      giscusScript.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkxMzEwNDU4Njc=');
+      giscusScript.setAttribute('data-category', 'General');
+      giscusScript.setAttribute('data-category-id', 'DIC_kwDOB8-Z684CU9zc');
+      giscusScript.setAttribute('data-mapping', 'title');
+      giscusScript.setAttribute('data-strict', '0');
+      giscusScript.setAttribute('data-reactions-enabled', '1');
+      giscusScript.setAttribute('data-emit-metadata', '0');
+      giscusScript.setAttribute('data-input-position', 'bottom');
+      giscusScript.setAttribute('data-theme', theme);
+      giscusScript.setAttribute('data-lang', 'en');
+      giscusScript.setAttribute('crossorigin', 'anonymous');
+      giscusScript.async = true;
+
+      container.appendChild(giscusScript);
+    }
+
+    
+    if (loadBtn) {
+      loadBtn.addEventListener('click', loadGiscus);
+    }
+
+    
+    function setGiscusTheme(theme) {
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame && giscusFrame.contentWindow) {
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme } } },
+          'https://giscus.app'
+        );
+      }
+    }
+
+    
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        
+        setTimeout(() => {
+          const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+          setGiscusTheme(currentTheme);
+        }, 10); 
+      });
+    }
+
+    
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        if (!localStorage.getItem('theme')) { 
+          const newTheme = event.matches ? "dark" : "light";
+          setGiscusTheme(newTheme);
+        }
+      });
+    }
+  })();
+</script>
+
+
+
+<footer>
+	<div class="footer-content">
+		<span class="footer-icons">
+			
+			
+			<a href="https://github.com/fredrikaverpil" target="_blank" rel="noopener" title="GitHub">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+
+			</a>
+			
+			
+			<a href="https://fosstodon.org/@fredrikaverpil" target="_blank" rel="noopener" title="Mastodon">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg>
+
+			</a>
+			
+			
+			<a href="https://bsky.app/profile/fredrikaverpil.bsky.social" target="_blank" rel="noopener" title="Bluesky">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></svg>
+
+			</a>
+			
+			
+			<a href="https://linkedin.com/in/fredrik" target="_blank" rel="noopener" title="LinkedIn">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+
+			</a>
+			
+			
+			<a href="/blog/index.xml" target="_blank" rel="noopener" title="RSS">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"/></svg>
+
+			</a>
+			
+			
+			<a href="https://cloud.umami.is/share/tJcIgDO3dznRmeGX" target="_blank" rel="noopener" title="Umami">
+				
+
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"><path d="M2.203 8.611H.857a.845.845 0 0 0-.841.841v.858a13.31 13.31 0 0 0-.016.6c0 6.627 5.373 12 12 12 6.527 0 11.837-5.212 11.996-11.701 0-.025.004-.05.004-.075V9.452a.845.845 0 0 0-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692 0-8.645 3.192-9.805 7.521Zm18.444 0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069 0 7.512 2.697 8.639 6.399Z"/></svg>
+
+			</a>
+			
+		</span>
+		<span class="footer-text">
+			© Mark Holloway 2005-2026
+		</span>
+	</div>
+	<script src="/js/main.js"></script>
+
+</footer>
+</body>
+
+</html>
+

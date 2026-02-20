@@ -5,6 +5,11 @@ author = 'Mark Holloway'
 copyright = '© Mark Holloway'
 enableRobotsTXT = true
 
+[deployment]
+  [[deployment.targets]]
+    name = "storage_bucket"
+    URL = "gs://www.markholloway.com"
+
 [pagination]
 pagerSize = 10
 

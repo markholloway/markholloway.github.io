@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Workflow on Mark Holloway</title>
+    <link>http://localhost:1313/tags/workflow/</link>
+    <description>Recent content in Workflow on Mark Holloway</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>© Mark Holloway</copyright>
+    <lastBuildDate>Sun, 27 Jun 2010 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/workflow/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linear workflow, part 2</title>
+      <link>http://localhost:1313/blog/2010/06/27/linear-workflow-part-2/</link>
+      <pubDate>Sun, 27 Jun 2010 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2010/06/27/linear-workflow-part-2/</guid>
+      <description>&lt;p&gt;This is how I would deal with the linear workflow (including non-linear preview) between Maya 2010 and Nuke 6.0v6.&lt;/p&gt;&#xA;&lt;p&gt;If you are new to linear workflows and do not really understand what this is for, please read the Linear Workflow, &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;../2010-05-27-linear-workflow-part-1/&#34;&gt;part 1&lt;/a&gt; article before continuing.&lt;/p&gt;&#xA;&lt;h2 id=&#34;default-render-no-gamma-correction&#34;&gt;Default render, no gamma correction&lt;/h2&gt;&#xA;&lt;p&gt;Make sure mental ray is loaded by enabling the mrtomaya.mll plugin in the plug-in manager. Put your favourite model in the scene, create a camera and some lights. Hit render.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linear workflow, part 1</title>
+      <link>http://localhost:1313/blog/2010/05/27/linear-workflow-part-1/</link>
+      <pubDate>Thu, 27 May 2010 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2010/05/27/linear-workflow-part-1/</guid>
+      <description>&lt;p&gt;There seems to be a general confusion on linear workflows and how 3D/compositing packages work, what sRGB/gamma 2.2 is for and why it’s a good idea to render images in linear data throughout the pipeline. This is my take on a linear workflow with Maya and Nuke as well as a bit of history on the subject.&lt;/p&gt;&#xA;&lt;p&gt;Most graphics software use a linear data model. Simply put, this means that the math used when creating digital images works in a linear fashion, e.g. 2 + 2 = 4. In effect, you can say that linear math is applied when a 3D renderer is calculating what the resulting image should be like. However, our display devices, such as monitors, do not use linear math when visualizing this data as images. They use non-linear (logarithmic) math due to the technology used in recording and displaying images. For them this could in some cases mean that the linear data of e.g. 2 + 2 = 4 is interpreted as 2 + 2 = 10. In order make the linear data which makes up an image show on a device that needs to visualize non-linear data, we need to convert or rather “correct” the linear data image. This is done using &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.poynton.com/notes/colour_and_gamma/GammaFAQ.html#gamma&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gamma&lt;/a&gt;. The gamma varies depending on the display device but the most common gamma for laptops and computer display devices these days is gamma 2.2, also known as &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/SRGB&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;sRGB&lt;/a&gt; (although sRGB is not exactly gamma 2.2). So a &#xA;&#xA;&#xA;&#xA;&lt;a href=&#34;https://www.poynton.com/notes/colour_and_gamma/GammaFAQ.html#gamma_correction&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gamma correction&lt;/a&gt; curve is applied and baked into the image file by the graphics software so that the image is shown correctly on our display devices. The gamma correction for sRGB devices (with a gamma of approximately 2.2) is ½.2 = 0.4545.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
