@@ -16,6 +16,8 @@ build:
 #	bunx pagefind --site public /or/ bunx pagefind --site docs
 	cp docs/blog/index.xml docs/feed_rss_created.xml
 	bunx pagefind --site docs
+#	Required CNAME for custom domains on GitHub Pages
+	cp CNAME docs/CNAME
 
 clean:
 #	**Comment out public and replaces with docs for github compatability**
