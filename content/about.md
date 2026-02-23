@@ -6,5 +6,4 @@ layout: "profile"
 type: "page"
 ---
 
-This is my personal blog, where I scribble down notes on software development,
-open source, and other stuff I love tinkering with! 🥰
+Thought leadership, developer evangelist, and value-drivren work ethic at the forefront of building big data applications through Ontology. Speed, veracity, and security enable government and enterprises to make strategic data-driven decisions for critical operations, including intelligence, defense, and analytics. I am a believer in Human + AI teams build strong collaboration and efficiency. 
