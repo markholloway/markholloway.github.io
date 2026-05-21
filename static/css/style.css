@@ -172,7 +172,7 @@
   --dark-font-weight: 200;
   --dark-menu-link-bg: rgba(255, 255, 255, 0.05);
 
-  /* Active Theme (Default: Light) */
+  /* Active Theme (Default: Light) 
   --bg: var(--light-bg);
   --fg: var(--light-fg);
   --fg-dim: var(--light-fg-dim);
@@ -207,6 +207,44 @@
   --syntax-bg: var(--light-bg);
   --font-weight-body: var(--light-font-weight);
   --menu-link-bg: var(--light-menu-link-bg);
+*/
+
+/* Active Theme (Default: Dark) */
+--bg: var(--dark-bg);
+  --fg: var(--dark-fg);
+  --fg-dim: var(--dark-fg-dim);
+  --fg-muted: var(--dark-fg-muted);
+  --link: var(--dark-link);
+  --link-visited: var(--dark-link-visited);
+  --meta-bg: var(--dark-meta-bg);
+  --button-bg: var(--dark-button-bg);
+  --button-hover-bg: var(--dark-button-hover-bg);
+  --border: var(--dark-border);
+  --callout-bg: var(--dark-meta-bg);
+  --note-border: var(--dark-note-border);
+  --note-bg: var(--dark-note-bg);
+  --warn-border: var(--dark-warn-border);
+  --warn-bg: var(--dark-warn-bg);
+  --tip-border: var(--dark-tip-border);
+  --tip-bg: var(--dark-tip-bg);
+  --imp-border: var(--dark-imp-border);
+  --imp-bg: var(--dark-imp-bg);
+  --example-border: var(--dark-example-border);
+  --example-bg: var(--dark-example-bg);
+  --info-border: var(--note-border);
+  --info-bg: var(--note-bg);
+  --quote-border: var(--fg-dim);
+  --quote-bg: var(--meta-bg);
+  --syntax-k: var(--dark-syntax-k);
+  --syntax-c: var(--dark-syntax-c);
+  --syntax-s: var(--dark-syntax-s);
+  --syntax-n: var(--dark-syntax-n);
+  --syntax-const: var(--dark-syntax-const);
+  --syntax-fn: var(--dark-syntax-fn);
+  --syntax-bg: var(--dark-bg);
+  --font-weight-body: var(--dark-font-weight);
+  --menu-link-bg: var(--dark-menu-link-bg);
+
 
   /* Pagefind Theme */
   --pagefind-ui-primary: var(--link);
